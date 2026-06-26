@@ -1,0 +1,273 @@
+{
+  "attested": true,
+  "attested_date": "2026-06-23",
+  "attestation_note": "Three errors corrected: (1) Neo4j was absent from the skills section despite being explicitly used in the Granite NL2SQL pipeline bullet — import omission; added Neo4j to Backend and Databases skills. (2) Education start dates were both null — the import extracted degree names and end dates but failed to extract start dates; corrected to Northeastern Sep 2024 and VIT Jul 2018. (3) Salesforce listed in skills but no work bullet captured how it was used — at Granite it was used to understand object relationships and build base/derived variables for the franchisee data completeness project; added Salesforce to the Granite bullet with context.",
+  "source": "private/master_resume.json",
+
+  "contact": {
+    "type": "contact",
+    "name": "Aakash Belide",
+    "location": "Boston, MA",
+    "linkedin": "https://www.linkedin.com/in/aakashbelide",
+    "github": "https://github.com/AakashBelide"
+  },
+
+  "work_experience": [
+    {
+      "type": "work",
+      "title": "Data Science Intern",
+      "organization": "Granite Telecommunications",
+      "location": "Quincy, MA, USA",
+      "start_date": "2025-06",
+      "end_date": null,
+      "is_current": true,
+      "authorization": "CPT",
+      "bullets": [
+        {
+          "text": "Enhanced data completeness by 35% across 20,000+ franchisee records and reduced manual lookup time by 40% by developing an agentic web scraping workflow with Google Gemini and LangChain, leveraging Salesforce data models to understand object relationships and build base data and derived variables",
+          "metrics": ["35%", "20,000+ records", "40%"],
+          "tools": ["Google Gemini", "LangChain", "Salesforce"]
+        },
+        {
+          "text": "Reduced query turnaround from hours to minutes for 2,000+ business users by designing an NL2SQL workflow converting natural language into BigQuery queries, using Neo4j, Qdrant, FastAPI, LangGraph, Cloud Run, GCP, Docker, Terraform, and OpenTelemetry for tracing",
+          "metrics": ["2,000+ users"],
+          "tools": ["Neo4j", "Qdrant", "FastAPI", "LangGraph", "BigQuery", "Cloud Run", "GCP", "Docker", "Terraform", "OpenTelemetry"]
+        }
+      ]
+    },
+    {
+      "type": "work",
+      "title": "Data Science Engineer, Risk Containment Unit",
+      "organization": "Bajaj Finserv",
+      "location": "India",
+      "start_date": "2022-07",
+      "end_date": "2024-08",
+      "is_current": false,
+      "authorization": "domestic (India)",
+      "bullets": [
+        {
+          "text": "Reduced delinquency rate by 0.5% across B2B, B2C, and Wheels by developing an automated decision-tree model to extract rules for identifying segments; estimated to save $59.7 million per product",
+          "metrics": ["0.5% delinquency reduction", "$59.7M estimated savings per product"],
+          "tools": ["decision tree", "Python"]
+        },
+        {
+          "text": "Minimized manual review by 60% by using Azure OpenAI GPT-4o API with mega prompts and vision capabilities to verify and identify estimated merchant net worth from merchant images",
+          "metrics": ["60%"],
+          "tools": ["Azure OpenAI", "GPT-4o"]
+        },
+        {
+          "text": "Saved over $1.19 million after designing and developing a large-scale graph-based deduplication engine using TigerGraph comprising over 10 billion edges and 1 billion nodes to identify duplicates among potential customers",
+          "metrics": ["$1.19M saved", "10B edges", "1B nodes"],
+          "tools": ["TigerGraph", "Python"]
+        },
+        {
+          "text": "Reduced operational costs by 10x by revamping existing system architecture to handle scalability issues",
+          "metrics": ["10x cost reduction"],
+          "tools": []
+        },
+        {
+          "text": "Cut deployment costs by 30% by migrating APIs from Azure Virtual Machines to Azure Kubernetes",
+          "metrics": ["30%"],
+          "tools": ["Azure VMs", "Azure Kubernetes Service"]
+        },
+        {
+          "text": "Trained and managed 9 interns across 4 projects leading to over $1 million in savings",
+          "metrics": ["9 interns", "4 projects", "$1M+ savings"],
+          "tools": []
+        }
+      ]
+    },
+    {
+      "type": "work",
+      "title": "Data Science Intern",
+      "organization": "Bajaj Finserv",
+      "location": "India",
+      "start_date": "2022-01",
+      "end_date": "2022-06",
+      "is_current": false,
+      "authorization": "domestic (India)",
+      "bullets": [
+        {
+          "text": "Improved fraud catch rate by 32% by building ETL pipelines and an address-based fraud detection model using customer demographic data",
+          "metrics": ["32%"],
+          "tools": ["ETL", "Python"]
+        },
+        {
+          "text": "Decreased fraudulent customer logins by 40% and saved 100+ hours of manual review per month by building big-data pipelines in Databricks using Python, PySpark, Azure Data Lake, and Azure Blob Storage",
+          "metrics": ["40%", "100+ hours/month"],
+          "tools": ["Databricks", "PySpark", "Azure Data Lake", "Azure Blob Storage"]
+        },
+        {
+          "text": "Identified ~30 fraudulent activities per day at 87% accuracy by developing an address-based risk model integrated with a real-time Flask API",
+          "metrics": ["~30/day", "87% accuracy"],
+          "tools": ["Flask", "Python"]
+        }
+      ]
+    },
+    {
+      "type": "work",
+      "title": "Data Science Intern",
+      "organization": "Hello Tripper",
+      "location": "India",
+      "start_date": "2020-09",
+      "end_date": "2021-04",
+      "is_current": false,
+      "authorization": "domestic (India)",
+      "concurrent_with": "Landryt internship (2020-12 to 2021-01) — confirmed concurrent, both legal",
+      "bullets": [
+        {
+          "text": "Collected and cleaned data for 50 Indian cities by developing a Flask app, web scraping with Selenium and Regex",
+          "metrics": ["50 cities"],
+          "tools": ["Flask", "Selenium", "Regex"]
+        },
+        {
+          "text": "Developed a multi-label text classification ML model with 88.9% accuracy for tagging city descriptions",
+          "metrics": ["88.9% accuracy"],
+          "tools": ["scikit-learn", "Python"]
+        }
+      ]
+    },
+    {
+      "type": "work",
+      "title": "Data Science Intern",
+      "organization": "Landryt",
+      "location": "India",
+      "start_date": "2020-12",
+      "end_date": "2021-01",
+      "is_current": false,
+      "authorization": "domestic (India)",
+      "concurrent_with": "Hello Tripper internship (2020-09 to 2021-04) — confirmed concurrent, both legal",
+      "bullets": [
+        {
+          "text": "Scraped over 50,000 documents using Selenium, AWS EC2 instances, Digital Ocean, Docker, and Elasticsearch",
+          "metrics": ["50,000 documents"],
+          "tools": ["Selenium", "AWS EC2", "Digital Ocean", "Docker", "Elasticsearch"]
+        },
+        {
+          "text": "Deployed a Flask API combined with the WhatsApp Twilio API to facilitate customer account sign-ups",
+          "metrics": [],
+          "tools": ["Flask", "Twilio WhatsApp API"]
+        }
+      ]
+    }
+  ],
+
+  "projects": [
+    {
+      "type": "project",
+      "title": "AI Agent with RAG Integration",
+      "organization": null,
+      "start_date": "2024-10",
+      "end_date": "2024-12",
+      "url": null,
+      "bullets": [
+        {
+          "text": "Built a RAG pipeline to parse 20+ documents using LlamaParse and LangChain for chunking",
+          "metrics": ["20+ documents"],
+          "tools": ["LlamaParse", "LangChain"]
+        },
+        {
+          "text": "Used Pinecone as vector store for retrieval, lowering hallucinations by 60% — measured via semantic similarity against a golden Q&A set and LLM-as-judge evaluation across RAG vs non-RAG pipeline",
+          "metrics": ["60% hallucination reduction"],
+          "tools": ["Pinecone"],
+          "measurement": "golden-set + semantic similarity + LLM-as-judge (two independent signals)"
+        }
+      ]
+    },
+    {
+      "type": "project",
+      "title": "WhatsApp Chatbot Using Natural Language Processing",
+      "organization": "VIT",
+      "start_date": "2020-07",
+      "end_date": "2021-05",
+      "url": "https://github.com/AakashBelide/whatsappbot_nlp",
+      "bullets": [
+        {
+          "text": "Trained a chatbot using NLTK on a dataset of 200+ courses to interpret messages via intent tags; connected to Twilio WhatsApp sandbox API via Flask",
+          "metrics": ["200+ courses"],
+          "tools": ["NLTK", "Flask", "Twilio WhatsApp API"]
+        }
+      ]
+    }
+  ],
+
+  "education": [
+    {
+      "type": "education",
+      "degree": "Master of Science in Information Systems",
+      "organization": "Northeastern University",
+      "location": "Boston, MA",
+      "start_date": "2024-09",
+      "end_date": "2026-08",
+      "is_current": true,
+      "gpa": "4.0",
+      "coursework": [
+        "Application Engineering and Development",
+        "Database Management",
+        "Data Science",
+        "Algorithms"
+      ]
+    },
+    {
+      "type": "education",
+      "degree": "Bachelor of Technology in Information Technology",
+      "organization": "Vellore Institute of Technology (VIT)",
+      "location": "India",
+      "start_date": "2018-07",
+      "end_date": "2022-07",
+      "is_current": false,
+      "gpa": null
+    }
+  ],
+
+  "certifications": [
+    {
+      "type": "certification",
+      "title": "Microsoft Certified: Azure Data Fundamentals",
+      "issuer": "Microsoft",
+      "issued_date": "2023-08",
+      "url": "https://www.credly.com/badges/ad603700-635c-4627-8722-5e35992641be"
+    }
+  ],
+
+  "skills": [
+    {
+      "type": "skill",
+      "category": "Languages and Tools",
+      "items": ["Python", "Java", "Git", "Excel", "Selenium", "Playwright", "Puppeteer", "Salesforce", "JIRA", "Agile"],
+      "usage_context": "Java, Playwright, Puppeteer, Angular, React, Node.js — coursework (VIT + Northeastern) and minor workplace usage; primary work bullets reflect higher-value deliverables"
+    },
+    {
+      "type": "skill",
+      "category": "Big Data and Data Science",
+      "items": ["Spark", "PySpark", "Databricks", "Exploratory Data Analysis", "Enterprise Data Warehouse"]
+    },
+    {
+      "type": "skill",
+      "category": "Backend and Databases",
+      "items": ["SQL", "Flask", "MongoDB", "TigerGraph", "Neo4j", "Postman", "Linux", "FastAPI", "PostgreSQL", "Pinecone", "Qdrant"],
+      "usage_context": "TigerGraph — used at Bajaj Finserv for the 10B-edge graph deduplication engine. Neo4j — used at Granite Telecommunications for the NL2SQL pipeline. Both are verified from work bullets."
+    },
+    {
+      "type": "skill",
+      "category": "Data Visualization and Web Technologies",
+      "items": ["Matplotlib", "Seaborn", "Power BI", "Tableau", "Angular", "React", "Node.js"]
+    },
+    {
+      "type": "skill",
+      "category": "Cloud and DevOps",
+      "items": ["Docker", "Kubernetes", "Terraform", "GCP", "Azure", "AWS", "Cloud Run", "Azure Data Lake", "CI/CD"]
+    },
+    {
+      "type": "skill",
+      "category": "Machine Learning",
+      "items": ["Natural Language Processing", "scikit-learn", "NumPy", "Pandas", "Regex"]
+    },
+    {
+      "type": "skill",
+      "category": "Generative AI",
+      "items": ["LLM", "RAG", "OpenAI", "Gemini", "LangChain", "LangGraph", "ADK", "MCP", "A2A"],
+      "usage_context": "ADK, MCP, A2A — POC projects and deep research at Granite Telecommunications (2025)"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+# search/profile.yml — Aakash Belide
+# Target role, constraints, and search preferences for the Reallocation Engine scorer.
+# Drafted by Claude Code from Q1–Q5 intake (2026-06-23). Review and correct any drift.
+
+target_role:
+  description: "AI Engineer at a large, established fintech or SaaS company building production LLM pipelines"
+  function: "AI Engineering / ML Engineering"
+  seniority: "new-grad to junior IC"
+
+visa:
+  type: "F-1 OPT"
+  current_status: "F-1 student (CPT for current Granite internship)"
+  opt_start: "2026-09-08"
+  opt_end: "2027-09-07"
+  unemployment_days_used: 0
+  unemployment_days_note: "OPT period has not started yet; days used will be tracked from opt_start date"
+  stem_eligible: true
+  stem_note: "Confirmed STEM-eligible — MS Information Systems, Northeastern University (CIP 11.0401). Confirmed with DSO."
+  stem_opt_estimated_end: "2029-09-07"
+  stem_opt_note: "24-month STEM OPT extension after standard OPT expires 2027-09-07; subject to timely application and approval"
+  buffer_target_days: 80
+  buffer_note: "Book recommendation: stay 80 days below the 90-day unemployment ceiling"
+
+geography:
+  preferred:
+    - "Boston, MA"
+    - "New York, NY"
+    - "New Jersey (NYC metro)"
+    - "Chicago, IL"
+    - "Seattle, WA"
+    - "San Francisco Bay Area, CA"
+    - "Los Angeles, CA"
+    - "Austin, TX"
+    - "Other major US tech hubs"
+  remote: true
+  remote_note: "Open to remote but F-1 OPT requires a bona-fide employer; fully remote roles need to confirm they meet OPT work authorization requirements before applying"
+  constraints: "Must be US-based employer. No international roles during OPT period."
+
+industry:
+  sectors:
+    - "fintech"
+    - "SaaS"
+    - "AI infrastructure"
+    - "enterprise software"
+    - "any sector with large-scale data/AI engineering needs"
+  company_size:
+    - "large established (Series D+, late-stage private, or public)"
+    - "minimum headcount: ~500 employees"
+  exclusions:
+    - "companies with no H-1B sponsorship history (hard gate — Skip regardless of fit)"
+    - "roles with starting base salary below $100,000"
+  exclusion_note: "The $100k floor is a compensation minimum, not an industry exclusion. The sponsorship history gate is the critical hard stop for the scorer."
+
+sponsorship:
+  required: true
+  timing: "not immediately required (authorized on OPT through 2027-09-07, potentially STEM OPT through ~2029)"
+  gate: "Companies must have H-1B sponsorship history — a company with no DOL/H-1B record is Skip regardless of fit score"
