@@ -1,0 +1,115 @@
+{
+  "attested": true,
+  "attested_date": "2026-06-25",
+  "attestation_note": "Three errors corrected: (1) visa_status originally read 'F-1, transitioning to STEM OPT (~October 2026)' implying active transition — corrected to reflect current F-1 status with OPT not yet filed; (2) scale field removed from all projects — agent invented a separate top-level field by extracting metrics from bullet points, field does not exist in source resume and not all scales were captured; (3) type field removed from CREWASIS entry — agent inferred and added 'co-op' which does not appear anywhere in the source resume.",
+
+  "personal": {
+    "name": "Komal Khairnar",
+    "phone": "(857) 544-9856",
+    "email": "komalkhairnar1799@gmail.com",
+    "location": "United States",
+    "visa_status": "F-1 student visa; EAD start date anticipated October 19, 2026"
+  },
+
+  "education": [
+    {
+      "institution": "Northeastern University",
+      "degree": "Master of Science in Information Systems",
+      "location": "Boston, MA",
+      "start_date": null,
+      "end_date": "2026-08",
+      "status": "Expected"
+    },
+    {
+      "institution": "University of Mumbai",
+      "degree": "Bachelor of Engineering in Electronics and Telecommunication",
+      "location": "Mumbai, India",
+      "start_date": null,
+      "end_date": "2020-10"
+    }
+  ],
+
+  "experience": [
+    {
+      "company": "CREWASIS.AI",
+      "title": "Data Engineer, ML Ops",
+      "location": "New York, USA",
+      "start_date": "2026-01",
+      "end_date": "2026-05",
+      "bullets": [
+        "Engineered video intelligence pipeline on AWS Lambda, Step Functions, and ECS Fargate processing 400 videos per run through Apify scraping, transcription, S3 staging, and Bedrock/Claude, reducing processing time by 40%.",
+        "Developed LLM evaluation framework using LangChain and AWS Bedrock across Detail, Tone, and Language, ran Bayesian Optimization on 500 ground truth samples, cutting pipeline runtime by 80%.",
+        "Designed competitive intelligence platform schema in PostgreSQL, implemented 3 ingestion microservices using Apify, Selenium, and Claude Vision API for 10 products per run.",
+        "Managed AWS infrastructure across Lambda, ECR, S3, ECS, and EventBridge, containerizing data pipelines.",
+        "Maintained data lineage documentation and integration contracts across 3 concurrent pipelines, enforcing data governance standards across ingestion, transformation, and serving layers.",
+        "Architected hybrid AWS Bedrock inference routing across two pipelines, auto-selecting on-demand vs batch processing based on input volume, set up EventBridge for async batch completion handling."
+      ],
+      "technologies": ["AWS Lambda", "AWS Step Functions", "ECS Fargate", "AWS Bedrock", "AWS S3", "AWS ECR", "EventBridge", "Apify", "Selenium", "Claude Vision API", "LangChain", "PostgreSQL", "Docker", "Python"]
+    },
+    {
+      "company": "Infosys",
+      "title": "Senior System Engineer",
+      "location": "Pune, India",
+      "start_date": "2021-04",
+      "end_date": "2023-10",
+      "bullets": [
+        "Restructured Airflow DAGs on Databricks and AWS Glue to parallelize 5 tasks, reducing pipeline runtime by 30%.",
+        "Diagnosed index fragmentation across a 10M+ row database, rewrote 30+ stored procedures and dbt models with optimized indexing, recovering 40% query efficiency.",
+        "Deployed Azure Data Factory pipelines integrating SAP enterprise data across 5+ microservices, enabling real-time analytics and improving data accessibility by 25%.",
+        "Built Power BI dashboards monitoring API endpoint reliability across 4 enterprise applications with 10M+ log records and drill-through reporting, improving efficiency by 30%.",
+        "Led end-to-end migration of 12+ production data pipelines to AWS and Azure, defining governance standards, coordinating with 5+ downstream teams, and ensuring zero data loss during cutover.",
+        "Automated Incident Remediation Framework using Python and SQL, resolving 90% of reported code issues."
+      ],
+      "technologies": ["Airflow", "Databricks", "AWS Glue", "dbt", "Azure Data Factory", "SAP", "Power BI", "Python", "SQL"]
+    }
+  ],
+
+  "projects": [
+    {
+      "name": "AutoInsight — Automotive Intelligence Platform",
+      "github": true,
+      "technologies": ["LangGraph", "Snowflake", "Apache Spark", "Pinecone", "Airflow", "AWS EC2", "GitHub Actions"],
+      "bullets": [
+        "Designed Snowflake data access layer serving a 5-agent LangGraph system, integrating Pinecone vector search for low-latency retrieval and enforcing query contracts that achieved 95.3% SQL accuracy and 88% hallucination reduction.",
+        "Processed Spark ETL on 84GB automotive data into Snowflake, added sentiment analysis over 210K+ records, deployed on AWS EC2 with CI/CD via GitHub Actions."
+      ]
+    },
+    {
+      "name": "Food Safety Inspection Analytics",
+      "github": true,
+      "technologies": ["Databricks", "Delta Live Tables", "Medallion Architecture", "Snowflake", "Tableau", "Alteryx"],
+      "bullets": [
+        "Developed BI pipeline unifying 1M+ inspection records using Databricks Delta Live Tables and Medallion Architecture, enforced 8 quality rules eliminating 98% of errors.",
+        "Engineered a star schema dimensional model with SCD Type 2 for historical compliance tracking, utilized Alteryx for data profiling and RegEx standardization and created Tableau dashboards visualizing 100+ violation patterns."
+      ]
+    },
+    {
+      "name": "IMDb Movie Analytics",
+      "github": true,
+      "technologies": ["Azure Data Factory", "Snowflake", "Medallion Architecture", "Power BI", "Tableau"],
+      "bullets": [
+        "Implemented BI pipeline using Azure Data Factory and Medallion Architecture to load 200M+ IMDb records into Snowflake with data quality and lineage tracking.",
+        "Modeled star schema with 5 dimension tables and 1 fact table, delivered Power BI and Tableau dashboards on genres, ratings."
+      ]
+    },
+    {
+      "name": "Project Aurelia — Financial RAG Pipeline",
+      "github": true,
+      "technologies": ["AWS EC2", "Pinecone", "Azure Document Intelligence", "PostgreSQL", "Airflow", "FastAPI", "Streamlit"],
+      "bullets": [
+        "Constructed RAG pipeline using Azure Document Intelligence, chunking into 1,247 Pinecone vectors with PostgreSQL semantic caching achieving 0.35s retrieval latency.",
+        "Configured FastAPI on AWS EC2 with Airflow orchestration and auto-scaling, launched Streamlit frontend maintaining 95% accuracy on financial queries."
+      ]
+    }
+  ],
+
+  "skills": {
+    "languages": ["Python (Pandas, NumPy)", "SQL"],
+    "cloud": ["AWS (Lambda, Bedrock, S3, Glue, Step Functions, EC2, RDS)", "Azure (ADF, Data Lake)", "GCP"],
+    "data_and_ml": ["Apache Spark", "Airflow", "dbt", "LangChain", "LangGraph", "Pinecone", "Snowflake", "PostgreSQL", "MongoDB", "Redshift"],
+    "tools": ["Docker", "FastAPI", "Streamlit", "Selenium", "BeautifulSoup", "Apify", "Power BI", "Tableau", "Git", "Alteryx", "GitHub Actions"],
+    "concepts": ["ETL/ELT", "Data Warehousing", "Dimensional Modeling", "Star Schema", "SCD Type 2", "Medallion Architecture", "Data Governance", "Data Lineage", "RAG", "LLMOps", "CI/CD"]
+  },
+
+  "certifications": []
+}
