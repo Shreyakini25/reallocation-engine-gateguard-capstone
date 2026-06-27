@@ -1,0 +1,131 @@
+{
+  "attested": true,
+  "attested_date": "2026-06-26",
+  "attestation_note": "Three errors corrected: (1) TripSync project — removed frontend/Next.js bullets that belonged to teammates; I owned only the Spring Boot backend on a 4-person team. (2) Docker and Kubernetes moved to familiar_with — learned in coursework only, never deployed. (3) Aiera bullets were UX-only; added the backend/infrastructure work I actually led (serverless pipeline, Lambda, LangChain, CI/CD).",
+
+  "personal": {
+    "name": "Aditi Bailur",
+    "location": "Boston, MA",
+    "phone": "857-445-9529",
+    "email": "bailur.a@northeastern.edu",
+    "linkedin": "https://www.linkedin.com/in/aditi-bailur/",
+    "github": "https://github.com/aditibailur"
+  },
+
+  "education": [
+    {
+      "institution": "Northeastern University",
+      "location": "Boston, MA",
+      "degree": "Master of Software Engineering Systems",
+      "gpa": "3.7/4.0",
+      "start_date": "UNKNOWN",
+      "end_date": "2026-05",
+      "status": "expected",
+      "coursework": [
+        "Program Structures & Algorithms",
+        "Object-Oriented Programming",
+        "Website Development"
+      ]
+    },
+    {
+      "institution": "Shah and Anchor Kutchhi Engineering College / Mumbai University",
+      "location": "Mumbai, India",
+      "degree": "Bachelor of Technology in Computer Science with Honors",
+      "gpa": "3.7/4.0",
+      "start_date": "UNKNOWN",
+      "end_date": "2023-05",
+      "status": "completed"
+    }
+  ],
+
+  "experience": [
+    {
+      "company": "Aiera",
+      "location": "Boston, MA",
+      "title": "Software Engineering Co-op",
+      "start_date": "2025-05",
+      "end_date": "present",
+      "bullets": [
+        "Led the design and implementation of a serverless document pipeline for SEC filings using AWS Lambda, S3, Python, and LangChain, improving data throughput and scalability",
+        "Optimized cloud efficiency and latency through Lambda tuning, OpenSearch indexing, and S3 lifecycle management, lowering compute costs by 20%",
+        "Authored runbooks and CI/CD workflows to standardize deployments and reduce incident recovery time",
+        "Improved developer productivity by introducing Poetry packaging, Docker pipelines, and pre-commit hooks, cutting onboarding time and improving reliability",
+        "Translated complex workflows into intuitive UI patterns for internal dashboards",
+        "Improved user experience of the SEC document delivery pipeline by simplifying data flows, designing clearer information architecture, and reducing friction in multi-step processes",
+        "Created reusable, accessible UI components aligned with internal design guidelines"
+      ],
+      "attestation_correction": "Agent extracted only UX/frontend bullets from resume. Missing backend work added: serverless pipeline (AWS Lambda, S3, LangChain), cloud optimization, CI/CD, and developer tooling work that reflects the full scope of the co-op."
+    },
+    {
+      "company": "Stellar Organization",
+      "location": "Mumbai, India",
+      "title": "Software Developer",
+      "start_date": "2023-06",
+      "end_date": "2023-12",
+      "bullets": [
+        "Developed an interactive financial dashboard using Power BI, integrating real-time financial data from AWS S3 and PostgreSQL, improving data accessibility and decision-making efficiency by 10%",
+        "Implemented a distributed messaging system using Apache Kafka and Zookeeper, ensuring fault-tolerant real-time event streaming and reducing data errors by 50%",
+        "Integrated third-party financial APIs using AWS Lambda and API Gateway, implementing a circuit breaker pattern to prevent cascading failures and optimize API resource utilization",
+        "Designed and deployed RESTful APIs using Node.js and Express.js, enabling seamless microservices communication and reducing response latency by 20%"
+      ],
+      "agent_note": "Verify the quantified metrics (10%, 50%, 20%) — these are common places where agents copy optimistic resume numbers without checking source data."
+    },
+    {
+      "company": "Oasis Infobyte",
+      "location": "Mumbai, India",
+      "title": "Website Developer",
+      "start_date": "2023-04",
+      "end_date": "2023-05",
+      "bullets": [
+        "Designed and implemented a responsive CRM website using the MERN stack, featuring a D3.js and Three.js data visualization dashboard for interactive 3D and 2D data insights",
+        "Integrated AWS S3 for secure document storage, ensuring encrypted file uploads for CRM users",
+        "Developed a platform to streamline day-to-day operations, optimizing goods management and automating production, resulting in a 25% productivity increase",
+        "Incorporated third-party API (Stripe) in the application using Node.js and Express.js for payment processing"
+      ],
+      "agent_note": "Duration is April–May 2023 (2 months). Verify this was a formal internship/role and not a project — short stints are flagged in ATS systems."
+    }
+  ],
+
+  "projects": [
+    {
+      "name": "PawConnect – A Real-Time Pet Adoption Platform",
+      "start_date": "2024-09",
+      "end_date": "2024-12",
+      "type": "academic",
+      "team_size": "UNKNOWN — verify whether solo or group",
+      "bullets": [
+        "Developed a multilingual Progressive Web Application (PWA) using React, Redux, and TypeScript, enabling dynamic language switching and improving accessibility for non-English-speaking users by 40%",
+        "Developed real-time adoption tracking with WebSockets for instant updates and a seamless user experience",
+        "Designed RESTful APIs with Node.js, Express.js, and PostgreSQL, improving API response time by 30% with ACID compliance",
+        "Integrated AWS S3 for image storage and optimized performance with Webpack & Babel, cutting server load by 50% and boosting page speed by 35%"
+      ],
+      "agent_note": "Agent cannot determine team size from resume. If this was a group project, the bullets imply full ownership. Correct them to reflect your actual contribution."
+    },
+    {
+      "name": "TripSync – Personalized Trip Planning Platform",
+      "start_date": "2024-09",
+      "end_date": "2024-12",
+      "type": "academic",
+      "team_size": 4,
+      "my_role": "Backend developer — Spring Boot APIs",
+      "bullets": [
+        "Designed RESTful APIs with Spring Boot, leveraging indexing and caching to improve query execution"
+      ],
+      "attestation_correction": "Original agent draft included React/Next.js frontend bullets (SSR, SSG, dynamic routing, data fetching) that were not my work — those were built by other team members. Removed. Only the Spring Boot backend bullet reflects my actual contribution."
+    }
+  ],
+
+  "skills": {
+    "languages": ["Java", "Python", "JavaScript (ES6+)", "TypeScript", "SQL"],
+    "testing_qa": ["Jest", "Postman", "API Testing (manual & automated)"],
+    "backend_automation": ["Node.js", "Express.js", "RESTful APIs", "Spring Boot"],
+    "database_cloud": ["PostgreSQL", "MySQL", "AWS Lambda", "AWS S3", "AWS API Gateway"],
+    "devops_cicd": ["GitHub Actions"],
+    "familiar_with_not_shipped": ["Docker", "Kubernetes"],
+    "attestation_correction_skills": "Docker and Kubernetes moved out of core skills — learned through coursework/tutorials only, never deployed in a real project. GitHub Actions stays (used in TripSync CI/CD).",
+    "frontend": ["React", "Redux", "Next.js", "TypeScript", "D3.js", "Three.js", "PWA"],
+    "data_bi": ["Power BI"],
+    "messaging": ["Apache Kafka", "Zookeeper"],
+    "agent_note": "Frontend and data/BI skills inferred from bullets and added as categories — these are not in the original skills section. Verify you can speak to all of these in an interview."
+  }
+}

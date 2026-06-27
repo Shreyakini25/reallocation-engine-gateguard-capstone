@@ -150,3 +150,58 @@ private emails, or sensitive application notes.
 - **Rebuilt:** `node scripts/build-instructions.mjs --promote` → `AGENTS.md` + `CLAUDE.md` regenerated; `CLAUDE.md` now imports `@SNICKERDOODLE.md`.
 - **Untouched:** `data/` CSVs (real company names containing "mycroft") and prior RUN_LOG history (append-only).
 - **Result:** conformance + doctor green; no stale `MYCROFT.md` outside data/history.
+
+
+
+
+## Date
+2026-06-26
+
+## What Was Built
+- `search/resume.json` — structured record extracted from PDF resume, agent-drafted then attested
+- `search/profile.yml` — target role, visa constraints, geography, sponsorship gate
+- `search/gaps.md` — delta table between attested record and target role requirements
+
+---
+
+## Attestation Errors Found in resume.json
+
+1. **TripSync project overclaimed ownership** → Agent wrote all bullets in first-person singular implying solo work. TripSync was a 4-person group project; I owned only the Spring Boot backend. Removed all React/Next.js frontend bullets that belonged to teammates.
+2. **Docker and Kubernetes listed as shipped skills** → Both were learned through coursework/tutorials only, never deployed in a real project. Moved to `familiar_with_not_shipped` category.
+3. **Aiera bullets were UX-only** → Agent extracted only the frontend/dashboard work visible on the PDF resume. Missing the entire backend/infrastructure scope I actually led: serverless SEC filing pipeline (AWS Lambda, S3, LangChain), Lambda tuning, OpenSearch indexing, CI/CD workflows, and developer tooling.
+
+---
+
+## Top Gap from gaps.md
+Backend/full-stack and cloud depth isn't independently demonstrable outside of employer context. My Aiera work shows I can do this, but it all happened inside existing infrastructure. No public project proves I can set it up from scratch — and that's what fintech SWE and AI Engineer roles are looking for.
+
+---
+
+## Killed Row
+**Cloud infrastructure ownership** — The agent drafted this gap before my Aiera backend work was added to resume.json. My co-op work includes Lambda tuning, OpenSearch indexing, and S3 lifecycle management, which is infrastructure I owned, not just integrated against.
+
+---
+
+## Corrected Field in profile.yml
+The agent drafted `stem_eligible: "uncertain"` and `dso_confirmed: false`. Corrected to `stem_eligible: true` and `dso_confirmed: true` after confirming with DSO. Unemployment days used (0) is accurate. The `authorization_end_date` (2027-09-01) is **estimated** — my EAD has not been issued yet, so the date is based on expected STEM OPT start, not read from a physical card. Marked explicitly as estimated via `authorization_end_date_status` in profile.yml so the engine treats the timeline gate as uncertain until the card is in hand. (This corrects an earlier draft of this note that said the date came "from actual documents.")
+
+---
+
+## Verification Check
+
+**resume.json** — Is every job entry traceable to something verifiable?
+→ Yes — all jobs, projects, and dates are traceable to LinkedIn, offer letters, or direct experience.
+
+**profile.yml** — Does the visa section reflect your actual documents, not your hope for how the timeline works out?
+→ Partially — the authorization end date (2027-09-01) is an estimated date based on expected OPT start, not confirmed from an issued EAD card. This should be updated to the exact date on the physical EAD card once issued/confirmed.
+
+**gaps.md** — Does every evidence column cite something real?
+→ Partially — some evidence was inferred by the agent from training data rather than verified against actual postings. Before the engine runs on this file, the evidence columns should be grounded by reviewing 3–5 real fintech SWE and AI Engineer job postings and confirming the cited skill demands are real patterns, not agent assumptions.
+
+---
+
+## AI Use Disclosure
+
+What AI did: Agent extracted resume to JSON, drafted profile.yml from intake questions, drafted gaps.md by comparing record to target role requirements.
+
+What AI could not do: The agent extracted only the UX/frontend bullets from my Aiera co-op role, missing the entire backend and infrastructure work I led — the serverless pipeline, Lambda tuning, OpenSearch indexing, and CI/CD work. That required my knowledge to catch and correct.

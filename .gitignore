@@ -66,4 +66,4 @@ data/BLS/db_30_2_mysql/
 # (data/ats/ self-manages via its own .gitignore — don't blanket-ignore it here.)
 **/*.resume.pdf
 **/resume.pdf
-resume.json
+search/private-notes.md
