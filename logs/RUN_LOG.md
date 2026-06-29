@@ -1,3 +1,18 @@
+## 2026-06-29 — case-swe-to-ai-engineer-h1b-title-screen v0.1.0 (RUNNABLE-SAMPLE)
+
+- **Mode:** `case-swe-to-ai-engineer-h1b-title-screen`
+- **Run type:** sample — no writes to `private/`, no external API calls beyond `npm run ats:liveness`
+- **Inputs:** 10 companies from `data/raw/case-swe-to-ai-engineer/company-list.json`; OPT start 2026-09-08; target SOCs 15-1221, 15-1252, 15-1299.08
+- **Data provenance:** `python3 scripts/sec/validate-h1b-join-sample.py` — 30,369 total companies, 1,557 with H-1B data (5.1%), audit written to `data/80-days-to-stay/data/SEC_DOL_H1b_data_mapped-join-validation-audit.md`
+- **Title screen:** 5 practitioner, 3 researcher-only (stopped — not scored), 1 hybrid (flagged for manual review), 1 no-data (AMD — public company, no Form D)
+- **Liveness:** Cohere Health Staff MLE (`job-boards.greenhouse.io/coherehealth/jobs/7617095003`) → active; AMD posting → expired
+- **Scores:** Apply 1 (COHERE HEALTH INC, composite 0.492), Consider 0, Skip 0
+- **Break test:** liveness.factor=0 → Skip, reason "gated: liveness ≈ 0.000" — gate behavior confirmed
+- **Artifacts:** `data/raw/case-swe-to-ai-engineer/title-screen.json`, `data/raw/case-swe-to-ai-engineer/role-scores.json`, `reports/generated/case-swe-to-ai-engineer-2026-06-29.md`
+- **Open issues:** `filter-by-title-pattern.py` not yet implemented `[TODO: DEV]`; LCA data not acquired `[TODO: DATA SOURCE]`; only 1 role scored (one confirmed live posting); Workday-based portals not checkable with current liveness script; Roblox classified as practitioner in data but PhD-only on current job board — validates Failure Mode 1
+
+---
+
 ## 2026-06-23 — Assignment 4: Search's Personal Layer
 
 - **What was built:** `search/resume.json` (attested 2026-06-23), `search/profile.yml`, `search/gaps.md`; `.gitignore` updated with `!/search/resume.json` exception to prevent blanket `resume.json` rule from silently excluding the assignment artifact.

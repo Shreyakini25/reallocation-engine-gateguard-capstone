@@ -1,17 +1,39 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(python3 -c ' *)",
+      "Bash(npx playwright *)",
+      "Bash(python3 scripts/sec/validate-h1b-join-sample.py)",
+      "WebSearch",
+      "Bash(wait)",
+      "Bash(tee data/raw/case-swe-to-ai-engineer/title-screen.json)",
+      "Bash(node scripts/score/role-scorer.mjs data/raw/case-swe-to-ai-engineer/roles.json --md reports/generated/case-swe-to-ai-engineer-2026-06-29.md)",
+      "Bash(python3 -m json.tool)",
+      "Bash(node scripts/score/role-scorer.mjs /tmp/roles-break-test.json)",
+      "Read(//private/tmp/**)",
+      "Bash(python3 -c \"import json,sys; r=json.load\\(sys.stdin\\)['roles'][0]; print\\('recommendation:', r['recommendation']\\); print\\('reason:', r['reason']\\); print\\('arithmetic:', r['trace']['arithmetic']\\)\")"
+    ]
+  },
   "hooks": {
     "PreToolUse": [
       {
         "matcher": "Bash",
         "hooks": [
-          { "type": "command", "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/archive-guard.sh" }
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/archive-guard.sh"
+          }
         ]
       }
     ],
     "Stop": [
       {
         "hooks": [
-          { "type": "command", "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/conformance-check.sh" }
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/conformance-check.sh"
+          }
         ]
       }
     ]

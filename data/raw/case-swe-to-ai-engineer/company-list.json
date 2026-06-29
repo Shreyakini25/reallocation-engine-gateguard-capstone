@@ -1,0 +1,80 @@
+{
+  "run_id": "sample-2026-06-29",
+  "mode": "sample",
+  "opt_start_date": "2026-09-08",
+  "opt_end_date": "2027-09-07",
+  "stem_eligible": true,
+  "target_soc_codes": ["15-1221", "15-1252", "15-1299.08"],
+  "notes": "10-company sample covering all 4 title-screen classifications plus two stop-condition examples. Companies selected from SEC_DOL_H1b_data_mapped.csv based on title pattern analysis run 2026-06-29.",
+  "companies": [
+    {
+      "name": "COHERE HEALTH INC",
+      "posting_url": "https://job-boards.greenhouse.io/coherehealth/jobs/7617095003",
+      "role_title": "Staff Machine Learning Engineer",
+      "expected_classification": "practitioner"
+    },
+    {
+      "name": "MOLOCO INC",
+      "posting_url": "https://job-boards.greenhouse.io/moloco/jobs/7635045003",
+      "role_title": "Machine Learning Engineer Intern",
+      "expected_classification": "practitioner",
+      "note": "Full-time MLE II+ requires MS/PhD — intern posting is live; flag for manual review"
+    },
+    {
+      "name": "KENSHO TECHNOLOGIES INC",
+      "posting_url": null,
+      "role_title": "Machine Learning Engineer",
+      "expected_classification": "practitioner",
+      "note": "Uses Workday; posting URL not confirmed live — liveness gate TBD"
+    },
+    {
+      "name": "ATTENTIVE MOBILE INC",
+      "posting_url": null,
+      "role_title": "Senior Machine Learning Engineer",
+      "expected_classification": "practitioner",
+      "note": "Posting URL not yet confirmed; liveness gate TBD"
+    },
+    {
+      "name": "SKYDIO INC",
+      "posting_url": null,
+      "role_title": "Research Scientist",
+      "expected_classification": "researcher-only",
+      "note": "Expected to stop at title screen — researcher-only titles only"
+    },
+    {
+      "name": "DATAMINR INC",
+      "posting_url": null,
+      "role_title": "Research Engineer",
+      "expected_classification": "researcher-only",
+      "note": "Expected to stop at title screen"
+    },
+    {
+      "name": "OUTREACH CORP",
+      "posting_url": null,
+      "role_title": "Applied Scientist",
+      "expected_classification": "researcher-only",
+      "note": "Expected to stop at title screen"
+    },
+    {
+      "name": "KINETIC AUTOMATION INC",
+      "posting_url": null,
+      "role_title": "Machine Learning Engineer",
+      "expected_classification": "hybrid",
+      "note": "Has both MLE and Research Engineer titles — hybrid, requires manual review"
+    },
+    {
+      "name": "ZOOM VIDEO COMMUNICATIONS INC",
+      "posting_url": null,
+      "role_title": "Machine Learning Engineer",
+      "expected_classification": "practitioner",
+      "note": "Only 2 total H-1B approvals — low-N flag; approval rate statistically unreliable"
+    },
+    {
+      "name": "ADVANCED MICRO DEVICES INC",
+      "posting_url": "https://careers.amd.com/careers-home/jobs/80934",
+      "role_title": "Machine Learning Engineer",
+      "expected_classification": "no-data",
+      "note": "Public company (NASDAQ) — not in SEC Form D dataset. Stop condition example. Posting also confirmed expired."
+    }
+  ]
+}
