@@ -108,10 +108,10 @@ npm run ats:liveness -- <posting_url>
 # must show: ✅ active
 ```
 
-**Gate 5 — Score output parses:** Before writing the human report, confirm the scorer's JSON output is valid.
+**Gate 5 — Score output parses:** After the scorer runs, confirm the output JSON is valid before treating the report as final.
 
 ```bash
-node scripts/score/role-scorer.mjs data/raw/case-swe-to-ai-engineer/roles.json | python3 -m json.tool > /dev/null && echo "valid"
+python3 -m json.tool data/raw/case-swe-to-ai-engineer/role-scores.json > /dev/null && echo "valid"
 ```
 
 ---
@@ -211,7 +211,7 @@ with open('data/80-days-to-stay/data/SEC_DOL_H1b_data_mapped.csv') as f:
 found = {r['company'].upper() for r in results}
 for name in targets:
     if name not in found:
-        results.append({'company': name, 'classification': 'no-data', 'note': 'not in dataset'})
+        results.append({'company': name, 'classification': 'no-data', 'note': 'not found in SEC_DOL_H1b_data_mapped.csv'})
 
 print(json.dumps(results, indent=2))
 " | tee data/raw/case-swe-to-ai-engineer/title-screen.json

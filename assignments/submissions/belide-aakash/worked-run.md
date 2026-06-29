@@ -184,6 +184,23 @@ Full output (this reads the real CSV — not model memory):
 - Hybrid: 1 (Kinetic Automation) — flagged for manual review
 - No-data: 1 (AMD) — stop condition triggered (public company, no Form D)
 
+### 3a. Funding recency check (Recipe Step 3)
+
+Step 3 in the recipe: flag companies where `latest_funding_date` is before 2024-06-29 (>24 months stale) or where funding stage is Pre-Seed.
+
+From `title-screen.json` — funding dates read directly from the CSV:
+
+| Company | Funding Stage | Last Funded | Recency Flag |
+|---|---|---|---|
+| COHERE HEALTH INC | Series C | 2025-05-07 | ✅ recent (13 months ago) |
+| ATTENTIVE MOBILE INC | Series D+ | 2020-09-09 | ⚠ stale (68 months ago) |
+| MOLOCO INC | Series D+ | 2021-08-09 | ⚠ stale (58 months ago) |
+| KENSHO TECHNOLOGIES INC | Series C | 2015-07-28 | ⚠ stale (132 months ago) |
+| ZOOM VIDEO COMMUNICATIONS INC | Series D+ | 2016-12-01 | ⚠ stale (114 months ago) |
+| KINETIC AUTOMATION INC | Series B | 2024-04-26 | ✅ recent (26 months ago) |
+
+Cohere Health is the only practitioner-accessible company with recent funding. Kensho's 2015 date makes it the oldest funder in the batch — worth manual investigation before committing prep time. This is a soft signal (companies can operate years past last funding), not a hard gate, but it narrows where to prioritize.
+
 ### 4. Liveness checks
 
 ```
@@ -212,6 +229,20 @@ Results: 0 active  1 expired  0 uncertain
 ```
 
 The AMD result is exactly what the liveness gate is for. AMD also triggered the no-data stop condition from the title screen, so it would have stopped before reaching this gate anyway — but this confirms both gates fire independently.
+
+```
+$ npm run ats:liveness -- "https://job-boards.greenhouse.io/moloco/jobs/7635045003"
+
+> the-reallocation-engine@1.0.0 ats:liveness
+> node scripts/ats/check-liveness.mjs https://job-boards.greenhouse.io/moloco/jobs/7635045003
+
+Checking 1 URL(s)...
+✅ active     https://job-boards.greenhouse.io/moloco/jobs/7635045003
+
+Results: 1 active  0 expired  0 uncertain
+```
+
+Moloco's posting is live — but it's an intern role ("Machine Learning Engineer Intern"). The recipe targets Staff/Senior ICs on OPT who need H-1B sponsorship lined up within a 12–36 month window. An intern role doesn't advance that. The JD note in `company-list.json` also flags that Moloco's full-time MLE II+ requires MS/PhD. Moloco passed liveness but was removed from the scoring batch on persona grounds — this is the human judgment step between liveness and scoring that the recipe describes but can't automate.
 
 ### 5. Role scorer — normal run
 
@@ -265,9 +296,12 @@ This is the gate behavior described in the mode: liveness is a multiplier, not a
 | ZOOM VIDEO COMMS: low_n_flag=true (2 approvals) | CSV row | **Verified — record** |
 | AMD not found in CSV | Title screen — company not in dataset | **Verified — script** |
 | Cohere Health posting is live | `npm run ats:liveness` output, 2026-06-29 | **Verified — script** |
+| Moloco posting is live | `npm run ats:liveness` output, 2026-06-29 | **Verified — script** |
 | AMD posting is expired | `npm run ats:liveness` output, 2026-06-29 | **Verified — script** |
+| Cohere Health last funded 2025-05-07 (only one in batch within 24 months) | `title-screen.json` funding_date, from CSV row | **Verified — record** |
 | BLS cognitive_pivot_score for SOC 15-1221 is 4.516 | `data/bls/compact/soc_occupation_compact.csv` row | **Verified — record** |
 | Composite score for Cohere Health role = 0.492 | `role-scores.json`, scorer arithmetic | **Verified — script** |
+| role-scores.json parses as valid JSON | Gate 5: `python3 -m json.tool role-scores.json` exits 0 | **Verified — script** |
 | Roblox's 2026 job postings are PhD Early Career | Job search results, careers.roblox.com | **Verified — external check** |
 | Fit vote 0.65 for Staff MLE at Cohere Health | Judgment based on profile | **Model judgment** |
 | Cohere Health's current ML team hires practitioners | H-1B title history inferred | **Inferred — title history ≠ current team** |
@@ -292,7 +326,8 @@ This is the gate behavior described in the mode: liveness is a multiplier, not a
 | `npm run ats:liveness -- <AMD url>` | `❌ expired` | expired (public company, no Form D, posting also dead) |
 | `node role-scorer.mjs roles.json` (normal run) | Apply 1, composite 0.492, arithmetic shown | Apply; composite ~0.49 |
 | Break test: liveness.factor set to 0 | Skip 100%, reason "gated: liveness ≈ 0.000" | gate fires, composite zeroed |
-| `npm run doctor` after writing mode file | todos_open 522 declared = 522 body; RUNNABLE-SAMPLE 1; privacy clean | no mismatch, privacy OK |
+| `npm run doctor` after writing mode file | todos_open 522 declared = 522 body; RUNNABLE-SAMPLE 1; `search/resume.json` flagged as git-tracked (pre-existing — Assignment 4 committed it; requires `git rm --cached` before final push) | recipe counts match; privacy flag known and documented |
+| Gate 5: `python3 -m json.tool data/raw/case-swe-to-ai-engineer/role-scores.json > /dev/null && echo "valid"` | prints "valid" | exits 0, role-scores.json parses |
 
 ### Did not test
 
