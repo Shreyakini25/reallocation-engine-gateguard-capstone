@@ -1,7 +1,7 @@
 ---
 status: RUNNABLE-SAMPLE
 todos_open: 2
-last_gate: liveness-confirmed
+last_gate: score-run-confirmed
 attestation: Shreya Kini 2026-06-26
 recipe_version: 0.2.0
 ---

@@ -2,8 +2,8 @@
 
 ## Who Uses This Mode and When
 
-An MS Computer Software Engineering graduate (Northeastern University,
-May 2026) who began employment June 1, 2026 at YASH Technologies as a
+An MS Computer Software Engineering graduate (a US university,
+May 2026) who began employment June 1, 2026 at an IT consulting firm as a
 SAP Technical Consultant on post-completion OPT expiring July 2027.
 STEM OPT extension eligibility pushes the window to approximately
 July 2029, but H-1B lottery selection must occur before that deadline.
@@ -60,7 +60,7 @@ vulnerable ones (configuration, ticket resolution, scores 3–5).
 ## Failure Modes
 
 **Failure 1 — Missing record misread as a clean signal.**
-If YASH Technologies does not appear in the mapped CSV, a student
+If an IT consulting firm does not appear in the mapped CSV, a student
 may panic or wrongly conclude no sponsorship problem exists. The
 audit confirms only 5.1% coverage. Absence means missing data, not
 missing sponsorship. Hardest to catch for students new to the dataset
