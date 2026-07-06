@@ -23,7 +23,7 @@ What's not identical is the H-1B petition history. When a company sponsors someo
 
 This is not visible from a job posting. You can only see it by looking at the H-1B petition data — which is exactly what the mapped CSV at `data/80-days-to-stay/data/SEC_DOL_H1b_data_mapped.csv` provides.
 
-To put some numbers on the scale: of the 30,369 companies in the dataset, 1,557 have H-1B data at all (5.1%). Of those, 49 have practitioner ML titles in their sponsorship history and 40 have researcher-only titles. That's not a large number, but it's specific — and specificity is the point. Without this filter, you're guessing. With it, you have a signal.
+To put some numbers on it: of the 30,369 companies in the dataset, only 1,557 (5.1%) have H-1B data at all. Of those, 49 have practitioner ML titles and 40 have researcher-only titles. Not a huge number, but it's the right slice. Without this lookup, you're applying to both camps interchangeably; with it, you're not.
 
 ---
 
@@ -33,7 +33,7 @@ To put some numbers on the scale: of the 30,369 companies in the dataset, 1,557 
 
 **Job-Ops:** The ATS liveness check is a hard gate in this mode, same as everywhere else in the engine. A practitioner-friendly company with a dead posting is still a skip — no score runs. I ran `npm run ats:liveness` on the Cohere Health posting during the sample run and confirmed it was live before scoring.
 
-**Cognitive Pivot:** The BLS data tells you something important about why this transition matters beyond just getting a job. SOC 15-1221 (Computer and Information Research Scientists, which is where "AI Engineer" lands) has a `cognitive_pivot_score` of 4.516 versus 3.834 for SOC 15-1252 (Software Developers, where most SWEs start). The gap is 0.68. That's a real difference in role resilience to AI substitution — the kinds of tasks an AI Engineer does (system judgment, model evaluation, debugging emergent behavior) are much harder to automate than the tasks that represent the median SWE workload. Targeting companies that hire practitioners into ML roles isn't just about the job you land now; it's about landing in a role category that holds its value as AI tooling improves.
+**Cognitive Pivot:** The BLS data makes a longer-term case for this transition. SOC 15-1221 (Computer and Information Research Scientists, which maps to "AI Engineer") sits at a `cognitive_pivot_score` of 4.516, compared to 3.834 for SOC 15-1252 (Software Developers). That 0.68 gap matters — AI Engineer work involves system judgment, model evaluation, and debugging emergent behavior, which are harder to automate than the average SWE task. So this isn't only about landing an ML job before OPT runs out. It's about ending up in a role category that's less exposed to the same tooling that's already compressing backend development work.
 
 ---
 

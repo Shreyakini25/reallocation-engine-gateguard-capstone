@@ -326,7 +326,7 @@ This is the gate behavior described in the mode: liveness is a multiplier, not a
 | `npm run ats:liveness -- <AMD url>` | `❌ expired` | expired (public company, no Form D, posting also dead) |
 | `node role-scorer.mjs roles.json` (normal run) | Apply 1, composite 0.492, arithmetic shown | Apply; composite ~0.49 |
 | Break test: liveness.factor set to 0 | Skip 100%, reason "gated: liveness ≈ 0.000" | gate fires, composite zeroed |
-| `npm run doctor` after writing mode file | todos_open 522 declared = 522 body; RUNNABLE-SAMPLE 1; `search/resume.json` flagged as git-tracked (pre-existing — Assignment 4 committed it; requires `git rm --cached` before final push) | recipe counts match; privacy flag known and documented |
+| `npm run doctor` after writing mode file | RUNNABLE-SAMPLE: 1 recipe; aggregate todos across all 43 recipes: 522 declared = 522 body (our recipe: todos_open 5 = 5 `[TODO:` markers, counts match); `search/resume.json` flagged git-tracked — pre-existing issue from Assignment 4, fix with `git rm --cached` before final push | recipe counts match; privacy flag known and documented |
 | Gate 5: `python3 -m json.tool data/raw/case-swe-to-ai-engineer/role-scores.json > /dev/null && echo "valid"` | prints "valid" | exits 0, role-scores.json parses |
 
 ### Did not test
@@ -348,7 +348,7 @@ This is the gate behavior described in the mode: liveness is a multiplier, not a
 
 The title screen itself works well and runs fast — the whole CSV lookup for 10 companies takes under a second. The practitioner/researcher split came out exactly as expected from the prior data exploration. The more interesting finding was Roblox: 856 MLE approvals in the dataset but PhD-only current postings when you actually look at their job board. The mode would classify them as practitioner-accessible, which would be misleading. That's a real failure mode, not a theoretical one.
 
-The scorer input format wasn't documented anywhere obvious — had to read the source to find that it uses `.p` not `.vote` for vote values and `.factor` not a bare number for gates. Worth noting in the mode or in a README for whoever runs this next.
+The scorer input format wasn't documented anywhere obvious — had to read the source to find that it uses `.p` not `.vote` for vote values and `.factor` not a bare number for gates. I'll add this to the mode docs; it'd trip up anyone who just eyeballs the sample JSON.
 
 The one thing this run couldn't demonstrate is a multi-company scoring pass, because only one company had a confirmed live posting that fit the persona (Staff MLE, no explicit PhD requirement). The others either had expired postings, Workday-based portals the liveness checker doesn't support, or researcher-only classifications that stopped before liveness.
 
