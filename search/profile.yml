@@ -1,0 +1,76 @@
+# search/profile.yml
+# Target role, visa constraints, geography, industry preferences, sponsorship requirement
+# Agent-drafted 2026-06-25 — three fields corrected by Neha Dharanu before commit:
+# (1) hard_exclusions removed — none apply; (2) Series A added to company size range;
+# (3) remote preference corrected — any USA work arrangement acceptable
+
+target_role:
+  title: "Full-Stack or Backend Software Engineer"
+  soc_code: "15-1252"
+  level: "Entry to mid-level Software Engineer (MS graduate, 3+ years prior industry experience)"
+  description: >
+    Backend-heavy full-stack SWE roles at mid-size to large tech companies,
+    building scalable REST APIs, microservices, and distributed systems.
+    Open to roles with AI/LLM integration components.
+
+visa:
+  type: "F-1"
+  status: "OPT not yet started"
+  opt_start_date: "2026-10-01"
+  ead_expiry: "2027-10-01"
+  stem_opt_eligible: true
+  stem_opt_confirmed_by_dso: true
+  stem_opt_extension_start: "2027-10-01"
+  stem_opt_extension_end: "2029-10-01"
+  unemployment_days_used: 0
+  buffer_target_days: 80
+  h1b_lottery_target: "FY2028"
+  h1b_lottery_deadline: "2027-04-01"
+  latest_offer_deadline_standard_processing: "2026-12-01"
+  latest_offer_deadline_premium_processing: "2027-03-01"
+  notes: >
+    STEM OPT eligibility confirmed with DSO.
+    No unemployment days used as of profile creation date.
+    Buffer target of 80 days maintained below 90-day ceiling per engine recommendation.
+
+sponsorship:
+  required: true
+  gate: true
+  note: >
+    Employer visa sponsorship is a hard gate — not a preference.
+    Any company with no H-1B sponsorship history is skip-regardless of fit score.
+    Sponsorship requirement applies to both H-1B cap filing (FY2028) and
+    any future green card process.
+
+geography:
+  preferred:
+    - "Seattle, WA"
+    - "San Francisco Bay Area, CA"
+    - "Los Angeles, CA"
+  work_arrangement: >
+    Open to fully remote (USA), hybrid (USA), or in-office (USA).
+    No geographic work arrangement constraint — all three metros viable
+    for in-person roles; remote roles accepted if employer is USA-based.
+
+industry:
+  target_sectors:
+    - "Technology (SaaS, developer tools, AI/ML platforms)"
+    - "Fintech"
+    - "E-commerce and marketplace platforms"
+  company_size:
+    - "Series A and beyond — Series A considered if H-1B sponsorship history is documented"
+    - "Series B and beyond preferred"
+    - "Large public tech companies"
+  hard_exclusions: none
+  notes: >
+    Preference for companies with established engineering orgs and
+    documented H-1B sponsorship history for SOC 15-1252 titles.
+    Seed stage excluded — sponsorship history too thin and
+    lottery timeline risk too high given OPT constraints.
+
+search_preferences:
+  apply_threshold: "Proven H-1B sponsor + SWE titles confirmed + live posting"
+  consider_threshold: "Likely sponsor + role fit strong + manual DOL lookup needed"
+  skip_threshold: "No sponsorship history or no SWE titles in LCA data"
+  pipeline_size_target: 20
+  weekly_application_target: 5

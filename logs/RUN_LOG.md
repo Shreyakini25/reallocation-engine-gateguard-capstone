@@ -1,152 +1,164 @@
-# Recipe Run Log
+# RUN_LOG.md
 
-Human-readable history for recipe-driven work.
+---
 
-Use this file to record what was run, what worked, what failed, and what should
-be tested next. Keep entries short. Do not include secrets, real phone numbers,
-private emails, or sensitive application notes.
+## Setup Exercise — Your Search's Personal Layer
 
-## 2026-06-12 — Wrote Tutorial 00 (Exercise Zero) in full
+**Date:** 2026-06-25
+**Operator:** Neha Dharanu
 
-- **Recipe:** manual
-- **Inputs:** `docs/search-profile-design.md` v3, `data/bls/compact/soc_occupation_compact.csv` schema, MYCROFT.md attestation rules
-- **Outputs:** `docs/tutorials/00-personal-layer.md` — privacy-first setup (gitignore gate), paste-ready agent prompt (3 tasks with hard stops), resume.json schema with evidence fields and attested timestamp, full 8-question conditional intake tree (visa block only after a "no" at Q4), gaps draft with 3 required student edits (kill a row / rewrite a row / write one startable plan), migration rule, 4 exercises (delete test, inflation hunt, multi-model SOC second opinion, six-hour test), what-can-go-wrong table; index updated to ready
-- **Result:** Exercise Zero runnable today in Claude Code with zero new scripts. Extraction-corrections count gives each student a personal fluency-vs-truth measurement on day one.
-- **Open issues:** SOC matching quality from free text untested against real student answers; the agent prompt should be re-tested once the config generator lands (Tutorial 01 hand-edit note then changes); per-section attestation flags deliberately omitted in favor of one file-level timestamp — revisit if students attest carelessly.
+---
 
-## 2026-06-12 — Dropped personas for conditional intake; added gaps file + Exercise Zero
+### What Was Built
 
-- **Recipe:** manual (human design input: don't invent personas, ask for relevant facts — past for resume, future for wants/constraints; generate an editable gaps file; gaps migrate to resume with evidence; this is the first exercise)
-- **Inputs:** `docs/search-profile-design.md` v3, `data/bls/compact/soc_occupation_compact.csv` (skill_*_lv / ability_*_lv columns)
-- **Outputs:** design doc revised — personas replaced by conditional intake over canonical fields (question tree branches on answers, no labels); new gaps-file section (generated draft from O*NET levels + scanned-posting keyword frequency, human-owned thereafter, regenerate-as-diff, migration-to-resume.json only with evidence); Exercise Zero defined; tutorials index gains Tutorial 00 (planned)
-- **Result:** Personal layer is three files with distinct epistemic status: resume.json (attested past), profile.yml (declared future), gaps.md (managed delta). Aspirational resume entries become structurally impossible. Engine extends from application allocator to development allocator (gaps = what to build in the six hours).
-- **Open issues:** gap computation quality unknown until tried against a real resume + SOC pair; Tutorial 00 not yet written; intake question tree not yet drafted.
+Three files created in `search/` folder of forked Reallocation Engine repo:
 
-## 2026-06-12 — Added profile metadata + personas to the design
+- `search/resume.json` — structured, attested record extracted from resume PDF
+- `search/profile.yml` — target role, visa constraints, geography, sponsorship gate
+- `search/gaps.md` — delta between attested resume and SOC 15-1252 target role requirements
 
-- **Recipe:** manual (human design input: resume facts ≠ search metadata; US citizens shouldn't see visa questions; start with a few personas, add later)
-- **Inputs:** `docs/search-profile-design.md` v2
-- **Outputs:** new "Profile metadata" section — four starting personas (international student, US new grad, employed-and-quietly-looking, flexible/part-time); two-layer model: canonical profile fields + personas as intake routing/defaults only; scorer weights become a function of profile fields (sponsorship weight ≈ 0 for citizens, timeline gate persona-conditional)
-- **Result:** Persona proliferation avoided — combinations are field combinations, not new personas; engine reads fields, never labels. New-persona criterion is evidence-driven (recurring intake combinations the presets serve badly).
-- **Open issues:** discretion mechanics for the employed persona (employer-affiliate exclusion list source?); whether persona presets live in data/ as a versioned file (recommended) or in the intake recipe prose.
+---
 
-## 2026-06-12 — Revised profile design: roles-first intake + resume.json layer
+### Three Attestation Errors Caught in resume.json
 
-- **Recipe:** manual (human design input: never ask for companies; ask what they want to do → SOC codes → suggest companies; resume converted to verified JSON, generated docs derive from it)
-- **Inputs:** `docs/search-profile-design.md` v1, `data/bls/compact/soc_occupation_compact.csv`, `scripts/resumes/`
-- **Outputs:** design doc revised — 5-step pipeline (intake → SOC resolution with human confirmation gate → generate → review/prune → scan); new resume.json section (upload → extract → field-by-field human attestation → all resume artifacts generated as projections, never rewrites); search/ layout extended; course-project mapping section (student H-1B probability tools and resume-JSON converters are the engine's missing components)
-- **Result:** Companies are now an output of the engine, not an input. Resume claims become machine-checkable against attested source fields — verified-data contract extended to the student's own history.
-- **Open issues:** unchanged 4 open decisions + new: JSON Resume schema as-is vs extended; where extraction-hallucination checking lives (conformance script vs gate checklist).
+1. **Kubernetes scope overclaimed** — agent listed Kubernetes as a peer skill alongside Docker and AWS, implying cluster ownership. Reality: used a managed Kubernetes cluster at Mercedes-Benz for dev/staging deployments — did not author cluster configs or Helm charts. Corrected by removing Kubernetes from the skills list and adding a `kubernetes_note` field with accurate scope.
 
-## 2026-06-12 — Designed profile-driven config generation
+2. **Hibernate/JPA omitted from skills** — agent extracted skills only from the skills section of the resume and missed Hibernate/JPA, which was used hands-on at Mercedes-Benz for query updates during the DB2-to-PostgreSQL migration. Corrected by adding Hibernate/JPA to the frameworks skills list.
 
-- **Recipe:** manual (triggered by human design question: why does a human hand-edit portals.yml?)
-- **Inputs:** `recipes/_profile.template.md`, `scripts/ats/detect-ats.py`, `data/bls/compact/soc_occupation_compact.csv` (alternate_titles columns), `data/80-days-to-stay/`, `scripts/ats/scan.mjs` (REALLOCATION_ENGINE_PORTALS env var)
-- **Outputs:** `docs/search-profile-design.md` (intake → search/profile.yml → generated portals.yml with O*NET + curated synonym expansion, evidence-derived company suggestions, gitignored personal `search/` folder); Tutorial 01 Step 1 reframed (hand-editing = looking under the hood, not steady state)
-- **Result:** Design connects four existing-but-disconnected pieces: profile template, detect-ats.py, O*NET alternate titles, sponsorship data. Human reads/judges generated config; never writes it.
-- **Open issues:** Generator script, synonyms seed file, profile recipe, and `.gitignore` entry not yet built — design awaits approval on 4 open decisions (folder name, intake form, suggestion cap, fate of personal files in data/ats/).
+3. **Capgemini contribution scope overstated** — agent wrote "owning design through production deployment" implying solo ownership. Reality: team of 4–6 engineers. Corrected bullet to "contributed... as part of a team of 4–6 engineers, participating from design through production deployment."
 
-## 2026-06-12 — Verified Greenhouse API liveness; fixed tutorial browser-check step
+---
 
-- **Recipe:** manual (triggered by human observation: `job-boards.greenhouse.io/databricks` redirects to the company careers site; same pattern at Duolingo)
-- **Inputs:** `scripts/ats/providers/greenhouse.mjs` (read: provider derives `boards-api.greenhouse.io/v1/boards/<slug>/jobs` and fetches with `redirect: 'error'`); fetched the Databricks and Duolingo API endpoints directly
-- **Outputs:** `docs/tutorials/01-first-scan.md` Step 6 rewritten (verify against the API JSON, not the board page, with explanation of the redirect pattern); new what-can-go-wrong row
-- **Result:** Both APIs live and serving: Databricks ≈97 KB payload, 100+ postings; Duolingo ≈78 KB, ≈80 postings. The browser redirect is a UI relocation, not an API removal — human-facing board pages increasingly redirect to branded careers sites while the JSON API keeps serving. Scanner unaffected by design (API-only + redirect:'error'). This partially closes the prior open issue "provider fetch not verified": the endpoint is confirmed reachable and serving from this environment's fetch tool, though still not via the scanner process itself.
-- **Open issues:** Job counts are approximate (counted from match listings, not a parsed total). If Greenhouse ever moves or gates boards-api, the provider fails loudly (`fetch failed` / redirect error) — correct behavior, but worth a tutorial-02 liveness note. Some companies may genuinely leave Greenhouse; a redirected board page plus a 404 from boards-api is the signature of that case.
+### Top Gap from gaps.md
 
-## 2026-06-12 — Added tutorials layer (docs/tutorials/)
+**System design interview fluency** — I have real design work (Mercedes rules engine processing millions of automotive config rules, zero-downtime DB2→PostgreSQL migration, SentinelPay three-layer fraud detection architecture) but have not practiced articulating these designs under timed interview conditions at a target company. Gap closes when three written design docs are published on GitHub and reviewed by a practicing senior engineer, or a system design screen is passed at a target company.
 
-- **Recipe:** manual
-- **Inputs:** `data/ats/portals.example.yml`, `scripts/ats/scan.mjs` (usage header, flags, default paths), `package.json`, MYCROFT.md conventions
-- **Outputs:** `docs/tutorials/01-first-scan.md` (full predict→run→inspect→judge→record walkthrough with 6 graduated exercises and a what-can-go-wrong table), `docs/tutorials/README.md` (index; tutorials 02–05 marked planned), `DOMAIN.md` first-win section now points to the tutorial
-- **Result:** The first-win command is no longer a bare one-liner; a student can complete the scan loop unassisted. Exercise 6 rehearses the attestation format; exercise 4 teaches the conformance/adequacy boundary by deliberate breakage.
-- **Open issues:** Sample output numbers in Step 5 are illustrative (live fetch is blocked in this sandbox — could not capture a real success report). Tutorials 02–05 are titles only. Exercise 4's typo-provider behavior was not executed; the tutorial asks the student to discover it, but an instructor should verify the actual error message once on an unrestricted machine.
+---
 
-## 2026-06-12 — First honest run: BLS extract + ATS scan dry-run
+### Killed Row and Why
 
-- **Recipe:** manual (pre-recipe verification run under MYCROFT.md contract)
-- **Inputs:** `scripts/bls/extract-soc-occupation-table.py` against `data/bls/db-30-2-text/` + `data/bls/oesm24nat/`; `npm run ats:scan -- --dry-run` with `REALLOCATION_ENGINE_PORTALS=data/ats/portals.example.yml`
-- **Outputs:** `data/bls/compact/soc_occupation_compact.csv` (1,016 occupations; SHA-256 recorded in audit), `data/bls/bls-audit.md` (962/1,016 = 94.7% matched to OEWS 2024 detailed SOC rows)
-- **Result:** BLS extractor runs clean after the `Skills.txt` fix; audit generated and read; CSV schema unchanged (`skill_*` columns intact). ATS scan loaded the example portal config, matched the Greenhouse provider, ran filter/dedup/report logic, and wrote nothing in dry-run mode — machinery verified.
-- **Open issues:** ATS scan's live fetch failed in the sandboxed environment (network egress blocked) — provider fetch is **not** verified end-to-end; rerun on an unrestricted machine. BLS extractor was not executed pre-fix, so "failed before fix" is inferred from the missing `Recipes.txt` file, not observed. `playwright`/`sharp` not installed; only `js-yaml`/`glob` were needed for this run.
+**Killed:** Organizational leadership — mentoring junior engineers and driving alignment across teams
 
-## 2026-06-12 — Fixed rename-shrapnel bugs; added lifecycle frontmatter
+**Reason:** Agent generated this gap because mentoring activity does not appear explicitly in my resume. In reality, I informally mentored 1–2 junior engineers at Mercedes-Benz on task-level design and code reviews. The agent could not know this from the resume text alone — this is exactly the kind of domain knowledge about my own situation that required my correction. The gap is overstated; what I lack is formal team leadership, not all organizational influence.
 
-- **Recipe:** manual
-- **Inputs:** `scripts/bls/extract-soc-occupation-table.py`, `scripts/ats/analyze-patterns.py`, `scripts/ats/README.md`, 8 core recipe files
-- **Outputs:** three one-line fixes (`Recipes.txt`→`Skills.txt`; `modes/RUN_LOG.md`→`logs/RUN_LOG.md` in script and README; audit prose "recipe Level scores"→"skill Level scores"); MYCROFT.md lifecycle frontmatter added to `_shared` (type: contract) and `scan`, `pipeline`, `oferta`, `tracker`, `pdf`, `patterns`, `update` (status: DRAFT, todos_open: 11 each)
-- **Result:** Known defects 1–2 from DOMAIN.md closed. Recipe status is now machine-readable.
-- **Open issues:** `scripts/cowork-agentic-repo.py` still contains mangled prose ("Recipes and recipes…") — cosmetic, not load-bearing. The 33 non-core recipes have no frontmatter yet.
+---
 
-## 2026-06-11 — Established MYCROFT.md as source of truth
+### Field Corrected in profile.yml from Agent's First Draft
 
-- **Recipe:** manual
-- **Inputs:** architecture review of the full repo; Codex cross-review; Gru SDD; principles discussion (Cowork session)
-- **Outputs:** `MYCROFT.md` (new — constitution v0.1.0: 8 principles, verification stack, recipe lifecycle, TODO-closure evidence, attestation format), `DOMAIN.md` (new — domain manifest: actual layout, runnable command surface, known gaps/defects), `CLAUDE.md` (rewritten as pointer to MYCROFT.md), `AGENTS.md` (rewritten as pointer; also removed "recipes, recipes" rename shrapnel)
-- **Result:** One governing file; precedence rule explicit; current-vs-planned architecture separated (domain layout is current; `data/raw`/`data/verified`/snickerdoodle CLI marked roadmap). Claude Code named as v0 runtime.
-- **Open issues:** Known defects listed in DOMAIN.md §Known gaps: BLS `Recipes.txt` bug, `modes/RUN_LOG.md` path bug, scorer unimplemented, no recipe has a logged run, doctor script not built, person-named recipes need privacy review, skill/recipe terminology in manuscript unreconciled. README and `docs/` not yet updated to cite MYCROFT.md.
+Agent wrote three fields incorrectly in its first draft:
 
-## 2026-05-28 — Recipe folder converted to verified-data workflows
+- `hard_exclusions` — agent added Defense and Gambling as exclusions; I have no hard industry exclusions. Removed.
+- `company_size` — agent excluded Series A entirely; I would consider Series A if H-1B sponsorship history is documented. Corrected.
+- `work_arrangement` — agent wrote "not fully remote only" implying a geographic constraint. Reality: I am open to fully remote, hybrid, or in-office anywhere in the USA. Corrected.
 
-- **Recipe:** manual
-- **Inputs:** `recipes/`, `scripts/`, `README.md`, `DATA_CONTRACT.md`
-- **Outputs:** `recipes/_shared.md`, `recipes/README.md`, active recipes, and draft/helper recipe files
-- **Result:** Recipes now point students toward repo scripts, audits, and logs instead of prompt-only recipes.
-- **Open issues:** Some workflows remain intentionally marked as draft until supporting scripts exist.
+---
 
-## 2026-05-28 — Removed copied Job-Ops source tree
+### Verification Check Answers
 
-- **Recipe:** manual
-- **Inputs:** `data/career-ops-main/`, `scripts/ats/`, `recipes/`, `resumes/`
-- **Outputs:** `.gitignore`, `README.md`, `DATA_CONTRACT.md`, provider docs
-- **Result:** Removed the copied reference directory after useful pieces had been adapted into maintained repo paths.
-- **Open issues:** Provenance now lives in docs and adapted files, not in a local source copy.
+**resume.json:** Every job entry is defensible. "Zero downtime migration" and "70% performance improvement" at Mercedes-Benz are both figures I measured and owned directly — confirmed yes.
 
-## 2026-05-28 — Normalized data directory names
+**profile.yml:** Visa section reflects actual documents. OPT start date of October 2026 is based on expected EAD timeline confirmed with DSO. STEM OPT eligibility confirmed with DSO — marked as confirmed, not uncertain.
 
-- **Recipe:** manual
-- **Inputs:** old mixed-case 80 Days and BLS data directories, `data/sec/form-d/`
-- **Outputs:** `data/80-days-to-stay/`, `data/bls/`, lower-kebab SEC extracted folders, updated docs/scripts
-- **Result:** Source/reference data directories now use lower-case kebab-case names. Maintained automation now uses lowercase `scripts/` by repo convention.
-- **Open issues:** Some source data filenames and JSON field values still preserve upstream naming.
+**gaps.md:** Censys job posting (8245190002) cited in evidence column is no longer live as of 2026-06-25 — verified by checking job-boards.greenhouse.io/censys which returned an error for that specific role. However, the Censys board shows active "Distributed Systems Engineer" and "Senior Backend Engineer" roles confirming the demand pattern is real and not invented. O\*NET 15-1252 verified live at onetonline.org/link/summary/15-1252.00 and confirms distributed systems and design requirements for the occupation. One evidence citation is stale; the demand signal still holds.
 
-## 2026-06-13 -- Context parity + privacy pass + doctor (consolidated; re-logged after a git reset dropped prior entries)
+---
 
-- **Parity:** brought this repo to the Madison/Mycroft context architecture — ported `conformance.mjs`/`to-markdown.mjs`/`build-instructions.mjs`, added `instructions/` (6 shared rule modules + `reallocation-engine.md` + manifest) compiling to generated root `AGENTS.md`/`CLAUDE.md`, plus `.claude/` hooks (archive-guard + conformance-check) and `.github/workflows/verify.yml` (conformance + instruction drift guard). `MYCROFT.md` confirmed identical to the other Mycroft-domain repos.
-- **Privacy pass (gap #6):** 14 person-named case-study recipes anonymized -> `case-*.md` role slugs; student names + Canvas submission-IDs scrubbed. Verified zero residual PII repo-wide. Git **history** also purged via `git filter-repo` (--invert-paths on the 14 old paths + --replace-text on names/IDs); force-pushed.
-- **doctor (gap #5):** `scripts/doctor.mjs` (`npm run doctor`) — environment + npm-command-target + domain-dir checks + recipe-status dashboard. Surfaced gap #8: only 7/42 recipes carry lifecycle frontmatter; declared todos_open (77) vs 518 body `[TODO` markers.
-- **Note:** a later `git reset`/`filter-repo` reverted edits to pre-existing tracked files (DOMAIN.md gaps reconciliation, this log, package.json scripts, generated AGENTS/CLAUDE) while new files survived; re-applied 2026-06-13. New files were unaffected.
-- **Result:** doctor + conformance green; DOMAIN.md known-gaps reconciled (#1,#2,#5,#6 resolved; #3,#4,#7,#8 open).
+_No contents from search/private-notes.md are included in this log._
 
-## 2026-06-13 -- Backfill recipe lifecycle frontmatter (gap #8)
+---
 
-- **Commands:** One-off migration over recipes/ (excl. README + templates): prepended a `status/todos_open/last_gate/attestation/recipe_version` block to the 34 recipes that lacked one, injected the lifecycle keys into `_shared.md` (kept `type: contract`), and reconciled `todos_open` to the true `[TODO`-marker body count everywhere. 7 already-stamped recipes unchanged (idempotent).
-- **Result:** doctor now reports 42/42 recipes with frontmatter, 0 missing; declared todos_open == body markers (518 = 518, mismatch gone). Conformance clean. DOMAIN gap #8 resolved.
-- **Open issues:** All 42 remain `status: DRAFT` — promotion past DRAFT still requires a real gated run (gap #4) + attestation. Frontmatter is now the substrate for that lifecycle tracking.
+## Mode Run — case-ms-swe-stem-opt-h1b
 
-## 2026-06-13 -- Build the Bayesian Role Scorer (gap #3)
+**Date:** 2026-07-03
+**Operator:** Neha Dharanu
+**Recipe version:** 0.1.0
+**Status reached:** RUNNABLE-SAMPLE
 
-- **Skill:** Implement the book's Chapter-11 decision core — the composite role scorer / combiner.
-- **Inputs:** spec from `chapters/11-the-bayesian-role-scorer.md` (composite form, weights sponsorship 0.35 / fit 0.30, multiplicative liveness+timeline gates, threshold ~0.3, Apply/Consider/Skip, override discipline, auditability thesis) + `docs/search-profile-design.md` (weights are a function of the profile, not constants). Confirmed exact structure by reproducing the chapter's worked example backward.
-- **Commands:** Wrote `scripts/score/role-scorer.mjs` — combiner only (reads per-role evidence records; does not compute components). Multiplicative gates × weighted votes; profile-conditional sponsorship weight (→0 when authorization doesn't need sponsorship); per-term audit trace with source labels (record / model-judgment / your-input); documented-override support (override without a reason is ignored, per Ch.11); JSON + Markdown report + skip-rate summary. Config block annotates every weight/threshold with provenance; role_quality weight + Consider floor left as documented `[VERIFY]` defaults (not pinned by the chapter). Built fixture `data/examples/ch11-roles.json` reproducing the chapter's two roles + gate/Consider/override cases. Wired `npm run score`.
-- **Result:** Verified against the book — Cambridge biotech composite 0.446 → Apply; identical-fit non-sponsor 0.178 → Skip; ghost posting gated to 0 → Skip; Likely-tier → Consider; documented override flips Skip→Apply and records the reason. Conformance clean; doctor sees the new command. DOMAIN gap #3 resolved.
-- **Open issues:** `[VERIFY]` weights (role_quality, Consider floor) need confirmation vs the system design document before real decisions. The scorer is a pure combiner — wiring the upstream feeds (Ch.7/8/9/10) to emit the per-role evidence envelope is separate (the run-envelope schema is still `[TODO: DEFINE]` in recipes/pipeline.md) and tied to the honest run (gap #4).
+### Inputs
 
-## 2026-06-14 -- The honest run (gap #4): first gated, logged recipe run
+- Profile: search/profile.yml (OPT start: 2026-10-01, H-1B target: FY2028)
+- Resume: search/resume.json (attested 2026-06-25)
+- Roles evaluated: 5 real companies from SEC_DOL_H1b_data_mapped.csv
+  (Stripe, Databricks, Snowflake, Anyscale, Accolade)
+- URLs liveness-checked: 9 total (3 active, 1 uncertain on boards.greenhouse.io,
+  4 uncertain systematic on my.greenhouse.io, 1 deliberate fake/expired)
 
-- **Recipe:** `oferta` (Ch.11 Bayesian role scorer), **sample mode**, run id `oferta-2026-06-14-001`.
-- **Command:** `npm run score data/examples/ch11-roles.json` (stored script; no ad-hoc code).
-- **Inputs:** verified fixture `data/examples/ch11-roles.json` + run-envelope (`mode: sample`).
-- **Gates:** 1 Source ✓ · 2 Scope ✓ (sample) · 3 Data-shape ✓ · 4 Script-readiness ✓ · 5 Approval n/a (no live network/writes/model) · 6 Report ✓. Human adequacy gate: **PENDING attestation.**
-- **Result:** 5 roles → Apply 2 · Consider 1 · Skip 2 (skip 40%). Cambridge 0.446 / non-sponsor 0.178 reproduce Ch.11. Output fully sourced (record / model-judgment / your-input).
-- **Artifacts:** `logs/oferta-2026-06-14.json`, `reports/generated/oferta-2026-06-14.md`, `data/examples/role-scores.{json,md}`.
-- **Flags:** skip-rate 40% < 50% (curated fixture, expected); `role_quality` weight 0 [VERIFY] drops the Ch.9 signal (gap #3); 1 documented override.
-- **Open:** machine half of P4 done; **human adequacy (P4 second half) outstanding** — attest to promote `oferta` past DRAFT.
+### CSV filter evidence
 
-## 2026-06-14 -- Rename MYCROFT.md → SNICKERDOODLE.md (constitution rebrand)
+- Total companies in dataset: 30,369
+- After sponsorship filter: 1,552 (28,817 skipped — 94.9%)
+- After SWE title filter: 493
+- After CA/WA geography filter: 338
+- PowerShell Select-String count for "Software Engineer": 441 rows
 
-- **Why:** disambiguate this repo's constitution from the shared **Mycroft** agent-OS frame it was forked from. Renamed to a cookie-recipe name fitting the book's "recipe" vocabulary.
-- **Did:** `git mv MYCROFT.md SNICKERDOODLE.md`; rebranded the file's own identity (`# SNICKERDOODLE`, "Snickerdoodle is an agent-operating system…", lineage line preserved). Swapped every `MYCROFT.md` path/governance reference (instructions/ source, `conformance.mjs` required-files list, `manifest.yml` `@import`, CI comment, `DOMAIN.md`, `status.md`, `archive/README.md`, docs/). Rebranded this-repo "Mycroft" prose (P4, "a Snickerdoodle domain", audit doc); **kept** the cross-repo "Madison and Mycroft" shared-library mention.
-- **Rebuilt:** `node scripts/build-instructions.mjs --promote` → `AGENTS.md` + `CLAUDE.md` regenerated; `CLAUDE.md` now imports `@SNICKERDOODLE.md`.
-- **Untouched:** `data/` CSVs (real company names containing "mycroft") and prior RUN_LOG history (append-only).
-- **Result:** conformance + doctor green; no stale `MYCROFT.md` outside data/history.
+### Commands run
+
+- npx playwright install chromium (required — browsers not installed)
+- npm run score -- data/examples/ch11-roles.json (toolchain anchor)
+- npm run score -- assignments/submissions/nehadharanu/neha-target-roles.json
+- npm run ats:liveness -- Databricks URL → active
+- npm run ats:liveness -- Snowflake URL → active
+- npm run ats:liveness -- Anyscale URL → active
+- npm run ats:liveness -- Stripe URL → uncertain
+- npm run ats:liveness -- 4x my.greenhouse.io URLs → uncertain x4 (systematic)
+- npm run ats:liveness -- fake URL → expired HTTP 404
+- npm run score -- broken-roles.json (malformed JSON)
+- npm run verify (partial — python3 not found on Windows)
+
+### Gates
+
+- Sponsorship gate: VERIFIED from CSV for all 5 companies
+- SWE title gate: PASS for all 5 — Software/Backend Engineer confirmed in CSV
+- Liveness gate: ACTIVE — Databricks, Snowflake, Anyscale
+  UNCERTAIN — Stripe (boards.greenhouse.io subdomain)
+  UNCERTAIN systematic — my.greenhouse.io subdomain (4 employers tested)
+  EXPIRED — fake URL HTTP 404 (deliberate break attempt)
+- OPT buffer gate: NOT AUTOMATED — TODO-2 does not exist; 0 days used
+
+### Routing output (real target companies)
+
+- Apply: 3 roles (Databricks, Snowflake, Anyscale)
+- Consider: 1 role (Stripe — liveness uncertain)
+- Skip: 1 role (Accolade — deliberate ghost posting, liveness=0)
+- Skip rate: 20% (below healthy ~50%; sample biased toward proven sponsors)
+
+### Break attempts
+
+- Break 1: fake URL → ❌ expired HTTP 404 — liveness gate confirmed
+  dead posting correctly blocked regardless of sponsorship strength
+- Break 2: malformed JSON → SyntaxError at JSON.parse line 167 — scorer
+  fails closed on invalid input. System correctly refuses malformed input —
+  no Apply recommendation ever produced from bad data. Schema mistakes
+  become Skip; parser-invalid input stops execution. Neither case guesses.
+
+### Unexpected finding
+
+- my.greenhouse.io URLs return uncertain systematically across all four
+  additional employers tested — ATS subdomain limitation, not
+  posting-specific. Playwright cannot detect apply button on this subdomain.
+  Documented in mode stop conditions and cannot verify section.
+
+### Open TODOs
+
+- TODO-1: SOC 15-1252 H-1B sponsor filter script — not built
+- TODO-2: OPT unemployment-days tracker — not built
+- TODO-3: H-1B offer-deadline back-calculator — not built
+
+### What went well
+
+Real liveness on all five target companies. Three active confirmations
+(Databricks, Snowflake, Anyscale). Ghost-posting demo correctly Skip
+despite 100% approval rate. Both break attempts failed closed — scorer
+refuses to guess on bad input in either form.
+
+### What the mode missed
+
+my.greenhouse.io subdomain limitation affects significant portion of
+target universe. Skip rate 20% — below healthy target due to sample bias.
+SWE title inflation not screened. Windows conformance failure documented.
+
+### Next steps
+
+Document my.greenhouse.io workaround (manual browser check always required).
+Build TODO-1 with SWE title family validation.
+Treat uncertain liveness as manual check required before applying.
