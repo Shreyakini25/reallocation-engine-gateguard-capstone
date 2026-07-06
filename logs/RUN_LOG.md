@@ -1,3 +1,36 @@
+## 2026-06-22 — Setup Exercise: Search Personal Layer
+
+* **What was built:** Three files in the `search/` folder — `resume.json` (attested experience record), `profile.yml` (target role and visa constraints), `gaps.md` (delta table between current evidence and target role). Also updated `.gitignore` to exclude `search/private-notes.md`.
+
+* **Three attestation errors caught in resume.json:**
+  1. **Panasonic end date wrong** — agent extracted "Dec 2025" from the resume PDF as the end date, but this was the internship end date. The import did not distinguish that I am now at a different employer (YASH Technologies) placed back at Panasonic as a client. Role status was corrected from "active at Panasonic" to "completed internship."
+  2. **YASH Technologies missing entirely** — agent had no record of my current employer since it is not on my resume yet. Added manually with correct start date (June 1, 2026), title (SAP Technical Consultant), and work authorization status.
+  3. **Graduation date wrong** — agent extracted "May 2026" from the resume, which is the academic year end shown on the resume header. Actual graduation date is August 2026. Corrected in education record and flagged as relevant to OPT transition timing.
+
+* **Top gap from gaps.md:** SAP BTP certification — skills are project-demonstrated but not externally credentialed. Three of five SAP BTP postings reviewed explicitly list certification as preferred. Closes when C_BTP_2409 badge appears on SAP Learning Hub.
+
+* **Killed row:** "React/Fiori UI5 frontend development" — agent flagged this as a gap because resume bullets emphasize backend work. But Fiori/UI5 is a verified skill with Panasonic project evidence. This was a resume presentation issue, not a real capability gap.
+
+* **Field corrected in profile.yml:** Agent initially set `stem_extension_eligible: true` based on the fact that Information Systems is a STEM-designated program. Corrected to `uncertain` — STEM OPT eligibility has not been confirmed with my DSO and should not be treated as a gate until verified.
+
+---
+
+## Verification Check
+
+**resume.json — is every job entry traceable to something verifiable?**
+Yes. Capgemini entries match LinkedIn and offer letters. Panasonic internship matches the internship offer and project deliverables I can reference. YASH Technologies entry matches my offer letter dated May 2026. The one risk area: some Panasonic resume bullets (e.g. "45% cost reduction") are based on estimates made during the internship — I can defend the methodology but not produce an external audit report.
+
+**profile.yml — does the visa section reflect actual documents?**
+Mostly yes. OPT end date of July 2027 is based on my current understanding. STEM extension eligibility is marked `uncertain` because I have not formally confirmed with my DSO — the agent originally marked it `true` and I caught and corrected this. Will confirm before running any scorer that gates on STEM eligibility.
+
+**gaps.md — does every evidence column cite something real?**
+Yes. SAP BTP certification gap cites three specific postings (Deloitte, Accenture, TCS) reviewed in June 2026. CPI gap cites a pattern across Infosys, Wipro, Capgemini postings. Joule gap cites four SAP AI postings searched June 2026. Consulting deliverables gap cites Deloitte, KPMG, EY postings. One row (Fiori UI5) was killed because the agent invented the gap from resume framing rather than from an actual skill deficit.
+
+---
+
+
+
+
 # Recipe Run Log
 
 Human-readable history for recipe-driven work.
@@ -150,3 +183,11 @@ private emails, or sensitive application notes.
 - **Rebuilt:** `node scripts/build-instructions.mjs --promote` → `AGENTS.md` + `CLAUDE.md` regenerated; `CLAUDE.md` now imports `@SNICKERDOODLE.md`.
 - **Untouched:** `data/` CSVs (real company names containing "mycroft") and prior RUN_LOG history (append-only).
 - **Result:** conformance + doctor green; no stale `MYCROFT.md` outside data/history.
+
+## 2026-06-26 — H-1B sponsorship audit sample run
+
+* Mode: case-sap-h1b-sponsorship-audit v0.2.0
+* Inputs: 3 SAP ecosystem roles, SOC 15-1252 and 15-1211, OPT end July 2027
+* Commands run: grep 15-1252 data/BLS/compact/soc_occupation_compact.csv && npm run score
+* Result: Apply 1 · Consider 2 · Skip 0. Break test liveness=0 gave Skip gated.
+* Open issues: LCA wage level TODO. USCIS approval rate TODO.

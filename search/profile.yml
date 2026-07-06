@@ -1,0 +1,64 @@
+target_role:
+  title: "SAP BTP Technical Consultant / SAP AI Integration Engineer"
+  description: >
+    Mid-level SAP consulting or in-house SAP engineering role focused on BTP development,
+    S/4HANA extensions, and AI-assisted automation (SAP Joule, AI Core, Gen AI Hub).
+    Targeting roles at SAP consulting firms, system integrators, or enterprise clients
+    running S/4HANA transformations.
+  seniority: "mid-level (2-3 years experience)"
+  soc_code: "15-1252"
+
+visa_constraints:
+  visa_type: "F-1 OPT"
+  opt_type: "pre-completion OPT (transitioning to post-completion OPT)"
+  work_authorization_end_date: "2027-07"
+  stem_extension_eligible: "uncertain — not yet confirmed with DSO"
+  current_status: "Part-time until August 2026, then full-time post-completion OPT"
+  graduation_date: "2026-08"
+  unemployment_days_used: 0
+  buffer_target: "80 days below 90-day ceiling"
+  notes: >
+    STEM OPT eligibility not confirmed with DSO. Do not treat as a gate until verified.
+    Transitioning to full-time authorization in late August 2026.
+
+sponsorship:
+  requires_sponsorship: true
+  sponsorship_gate: "hard"
+  notes: >
+    Employer must have H-1B sponsorship history. Companies with no sponsorship record
+    are skip-regardless of fit score. Will require H-1B sponsorship after OPT period ends.
+
+geography:
+  current_location: "Boston, MA"
+  willing_to_relocate: true
+  target_cities:
+    - "Boston, MA"
+    - "New York, NY"
+    - "Chicago, IL"
+    - "Dallas, TX"
+    - "Phoenix, AZ"
+    - "Remote"
+  hard_constraints:
+    - "Must be within commutable distance of a USCIS field office for visa processing"
+
+industry_preferences:
+  target_sectors:
+    - "Enterprise software / SAP consulting"
+    - "Manufacturing (SAP client)"
+    - "Financial services (SAP client)"
+    - "Healthcare (SAP client)"
+  company_size:
+    - "Mid-market consulting firms (100-5000 employees)"
+    - "Large enterprise (Fortune 500, in-house SAP teams)"
+    - "SAP partner / system integrator"
+  hard_exclusions:
+    - "Defense / weapons manufacturing"
+
+salary:
+  target_range_usd: "115000-130000"
+  floor_usd: 105000
+
+search_status:
+  currently_employed: true
+  employer: "YASH Technologies (placed at Panasonic)"
+  open_to_opportunities: true
