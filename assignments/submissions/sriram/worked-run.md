@@ -31,17 +31,34 @@ found 0 vulnerabilities
 ## Command 1 — Conformance Check (`npm run verify`)
 
 ```
-C:\assignments\5\the-reallocation-engine>npm run verify
-
 > the-reallocation-engine@1.0.0 verify
 > node scripts/conformance.mjs && node scripts/manifest-check.mjs
 
-conformance: 131 files (75 md · 30 py · 23 js · 1 sh · 1 yaml · 1 json)
-✗ 1 file(s) FAILED conformance:
-  • scripts\gitignore-large.sh — <3>WSL (9 - Relay) ERROR: CreateProcessCommon:798: execvpe(/bin/bash) failed: No such file or directory
+conformance: 132 files (76 md · 30 py · 23 js · 1 sh · 1 yaml · 1 json)
+✓ all conform (machine half of P4). Adequacy is still the human gate.
+
+MANIFEST CHECK — The Reallocation Engine
+==========================================
+
+WARN (4):
+  W1 ignore path not in .gitignore: output/
+  W1 ignore path not in .gitignore: reports/generated/
+  W1 ignore path not in .gitignore: archive/
+  W2 private path not gitignored (PII/secret risk): private/
+
+ERROR (6):
+  E3 AGENTS.md is out of sync with instructions/ — hand-edited or not rebuilt
+  E3 CLAUDE.md is out of sync with instructions/ — hand-edited or not rebuilt
+  E3 .gemini/settings.json is out of sync with instructions/ — hand-edited or not rebuilt
+  E3 .aider.conf.yml is out of sync with instructions/ — hand-edited or not rebuilt
+  E3 .github/copilot-instructions.md is out of sync with instructions/ — hand-edited or not rebuilt
+  E3 .cursor/rules/reallocation-engine.mdc is out of sync with instructions/ — hand-edited or not rebuilt
+
+✗ manifest check FAILED (6 errors)
+EXIT: 1
 ```
 
-**Interpretation:** One shell script (`gitignore-large.sh`) failed because it requires WSL (`/bin/bash`) which is not available on Windows. All other 130 files passed. This is a Windows environment issue, not a mode issue — the script does not affect the data or scoring workflow.
+**Interpretation:** Conformance passes on all 132 files (the machine half of P4). `verify` then fails at the manifest check with 6 `E3` errors: the generated instruction files (`AGENTS.md`, `CLAUDE.md`, and the per-tool configs) are out of sync with `instructions/` and need rebuilding via `node scripts/build-instructions.mjs --promote`. This is a pre-existing repo-state issue, not introduced by this mode's data or scoring work — but it does mean `npm run verify` exits nonzero at HEAD until the instruction files are rebuilt.
 
 ---
 
@@ -82,56 +99,56 @@ DOMAIN DIRECTORIES
 PRIVACY (no personal data committed)
   ✓ no private/PII paths are tracked
 
-RECIPES (42)
-  with lifecycle frontmatter: 0   missing: 42
-  by status: —
-  open TODOs: 0 declared (in frontmatter) · 517 [TODO markers in bodies
+RECIPES (43)
+  with lifecycle frontmatter: 1   missing: 42
+  by status: RUNNABLE-SAMPLE 1
+  open TODOs: 6 declared (in frontmatter) · 523 [TODO markers in bodies
   ! missing frontmatter (42) — add: status / todos_open / last_gate / attestation / recipe_version
 
 SUMMARY
   environment: ✓ runnable
-  recipes: 0/42 carry lifecycle frontmatter — 42 need it
+  recipes: 1/43 carry lifecycle frontmatter — 42 need it (gap toward DRAFT→VERIFIED discipline)
 ```
 
-**Notable finding:** 0 of 42 existing recipes have lifecycle frontmatter. My mode file is the first to include it, which is exactly what the assignment requires.
+**Notable finding:** Only 1 of 43 recipes carries lifecycle frontmatter — and that one is my mode file (`RUNNABLE-SAMPLE`, 6 open TODOs). The other 42 have none. My mode file is the first conformant recipe in the repo, which is exactly what the assignment requires.
 
 ---
 
 ## Command 3 — Role Quality Scorer (`npm run score`)
 
-Run against the example roles file included in the repo:
+Run against the MLOps roles file added for this mode:
 
 ```
-C:\assignments\5\the-reallocation-engine>npm run score -- data\examples\ch11-roles.json
+C:\assignments\5\the-reallocation-engine>npm run score -- data/examples/mle-opt-roles.json
 
 > the-reallocation-engine@1.0.0 score
-> node scripts/score/role-scorer.mjs data\examples\ch11-roles.json
+> node scripts/score/role-scorer.mjs data/examples/mle-opt-roles.json
 
-✓ scored 5 roles → Apply 2 · Consider 1 · Skip 2 (skip 40%)
+✓ scored 5 roles → Apply 1 · Consider 2 · Skip 2 (skip 40%)
   data\examples\role-scores.json  +  data\examples\role-scores.md
 ```
 
 Full markdown report (`data\examples\role-scores.md`):
 
 ```
-# Role Scorer report — 2026-07-05
+# Role Scorer report — 2026-07-06
 
 Bayesian Role Scorer (Ch.11). Weights: sponsorship 0.35, fit 0.3, role_quality 0
 [role_quality weight is **[VERIFY]** — not pinned by the chapter].
 Threshold 0.3. Profile requires sponsorship.
 
-Summary: 5 roles → Apply 2 · Consider 1 · Skip 2. Skip rate 40%
+Summary: 5 roles → Apply 1 · Consider 2 · Skip 2. Skip rate 40%
 
 | Role | Composite | Rec | Why |
 |---|---|---|---|
-| Cambridge biotech — Data role (Proven tier) | 0.446 | Apply | composite ≥ 0.3, gates healthy |
-| Likely-tier sponsor — Strong but Likely not Proven | 0.418 | Consider | above threshold but sponsorship tier is "Likely" |
-| Non-sponsor, but HM is a contact | 0.193 | Apply (override) | composite < 0.2 — scorer says skip, human overrides |
-| Household-name non-sponsor | 0.178 | Skip | composite < 0.2 |
-| Proven sponsor (ghost posting) | 0.000 | Skip | liveness gate = 0 — zeroes composite regardless of other scores |
+| Scale AI — ML Engineer, Model Evaluation | 0.499 | Apply | composite 0.499 ≥ 0.3, gates healthy |
+| Modal Labs — Forward Deployed Engineer - ML | 0.450 | Consider | above threshold but sponsorship tier is "Likely" |
+| Hugging Face — MLOps Engineer | 0.408 | Consider | above threshold but sponsorship tier is "Likely" |
+| Large Tech Co (no ML sponsorship) — ML Infrastructure Engineer | 0.191 | Skip | composite 0.191 < 0.2 — time better spent elsewhere |
+| Defunct MLOps Startup — ML Platform Engineer (ghost posting) | 0.000 | Skip | liveness gate = 0 — zeroes composite regardless of other scores |
 ```
 
-**Key observation for my mode:** The last row demonstrates the liveness gate behavior central to Gate G1 in my mode — a ghost posting from a Proven H-1B sponsor scores 0.000 and is skipped. The scorer enforces this automatically. A dead posting cannot be rescued by good sponsorship history.
+**Key observation for my mode:** The last row demonstrates the liveness gate behavior central to Gate G1 in my mode — a ghost posting scores 0.000 and is skipped despite a Proven sponsorship history. The scorer enforces this automatically. A dead posting cannot be rescued by good sponsorship history. Note also that the two "Consider" rows (Modal, Hugging Face) rest on `model-judgment` sponsorship probabilities, not DOL records — labeled as judgments, not evidence (P3).
 
 ---
 
@@ -173,17 +190,17 @@ Results: 0 active  0 expired  2 uncertain
 | Claim | Source | Status |
 |---|---|---|
 | Repo clones and installs cleanly | Terminal output | ✓ VERIFIED |
-| `npm run verify` passes on 130/131 files | Terminal output | ✓ VERIFIED |
-| WSL failure on `gitignore-large.sh` is Windows-only environment issue | Error message text | ✓ VERIFIED |
+| `npm run verify`: conformance passes on all 132 files | Terminal output | ✓ VERIFIED |
+| `npm run verify` then FAILS (exit 1) on 6 `E3` manifest-sync errors (AGENTS.md/CLAUDE.md/etc. out of sync with instructions/) | Terminal output | ✓ VERIFIED |
 | `npm run doctor` confirms all 18 scripts present and data directories exist | Terminal output | ✓ VERIFIED |
-| 0 of 42 existing recipes have lifecycle frontmatter | `doctor` output | ✓ VERIFIED |
-| Scorer ran on 5 roles, produced Apply 2 / Consider 1 / Skip 2 | Terminal output | ✓ VERIFIED |
+| 1 of 43 recipes has lifecycle frontmatter (my mode file, RUNNABLE-SAMPLE); 42 missing | `doctor` output | ✓ VERIFIED |
+| Scorer ran on 5 roles in mle-opt-roles.json → Apply 1 / Consider 2 / Skip 2 | Terminal output | ✓ VERIFIED |
 | Ghost posting scored 0.000 due to liveness gate | `role-scores.md` output | ✓ VERIFIED |
-| `ats:liveness` returns `uncertain` for board-level URLs | Terminal output | ✓ VERIFIED |
-| `uncertain` ≠ `DEAD` — tool needs per-posting URL | Script behavior observed | ✓ VERIFIED |
+| Modal Labs posting returns `active` on its per-posting Ashby URL | Terminal output | ✓ VERIFIED |
+| Passing the `--url` flag makes the tool treat `--url` itself as an invalid URL (arg-parsing quirk) | Terminal output | ✓ VERIFIED |
 | Scorer uses sponsorship weight 0.35 | `role-scores.md` header | ✓ VERIFIED |
 | `role_quality` weight is 0 and marked [VERIFY] in scorer | `role-scores.md` header | ✓ VERIFIED |
-| Scorer would apply same logic to MLOps roles in ch11-roles.json | Scorer architecture | [HUMAN] Inferred — ch11-roles.json uses example data, not MLOps-specific titles |
+| Modal & Hugging Face sponsorship probabilities are model-judgment, not DOL record | `mle-opt-roles.json` sources | ✓ VERIFIED (labeled as judgment, not evidence) |
 | H-1B CSV contains MLOps-specific petition rows | data/80-days-to-stay/ contents | [HUMAN] Not directly verified — no H-1B CSV found at expected path |
 
 ---
@@ -194,19 +211,19 @@ Results: 0 active  0 expired  2 uncertain
 
 | Ran | Saw | Expected |
 |---|---|---|
-| `npm run verify` | 130 pass, 1 fail (WSL/bash, Windows only) | All pass or known env failure |
-| `npm run doctor` | All scripts confirmed, 0/42 recipes have frontmatter | Environment runnable |
-| `npm run score -- data\examples\ch11-roles.json` | 5 roles scored, Apply 2 / Consider 1 / Skip 2 | Numeric output |
+| `npm run verify` | conformance passes (132 files), then FAILS (exit 1) on 6 E3 manifest-sync errors | Conformance passes; any manifest failure surfaced honestly |
+| `npm run doctor` | All 18 scripts confirmed; 1/43 recipes have frontmatter (my mode file) | Environment runnable |
+| `npm run score -- data/examples/mle-opt-roles.json` | 5 roles scored, Apply 1 / Consider 2 / Skip 2 | Numeric output |
 | `npm run score` (no args) | Usage error printed | Graceful error, not crash |
-| `npm run ats:liveness -- --url https://boards.greenhouse.io/anthropic` | `uncertain` — board page, no apply control | `active` or `uncertain` |
+| `npm run ats:liveness -- https://jobs.ashbyhq.com/modal/9fadb51f-ce11-41b1-84d5-470e66cc8ee9` | `active` (1 active, 0 uncertain) | `active` for a live posting |
 | **Break attempt 1:** `npm run score` with no arguments | Printed usage instructions, exited cleanly | Graceful failure |
-| **Break attempt 2:** `npm run ats:liveness` with a board-level URL instead of a posting URL | Returned `uncertain`, not `active` — correctly refused to confirm liveness | Should not return `active` |
+| **Break attempt 2:** `npm run ats:liveness -- --url <posting>` (with the `--url` flag) | Tool treated `--url` as its own invalid URL → 1 uncertain, exit 1; the real posting still read `active` | Flag mishandled; documented as a defect |
 
 ### Did not test
 
 - `ats:liveness` against a confirmed-dead individual posting URL (would confirm `expired` behavior)
 - `ats:scan` — requires `portals.yml` setup via an onboarding step that does not exist as a script
-- `npm run score` against a custom roles.json with MLOps-specific titles (ch11-roles.json uses generic example roles)
+- `ats:liveness` against a company **board-level** URL in this run (a prior run showed boards return `uncertain`; here only the per-posting Modal URL was checked, which returned `active`)
 - H-1B CSV grep (file not found at `data/h1b/` — path assumed in mode design; actual path needs verification)
 - SEC Form D JSON lookup (file location in `data/sec/` not explored in this run)
 
@@ -222,7 +239,7 @@ Results: 0 active  0 expired  2 uncertain
 **What went well:**  
 The scorer ran cleanly on the first real attempt once the correct input file path was supplied. The ghost-posting row in the example output (`liveness = 0 → composite = 0.000`) directly demonstrates the core gate logic in my mode — a dead posting cannot be rescued by strong sponsorship history. That's the most important behavioral property of Gate G1, and the script enforced it automatically without any configuration.
 
-The `doctor` output revealed something genuinely useful: 0 of 42 existing recipes have lifecycle frontmatter. My mode file is structured to be the first properly conformant recipe in the repo, which is exactly what the assignment asks for.
+The `doctor` output revealed something genuinely useful: only 1 of 43 recipes carries lifecycle frontmatter — and that one is my mode file (RUNNABLE-SAMPLE). The other 42 have none. My mode file is the first properly conformant recipe in the repo, which is exactly what the assignment asks for.
 
 **What the mode got wrong or missed:**  
 The biggest gap uncovered during the run: `ats:liveness` requires individual posting URLs, not company board pages. My mode's Gate G1 section said "run liveness on each URL" but did not specify that the URL must be a direct job posting link. A student following the mode as written might run it against a company's careers page and get `uncertain`, which the mode currently treats as a stop condition — but without explaining *why* it's uncertain or what to do next. The gate description needs to be more precise.
@@ -250,20 +267,21 @@ The H-1B CSV path assumed in the mode (`data/h1b/h1b_disclosure_data.csv`) was n
   - git clone + npm install
   - npm run verify
   - npm run doctor
-  - npm run score -- data\examples\ch11-roles.json
-  - npx playwright install chromium
-  - npm run ats:liveness -- --url https://boards.greenhouse.io/anthropic
+  - npm run score -- data/examples/mle-opt-roles.json
+  - npm run ats:liveness -- https://jobs.ashbyhq.com/modal/9fadb51f-ce11-41b1-84d5-470e66cc8ee9
 - Outputs:
   - data\examples\role-scores.json (written by scorer)
   - data\examples\role-scores.md (written by scorer)
 - Key findings:
   - Scorer enforces liveness gate: ghost posting → 0.000 composite regardless of sponsorship
-  - 0/42 existing recipes have lifecycle frontmatter — mode file is first conformant recipe
-  - ats:liveness requires per-posting URL, not board-level URL → uncertain on board pages
+  - mle-opt-roles.json → Apply 1 / Consider 2 / Skip 2 (skip 40%)
+  - 1/43 recipes have lifecycle frontmatter — my mode file (RUNNABLE-SAMPLE) is the first conformant recipe
+  - npm run verify exits 1: conformance passes (132 files) but manifest-check fails on 6 E3 instruction-sync errors (pre-existing)
+  - Modal posting returns active on its per-posting Ashby URL; passing --url makes the tool misread --url as an invalid URL
   - ats:scan requires portals.yml — no setup path documented → marked [TODO] in mode
 - Open issues:
   - H-1B CSV path not confirmed (data/h1b/ assumed, not verified)
   - ats:scan cannot run without portals.yml setup
-  - WSL/bash conformance failure on Windows (environment issue, not mode issue)
-- Notes: Two deliberate break attempts passed. Playwright install required on Windows before liveness check.
+  - npm run verify fails at HEAD on E3 manifest-sync errors (fix: node scripts/build-instructions.mjs --promote)
+- Notes: Two deliberate break attempts passed. Scorer output regenerated data/examples/role-scores.{json,md}.
 ```

@@ -1,0 +1,57 @@
+[
+  {
+    "role_id": "modal-fde-ml",
+    "company": "Modal Labs",
+    "title": "Forward Deployed Engineer - ML",
+    "url": "https://jobs.ashbyhq.com/modal/9fadb51f-ce11-41b1-84d5-470e66cc8ee9",
+    "sponsorship": { "p": 0.7, "tier": "Likely", "source": "model-judgment" },
+    "fit": { "p": 0.85, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.9, "source": "your-input" },
+    "notes": "Ashby ATS — liveness confirmed active 2026-07-05. Early-stage infra startup, no public H-1B petition history found. Sponsorship tier Likely based on technical hiring profile."
+  },
+  {
+    "role_id": "scale-mle",
+    "company": "Scale AI",
+    "title": "ML Engineer, Model Evaluation",
+    "url": "https://boards.greenhouse.io/scaleai",
+    "sponsorship": { "p": 0.9, "tier": "Proven", "source": "record" },
+    "fit": { "p": 0.8, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.9, "source": "your-input" },
+    "notes": "Greenhouse ATS. Known H-1B sponsor with multiple petitions for ML titles. Well-funded (Series F). SOC 15-2051."
+  },
+  {
+    "role_id": "huggingface-mlops",
+    "company": "Hugging Face",
+    "title": "MLOps Engineer",
+    "url": "https://apply.workable.com/huggingface",
+    "sponsorship": { "p": 0.6, "tier": "Likely", "source": "model-judgment" },
+    "fit": { "p": 0.9, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.85, "source": "your-input" },
+    "notes": "Workable ATS. Strong technical fit for MLOps profile. H-1B history present but volume lower than larger orgs."
+  },
+  {
+    "role_id": "ghost-mlops",
+    "company": "Defunct MLOps Startup",
+    "title": "ML Platform Engineer (ghost posting)",
+    "url": "https://jobs.lever.co/example-dead-co/abc123",
+    "sponsorship": { "p": 0.8, "tier": "Proven", "source": "record" },
+    "fit": { "p": 0.85, "source": "model-judgment" },
+    "liveness": { "factor": 0.0, "source": "record" },
+    "timeline": { "factor": 0.85, "source": "your-input" },
+    "notes": "Posting confirmed expired. Composite zeroed by liveness gate regardless of sponsorship history. Demonstrates G1 gate behavior."
+  },
+  {
+    "role_id": "no-sponsor-bigtech",
+    "company": "Large Tech Co (no ML sponsorship)",
+    "title": "ML Infrastructure Engineer",
+    "url": "https://careers.example-bigtech.com/jobs/ml-infra-456",
+    "sponsorship": { "p": 0.0, "tier": "None", "source": "record" },
+    "fit": { "p": 0.75, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.85, "source": "your-input" },
+    "notes": "No H-1B petition history for ML titles despite large engineering org. Sponsorship = 0 zeroes composite."
+  }
+]
