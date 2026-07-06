@@ -1,0 +1,48 @@
+# search/profile.yml — Target Role & Search Constraints
+# Attested by Aditi Bailur on 2026-06-26
+
+# ── TARGET ROLE ──────────────────────────────────────────────────────────────
+target_role:
+  title: "Software Engineer or AI Engineer at a fintech startup"
+  note: "Two genuinely equal targets — not a primary/fallback split. Scorer should weight both."
+  seniority: "Entry-level / New grad"
+  function: "Software Engineering / AI Engineering"
+
+# ── VISA & TIMELINE ───────────────────────────────────────────────────────────
+visa:
+  type: "F-1 STEM OPT"
+  stem_eligible: true
+  dso_confirmed: true
+  authorization_end_date: "2027-09-01"
+  authorization_end_date_status: "ESTIMATED — EAD not yet issued. Date is based on expected STEM OPT start, NOT read from a physical EAD card. The engine must treat the timeline gate as uncertain until this is confirmed against the issued card."
+  unemployment_days_used: 0
+  buffer_target_days: 80
+  note: "90-day unemployment ceiling applies. 0 days used as of 2026-06-26. Authorization end date is estimated — see authorization_end_date_status."
+
+# ── GEOGRAPHY ────────────────────────────────────────────────────────────────
+geography:
+  primary: "Boston, MA (current)"
+  open_to_relocation: true
+  relocation_constraints: "none"
+
+# ── INDUSTRY & COMPANY ───────────────────────────────────────────────────────
+industry:
+  target_sectors:
+    - "fintech"
+    - "AI / ML infrastructure"
+    - "SaaS / developer tools"
+  company_size: "no preference"
+  hard_exclusions:
+    - "defense"
+    - "gambling"
+    - "tobacco"
+
+# ── SPONSORSHIP ──────────────────────────────────────────────────────────────
+sponsorship:
+  requires_sponsorship: true
+  sponsorship_gate: "hard_gate"
+  note: >
+    Currently authorized under STEM OPT through 2027-09-01.
+    H-1B sponsorship required for long-term employment beyond that date.
+    Filtering on H-1B sponsorship history now to avoid investing in
+    companies that cannot convert to H-1B when OPT expires.

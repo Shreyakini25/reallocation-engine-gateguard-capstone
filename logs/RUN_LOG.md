@@ -150,3 +150,116 @@ private emails, or sensitive application notes.
 - **Rebuilt:** `node scripts/build-instructions.mjs --promote` → `AGENTS.md` + `CLAUDE.md` regenerated; `CLAUDE.md` now imports `@SNICKERDOODLE.md`.
 - **Untouched:** `data/` CSVs (real company names containing "mycroft") and prior RUN_LOG history (append-only).
 - **Result:** conformance + doctor green; no stale `MYCROFT.md` outside data/history.
+
+
+
+
+## Date
+2026-06-26
+
+## What Was Built
+- `search/resume.json` — structured record extracted from PDF resume, agent-drafted then attested
+- `search/profile.yml` — target role, visa constraints, geography, sponsorship gate
+- `search/gaps.md` — delta table between attested record and target role requirements
+
+---
+
+## Attestation Errors Found in resume.json
+
+1. **TripSync project overclaimed ownership** → Agent wrote all bullets in first-person singular implying solo work. TripSync was a 4-person group project; I owned only the Spring Boot backend. Removed all React/Next.js frontend bullets that belonged to teammates.
+2. **Docker and Kubernetes listed as shipped skills** → Both were learned through coursework/tutorials only, never deployed in a real project. Moved to `familiar_with_not_shipped` category.
+3. **Aiera bullets were UX-only** → Agent extracted only the frontend/dashboard work visible on the PDF resume. Missing the entire backend/infrastructure scope I actually led: serverless SEC filing pipeline (AWS Lambda, S3, LangChain), Lambda tuning, OpenSearch indexing, CI/CD workflows, and developer tooling.
+
+---
+
+## Top Gap from gaps.md
+Backend/full-stack and cloud depth isn't independently demonstrable outside of employer context. My Aiera work shows I can do this, but it all happened inside existing infrastructure. No public project proves I can set it up from scratch — and that's what fintech SWE and AI Engineer roles are looking for.
+
+---
+
+## Killed Row
+**Cloud infrastructure ownership** — The agent drafted this gap before my Aiera backend work was added to resume.json. My co-op work includes Lambda tuning, OpenSearch indexing, and S3 lifecycle management, which is infrastructure I owned, not just integrated against.
+
+---
+
+## Corrected Field in profile.yml
+The agent drafted `stem_eligible: "uncertain"` and `dso_confirmed: false`. Corrected to `stem_eligible: true` and `dso_confirmed: true` after confirming with DSO. Unemployment days used (0) is accurate. The `authorization_end_date` (2027-09-01) is **estimated** — my EAD has not been issued yet, so the date is based on expected STEM OPT start, not read from a physical card. Marked explicitly as estimated via `authorization_end_date_status` in profile.yml so the engine treats the timeline gate as uncertain until the card is in hand. (This corrects an earlier draft of this note that said the date came "from actual documents.")
+
+---
+
+## Verification Check
+
+**resume.json** — Is every job entry traceable to something verifiable?
+→ Yes — all jobs, projects, and dates are traceable to LinkedIn, offer letters, or direct experience.
+
+**profile.yml** — Does the visa section reflect your actual documents, not your hope for how the timeline works out?
+→ Partially — the authorization end date (2027-09-01) is an estimated date based on expected OPT start, not confirmed from an issued EAD card. This should be updated to the exact date on the physical EAD card once issued/confirmed.
+
+**gaps.md** — Does every evidence column cite something real?
+→ Partially — some evidence was inferred by the agent from training data rather than verified against actual postings. Before the engine runs on this file, the evidence columns should be grounded by reviewing 3–5 real fintech SWE and AI Engineer job postings and confirming the cited skill demands are real patterns, not agent assumptions.
+
+---
+
+## AI Use Disclosure
+
+What AI did: Agent extracted resume to JSON, drafted profile.yml from intake questions, drafted gaps.md by comparing record to target role requirements.
+
+What AI could not do: The agent extracted only the UX/frontend bullets from my Aiera co-op role, missing the entire backend and infrastructure work I led — the serverless pipeline, Lambda tuning, OpenSearch indexing, and CI/CD work. That required my knowledge to catch and correct.
+## case-ml-sponsorship-triage — 2026-07-06
+
+**By:** Aditi Bailur
+
+**Inputs:**
+- `data/80-days-to-stay/data/SEC_DOL_H1b_data_mapped.csv` (30,369 rows)
+- SEC Form D quarters: 2025q2, 2025q3, 2025q4, 2026q1 (regenerated via
+  `refresh-recent-sec-quarters.py`)
+- `data/bls/compact/soc_occupation_compact.csv` (1,016 occupations, regenerated via
+  `extract-soc-occupation-table.py`)
+- `data/examples/ch11-roles.json` (repo sample, 5 roles)
+
+**Steps completed:**
+- [x] `npm run verify` — passed, 5 manifest warnings reviewed (1 real gap fixed:
+      `resume.json` added to `.gitignore`)
+- [x] `node scripts/score/role-scorer.mjs data/examples/ch11-roles.json` — run twice,
+      deterministic (Apply 2 · Consider 1 · Skip 2, skip 40%)
+- [x] H-1B filter — 1,552 companies with approvals; 150 with ML/DS-titled sponsorship
+      history
+- [x] SEC Form D refresh — 4/4 quarters processed (13,325 / 14,138 / 14,885 / 15,981
+      companies respectively)
+- [x] BLS SOC lookup for 15-1252, 15-2051, 15-1299 — cognitive-pivot score present
+      only for 15-1252 at base code (3.834); gap documented for the other two
+- [x] H-1B × Form D join — 3 matches (Fiddler Labs, Imperative Care, Surgical Safety
+      Technologies) after fixing a real JSON-schema bug
+- [x] ATS detection run on the 3 matches — 0/3 found on Greenhouse/Lever (real
+      negative result)
+- [ ] Liveness check on a specific job URL — not run this submission
+- [ ] Tech stack extraction — proposed only, script does not exist
+- [ ] GitHub/ArXiv intelligence — proposed only, script does not exist
+
+**Output:** two Output-Contract artifacts produced for this run (P5 — machine + human):
+`logs/case-ml-sponsorship-triage-2026-07-06.json` (agent log) and
+`reports/generated/case-ml-sponsorship-triage-2026-07-06.md` (human report), written
+manually from real run numbers. No persisted shortlist CSV yet — [TODO: DEV]
+`scripts/ml/build_ml_shortlist.py`. Recommendation this run: Apply 0 · Skip 3 (all three
+finalists fail the liveness gate).
+
+**Verified signals:** H-1B approval + ML title match, Form D quarterly recency,
+role-scorer liveness/timeline gating behavior, ATS non-detection (real negative)
+
+**Inferred / proposed signals:** tech stack fingerprint, GitHub/ArXiv project
+intelligence — both remain design-only, no script exists
+
+**Gaps hit:**
+- Cognitive-pivot score missing at base SOC code for 2 of 3 target codes (only
+  detailed O*NET sub-occupations are scored)
+- Form D JSON schema is a dict with nested company records, not a flat list — initial
+  join silently returned 0 matches until investigated and fixed
+- `detect-ats.py` only checks Greenhouse and Lever with a guessed slug; cannot
+  distinguish "not hiring" from "uses a different platform"
+
+**What to do next:**
+- [ ] Build `scripts/ml/build_ml_shortlist.py` to persist shortlist output
+- [ ] Build a SOC-code rollup for sub-occupation cognitive-pivot scores
+- [ ] Extend ATS detection or add a manual-override field
+- [ ] Wire a student-supplied OPT end date into `role-scorer.mjs`'s timeline gate
+- [ ] Run `npm run doctor` before opening the PR
