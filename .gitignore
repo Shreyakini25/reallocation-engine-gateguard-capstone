@@ -67,3 +67,5 @@ data/BLS/db_30_2_mysql/
 **/*.resume.pdf
 **/resume.pdf
 search/private-notes.md
+resume.json
+search/resume.json

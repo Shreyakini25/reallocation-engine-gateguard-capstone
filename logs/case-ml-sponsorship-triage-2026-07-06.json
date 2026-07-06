@@ -1,0 +1,94 @@
+{
+  "workflow": "case-ml-sponsorship-triage",
+  "recipe_version": "0.2.0",
+  "mode_status": "RUNNABLE-SAMPLE",
+  "run_id": "case-ml-sponsorship-triage-2026-07-06-sample",
+  "generated_at": "2026-07-06",
+  "generated_by": "manual — produced from real run output; auto-generation is [TODO: DEV]",
+  "steps_completed": [
+    "h1b-filter",
+    "formd-refresh",
+    "cognitive-pivot-lookup",
+    "h1b-x-formd-join",
+    "ats-detection"
+  ],
+  "records_seen": 30369,
+  "h1b_approved_count": 1552,
+  "ml_titled_count": 150,
+  "formd_quarter_counts": {
+    "2025q2": 13325,
+    "2025q3": 14138,
+    "2025q4": 14885,
+    "2026q1": 15981
+  },
+  "formd_matches": 3,
+  "matches": [
+    {
+      "company": "FIDDLER LABS INC",
+      "total_approvals": 20,
+      "median_salary_offered": 168750,
+      "formd_quarter": "2026q1",
+      "ats_detection": "not_found",
+      "decision": "Skip",
+      "gate_that_decided": "liveness"
+    },
+    {
+      "company": "IMPERATIVE CARE INC",
+      "total_approvals": 26,
+      "median_salary_offered": 180000,
+      "formd_quarter": "2026q1",
+      "ats_detection": "not_found",
+      "decision": "Skip",
+      "gate_that_decided": "liveness"
+    },
+    {
+      "company": "SURGICAL SAFETY TECHNOLOGIES INC",
+      "total_approvals": 2,
+      "median_salary_offered": 110000,
+      "formd_quarter": "2026q1",
+      "ats_detection": "not_found",
+      "decision": "Skip",
+      "gate_that_decided": "liveness"
+    }
+  ],
+  "cognitive_pivot": {
+    "15-1252.00": 3.834,
+    "15-2051.00": null,
+    "15-1299.00": null,
+    "note": "base-code cognitive_pivot_score present for only 1 of 3 target SOC codes; sub-occupation scores exist (e.g. 15-2051.01 = 3.903, 15-1299.08 = 4.027)"
+  },
+  "ats_checked": 3,
+  "ats_found": 0,
+  "gate_results": {
+    "ingest": "pass",
+    "cognitive_pivot_soft": "pass-with-documented-exception",
+    "liveness_hard": "fail — 0/3 ATS-detected on Greenhouse/Lever; no company reaches Apply",
+    "visa_timeline_hard": "not-evaluated — no OPT end date supplied this run",
+    "report": "pass — this file + reports/generated/case-ml-sponsorship-triage-2026-07-06.md"
+  },
+  "recommendations": {
+    "Apply": 0,
+    "Consider": 0,
+    "Skip": 3
+  },
+  "verified_signals": [
+    "h1b-approval-history",
+    "ml-titled-sponsorship",
+    "formd-quarterly-recency",
+    "ats-liveness-negative"
+  ],
+  "inferred_or_proposed_signals": [
+    "tech-stack-fingerprint (no script exists)",
+    "github-arxiv-project-intelligence (no script exists)"
+  ],
+  "todo_items": [
+    "[TODO: DEV] scripts/lca/ml-soc-sponsorship-filter.py",
+    "[TODO: DEV] scripts/ml/extract-stack-signals.py",
+    "[TODO: DEV] scripts/intel/github-arxiv-company-signal.py",
+    "[TODO: DATA SOURCE] data/ml/github_org_map.csv",
+    "[TODO: DEV] wire student OPT end date into role-scorer.mjs timeline gate",
+    "[TODO: DEV] auto-generate this agent log",
+    "[TODO: DEV] auto-generate the Markdown human report",
+    "[TODO: DEV] persist a shortlist CSV"
+  ]
+}

@@ -1,7 +1,7 @@
 # BLS/O*NET Source Audit
 
-**Generated at:** 2026-06-12T03:03:09.278597+00:00
-**Source directory:** `/sessions/kind-cool-davinci/mnt/bear-textbooks/books/the-reallocation-engine/data/bls`
+**Generated at:** 2026-07-06T18:04:57.585221+00:00
+**Source directory:** `/Users/aditibailur/skeptisism/the-reallocation-engine/data/bls`
 
 ## Role in The Reallocation Engine
 
@@ -10,15 +10,15 @@ It supports SOC/O*NET occupation mapping, cognitive demand features, wage/employ
 
 ## Inventory
 
-- Files: 172
-- Directories: 19
+- Files: 173
+- Directories: 20
 - O*NET text tables: 42
-- Latest OEWS national workbook used: `/sessions/kind-cool-davinci/mnt/bear-textbooks/books/the-reallocation-engine/data/bls/oesm24nat/national_M2024_dl.xlsx`
+- Latest OEWS national workbook used: `/Users/aditibailur/skeptisism/the-reallocation-engine/data/bls/oesm24nat/national_M2024_dl.xlsx`
 - Latest OEWS year: 2024
 
 ## Compact Extract
 
-- Output: `/sessions/kind-cool-davinci/mnt/bear-textbooks/books/the-reallocation-engine/data/bls/compact/soc_occupation_compact.csv`
+- Output: `/Users/aditibailur/skeptisism/the-reallocation-engine/data/bls/compact/soc_occupation_compact.csv`
 - SHA-256: `bac5acf77ca2d25268c75b3706084f7f67bcc0c6e3cc68cd03e0ebd2598343d1`
 - Occupations: 1,016
 - Occupations matched to latest OEWS detailed SOC rows: 962 (94.7%)
