@@ -1,6 +1,6 @@
 ---
 status: RUNNABLE-SAMPLE
-todos_open: 3
+todos_open: 17
 last_gate: gate-4-script-readiness
 attestation: "assignments/submissions/davidovic/worked-run.md#attestation"
 recipe_version: 0.2.0
