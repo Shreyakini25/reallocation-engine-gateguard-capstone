@@ -150,3 +150,14 @@ private emails, or sensitive application notes.
 - **Rebuilt:** `node scripts/build-instructions.mjs --promote` → `AGENTS.md` + `CLAUDE.md` regenerated; `CLAUDE.md` now imports `@SNICKERDOODLE.md`.
 - **Untouched:** `data/` CSVs (real company names containing "mycroft") and prior RUN_LOG history (append-only).
 - **Result:** conformance + doctor green; no stale `MYCROFT.md` outside data/history.
+
+## 2026-07-07 -- First run of case-supply-chain-planning-analyst-opt-dfw (sample fixture)
+
+- **Recipe:** `case-supply-chain-planning-analyst-opt-dfw` (new mode: supply chain/planning analyst, OPT/STEM-OPT, DFW preferred/remote acceptable), **sample mode**.
+- **Command:** `npm run score -- data/ats/your-roles.json --out-dir reports/generated/` (stored script `scripts/score/role-scorer.mjs`; no ad-hoc code).
+- **Inputs:** hand-constructed 3-role fixture `data/ats/your-roles.json`, matching the `data/examples/ch11-roles.json` schema — one proven-sponsor/live role, one non-sponsor/live role, one likely-sponsor/**dead-posting** role built specifically to test the liveness gate. `role_quality` left at the repo default weight (0) on all three, per documented mode decision.
+- **Gates:** 1 Source ✓ · 2 Scope ✓ (sample) · 3 Data-shape ✓ · 4 Script-readiness ✓ (`role-scorer.mjs`, `check-liveness.mjs` both real, unmodified) · 5 Approval n/a (no live network/writes/model calls) · 6 Report ✓. Human adequacy gate: **PENDING attestation.**
+- **Result:** 3 roles → Apply 1 · Consider 0 · Skip 2 (skip 67%). Liveness gate confirmed working as a hard multiplier: the dead-posting role had the strongest fit vote of the three (0.8) and a reasonable sponsorship vote (0.5), but liveness=0 forced its composite to 0.000 regardless.
+- **Artifacts:** `reports/generated/role-scores.json`, `reports/generated/role-scores.md`.
+- **Flags:** skip-rate 67% (above the ~50% healthy-run benchmark; expected for a 3-role curated fixture, not a real search); `role_quality` weight 0 [VERIFY] inherited unmodified — the mode documents this as a real limitation, not a hidden one; all sponsorship/liveness values in this run were hand-set placeholders, not joined from `mapped_student_employment_targets_v3.csv` or a real `ats:liveness` check.
+- **Open:** DFW/remote location field not yet confirmed in source data; exact per-role JSON schema not yet formally pinned against `ch11-roles.json`; `scripts/ats/inbox-sync.mjs` remains proposed, not built; human adequacy attestation outstanding — required to promote this recipe past DRAFT.
