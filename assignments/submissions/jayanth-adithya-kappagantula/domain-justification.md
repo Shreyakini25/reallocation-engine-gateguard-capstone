@@ -60,3 +60,17 @@ expecting to convert, and the runway dead-ends when the cap-subject H-1B never c
 sponsor" — the error only surfaces 2–3 years later when it is very costly to undo. (The mode
 counters it by tagging Runway strictly as a labeled human judgment with a documented reason,
 and drawing "cannot verify: whether a runway employer will *ever* sponsor" explicitly.)
+
+## Healthcare specialization (where I'm actually aiming)
+
+Narrowed to **healthcare / health-tech PM**, the asymmetry gets sharper, and the data proves
+it. Of the 30,369 companies, **4,745 are healthcare-industry** (Biotechnology 1,911, Other
+Health Care 2,173, Pharmaceuticals 520, Hospitals 122, Health Insurance 19). Of those 4,745,
+exactly **3** list "Product Manager" in their sponsored titles — **0.06%** — even though the
+same firms sponsor heavily under scientific, clinical, and engineering titles. So FM1 is at
+its most severe here: a title-literal search tells a healthcare PM the sector is closed, when
+it is not. It also adds **FM3** — a healthcare role titled "Product Manager" may be a
+*clinical/scientific* role (MD/PhD expected), not a *software/digital-health* PM role;
+scoring fit without reading the JD misclassifies it. And because biotech (1,911 firms) is
+cash-intensive and Form D-driven, the SEC Form D funding gate carries more weight here than
+economy-wide. See the mode's "Healthcare Specialization" section.

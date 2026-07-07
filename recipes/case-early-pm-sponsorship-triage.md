@@ -136,6 +136,35 @@ The mode must **refuse to produce a `record`-backed score** (and say so) when:
 - A **proposed** script (TODO #1–#4) is needed for a value — that value stays inferred or
   manual and is labeled *proposed*, never presented as if it ran.
 
+## Healthcare Specialization (optional profile narrowing)
+
+For a candidate targeting **healthcare / health-tech PM** roles specifically (digital health,
+EHR, payer/provider, medtech, biotech-adjacent product), narrow the source scan by the CSV
+`industry` column (`Biotechnology`, `Pharmaceuticals`, `Other Health Care`, `Hospitals and
+Physicians`, `Health Insurance`) before scoring. Verified against the data on this run:
+
+- **4,745** of the 30,369 companies are healthcare-industry (Biotechnology 1,911 · Other
+  Health Care 2,173 · Pharmaceuticals 520 · Hospitals 122 · Health Insurance 19).
+- Of those 4,745, exactly **3** list "Product Manager" in `top_job_titles_sponsored`
+  (**0.06%**) — yet the same firms sponsor heavily under scientific/clinical/engineering
+  titles (Senior Scientist, Software Engineer, Business Analyst, Quality Analyst).
+
+This makes the SOC-scatter asymmetry (FM1) **extreme** in healthcare: a title-literal search
+returns almost nothing, so adjacent-title reasoning is mandatory, not optional. Two knock-on
+effects for this profile:
+
+- **Funding gate matters more.** Biotech (1,911 firms) is cash-intensive and Form D-driven; a
+  stale/absent Form D is a stronger ghost-employer signal here than economy-wide. Lean on
+  `data/sec/form-d/`.
+- **New failure mode — FM3 (clinical vs. digital-health PM confusion).** A healthcare role
+  titled "Product Manager" may be a *clinical/scientific* role expecting an MD/PhD, not a
+  *software/digital-health* PM role. Scoring `fit` without reading the JD can misclassify
+  either direction. Keep `fit` a labeled model-judgment and read the JD before trusting it.
+
+The industry filter folds into proposed **TODO #1** (the DEV `pm-sponsor-lookup` helper):
+accept an optional `--industry` argument that pre-filters the CSV before the PM-adjacent
+title match. No new TODO — this is a documented extension of an existing one.
+
 ## RUN_LOG template
 
 ```markdown
