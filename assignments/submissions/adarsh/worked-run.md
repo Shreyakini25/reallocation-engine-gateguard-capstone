@@ -8,6 +8,7 @@ Input file: data/examples/opt-clock-roles.json (5 backend SWE roles: Stripe, Air
 ## Commands Run
 
 npm run score data/examples/opt-clock-roles.json
+npm run score data/examples/opt-clock-roles.json -- --profile data/examples/opt-clock-profile.json
 
 ## Real Terminal Output
 
@@ -21,23 +22,48 @@ scored 5 roles → Apply 2 · Consider 3 · Skip 0 (skip 0%)
 | Meta — Software Engineer Backend Infrastructure | 0.271 | Consider |
 | AnonymousStartup — Backend Engineer | 0.251 | Consider |
 
+Second run with profile file (requires_sponsorship: true): same result — Apply 2 · Consider 3 · Skip 0.
+
 ## Verified vs Inferred
 
-Verified: sponsorship scores from record, composite scores from role-scorer.mjs
-Inferred: all fit scores are model-judgment, all timeline factors are your-input
+Verified by scripts:
+- All sponsorship scores sourced from record (80-days-to-stay dataset)
+- AnonymousStartup sponsorship p=0.0 sourced from record
+- Composite scores and recommendations produced by role-scorer.mjs
+- Liveness factor 1.0 marked as record but not independently verified via ats:liveness in this run
+
+Inferred/human judgment:
+- All fit scores (0.82, 0.75, 0.88, 0.70, 0.78) sourced as model-judgment
+- All timeline factors sourced as your-input — estimated_days_to_offer is a human judgment
 
 ## Reflection
 
-What went well: scorer ran cleanly, audit trace fully sourced.
-What the mode got wrong: AnonymousStartup scored Consider instead of Skip — sponsorship hard gate only fires with explicit profile file.
-What the mode missed: timeline gate does not exist yet as a script — Meta 75-day pipeline would exceed buffer but scorer cannot enforce this.
-Next steps: build opt-clock-filter.mjs, verify liveness via ats:liveness, source fit scores from BLS SOC data.
+What went well: scorer ran cleanly, audit trace fully sourced, every term traces to record/model-judgment/your-input.
+
+What the mode got wrong: AnonymousStartup scored Consider (0.251) instead of Skip. Reading the scorer source (scripts/score/role-scorer.mjs), sponsorship is implemented as a weighted vote, not a hard gate. A role with sponsorship p=0.0 gets a low composite score but is never hard-skipped. The mode's Gate 1 (sponsorship hard stop) does not exist in the current scorer — it is a proposed pre-filter that needs opt-clock-filter.mjs to implement.
+
+What the mode missed: The timeline gate also does not exist in the scorer. Meta's timeline factor of 0.5 reduces its score to Consider but does not enforce a hard stop based on days_remaining. Both Gate 1 and Gate 3 from the mode spec are proposed additions, not currently implemented.
+
+What the skip rate means: Skip 0 (0%) is not a failure of the run — it reflects that all roles have liveness=1.0 and composite scores above 0.2. The scorer only produces Skip when composite < 0.2, which requires either a dead posting (liveness=0) or very low sponsorship + fit combination. The 0% skip rate is an honest finding that the current scorer is too permissive for an OPT-constrained job seeker.
+
+Next steps: Build opt-clock-filter.mjs to enforce hard sponsorship and timeline gates before the scorer runs. Verify liveness for all 5 roles via ats:liveness. Source fit scores from BLS SOC 15-1252 skill alignment rather than model-judgment.
 
 ## Attestation
 
 Recipe: case-opt-clock-backend-triage.md v0.1.0
 By: Adarsh Akhouri · 2026-07-06
 
-Tested: npm run score ran cleanly, output matches role-scores.json
-Did not test: ats:liveness, opt-clock-filter.mjs does not exist yet
-Broke during testing: first roles.json used wrong format, reformatted to match ch11-roles.json schema
+### Tested
+| Ran | Saw | Expected |
+|---|---|---|
+| npm run score data/examples/opt-clock-roles.json | Apply 2 · Consider 3 · Skip 0 | Apply 2+ with Stripe highest |
+| npm run score with --profile opt-clock-profile.json | Same result — Apply 2 · Consider 3 · Skip 0 | AnonymousStartup to Skip |
+| Removed sponsorship field from one role | Consider 0.251 — no error thrown | Error or Skip |
+
+### Did not test
+- ats:liveness for each posting URL — network fetch not verified in this run
+- opt-clock-filter.mjs timeline and sponsorship hard gates — script does not yet exist
+
+### Broke during testing
+- First roles.json used wrong format (flat fields) — reformatted to match ch11-roles.json nested schema
+- Passing profile file with requires_sponsorship: true did not change AnonymousStartup from Consider to Skip — discovered scorer implements sponsorship as weighted vote, not hard gate
