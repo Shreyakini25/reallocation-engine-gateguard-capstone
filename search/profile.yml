@@ -1,0 +1,34 @@
+target_role:
+  title: "Backend Software Engineer"
+  description: "Backend Software Engineer at a product-based company"
+  specificity_note: "Role must involve backend systems, APIs, or distributed infrastructure"
+
+visa_constraints:
+  visa_type: "F-1"
+  opt_status: "Pre-OPT — graduating August 2026, OPT expected to start September 2026"
+  stem_eligible: "yes — confirmed with DSO; MS in Computer Software Engineering at Northeastern University qualifies"
+  unemployment_days_used: 0
+  authorization_end_date: "uncertain — depends on OPT approval date; estimated September 2029 with STEM extension"
+  buffer_target: "apply only to roles with sponsorship history; 80-day unemployment buffer below 90-day ceiling"
+
+geography:
+  preferred:
+    - "Boston, MA"
+    - "New York, NY"
+    - "San Francisco, CA"
+    - "Los Angeles, CA"
+    - "Seattle, WA"
+  open_to_remote: true
+  constraint_note: "Open to any US city; preference for MA, CA, NY metros"
+
+industry_preferences:
+  sectors:
+    - "Fintech"
+    - "Product-based technology companies"
+  company_size: "no preference — open to seed-stage through public"
+  hard_exclusions: []
+
+sponsorship:
+  requires_sponsorship: true
+  sponsorship_gate: "Companies with no H-1B sponsorship history are skip-regardless, regardless of fit score"
+  note: "Currently F-1, transitioning to OPT September 2026; will require H-1B sponsorship before STEM OPT expires"

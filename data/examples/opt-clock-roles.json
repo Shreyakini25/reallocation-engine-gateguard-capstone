@@ -1,0 +1,31 @@
+[
+  { "role_id": "stripe-backend-swe", "company": "Stripe", "title": "Backend Software Engineer",
+    "sponsorship": { "p": 0.95, "tier": "Proven", "source": "record" },
+    "fit": { "p": 0.82, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.90, "source": "your-input" } },
+
+  { "role_id": "airbnb-backend-swe", "company": "Airbnb", "title": "Software Engineer Backend",
+    "sponsorship": { "p": 0.90, "tier": "Proven", "source": "record" },
+    "fit": { "p": 0.75, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.70, "source": "your-input" } },
+
+  { "role_id": "startup-anon-backend", "company": "AnonymousStartup", "title": "Backend Engineer",
+    "sponsorship": { "p": 0.0, "tier": "None", "source": "record" },
+    "fit": { "p": 0.88, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.95, "source": "your-input" } },
+
+  { "role_id": "meta-backend-infra", "company": "Meta", "title": "Software Engineer Backend Infrastructure",
+    "sponsorship": { "p": 0.95, "tier": "Proven", "source": "record" },
+    "fit": { "p": 0.70, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.50, "source": "your-input" } },
+
+  { "role_id": "rippling-backend-swe", "company": "Rippling", "title": "Software Engineer Backend",
+    "sponsorship": { "p": 0.80, "tier": "Likely", "source": "record" },
+    "fit": { "p": 0.78, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.88, "source": "your-input" } }
+]

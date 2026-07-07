@@ -150,3 +150,24 @@ private emails, or sensitive application notes.
 - **Rebuilt:** `node scripts/build-instructions.mjs --promote` → `AGENTS.md` + `CLAUDE.md` regenerated; `CLAUDE.md` now imports `@SNICKERDOODLE.md`.
 - **Untouched:** `data/` CSVs (real company names containing "mycroft") and prior RUN_LOG history (append-only).
 - **Result:** conformance + doctor green; no stale `MYCROFT.md` outside data/history.
+- 
+## 2026-06-25 — Search Setup Exercise: Personal Layer
+
+- **Assignment:** INFO 7375 Computational Skepticism for AI — Setup Exercise: Your Search's Personal Layer
+- **What was built:** search/resume.json (attested), search/profile.yml, search/gaps.md
+- **Three attestation errors caught in resume.json:** (1) GitHub and LinkedIn extracted as display text instead of full URLs — corrected to full URLs. (2) TCS contributions used "Drove" implying sole leadership — corrected to "Contributed to" as work was done with multiple contributors. (3) Swing missing from tools list despite being on original resume — added back.
+- **Top gap from gaps.md:** System design interview readiness — product company backend SWE roles gate on a system design interview round; building distributed systems at work and explaining tradeoffs under interview pressure are different skills.
+- **Killed row:** Removed "No cloud certifications (AWS/GCP/Azure)" — the agent inferred a generic cloud gap but backend SWE roles at product companies do not gate on certifications; demonstrated cloud project work already exists in resume.json.
+- **Field corrected in profile.yml:** Agent added "with preference for fintech" to target role description — removed because I have no fintech preference, any product-based company is fine.
+- **Verification check:** resume.json — every job traceable to verifiable employment, no inflated titles. profile.yml — visa constraints reflect actual documents, STEM eligibility confirmed with DSO. gaps.md — every evidence column cites real postings or O*NET requirements, no invented demand signals.
+- **AI Use Disclosure:** Claude (claude.ai) used to extract resume.json, draft profile.yml from intake answers, and draft gaps.md. What the AI could not do: extracted LinkedIn/GitHub as display text instead of URLs, inflated TCS role from contributor to lead, and dropped Swing from tools — all required my own knowledge to catch.
+
+## 2026-07-06 — opt-clock-backend-triage: first sample run
+
+- Mode: case-opt-clock-backend-triage.md v0.1.0
+- Input: data/examples/opt-clock-roles.json (5 backend SWE roles)
+- Command: npm run score data/examples/opt-clock-roles.json
+- Output: data/examples/role-scores.json + data/examples/role-scores.md
+- Result: Apply 2 · Consider 3 · Skip 0 (skip 0%)
+- Gates fired: no hard skips — sponsorship gate requires explicit profile file to fire as hard stop
+- Open issues: (1) AnonymousStartup scored Consider instead of Skip — sponsorship hard gate needs profile flag. (2) Timeline gate not yet enforced — opt-clock-filter.mjs is TODO. (3) Liveness not independently verified via ats:liveness.
