@@ -161,3 +161,23 @@ private emails, or sensitive application notes.
 - **Field corrected in profile.yml:** Agent added "with preference for fintech" to target role description — removed because I have no fintech preference, any product-based company is fine.
 - **Verification check:** resume.json — every job traceable to verifiable employment, no inflated titles. profile.yml — visa constraints reflect actual documents, STEM eligibility confirmed with DSO. gaps.md — every evidence column cites real postings or O*NET requirements, no invented demand signals.
 - **AI Use Disclosure:** Claude (claude.ai) used to extract resume.json, draft profile.yml from intake answers, and draft gaps.md. What the AI could not do: extracted LinkedIn/GitHub as display text instead of URLs, inflated TCS role from contributor to lead, and dropped Swing from tools — all required my own knowledge to catch.
+
+## 2026-07-06 — opt-clock-backend-triage: first sample run
+
+- Mode: case-opt-clock-backend-triage.md v0.1.0
+- Input: data/examples/opt-clock-roles.json (5 backend SWE roles)
+- Command: npm run score data/examples/opt-clock-roles.json
+- Output: data/examples/role-scores.json + data/examples/role-scores.md
+- Result: Apply 2 · Consider 3 · Skip 0 (skip 0%)
+- Gates fired: no hard skips — sponsorship gate requires explicit profile file to fire as hard stop
+- Open issues: (1) AnonymousStartup scored Consider instead of Skip — sponsorship hard gate needs profile flag. (2) Timeline gate not yet enforced — opt-clock-filter.mjs is TODO. (3) Liveness not independently verified via ats:liveness.
+
+## 2026-07-06 — opt-clock-backend-triage: first sample run
+
+- Mode: case-opt-clock-backend-triage.md v0.1.0
+- Input: data/examples/opt-clock-roles.json (5 backend SWE roles)
+- Command: npm run score data/examples/opt-clock-roles.json
+- Output: data/examples/role-scores.json + data/examples/role-scores.md
+- Result: Apply 2 · Consider 3 · Skip 0 (skip 0%)
+- Gates fired: no hard skips — sponsorship gate requires explicit profile file to fire as hard stop
+- Open issues: (1) AnonymousStartup scored Consider instead of Skip — sponsorship hard gate needs profile flag. (2) Timeline gate not yet enforced — opt-clock-filter.mjs is TODO. (3) Liveness not independently verified via ats:liveness.
