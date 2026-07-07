@@ -35,8 +35,9 @@ Analysts, 15-1299, 11-2021), so a real sponsor can look like a non-sponsor.
 |---|---|---|---|
 | Mapped SEC + DOL/H-1B company data | file (CSV) | `data/80-days-to-stay/80-days-csv/mapped_student_employment_targets_v3.csv` | Confirm the target company is present; read `Approval_Rate`, `top_job_titles_sponsored`, `latest_funding_stage/date`, `median_salary_offered`. 30,369 companies as of this run. |
 | SEC Form D (funding recency for startups) | dir | `data/sec/form-d/` (`raw/`, `extracted/`, `processed/`) | Confirm a recent Form D filing for early-stage targets (viability, not ghost employer). |
-| Bayesian Role Scorer (Ch.11) | command | `npm run score -- data/examples/pm-roles.json --out-dir <dir>` (`scripts/score/role-scorer.mjs`) | The decision core. Combines votes × gates; emits `role-scores.json` + `role-scores.md`. |
-| Role-evidence fixture | file (JSON) | `data/examples/pm-roles.json` | The scorer input: one record per role with `sponsorship`, `fit`, `liveness`, `timeline`, optional `override`. Every term labeled `record` / `model-judgment` / `your-input`. |
+| Bayesian Role Scorer (Ch.11) | command | `npm run score -- <roles.json> --out-dir <dir>` (`scripts/score/role-scorer.mjs`) | The decision core. Combines votes × gates; emits `role-scores.json` + `role-scores.md`. |
+| Real-company scorer input (primary) | file (JSON) | `data/examples/pm-roles-healthcare-real.json` | 7 **real** healthcare companies drawn from the mapped CSV; each `sponsorship` term cites its record in a `_source` field. This is the run of record. |
+| Synthetic path-coverage fixture | file (JSON) | `data/examples/pm-roles.json` | **Fictional** companies used only to exercise gate/override/timeline paths the real sample doesn't hit — never a claim about a real employer. |
 | Posting liveness (optional, Job-Ops) | command | `npm run ats:liveness -- <job-url>` | Confirms a posting is still live before effort is spent. A GATE, not a vote. |
 
 ## Proposed Additions

@@ -2,91 +2,107 @@
 
 **Mode:** `recipes/case-early-pm-sponsorship-triage.md` v0.1.0
 **By:** Jayanth Adithya Kappagantula · 2026-07-06
-**Lifecycle stage reached:** RUNNABLE-SAMPLE (one real sample run, logged; human adequacy
-gate still open)
+**Lifecycle stage reached:** RUNNABLE-SAMPLE (real logged runs; human adequacy gate still open)
 
-## 1. Inputs
+This worked run has two parts: **(A) a run on real companies** pulled from the repo's mapped
+SEC+DOL/H-1B dataset — the primary evidence — and **(B) a synthetic path-coverage fixture**
+that exercises decision paths the real sample didn't hit (a dead posting, an E-Verify override,
+a timeline-gate demotion), clearly labeled as synthetic.
 
-Fixture: `data/examples/pm-roles.json` — 7 anonymized/fictional entry-level PM postings, one
-per decision path. Every company name is fictional; no personal data. Each role carries
-`sponsorship`, `fit`, `liveness`, `timeline` (and, for the runway case, an `override`), with
-every term labeled `record` / `model-judgment` / `your-input`. The visa-timeline factors
-encode my real OPT filing status as of 2026-07-06 (I-20 requested 2026-07-01, not yet filed
-with USCIS, EAD realistically ~Oct–Nov 2026).
+---
 
-## 2. Commands run (verbatim) and real output
+## PART A — Real-company run (primary)
+
+### A.1 Inputs
+
+`data/examples/pm-roles-healthcare-real.json` — **7 real companies** selected from
+`data/80-days-to-stay/80-days-csv/mapped_student_employment_targets_v3.csv`, filtered to the
+healthcare industry. Each role's `sponsorship` term is grounded in that company's real record
+(`Total Approvals`, `Approval_Rate`, `top_job_titles_sponsored`, `latest_funding_stage`), cited
+in the row's `_source` field.
+
+**The record → probability rule (my documented mapping — this is the `your-input`/judgment half):**
+- Lists "Product Manager" in sponsored titles + high approvals → `record`, tier Proven, p ≈ 0.75–0.9.
+- Heavy approvals but **no** PM title → `model-judgment` (SOC-scatter), tier Likely, p ≈ 0.6.
+- Few approvals, scientific-only titles → `model-judgment`, tier Possible, p ≈ 0.3.
+- Zero approvals on record → `record`, tier None, p ≈ 0.05.
+
+**Honest limits of this run, stated up front:**
+- **Liveness is UNVERIFIED** — I have no live posting URLs, so `liveness.factor = 1.0` is
+  labeled `UNVERIFIED — no live posting checked`. These are **pre-liveness** scores; a real run
+  would clear the liveness gate with `npm run ats:liveness` and could gate some out.
+- **Selection bias** — I picked from the sponsor pool to show the decision paths, so the run
+  skews toward Apply. A full board scan would skip far more.
+
+### A.2 Command run (verbatim) and real output
 
 ```
-$ npm run score --silent -- data/examples/pm-roles.json \
-    --out-dir assignments/submissions/jayanth-adithya-kappagantula/run
-✓ scored 7 roles → Apply 1 · Consider 3 · Skip 3 (skip 43%)
-  assignments/submissions/jayanth-adithya-kappagantula/run/role-scores.json  +  assignments/submissions/jayanth-adithya-kappagantula/run/role-scores.md
+$ npm run score --silent -- data/examples/pm-roles-healthcare-real.json \
+    --out-dir assignments/submissions/jayanth-adithya-kappagantula/run-healthcare-real
+✓ scored 7 roles → Apply 3 · Consider 1 · Skip 3 (skip 43%)
 ```
 
-Human report produced (`run/role-scores.md`, pasted verbatim):
+Human report (`run-healthcare-real/role-scores.md`, pasted verbatim):
 
 ```markdown
 # Role Scorer report — 2026-07-07
 
 *Bayesian Role Scorer (Ch.11). Weights: sponsorship 0.35, fit 0.3, role_quality 0 [role_quality weight is **[VERIFY]** — not pinned by the chapter]. Threshold 0.3. Profile requires sponsorship.*
 
-**Summary:** 7 roles → Apply 1 · Consider 3 · Skip 3. **Skip rate 43%** (below the ~50% a healthy run skips; check the inputs).
+**Summary:** 7 roles → Apply 3 · Consider 1 · Skip 3. **Skip rate 43%** (below the ~50% a healthy run skips; check the inputs).
 
 | Role | Composite | Rec | Why | Audit (term · value · weight · source) |
 |---|---|---|---|---|
-| NovaLedger (Series B fintech, fictional) — Associate Product Manager (New Grad) | 0.446 | **Apply** | composite 0.446 ≥ 0.3, gates healthy | sponsorship 0.9·0.35 [record]; fit 0.7·0.3 [model-judgment] × liveness 1[record]×timeline 0.85[your-input] |
-| Corvus Analytics (established, fictional) — Product Manager I | 0.395 | **Consider** | above threshold (0.395) but one soft spot: sponsorship tier "Likely" | sponsorship 0.6·0.35 [model-judgment]; fit 0.85·0.3 [model-judgment] × liveness 1[record]×timeline 0.85[your-input] |
-| Atlas Freight Systems (fictional) — Product Manager I | 0.322 | **Consider** | above threshold (0.322) but one soft spot: timeline 0.550 | sponsorship 0.9·0.35 [record]; fit 0.9·0.3 [model-judgment] × liveness 1[record]×timeline 0.55[your-input] |
-| BrightWave Health (E-Verify, no H-1B history, fictional) — APM, Rotational Program | 0.155 | **Consider ⟵ override** | composite 0.155 < 0.2 — time is better spent elsewhere | sponsorship 0.05·0.35 [record]; fit 0.55·0.3 [model-judgment] × liveness 1[record]×timeline 0.85[your-input] |
-| Meridian Retail Group (fictional) — Associate Product Manager | 0.153 | **Skip** | composite 0.153 < 0.2 — time is better spent elsewhere | sponsorship 0·0.35 [record]; fit 0.6·0.3 [model-judgment] × liveness 1[record]×timeline 0.85[your-input] |
-| Stonebridge Mutual (fictional) — Product Owner (entry) | 0.102 | **Skip** | composite 0.102 < 0.2 — time is better spent elsewhere | sponsorship 0·0.35 [record]; fit 0.4·0.3 [model-judgment] × liveness 1[record]×timeline 0.85[your-input] |
-| Peak Robotics (fictional) — Product Manager (New Grad) | 0.000 | **Skip** | gated: liveness ≈ 0.000 (a closed gate zeroes the composite regardless of votes) | sponsorship 0.9·0.35 [record]; fit 0.8·0.3 [model-judgment] × liveness 0[record]×timeline 0.85[your-input] |
+| TELADOC HEALTH INC — Associate Product Manager (entry) — telehealth | 0.446 | **Apply** | composite 0.446 ≥ 0.3, gates healthy | sponsorship 0.9·0.35 [record]; fit 0.7·0.3 [model-judgment] × liveness 1[UNVERIFIED — no live posting checked (ats:liveness not run)]×timeline 0.85[your-input] |
+| MODERN CLINICS INC — Product Manager (early-stage health) | 0.389 | **Apply** | composite 0.389 ≥ 0.3, gates healthy | sponsorship 0.75·0.35 [record]; fit 0.65·0.3 [model-judgment] × liveness 1[UNVERIFIED — no live posting checked]×timeline 0.85[your-input] |
+| AMGEN INC — Product Manager I (biotech) | 0.357 | **Consider** | above threshold (0.357) but one soft spot: sponsorship tier "Likely" | sponsorship 0.6·0.35 [model-judgment]; fit 0.7·0.3 [model-judgment] × liveness 1[UNVERIFIED — no live posting checked]×timeline 0.85[your-input] |
+| THERMO FISHER SCIENTIFIC INC — Product Manager (life-sciences instruments) | 0.355 | **Apply** | composite 0.355 ≥ 0.3, gates healthy | sponsorship 0.85·0.35 [record]; fit 0.4·0.3 [model-judgment] × liveness 1[UNVERIFIED — no live posting checked]×timeline 0.85[your-input] |
+| ACER THERAPEUTICS INC — Product Manager (biotech, pre-seed) | 0.191 | **Skip** | composite 0.191 < 0.2 — time is better spent elsewhere | sponsorship 0.3·0.35 [model-judgment]; fit 0.4·0.3 [model-judgment] × liveness 1[UNVERIFIED — no live posting checked]×timeline 0.85[your-input] |
+| 1910 GENETICS INC — APM (AI-driven drug discovery) | 0.168 | **Skip** | composite 0.168 < 0.2 — time is better spent elsewhere | sponsorship 0.05·0.35 [record]; fit 0.6·0.3 [model-judgment] × liveness 1[UNVERIFIED — no live posting checked]×timeline 0.85[your-input] |
+| 1859 INC — Product Manager (biotech) | 0.142 | **Skip** | composite 0.142 < 0.2 — time is better spent elsewhere | sponsorship 0.05·0.35 [record]; fit 0.5·0.3 [model-judgment] × liveness 1[UNVERIFIED — no live posting checked]×timeline 0.85[your-input] |
 
 *Every term traces to its source. If you cannot explain a row term-by-term, distrust the recommendation before your confusion (Ch.11).*
 ```
 
-## 3. Verified vs. inferred (line by line)
+### A.3 Verified vs. inferred (line by line)
 
-The scorer labels every term, so the split is not my assertion — it is in the output.
-
-| Role | Decision | Verified (`record`) | Inferred (`model-judgment` / `your-input`) |
+| Company | Decision | Verified (`record`, from the CSV) | Inferred (`model-judgment` / `your-input`) |
 |---|---|---|---|
-| NovaLedger | **Apply** | sponsorship 0.9 (H-1B history + PM title on record); liveness 1.0 | fit 0.7 (model); timeline 0.85 (my input) |
-| Corvus | **Consider** | liveness 1.0 | sponsorship 0.6 **(model-judgment — SOC-scatter: has H-1B history but no "Product Manager" title, so NOT a record)**; fit 0.85; timeline 0.85 |
-| Atlas | **Consider** | sponsorship 0.9; liveness 1.0 | fit 0.9; **timeline 0.55 (my input — reduced because my OPT isn't filed; this is what demoted Apply→Consider)** |
-| BrightWave | **Consider ⟵ override** | sponsorship 0.05 (no H-1B history on record); liveness 1.0 | fit 0.55; timeline 0.85; **the Runway rescue is a documented override — my judgment, labeled, not a record** |
-| Meridian | **Skip** | sponsorship 0.0; liveness 1.0 | fit 0.6 |
-| Stonebridge | **Skip** | sponsorship 0.0; liveness 1.0 | fit 0.4 |
-| Peak Robotics | **Skip (gated)** | **liveness 0.0 (dead posting) — the gate that zeroed it** | fit 0.8 (irrelevant once gated) |
+| Teladoc | **Apply** | 510 approvals / 96.96% / lists "Product Manager" → sponsorship 0.9 | fit 0.7; timeline 0.85; **liveness UNVERIFIED** |
+| Modern Clinics | **Apply** | 10 approvals / 100% / lists "Senior Product Manager", Series B → sponsorship 0.75 | fit 0.65; timeline 0.85; liveness UNVERIFIED |
+| Amgen | **Consider** | 1,882 approvals / 99.47% — but **no PM title** → sponsorship is `model-judgment` 0.6, NOT record | the SOC-scatter call itself; fit 0.7; liveness UNVERIFIED |
+| Thermo Fisher | **Apply** ⚠ | 1,096 approvals / 98.03% / "Director, Product Management" → sponsorship 0.85 | **fit 0.4 (my flag that the PM role is Director-level, not new-grad)**; liveness UNVERIFIED |
+| Acer Therapeutics | **Skip** | 4 approvals / 66.7% / pre-seed / scientist-only titles | sponsorship downgraded to model-judgment 0.3; fit 0.4 |
+| 1910 Genetics | **Skip** | 0 approvals, Series B biotech → sponsorship 0.05 | fit 0.6; **runway? E-Verify UNKNOWN → not tagged (stop condition)** |
+| 1859 Inc | **Skip** | 0 approvals, Series B biotech → sponsorship 0.05 | fit 0.5; liveness UNVERIFIED |
 
-Two decisions are worth calling out: **Atlas** is only a Consider because my *own* timeline
-(0.55, `your-input`) pulled it down — the sponsorship and fit are strong. **BrightWave** is a
-Skip by the math (0.155) that I consciously overrode to Consider/Runway because it is
-E-Verify enrolled — and I documented why. The contrast with **Meridian** is the whole point:
-Meridian has *higher* fit (0.6 vs 0.55) yet stays Skip, because it has no E-Verify path. The
-rescue is the E-Verify status, not the fit.
+**Two decisions that make the mode's point on real data:**
+- **Amgen** — the *largest* sponsor in the set (1,882 approvals) landed at **Consider, not Apply**,
+  purely because it lists no "Product Manager" title, so its sponsorship term is honestly a
+  `model-judgment`, not a `record`. That is the SOC-scatter asymmetry (FM1) caught in the act.
+- **Thermo Fisher** — scored **Apply** (0.355), but its only PM title on record is *Director,
+  Product Management*: senior, not new-grad (FM3). The scorer has **no fit-based demotion**, so a
+  strong sponsor carried a too-senior role over the line. My `fit: 0.4` label is the *only* guard
+  — and it did not auto-stop it. Fluency is the first sign of trouble; the human owns this call.
 
-## 4. Verification
+### A.4 Verification
 
-1. **Determinism** — re-ran into a scratch dir and diffed the JSON (ignoring the date line):
-   `IDENTICAL`. Same input → same output.
-2. **JSON parses** — `python3 -m json.tool run/role-scores.json` → valid. Recommendation
-   counter: `{'Apply': 1, 'Consider': 3, 'Skip': 3}`; the only row where final ≠ machine
-   recommendation is `runway-everify-pivot` (Skip → Consider via override), exactly as designed.
-3. **Count cross-checked against the source** — the mode claims PM sponsorship is scarce in
-   the record. Parsed `mapped_student_employment_targets_v3.csv`: **30,369 companies**, of
-   which only **107** list "Product Manager" in `top_job_titles_sponsored` (0.35%). The
-   asymmetry the mode is built around is real and measured, not asserted.
-4. **Deliberate break attempts:**
-   - **Missing `sponsorship` field** → the scorer does **not** refuse. It silently drops the
-     sponsorship vote and scores on `fit` alone → composite 0.1785, Skip. `votes counted: ['fit']`.
-   - **Non-numeric probability** (`"p":"high"`) → same silent drop → 0.1785, Skip.
-   - **Malformed JSON** → hard crash (uncaught `JSON.parse` exception, Node stack trace).
+1. **Determinism** — re-ran into a scratch dir, diffed the JSON (minus the date line): IDENTICAL.
+2. **JSON parses** — `python3 -m json.tool run-healthcare-real/role-scores.json` → valid;
+   counter `{'Apply': 3, 'Consider': 1, 'Skip': 3}`.
+3. **Counts cross-checked against the source CSV** — 30,369 companies total; **4,745**
+   healthcare-industry; of those only **3** list "Product Manager" (0.06%). The three I could find
+   (Teladoc, Modern Clinics, Sirona) are exactly the healthcare PM sponsors I could score as
+   `record`; everyone else required a judgment. The scarcity the mode is built around is measured.
+4. **Deliberate break attempts** (against the scorer itself):
+   - Missing `sponsorship` field → does **not** refuse; silently drops the vote, scores on fit
+     alone → Skip 0.1785. `votes counted: ['fit']`.
+   - Non-numeric `"p":"high"` → same silent drop → Skip 0.1785.
+   - Malformed JSON → hard crash (uncaught `JSON.parse`, Node stack trace).
 
-   The malformed-JSON crash is loud and acceptable. The two silent drops are **not** — a data
-   gap produces a confident-looking Skip. This violates the mode's stated stop condition
-   ("refuse to score when sponsorship evidence is absent"), so I filed **[TODO: DEV] #4** (a
-   pre-flight validator) rather than pretend the current script enforces it.
+   The crash is loud and acceptable. The silent drops are not — a data gap becomes a confident
+   Skip, which is exactly the danger in healthcare where sponsorship data is mostly missing. Filed
+   as **[TODO: DEV] #4** (pre-flight validator) rather than pretend the script enforces it.
 
 ## Attestation
 - Recipe: case-early-pm-sponsorship-triage v0.1.0
@@ -95,45 +111,63 @@ rescue is the E-Verify status, not the fit.
 ### Tested
 | Ran | Saw | Expected |
 |---|---|---|
-| `npm run score -- data/examples/pm-roles.json --out-dir run` | Apply 1 · Consider 3 · Skip 3 (skip 43%); role-scores.json + .md written | 7 roles scored, each landing on its designed path |
-| Re-run + diff (determinism) | IDENTICAL except the date line | byte-identical scores |
-| `python3 -m json.tool run/role-scores.json` | valid JSON; override flips only `runway-everify-pivot` | parses; exactly one machine≠final row |
-| Cross-check count vs. CSV | 30,369 companies; 107 list "Product Manager" (0.35%) | scarcity confirms FM1 premise |
-| **Break: role with missing `sponsorship`** | did NOT refuse — scored on fit alone → Skip 0.1785 | *hoped* it would refuse; it silently drops the vote (filed TODO #4) |
-| **Break: `sponsorship.p = "high"` (string)** | same silent drop → Skip 0.1785 | same as above |
+| `npm run score -- data/examples/pm-roles-healthcare-real.json --out-dir run-healthcare-real` | Apply 3 · Consider 1 · Skip 3; json + md written | 7 real companies scored, each traceable to its CSV record |
+| Re-run + diff (determinism) | IDENTICAL except date line | byte-identical scores |
+| `python3 -m json.tool run-healthcare-real/role-scores.json` | valid JSON; counter {Apply:3, Consider:1, Skip:3} | parses |
+| Cross-check counts vs CSV | 30,369 total; 4,745 healthcare; 3 list "Product Manager" (0.06%) | scarcity confirms FM1 |
+| Amgen (biggest sponsor, no PM title) | Consider, not Apply, via model-judgment sponsorship | SOC-scatter demotes it |
+| Thermo Fisher (Director-level PM) | **Apply** despite fit 0.4 | *hoped* fit would demote it; scorer has no fit demotion — surfaced as a real limitation (FM3) |
+| **Break: role with missing `sponsorship`** | did NOT refuse — scored on fit → Skip 0.1785 | *hoped* it would refuse; silent drop (filed TODO #4) |
+| **Break: `sponsorship.p = "high"`** | same silent drop → Skip 0.1785 | same |
 | **Break: malformed JSON** | hard crash with stack trace | fail loudly (acceptable) |
 
 ### Did not test
-- Live `ats:liveness` against a real PM posting URL (used recorded liveness factors in the fixture).
-- The four proposed scripts (TODO #1–#4) — they are proposed, not built; none of their output is claimed as run.
-- The E-Verify data source (TODO #2) — E-Verify status in the fixture is asserted, not verified against a dataset.
-- `--profile` path (ran with the default "needs sponsorship" profile).
-- Any real/private company (fixture is entirely fictional).
+- Live `ats:liveness` on a real posting URL — liveness in every real row is UNVERIFIED (pre-liveness scores).
+- The four proposed scripts (TODO #1–#4) — proposed, not built; no output claimed as run.
+- The USCIS E-Verify data source (TODO #2) — so 1910 Genetics could NOT be confirmed as a runway.
+- `--profile` path (ran the default "needs sponsorship" profile).
 
 ### Broke during testing, fixed
-- My first run used the scorer's default out-dir, which writes `role-scores.json` and
-  overwrote the **tracked Ch.11 example** `data/examples/role-scores.json`. Fixed:
-  `git checkout` to restore the shared example, then re-ran with an explicit `--out-dir`
-  under my submission folder so nothing shared is clobbered.
+- First run used the scorer's default out-dir, which writes `role-scores.json` and overwrote the
+  **tracked Ch.11 example** `data/examples/role-scores.json`. Fixed with `git checkout` to restore
+  it, then re-ran with an explicit `--out-dir` under my submission folder so nothing shared is clobbered.
 
-## 5. Reflection
+### A.5 Reflection
 
-**What went well.** The scorer's per-term source labels gave me the verified-vs-inferred
-split for free — I didn't have to argue it; it's in the output. The two-track logic landed
-cleanly: the E-Verify runway rescue rides on the scorer's existing `override` feature (a
-documented human judgment) instead of faking the sponsorship number, and the Meridian↔BrightWave
-contrast shows the E-Verify *path*, not fit, is what rescues a role.
+**What went well.** Running on real companies made the thesis undeniable: Amgen, the single
+biggest sponsor in the set, gets held at Consider because it never labels a PM — the exact
+information asymmetry the engine exists to fix, reproduced on real data. The per-term source
+labels gave the verified/inferred split for free.
 
-**What the mode got wrong / missed.** (1) The break test exposed that the scorer silently
-drops missing/malformed votes rather than refusing — a data gap can masquerade as a confident
-Skip, which is dangerous precisely for FM1. (2) Skip rate is 43%, below the ~50% a healthy
-run skips; my fixture is deliberately balanced to exercise every path, so it under-skips
-relative to a real board. (3) The biggest limitation is unbuilt: the `sponsorship.p` values
-are still hand-entered, so the SOC-scatter judgment (TODO #1) and the E-Verify status (TODO #2)
-aren't yet machine-verified — the mode is honest RUNNABLE-SAMPLE, not VERIFIED.
+**What it got wrong / missed.** (1) Thermo Fisher scored Apply on a Director-level role — the
+scorer has no seniority/fit demotion, so my labeled `fit` is the only guard (FM3). (2) Every
+liveness value is UNVERIFIED — I did not clear the liveness gate, so these are pre-liveness
+scores. (3) The record→probability mapping is my rule, not the CSV's — the honest boundary
+between `record` and `your-input`. (4) Selection bias skews the run toward Apply.
 
-**Next steps.** Build TODO #4 (pre-flight validator) first — it's the cheapest and closes a
-real correctness gap. Then TODO #1 (CSV → scorer sponsorship lookup) to replace hand entry,
-then TODO #2 (USCIS E-Verify list) to move E-Verify from asserted to verified. After a live
-run with a real posting URL through `ats:liveness` and a mentor clearing the timeline gate,
-the mode can carry an attestation and move toward VERIFIED.
+**Next steps.** Build TODO #4 (pre-flight validator) first — cheapest, closes a real correctness
+gap. Then clear the liveness gate on one real posting with `ats:liveness`. Then TODO #1 (CSV →
+sponsorship lookup) to replace my hand-mapping, and TODO #2 (USCIS E-Verify list) so runway
+candidates like 1910 Genetics move from Skip to a verified Consider/Runway. After a mentor clears
+the timeline gate, the mode can carry an attestation toward VERIFIED.
+
+---
+
+## PART B — Synthetic path-coverage fixture (secondary, clearly labeled)
+
+`data/examples/pm-roles.json` is **synthetic** (fictional companies). It is not evidence about any
+real employer; it exists to exercise the three decision paths the real sample above did not hit:
+
+- a **dead posting** (liveness gate = 0 → Skip regardless of votes),
+- an **E-Verify runway override** (Skip → Consider via a documented `override`),
+- a **timeline-gate demotion** (Apply → Consider when the start date is impossible given OPT status).
+
+Run and result:
+
+```
+$ npm run score -- data/examples/pm-roles.json --out-dir run
+✓ scored 7 roles → Apply 1 · Consider 3 · Skip 3 (skip 43%)
+```
+
+The full output is at `run/role-scores.md`. Because these are fictional, they are used only to
+prove the gates and the override behave as specified — never as a claim about a real company.

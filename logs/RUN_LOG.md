@@ -163,3 +163,14 @@ private emails, or sensitive application notes.
 - **Gates:** Source ✓ (fixture) · Scope ✓ (sample, fictional data) · Liveness ✓ (recorded factors) · Timeline ✓ (my filing status) · Report ✓. Human adequacy gate: **PENDING attestation** (mode stays RUNNABLE-SAMPLE).
 - **Fixed during run:** default out-dir clobbered tracked `data/examples/role-scores.json` (Ch.11 example) — restored via git checkout, re-ran with explicit `--out-dir`.
 - **Open issues:** 4 typed TODOs open (pm-sponsor-lookup, USCIS E-Verify data source, two-track re-labeler, pre-flight validator); `sponsorship.p` still hand-entered; E-Verify status asserted not yet data-verified; skip rate 43% (balanced fixture under-skips vs a real board).
+
+## 2026-07-06 -- case-early-pm-sponsorship-triage: REAL-COMPANY run (healthcare)
+
+- **Recipe:** `case-early-pm-sponsorship-triage`, sample mode, real data.
+- **Command:** `npm run score -- data/examples/pm-roles-healthcare-real.json --out-dir assignments/submissions/jayanth-adithya-kappagantula/run-healthcare-real`
+- **Inputs:** 7 REAL healthcare companies pulled from `data/80-days-to-stay/80-days-csv/mapped_student_employment_targets_v3.csv` (Teladoc, Modern Clinics, Amgen, Thermo Fisher, Acer Therapeutics, 1910 Genetics, 1859 Inc). Each `sponsorship` term cites its CSV record (`_source`). Record→probability mapping documented in the worked run.
+- **Result:** Apply 3 (Teladoc 0.446, Modern Clinics 0.389, Thermo Fisher 0.355) · Consider 1 (Amgen 0.357 — SOC-scatter: biggest sponsor, no PM title → model-judgment) · Skip 3 (Acer 0.191, 1910 Genetics 0.168, 1859 0.142). Skip 43%.
+- **Verification:** deterministic on re-run; JSON parses; counts cross-checked (30,369 total / 4,745 healthcare / 3 list "Product Manager" = 0.06%). Break tests unchanged (scorer silently drops missing sponsorship → TODO #4).
+- **Gates:** Liveness **NOT cleared** — every row `liveness [UNVERIFIED — no live posting checked]`; these are pre-liveness scores. Timeline ✓ (my filing status). Human adequacy gate: PENDING.
+- **Findings:** Amgen (1,882 approvals, 99.5%) held at Consider for lacking a PM title = FM1 on real data. Thermo Fisher scored Apply on a Director-level PM role — scorer has no fit demotion (FM3); my labeled fit is the only guard.
+- **Open issues:** liveness unverified (need real posting URL + ats:liveness); record→p mapping is my rule (TODO #1 would automate); E-Verify unverified so 1910 Genetics could not be confirmed as runway (TODO #2); selection bias toward sponsors skews Apply.
