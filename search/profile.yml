@@ -1,0 +1,106 @@
+# =============================================================
+# search/profile.yml — Komal Khairnar Job Search Profile
+# Last updated: June 2026
+# =============================================================
+
+candidate:
+  name: "Komal Pravinkumar Khairnar"
+  email: "komalkhairnar1799@gmail.com"
+  phone: "(857) 544-9856"
+  linkedin: "linkedin.com/in/komal1799"
+  github: "github.com/Komal1799"
+  location: "Boston, MA (Burlington, MA area)"
+
+# -------------------------------------------------------------
+# Q1 — TARGET ROLE
+# -------------------------------------------------------------
+target_role:
+  primary: "Data Engineer"
+  secondary:
+    - "Analytics Engineer"
+    - "ML Engineer / ML Ops"
+    - "Data Analyst"
+  description: >
+    Data Engineer role at a mid-to-large company building scalable
+    ETL/ELT pipelines, cloud data platforms, or ML infrastructure
+    on AWS, GCP, or Azure. Open to analytics engineering and ML
+    engineering roles where data pipeline depth is core.
+  excluded:
+    - "Pure software engineering (SDE) roles"
+    - "Business Analyst roles without technical data component"
+    - "Research-only academic positions"
+
+# -------------------------------------------------------------
+# Q2 — VISA AND TIMELINE CONSTRAINTS
+# -------------------------------------------------------------
+visa:
+  type: "F-1 OPT (STEM extension eligible)"
+  current_status: "F1 — graduation August 29, 2026"
+  ead_start_date: "2026-10-19"
+  opt_end_date: "2029-10-19"  # 3-year STEM OPT window
+  unemployment_days_used: 0
+  unemployment_ceiling: 90
+  buffer_target: 80  # days below ceiling — stop applying if >80 days unemployed
+  stem_eligible: true
+  notes: >
+    Must not start work before EAD date (Oct 19, 2026).
+    Employer must be E-Verify certified for OPT.
+    90-day unemployment clock starts from OPT start date.
+
+# -------------------------------------------------------------
+# Q3 — TARGET GEOGRAPHY
+# -------------------------------------------------------------
+geography:
+  current_location: "Boston, MA"
+  open_to_remote: true
+  open_to_relocation: "Anywhere in the United States"
+  constraints: "No international relocation."
+
+# -------------------------------------------------------------
+# Q4 — INDUSTRY AND COMPANY PREFERENCES
+# -------------------------------------------------------------
+industry:
+  preferred_sectors:
+    - "Healthcare / Health Tech"
+    - "Financial Services / Fintech / Insurance"
+    - "Technology / SaaS"
+    - "E-commerce / Retail Tech"
+    - "AI / ML platforms"
+    - "Consulting / Staffing (W2 contract)"
+  company_size:
+    - "Series B and above"
+    - "Public companies"
+    - "Fortune 500"
+  hard_exclusions:
+    - "Defense / Military contractors"
+    - "Gambling / Cryptocurrency"
+    - "Companies with active layoffs or hiring freeze signals"
+  notes: "Open to W2 contract roles. Prefer direct hire but contract acceptable."
+
+# -------------------------------------------------------------
+# Q5 — SPONSORSHIP REQUIREMENT
+# -------------------------------------------------------------
+sponsorship:
+  requires_opt_evisa: true  # E-Verify required for OPT
+  requires_h1b_longterm: true  # After 3-year OPT window
+  sponsorship_gate: >
+    Companies with 0 H1B LCA filings in last 2 years are
+    SKIP for full-time roles unless exceptional fit.
+    For W2 contract roles through staffing agencies,
+    sponsorship gate applies to end client, not agency.
+  preferred_sponsors: "Companies with 50+ H1B LCA filings and 90%+ approval rate"
+  weak_sponsors_accepted_for_contract: "Companies with limited H1B history acceptable for W2 contract only"
+
+# -------------------------------------------------------------
+# SALARY TARGETS
+# -------------------------------------------------------------
+compensation:
+  full_time_minimum: 85000  # USD annual
+  full_time_target: 120000
+  contract_minimum_hourly: 40  # USD/hour W2
+  notes: >
+    Salary negotiable based on location, company size,
+    and sponsorship strength. Lower salary acceptable
+    for strong H1B sponsors or Boston-local roles.
+
+
