@@ -9,6 +9,7 @@ Input file: data/examples/opt-clock-roles.json (5 backend SWE roles: Stripe, Air
 
 npm run score data/examples/opt-clock-roles.json
 npm run score data/examples/opt-clock-roles.json -- --profile data/examples/opt-clock-profile.json
+REALLOCATION_ENGINE_PORTALS=data/ats/portals.example.yml npm run ats:scan -- --dry-run
 
 ## Real Terminal Output
 
@@ -23,6 +24,12 @@ scored 5 roles → Apply 2 · Consider 3 · Skip 0 (skip 0%)
 | AnonymousStartup — Backend Engineer | 0.251 | Consider |
 
 Second run with profile file (requires_sponsorship: true): same result — Apply 2 · Consider 3 · Skip 0.
+
+## ATS Scan Run (dry run)
+
+Command: REALLOCATION_ENGINE_PORTALS=data/ats/portals.example.yml npm run ats:scan -- --dry-run
+
+Output: Companies scanned 1, Total jobs found 789, Filtered by title 347, Filtered by location 389, New offers added 52 (Databricks postings). Confirms ATS scan script runs against real data. In the full mode workflow this would be run against each company in opt-clock-roles.json to verify liveness before scoring.
 
 ## Verified vs Inferred
 
