@@ -150,3 +150,44 @@ private emails, or sensitive application notes.
 - **Rebuilt:** `node scripts/build-instructions.mjs --promote` → `AGENTS.md` + `CLAUDE.md` regenerated; `CLAUDE.md` now imports `@SNICKERDOODLE.md`.
 - **Untouched:** `data/` CSVs (real company names containing "mycroft") and prior RUN_LOG history (append-only).
 - **Result:** conformance + doctor green; no stale `MYCROFT.md` outside data/history.
+
+## 2026-06-25 — New domain on branch `freelance-gigs`: AI-doable gig finder (Upwork), first sample run
+
+- **Why:** adapt the engine to find freelance gigs the user can finish with Claude (demo pages, interactive PPTs, websites, DB schemas…), Upwork first. Snickerdoodle constitution kept; only the domain swapped.
+- **Branch:** `freelance-gigs` (off `main`).
+- **Added:** `UPWORK-DOMAIN.md`; `data/upwork/` (`.gitignore` private-by-default + `README.md` + synthetic `gigs.sample.json`, 8 gigs); `scripts/upwork/ingest.mjs` (discovery + evidence derivation, labeled record/model-judgment/your-input; live Upwork API = marked `TODO[live]`); `scripts/score/gig-scorer.mjs` (adapted from Ch.11 `role-scorer.mjs` — votes ai_fit·0.45 + pay·0.30 + client_trust·0.25 × liveness × time_fit → Apply/Maybe/Skip + audit); `recipes/gig-scan.md` + `recipes/gig-score.md` (DRAFT); `package.json` gains `gig:ingest`, `gig:score`.
+- **Command:** `npm run gig:ingest -- --sample` then `npm run gig:score -- data/upwork/gigs.sample.evidence.json` (stored scripts; sample mode; zero credentials; zero Claude tokens).
+- **Result:** 8 gigs → Apply 2 · Maybe 2 · Skip 4 (**skip 50%**, healthy). Gates fire: "URGENT 12h" gated by time_fit (0.04), closed posting gated by liveness (0.02), flooded Next.js post demoted to Maybe. Output (private, gitignored): `data/upwork/gig-scores.{json,md}`.
+- **Conformance:** `node scripts/conformance.mjs` on all new files → 8/8 conform. Privacy: `git add --dry-run data/upwork/` stages only `.gitignore`, `README.md`, `gigs.sample.json`; derived evidence + scores correctly ignored.
+- **Open / not built:** live Upwork API pull (OAuth, ToS); real ai_fit via a Claude call (currently a labeled heuristic); time_fit effort model; weights/thresholds are v0 defaults; recipes DRAFT (no attestation); `DOMAIN.md` not yet rewritten (new domain doc added alongside instead). Not committed.
+
+## 2026-06-25 — Setup Exercise: personal `search/` layer (INFO 7375), freelance-framed
+
+> Drafted with Claude Code; the corrections below are conservative/defensible — confirm the trimmed
+> skills and set the profile.yml numbers before final submit. No `search/private-notes.md` content here.
+
+- **Why:** INFO 7375 setup exercise — build the personal-data layer that makes the engine *mine*. Framed around the AI-doable freelance-gig mode (professor-approved domain).
+- **Built (agent extract/draft/format):** `search/resume.json` (structured record from my real résumé data, sanitized — no phone/address), `search/profile.yml` (freelance-framed: target categories web/database/data-ml, visa `no constraint`, sponsorship `non-issue`, real gates = liveness + time_fit), `search/gaps.md` (5 evidence-backed gaps), `search/private-notes.md` (gitignored). Guard reconciled so `search/resume.json` is committable (`.gitignore` re-include + `doctor.mjs` `search/` exemption); `private/` + root protections unchanged.
+- **Attestation pass — 3 corrections to `resume.json`:**
+  1. Summary read "Lead Engineer with 6+ years" → corrected to "~5 years full-time (2019–2024), SWE→Senior→Lead, + 2025 co-op" — the draft rounded up across the 2024→2025 study gap and generalized the title.
+  2. Removed skills I can't readily defend in an interview — **RLHF fine-tuning, Computer Vision, Multimodal AI** — present in my skills file but not demonstrated in any role/project.
+  3. Softened "GuitarZero used by real users" → "publicly deployed at guitarzero.vercel.app" — the usage claim wasn't verifiable.
+- **Top gap (from `gaps.md`):** Row 1 — **no visible freelance footprint** (no reviews / Job Success Score). It's the binding constraint on winning gigs (the scorer weights `client_trust`; real senior-independent postings expect a track record), not my engineering ability.
+- **Killed row + why:** Deleted the "free-board data-ml demand is labeling, not senior LLM builds" row — it's *channel selection* (where I look for gigs), not a gap in my own evidence.
+- **`profile.yml` field corrected:** corrected the draft's `budget_floor_usd` placeholder 250 → **200**, and confirmed `weekly_availability_hours` at **10** (my real freelance bandwidth as a full-time student).
+- **Verification check (Step 4):**
+  - *resume.json:* Entries trace to my structured résumé; I removed three over-stated/undefendable items. Remaining %/$ metrics (70%, ~$2M, 35%) are my own prior-résumé claims I can source in an interview — not agent inventions.
+  - *profile.yml:* Visa stated "no constraint" for the freelance mode (visa doesn't gate freelance triage), with an explicit note that F-1 self-employment has real rules to confirm with my DSO; STEM eligibility marked "uncertain" (not DSO-confirmed); sponsorship "non-issue."
+  - *gaps.md:* Every gap cites something real — live Remotive URLs from my own scan, the scorer's code (`client_trust` weight, `time_fit` gate), or a pattern across the build-gig fixtures. I killed the one row whose "evidence" was a market observation, not a demand on my record.
+- **Conformance:** `node scripts/conformance.mjs search/resume.json search/profile.yml` → 2/2 conform. `npm run doctor` privacy ✓ (resume.json committable via `search/` carve-out; `private-notes.md` ignored).
+- **Submission:** push fork to GitHub + Canvas link (pending). AI Use Disclosure: `AI-USE-DISCLOSURE.md`.
+
+## 2026-06-25 — freelance-gig-triage (Remotive, live-data run) — Mode Build assignment
+
+- **Inputs:** 10 real contract/freelance postings pulled live from Remotive (public URLs, not personal data).
+- **Command:** `npm run gig:ingest -- --remotive --limit 20 --job-types contract,freelance` then `npm run gig:score -- data/upwork/gigs.remotive.evidence.json`.
+- **Result:** 10 gigs → Apply 7 · Maybe 0 · Skip 3 (**skip 30%**, below the ~50% healthy mark — flagged in the report).
+- **Gates fired:** `time_fit` gated 3 "Online Data Analyst" gigs at 0.04 — **false gates** (parser matched "today/immediately" in boilerplate); `liveness` + `client_trust` were flat defaults (Remotive supplies neither).
+- **Verified vs inferred:** `pay` = record; `client_trust` + `liveness` = neutral defaults (not verified); `ai_fit` = heuristic model-judgment (heaviest weight 0.45); `time_fit` = parsed (mis-fired).
+- **Defects found:** (1) loose deadline parser → false 0-day gates; (2) `ai_fit` over-rates and no counter-signal on this source → over-applies (Head of Sales / QA Rater / Writer scored Apply).
+- **Stage:** RUNNABLE-SAMPLE. Open `[TODO]`: live Upwork pull, real `ai_fit` Claude call, effort model, weight tuning. Mode file `recipes/freelance-gig-triage.md`; write-ups under `assignments/submissions/gaurav-bakale/`. Private outputs gitignored; not committed.

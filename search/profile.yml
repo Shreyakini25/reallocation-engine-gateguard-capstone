@@ -1,0 +1,59 @@
+# search/profile.yml — freelance-framed personal layer (INFO 7375 setup exercise)
+#
+# Facts about what I can actually deliver and what I'll bid on. Drafted by the agent
+# from resume.json (my real skills); I review and correct anything that drifts toward
+# "sounds good" instead of "is true". Fields marked CONFIRM are mine to set.
+#
+# Drives the gig-scorer (scripts/score/gig-scorer.mjs):
+#   Composite = (ai_fit*0.45 + pay*0.30 + client_trust*0.25) * liveness * time_fit
+#   Apply >= 0.45. liveness & time_fit are multiplicative GATES.
+
+# Q1 — TARGET ROLE (specific enough to drive the scorer)
+target_role: >-
+  Solo developer taking AI-doable freelance build gigs: web/landing-page frontends,
+  Postgres/SQL database schemas, and data/ML + LLM-agent automation — work I can finish
+  to a high standard with AI assistance on a part-time freelance basis.
+
+# Gig-scorer categories I can credibly deliver (grounds ai_fit). Chosen from my real
+# skills in resume.json: React/Next/TS/Node -> web; PostgreSQL/Snowflake/BigQuery/ETL
+# -> database; LangChain/CrewAI/RAG/agents + forecasting -> data-ml.
+target_categories: [web, database, data-ml]
+exclude_categories: [mobile, design, writing]   # outside my demonstrable skill — skip
+
+# Q2 — VISA AND TIMELINE CONSTRAINTS
+visa_and_timeline:
+  visa_type: "no constraint"          # assignment 'no constraint' out: visa does not gate freelance triage here
+  authorization_end_date: null
+  unemployment_days_used: null
+  stem_eligible: "uncertain — not confirmed with DSO"
+  honest_note: >-
+    Visa is NOT a gate for this freelance mode. Separately and truthfully: F-1 OPT
+    self-employment/freelance has its own authorization rules — I would confirm with my
+    DSO before doing paid freelance work. Flagged here, not relied on by the scorer.
+
+# Q3 — TARGET GEOGRAPHY
+geography:
+  base: "Boston, MA (US, Eastern Time)"
+  remote: "remote-only, async-friendly"
+  timezone_constraint: "prefer US / overlapping hours; no same-day turnarounds"
+
+# Q4 — CLIENT / WORK PREFERENCES
+client_preferences:
+  prefer: "payment-verified clients with spend history and reviews"
+  exclude: "payment-unverified clients with no platform history (treated as low trust)"
+
+# Q5 — SPONSORSHIP REQUIREMENT (stated explicitly, per the rubric)
+sponsorship:
+  required: false
+  statement: "non-issue — freelance gigs do not involve employer visa sponsorship."
+
+# The REAL skip-regardless GATES for this mode (the scorer's multiplicative factors):
+gates:
+  liveness: "posting must be open; >~20 proposals demotes, >50 = skip (flooded)."
+  time_fit: "deadline must be feasible for my availability; same-day / impossible = skip."
+  # client_trust is a weighted vote (0.25), not a hard gate; unverified clients are heavily discounted.
+
+# Economics + capacity (feed the pay vote and time_fit)
+budget_floor_usd: 200            # set by me — won't bid below this fixed price (or < $40/hr hourly)
+weekly_availability_hours: 10    # set by me — full-time MS student + job-searching; limited freelance bandwidth
+turnaround: "no same-day; prefer >= 3-day deadlines"

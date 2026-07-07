@@ -1,0 +1,12 @@
+# data/upwork/ is PRIVATE by default — it reveals your real gig-hunting activity
+# (which jobs you scanned, bid on, won). Same policy as data/ats/ (see
+# SNICKERDOODLE.md / UPWORK-DOMAIN.md): ignore everything, then allowlist ONLY
+# safe, shareable fixtures by name.
+
+# Ignore everything in this directory…
+*
+
+# …except this policy file, the README, and explicitly-safe sample fixtures:
+!.gitignore
+!README.md
+!gigs.sample.json

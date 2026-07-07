@@ -63,7 +63,11 @@ if (trackedFiles.length) {
   const inPrivateZone = (f) => /^private\//.test(f) || /^data\/ats\//.test(f);
   const isScaffold = (f) => /(^|\/)(README\.md|\.gitkeep|\.gitignore)$/i.test(f) || /\.example\./i.test(f);
   const isResumeArtifact = (f) => /\.resume\.(pdf|json)$|(^|\/)resume\.(json|pdf)$/i.test(f);
-  const leaks = trackedFiles.filter((f) => (inPrivateZone(f) && !isScaffold(f)) || isResumeArtifact(f));
+  // The INFO 7375 setup exercise intentionally commits search/resume.json (a sanitized,
+  // shareable record — NOT private/). Exempt the search/ layer from the résumé-artifact
+  // leak check; private/ and root resume.json/pdf protections are unchanged.
+  const isSearchLayer = (f) => /^search\//.test(f);
+  const leaks = trackedFiles.filter((f) => (inPrivateZone(f) && !isScaffold(f)) || (isResumeArtifact(f) && !isSearchLayer(f)));
   if (leaks.length) {
     hardFail = true;
     console.log(`  ✗ ${leaks.length} private/PII path(s) are git-tracked — REMOVE before pushing:`);

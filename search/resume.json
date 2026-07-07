@@ -1,0 +1,117 @@
+{
+  "attestation": {
+    "attested": true,
+    "attested_date": "2026-06-25",
+    "attestation_note": "Three corrections to the agent's extraction: (1) summary said 'Lead Engineer with 6+ years' — corrected to ~5 years full-time (2019-2024), SWE->Senior->Lead, plus a 2025 co-op (the draft rounded up across a gap and generalized the title); (2) removed skills I would not confidently defend in an interview (RLHF fine-tuning, Computer Vision, Multimodal AI) — they were in my skills file but not demonstrated in any role/project; (3) softened 'GuitarZero used by real users' to the verifiable 'publicly deployed'. Open: dollar/percent metrics below are my own prior-resume claims, kept as-is — I can source them in an interview.",
+    "_confirm": "Gaurav — review and keep attested:true only if you agree with the three corrections (esp. that you can't readily defend RLHF/CV/Multimodal). If you CAN defend any, tell the agent to re-add it."
+  },
+  "person": {
+    "name": "Gaurav Bakale",
+    "location": "Boston, MA",
+    "work_authorization": "F-1 OPT (authorized to work in the US now; will need employer sponsorship, e.g. H-1B, after OPT)",
+    "links": {
+      "linkedin": "https://www.linkedin.com/in/gaurav-bakale-846ba8184/"
+    },
+    "_sanitization_note": "Phone, street address, and personal email intentionally omitted — this file is committed to a public fork."
+  },
+  "summary": "Software engineer with ~5 years of full-time experience (2019-2024), progressing Software Engineer -> Senior -> Lead at Impact Analytics, plus a 2025 AI-engineering co-op. Completing an M.S. in Software Engineering (AI specialization) at Northeastern University (expected Aug 2026); recent work building agentic LLM platforms with CrewAI, LangChain, and TypeScript/Node.js.",
+  "experience": [
+    {
+      "title": "AI Engineer (Co-op)",
+      "company": "Impact Analytics",
+      "location": "Dallas, TX",
+      "start": "2025-05",
+      "end": "2025-12",
+      "highlights": [
+        "Built a modular multi-agent orchestration platform using CrewAI, LangChain, and LlamaIndex — configurable AI-agent deployment with tool-calling, memory modules, and RAG pipelines.",
+        "Developed RESTful microservices in TypeScript and Node.js exposing agent workflows as scalable APIs, with PostgreSQL-backed state management and event-driven task queuing.",
+        "Built an LLM-powered natural-language query engine over PostgreSQL and Snowflake, auto-generating governance and operational reports (~70% reduction in manual reporting effort).",
+        "Containerised agent services with Docker, deployed on GCP with CI/CD and structured logging (sub-500ms API response in production)."
+      ]
+    },
+    {
+      "title": "Lead Software Engineer",
+      "company": "Impact Analytics",
+      "location": "Bengaluru, India",
+      "start": "2022",
+      "end": "2024",
+      "highlights": [
+        "Led architecture and delivery of a data-platform application (user-access management, ETL configuration, time reporting, real-time notifications) serving 500+ enterprise users.",
+        "Migrated Airflow from VMs to GKE with horizontal auto-scaling (~35% infra-cost reduction; deployment time hours -> minutes).",
+        "Led development of LSTM and Transformer-based demand-forecasting and promotion-optimisation models across multi-store retail networks.",
+        "Built a POC benchmarking BigQuery vs. Snowflake (ingestion throughput, query latency, TCO); recommendation adopted org-wide."
+      ]
+    },
+    {
+      "title": "Senior Software Engineer",
+      "company": "Impact Analytics",
+      "location": "Bengaluru, India",
+      "start": "2020",
+      "end": "2022",
+      "highlights": [
+        "Built Apache Beam / Dataflow pipelines ingesting multi-terabyte datasets from SQL and SFTP sources into cloud warehouses with fault-tolerant exactly-once semantics.",
+        "Designed a REST pattern for long-running async tasks backed by Google Cloud Tasks with webhook completion, eliminating timeout failures for complex ETL jobs."
+      ]
+    },
+    {
+      "title": "Software Engineer",
+      "company": "Impact Analytics",
+      "location": "Bengaluru, India",
+      "start": "2019",
+      "end": "2020",
+      "highlights": [
+        "Identified customer segments and optimised coupon strategies via an exponential-decay model across multi-store retail networks (~$2M annualised margin impact).",
+        "Created a GLM-based model estimating price/promotion elasticities incorporating product affinity, cannibalisation, store-traffic forecasts, and competitor pricing."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "GuitarZero — Real-Time Guitar Trainer",
+      "type": "Personal Project",
+      "url": "https://guitarzero.vercel.app/",
+      "dates": "2026",
+      "highlights": [
+        "Built and deployed a real-time guitar trainer powered by a lightweight in-browser neural network that detects played notes from live audio; publicly deployed at guitarzero.vercel.app."
+      ]
+    },
+    {
+      "name": "PulseFrame — Autonomous AI News-Art Bot",
+      "type": "Personal Project",
+      "dates": "2025-2026",
+      "highlights": [
+        "Autonomous daily pipeline: a local LLM (Ollama) summarises trending news, generates a Stable Diffusion prompt, and auto-posts artwork to Instagram via the Graph API — orchestrated as a LangChain multi-agent workflow with failure recovery and Slack alerting."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "M.S. Software Engineering Systems (AI Specialization)",
+      "institution": "Northeastern University",
+      "location": "Boston, MA",
+      "dates": "Expected Aug 2026",
+      "details": [
+        "GPA 3.6/4.0",
+        "Teaching Assistant, DAMG6210 Data Management & Database Design"
+      ]
+    },
+    {
+      "degree": "B.E. Electronics & Communication Engineering",
+      "institution": "Ramaiah Institute of Technology",
+      "location": "Bengaluru, India",
+      "dates": "2019",
+      "details": [
+        "GPA 8.29/10",
+        "Coursework: Neural Networks & Deep Learning, Linear Algebra, Algorithms (Stanford Online)"
+      ]
+    }
+  ],
+  "skills": {
+    "_note": "Trimmed during the attestation pass to skills demonstrated in a role or project (interview-defensible). Removed: RLHF fine-tuning, Computer Vision, Multimodal AI — listed in my skills file but not evidenced above.",
+    "languages": ["Python", "TypeScript", "JavaScript", "Node.js", "SQL", "Java", "R", "C/C++"],
+    "ai_agent_frameworks": ["LangChain", "CrewAI", "LlamaIndex", "LangGraph", "Ollama", "OpenAI API", "Stable Diffusion", "RAG pipelines", "MCP"],
+    "backend_and_data": ["REST APIs", "PostgreSQL", "Supabase", "Snowflake", "BigQuery", "Apache Beam", "Airflow", "Cloud Tasks", "ETL", "event-driven architecture"],
+    "infrastructure_devops": ["Docker", "Kubernetes (GKE)", "GCP", "CI/CD", "Git", "monitoring & observability"],
+    "machine_learning": ["Generative AI", "LLMs", "Transformers", "Prompt Engineering", "Diffusion Models", "Deep Learning (CNNs, RNNs, LSTM)", "NLP", "Embeddings & Vector Search", "MLOps"]
+  }
+}

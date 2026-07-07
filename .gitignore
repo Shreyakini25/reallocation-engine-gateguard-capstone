@@ -67,3 +67,9 @@ data/BLS/db_30_2_mysql/
 **/*.resume.pdf
 **/resume.pdf
 resume.json
+
+# Assignment search/ layer (INFO 7375 setup exercise) — these three ARE meant to be
+# committed to the fork. Re-include search/resume.json despite the blanket ignore above;
+# keep the honest self-assessment (private-notes.md) out of git.
+!/search/resume.json
+/search/private-notes.md

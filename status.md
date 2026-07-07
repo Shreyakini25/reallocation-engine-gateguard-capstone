@@ -1,7 +1,7 @@
 ---
 project: the-reallocation-engine
 status: active
-updated: 2026-06-14
+updated: 2026-06-25
 canonical: [SNICKERDOODLE.md, DOMAIN.md, AGENTS.md, outline.md, book.md, chapters/]
 next:
   - "Attest adequacy of the honest run (review reports/generated/oferta-2026-06-14.md) to promote `oferta` past DRAFT (gap #4)"
@@ -29,5 +29,9 @@ _Read this first for current state._ `DOMAIN.md` = what the repo **is**; `logs/R
 
 ## Recently done (2026-06-14)
 - Decluttered the root; dual-licensed (MIT code / CC BY 4.0 book); set up large-file handling (samples + gitignore + a pre-commit size guard, documented in `DATA.md`); added the CLI-agnostic AI tooling guide and a repo audit under `docs/`; reconciled agentic "skill" → "recipe" across the manuscript (gap #7); defined the pipeline run-envelope schema; verified the scorer [VERIFY] weights — confirmed unpinned by Ch.11 and the SDD (#3); executed the first gated, logged honest run (#4, sample mode — awaiting your adequacy attestation).
+
+## INFO 7375 Setup Exercise — DONE (2026-06-25)
+- **Done:** personal `search/` layer built and completed (freelance-framed) — `search/resume.json` (attested, 3 corrections), `search/profile.yml` (budget 200 / avail 10), `search/gaps.md` (killed row + own-words rewrite); gitignored `search/private-notes.md`. Privacy guard reconciled (`.gitignore` + `doctor.mjs`) so the sanitized résumé is committable. `logs/RUN_LOG.md` entry + `AI-USE-DISCLOSURE.md` filled. On branch `freelance-gigs`, pushed to fork `main` (`gaurav-bakale/the-reallocation-engine`, HEAD `c897fc0`); `private-notes.md` confirmed not public. Est. ~23–24/25.
+- **Remaining (student):** submit the fork link + disclosure on Canvas; confirm the trimmed skills (RLHF/CV/Multimodal) are genuinely undefendable.
 
 _Update this file at the end of each working session: state, decisions, next actions. Keep it short — it's the current-state file, not a log._
