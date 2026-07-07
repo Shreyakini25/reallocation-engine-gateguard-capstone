@@ -181,3 +181,13 @@ private emails, or sensitive application notes.
   - *gaps.md:* Every gap cites something real — live Remotive URLs from my own scan, the scorer's code (`client_trust` weight, `time_fit` gate), or a pattern across the build-gig fixtures. I killed the one row whose "evidence" was a market observation, not a demand on my record.
 - **Conformance:** `node scripts/conformance.mjs search/resume.json search/profile.yml` → 2/2 conform. `npm run doctor` privacy ✓ (resume.json committable via `search/` carve-out; `private-notes.md` ignored).
 - **Submission:** push fork to GitHub + Canvas link (pending). AI Use Disclosure: `AI-USE-DISCLOSURE.md`.
+
+## 2026-06-25 — freelance-gig-triage (Remotive, live-data run) — Mode Build assignment
+
+- **Inputs:** 10 real contract/freelance postings pulled live from Remotive (public URLs, not personal data).
+- **Command:** `npm run gig:ingest -- --remotive --limit 20 --job-types contract,freelance` then `npm run gig:score -- data/upwork/gigs.remotive.evidence.json`.
+- **Result:** 10 gigs → Apply 7 · Maybe 0 · Skip 3 (**skip 30%**, below the ~50% healthy mark — flagged in the report).
+- **Gates fired:** `time_fit` gated 3 "Online Data Analyst" gigs at 0.04 — **false gates** (parser matched "today/immediately" in boilerplate); `liveness` + `client_trust` were flat defaults (Remotive supplies neither).
+- **Verified vs inferred:** `pay` = record; `client_trust` + `liveness` = neutral defaults (not verified); `ai_fit` = heuristic model-judgment (heaviest weight 0.45); `time_fit` = parsed (mis-fired).
+- **Defects found:** (1) loose deadline parser → false 0-day gates; (2) `ai_fit` over-rates and no counter-signal on this source → over-applies (Head of Sales / QA Rater / Writer scored Apply).
+- **Stage:** RUNNABLE-SAMPLE. Open `[TODO]`: live Upwork pull, real `ai_fit` Claude call, effort model, weight tuning. Mode file `recipes/freelance-gig-triage.md`; write-ups under `assignments/submissions/gaurav-bakale/`. Private outputs gitignored; not committed.
