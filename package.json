@@ -21,7 +21,8 @@
     "resumes:pdf": "node scripts/resumes/generate-pdf.mjs",
     "svg-to-png": "node scripts/svg-to-png.mjs",
     "audit:layout": "node scripts/svg-layout-audit.mjs",
-    "postsvg-to-png": "node scripts/svg-layout-audit.mjs images || true"
+    "postsvg-to-png": "node scripts/svg-layout-audit.mjs images || true",
+    "resumes:integrity": "node scripts/resumes/cv-integrity-check.mjs"
   },
   "dependencies": {
     "glob": "^10.0.0",

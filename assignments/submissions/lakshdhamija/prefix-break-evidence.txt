@@ -1,0 +1,39 @@
+Pre-fix break evidence — case-cv-integrity-backend-h1b v0.1.0
+Captured terminal output, 2026-07-06, before the fixes described in the
+attestation's "Broke during testing, fixed" section. The submission is a single
+squashed commit, so the pre-fix code state is not in history; this artifact
+preserves the observable pre-fix behavior verbatim for the one failure whose
+raw output I captured at the moment of discovery (the TDZ crash). The other
+pre-fix behaviors (attestation-block bypass ran to completion with exit 1;
+CRM chance-anchored with exit 0; EISDIR stack trace with exit 1; the stop-log
+written to a refused path) are documented in the attestation table with their
+pre- and post-fix observations.
+
+===== BREAK 1: missing base (pre-fix) =====
+$ node scripts/resumes/cv-integrity-check.mjs --base data/examples/cv-integrity/does-not-exist.json --variant data/examples/cv-integrity/sample-variant-clean.md --mode sample
+file:///Users/lakshdhamija/code/the-reallocation-engine/scripts/resumes/cv-integrity-check.mjs:192
+    candidates_checked: typeof candidates !== 'undefined' ? candidates.length : 0,
+                        ^
+
+ReferenceError: Cannot access 'candidates' before initialization
+    at buildAgentLog (file:///Users/lakshdhamija/code/the-reallocation-engine/scripts/resumes/cv-integrity-check.mjs:192:25)
+    at hardStop (file:///Users/lakshdhamija/code/the-reallocation-engine/scripts/resumes/cv-integrity-check.mjs:48:15)
+    at file:///Users/lakshdhamija/code/the-reallocation-engine/scripts/resumes/cv-integrity-check.mjs:115:28
+    at ModuleJob.run (node:internal/modules/esm/module_job:447:25)
+    at async node:internal/modules/esm/loader:646:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v26.4.0
+exit: 1
+
+===== BREAK 2: unattested base (pre-fix) =====
+$ node scripts/resumes/cv-integrity-check.mjs --base /tmp/unattested-base.json --variant data/examples/cv-integrity/sample-variant-clean.md --mode sample
+[same ReferenceError, raised from hardStop at cv-integrity-check.mjs:128]
+exit: 1
+
+===== BREAK 3: empty variant (pre-fix) =====
+$ node scripts/resumes/cv-integrity-check.mjs --base data/examples/cv-integrity/sample-base-cv.json --variant /tmp/empty-variant.md --mode sample
+[same ReferenceError, raised from hardStop at cv-integrity-check.mjs:145]
+exit: 1
+
+All three paths post-fix: STOP message + exit 2 (see worked-run.md attestation).

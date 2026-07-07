@@ -1,0 +1,50 @@
+{
+  "_note": "SAMPLE fixture for recipes/case-cv-integrity-backend-h1b.md — a fictional persona whose structure and bullet shapes are adapted from the author's record with all identifiers, names, and employers removed. Real records live in private/ and are never committed (see .gitignore).",
+  "attestation": {
+    "attested": true,
+    "attested_date": "2026-06-20",
+    "attestation_note": "Sample record: fields reviewed against the fictional persona's history; structure mirrors the setup-exercise personal record (see docs/tutorials/00-personal-layer.md)."
+  },
+  "identity": {
+    "name": "Sample Backend Engineer",
+    "location": "Boston, MA"
+  },
+  "education": [
+    {
+      "institution": "Sample University",
+      "degree": "Master of Science",
+      "field": "Computer Software Engineering",
+      "start": "2025-01",
+      "end": "2026-08",
+      "status": "in_progress"
+    }
+  ],
+  "experience": [
+    {
+      "company": "Sample Cloud Co",
+      "title": "Platform Engineer Co-op",
+      "start": "2026-01",
+      "end": "2026-05",
+      "highlights": [
+        "Reduced mean time to detection to under 2 minutes by building an observability stack with OpenTelemetry, Grafana dashboards, and alerting rules.",
+        "Built Terraform CI/CD pipelines on GCP with least-privilege IAM and cross-project bindings.",
+        "Automated chaos experiments on Kubernetes, gating environment promotions on Prometheus-verified checks."
+      ]
+    },
+    {
+      "company": "Sample SaaS Inc",
+      "title": "Software Development Engineer III",
+      "start": "2023-09",
+      "end": "2024-12",
+      "highlights": [
+        "Engineered a config-driven workflows platform on GCP Pub/Sub processing 500K+ events/sec with backpressure, ordering keys, and dead-letter queues.",
+        "Led a MongoDB to ClickHouse migration for a high-throughput analytical store."
+      ]
+    }
+  ],
+  "skills": {
+    "languages": ["Python", "Java", "Go", "TypeScript", "SQL", "Bash"],
+    "cloud_and_iac": ["AWS", "GCP", "Kubernetes", "Docker", "Terraform", "GitHub Actions", "IAM"],
+    "data_and_reliability": ["GCP Pub/Sub", "ClickHouse", "PostgreSQL", "MongoDB", "Redis", "Grafana", "Prometheus", "OpenTelemetry"]
+  }
+}
