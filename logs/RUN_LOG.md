@@ -150,3 +150,51 @@ private emails, or sensitive application notes.
 - **Rebuilt:** `node scripts/build-instructions.mjs --promote` → `AGENTS.md` + `CLAUDE.md` regenerated; `CLAUDE.md` now imports `@SNICKERDOODLE.md`.
 - **Untouched:** `data/` CSVs (real company names containing "mycroft") and prior RUN_LOG history (append-only).
 - **Result:** conformance + doctor green; no stale `MYCROFT.md` outside data/history.
+# RUN_LOG — The Reallocation Engine
+
+## 2026-07-04 — case-ds-faang-opt-runway-ranfei
+
+**Status reached:** RUNNABLE-SAMPLE
+**Recipe version:** 0.2.0
+**Profile:** F-1 OPT, MS Data Science, OPT start 2025-09-01, ~274 days to April 2026 H-1B deadline
+**Mode:** sample (no live network writes, no personal data committed)
+
+**Roles checked:**
+- Meta — Data Scientist (SOC 15-2051)
+- Amazon — Data Scientist II (SOC 15-2051)
+- Apple — ML Research Engineer (SOC 15-1221)
+
+**Commands run:**
+```
+npm run verify        → PASS (4 warnings, acceptable)
+npm run score -- /tmp/roles-correct.json --md /tmp/score-report-correct.md
+                      → Apply 1 · Consider 1 · Skip 1
+```
+
+**Results:**
+
+| Company | Role | Composite | Recommendation |
+|---|---|---|---|
+| Meta | Data Scientist | 0.537 | Apply |
+| Amazon | Data Scientist II | 0.259 | Consider |
+| Apple | ML Research Engineer | 0.000 | Skip (liveness gate closed) |
+
+**Verified signals:** sponsorship history (80 Days CSV), SOC cognitive score (BLS CSV), liveness gate (manual URL check), composite score (role-scorer.mjs)
+
+**Inferred / labeled your-input:** timeline.factor for all three roles — lca-filing-lag.py does not yet exist
+
+**TODOs open:**
+- `scripts/h1b/lca-filing-lag.py` [TODO: DEV] — needed to verify timeline.factor from DOL LCA data
+- `scripts/jobops/salary-floor.py` [TODO: DEV] — needed for prevailing wage check
+
+**Flags raised:**
+- Apple liveness = 0.0 — posting closed, composite zeroed regardless of sponsorship strength
+- Amazon timeline.factor = 0.55 — marginal window, labeled your-input, needs verification
+- Scorer emits no warning when votes array is empty (malformed input produces silent zero)
+- role_quality weight = 0 in scorer config — Cognitive Pivot layer recorded but not contributing to composite
+
+**Next action:** Apply to Meta. Hold Amazon pending recruiter confirmation of Year-1 filing policy. Drop Apple this cycle.
+
+**Open issues:**
+- timeline.factor values are student-input, not record — treat Apply recommendation for Meta with caution until Year-1 policy is confirmed directly with HR
+- Scorer input schema validation gap: needs pre-flight check script
