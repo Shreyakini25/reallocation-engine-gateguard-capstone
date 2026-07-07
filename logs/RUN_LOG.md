@@ -150,3 +150,21 @@ private emails, or sensitive application notes.
 - **Rebuilt:** `node scripts/build-instructions.mjs --promote` → `AGENTS.md` + `CLAUDE.md` regenerated; `CLAUDE.md` now imports `@SNICKERDOODLE.md`.
 - **Untouched:** `data/` CSVs (real company names containing "mycroft") and prior RUN_LOG history (append-only).
 - **Result:** conformance + doctor green; no stale `MYCROFT.md` outside data/history.
+### 2026-07-06
+- Mode: ux-designer-sponsor-triage v0.2.0
+- Inputs: fresh clone of the-reallocation-engine; SEC_DOL_H1b_data_mapped.csv
+  (repo data, no personal data); one live ats:scan against Databricks careers
+  data
+- Commands run:
+  - `npm run verify`
+  - `npm run ats:scan -- --dry-run` (failed first: portals.yml missing;
+    re-ran after `Copy-Item data\ats\portals.example.yml data\ats\portals.yml`)
+  - `Select-String -Path data\80-days-to-stay\data\SEC_DOL_H1b_data_mapped.csv -Pattern "Designer"`
+- Result: verify → 131 files scanned, 32 failed conformance (baseline, not
+  caused by this run). ats:scan → real Databricks postings returned.
+  Designer-title search → 68 company records matched; spot-checked for
+  industry noise, none obvious.
+- Open issues: title-string matching has no synonym handling (misses
+  "Interaction Designer" etc., over-includes adjacent titles like "Senior
+  Designer, Motion Graphics"); ats:liveness and score commands not yet run;
+  portals.yml onboarding step undocumented in repo.
