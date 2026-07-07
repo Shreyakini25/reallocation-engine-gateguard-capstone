@@ -174,3 +174,19 @@ private emails, or sensitive application notes.
 - **Gates:** Liveness **NOT cleared** — every row `liveness [UNVERIFIED — no live posting checked]`; these are pre-liveness scores. Timeline ✓ (my filing status). Human adequacy gate: PENDING.
 - **Findings:** Amgen (1,882 approvals, 99.5%) held at Consider for lacking a PM title = FM1 on real data. Thermo Fisher scored Apply on a Director-level PM role — scorer has no fit demotion (FM3); my labeled fit is the only guard.
 - **Open issues:** liveness unverified (need real posting URL + ats:liveness); record→p mapping is my rule (TODO #1 would automate); E-Verify unverified so 1910 Genetics could not be confirmed as runway (TODO #2); selection bias toward sponsors skews Apply.
+
+## 2026-07-06 -- case-early-pm-sponsorship-triage: liveness gate cleared on a real posting
+
+- **Command:** `npm run ats:liveness -- "https://jobs.ashbyhq.com/sailorhealth/08f8ea5b-...-application?..."`  (Playwright browser check).
+- **Setup fix:** first attempt failed (Playwright browser binary missing); ran `npx playwright install chromium`, then succeeded.
+- **Result:** `✅ active` (1 active / 0 expired / 0 uncertain) for the Sailor Health (health-tech startup) PM posting.
+- **Folded into the real-company run:** added Sailor Health as an 8th role in `data/examples/pm-roles-healthcare-real.json` with `liveness.source = "record — ats:liveness 2026-07-06: active"`. Sailor Health is ABSENT from the mapped CSV, so its sponsorship is a `model-judgment` (Source gate), and E-Verify is unknown so it is NOT tagged Runway → Skip 0.181 (a live posting is necessary, not sufficient).
+- **Updated result:** 8 roles → Apply 3 · Consider 1 · Skip 4 (**skip 50% — healthy**). One row now has a real, cleared liveness gate; the other seven remain pre-liveness (UNVERIFIED).
+- **Artifacts refreshed:** `assignments/submissions/jayanth-adithya-kappagantula/run-healthcare-real/role-scores.{json,md}`, `worked-run.md`.
+
+## 2026-07-06 -- case-early-pm-sponsorship-triage: second liveness check (Philips) — gate fires on real data
+
+- **Command:** `npm run ats:liveness -- "https://philips.wd3.myworkdayjobs.com/.../Associate-Global-Product-Manager_569412-1/?source=LinkedIn"`
+- **Result:** `❌ expired` (0 active / 1 expired / 0 uncertain) — "insufficient content — likely nav/footer only". CAVEAT: Workday is a JS SPA; this may be an under-render rather than a true expiry → a human clears the gate before a final Skip.
+- **Folded in:** added Philips as a 9th role (medical devices, Associate Global Product Manager). Philips is ABSENT from the mapped CSV → sponsorship is a model-judgment/prior, not a record (P2). Liveness 0.0 (per the tool) → the gate zeroes the composite → Skip (gated 0.000). This is the liveness gate firing on a REAL posting — the real counterpart to the synthetic ghost row.
+- **Updated result (final):** 9 roles → Apply 3 · Consider 1 · Skip 5 (**skip 56% — healthy**). Two rows now carry real liveness checks: Sailor Health `active`, Philips `expired`.

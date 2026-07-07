@@ -75,5 +75,27 @@
     "fit": { "p": 0.5, "source": "model-judgment" },
     "liveness": { "factor": 1.0, "source": "UNVERIFIED — no live posting checked" },
     "timeline": { "factor": 0.85, "source": "your-input" }
+  },
+  {
+    "role_id": "sailor-health-liveness-verified",
+    "company": "SAILOR HEALTH (sailorhealth, Ashby)",
+    "title": "Product Manager (health-tech startup)",
+    "_source": "ABSENT from mapped_student_employment_targets_v3.csv (verified: no 'Sailor Health' company row) → per the Source gate, sponsorship is a model-judgment, NOT a record. LIVENESS VERIFIED: npm run ats:liveness on the real Ashby posting on 2026-07-06 returned 'active'. This is the one row with a real, cleared liveness gate.",
+    "e_verify": null,
+    "sponsorship": { "p": 0.05, "tier": "None", "source": "model-judgment" },
+    "fit": { "p": 0.65, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record — ats:liveness 2026-07-06: active" },
+    "timeline": { "factor": 0.85, "source": "your-input" }
+  },
+  {
+    "role_id": "philips-liveness-gated",
+    "company": "PHILIPS (Workday)",
+    "title": "Associate Global Product Manager (medical devices, Murrysville PA)",
+    "_source": "ABSENT from mapped_student_employment_targets_v3.csv (verified: 0 company rows; a large public multinational, not a Form D filer) → sponsorship is a model-judgment/prior, NOT a record (P2 discipline: no claiming a record from general knowledge). LIVENESS: npm run ats:liveness on the real Workday posting on 2026-07-06 returned 'expired (insufficient content)'. CAVEAT: Workday is a JS SPA, so the headless check may have under-rendered — a human must clear this gate before a final Skip. Scored with liveness 0.0 per the tool result; the closed gate zeroes the composite regardless of votes.",
+    "e_verify": null,
+    "sponsorship": { "p": 0.5, "tier": "Likely", "source": "model-judgment" },
+    "fit": { "p": 0.7, "source": "model-judgment" },
+    "liveness": { "factor": 0.0, "source": "record — ats:liveness 2026-07-06: expired (insufficient content; Workday SPA — human to confirm)" },
+    "timeline": { "factor": 0.85, "source": "your-input" }
   }
 ]
