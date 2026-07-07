@@ -17,6 +17,18 @@ npm run gig:score  -- data/upwork/gigs.remotive.evidence.json
 #   → data/upwork/gig-scores.json (agent) + gig-scores.md (human)
 ```
 
+### Terminal output, verbatim
+
+```
+> the-reallocation-engine@1.0.0 gig:score
+> node scripts/score/gig-scorer.mjs data/upwork/gigs.remotive.evidence.json
+
+✓ scored 10 gigs → Apply 7 · Maybe 0 · Skip 3 (skip 30%)
+  data/upwork/gig-scores.json  +  data/upwork/gig-scores.md
+```
+
+The full per-gig report the scorer wrote (`gig-scores.md`) is reproduced below.
+
 ## Real output (pasted from `data/upwork/gig-scores.md`, not described)
 
 > *Votes: ai_fit 0.45, pay 0.3, client_trust 0.25. Gates (multiplicative): liveness, time_fit. Apply ≥ 0.45; Maybe ≥ 0.3.*
