@@ -63,3 +63,25 @@ The agent's first draft had four issues that required correction:
 **profile.yml:** The visa section reflects my actual situation — F-1 status, EAD start date October 19, 2026, STEM eligibility confirmed with DSO, zero unemployment days used. Geography was corrected from the agent's assumed constraints to my actual openness to relocate anywhere in the US.
 
 **gaps.md:** Every gap in the evidence column cites something checkable — job postings from my actual target companies or O*NET requirements for SOC 15-1242 and 15-2041. The Kafka row evidence is based on postings I have reviewed. The killed row (Terraform/IaC) was removed specifically because its evidence came from senior-level postings, not my actual target band.
+
+---
+2026-07-06 — case-de-da-live-skill-gap v0.1.0 — RUNNABLE-SAMPLE
+
+
+Recipe: case-de-da-live-skill-gap v0.1.0
+Runner: Komal Khairnar
+Inputs: my_targets.txt (15 companies), data/80-days-to-stay/80-days-csv/mapped_student_employment_targets_v3.csv (30,369 companies), data/examples/my-de-da-roles.json (5 roles for scorer)
+Commands run:
+
+python scripts/skill-demand/skill-gap-master.py --dry-run — setup verified, 15 companies loaded, no API calls
+python scripts/skill-demand/skill-gap-master.py — live run, Greenhouse + Lever APIs
+python scripts/skill-demand/skill-gap-master.py --targets nonexistent.txt — break test, clean error
+npm run ats:liveness -- https://careers.airbnb.com/positions/7988010?gh_jid=7988010 — active
+npm run score -- data/examples/my-de-da-roles.json — Apply 3, Consider 1, Skip 1
+
+
+
+Outputs: data/skill-demand/skill_gap_report.xlsx (4 sheets), data/skill-demand/skill_demand_log.json
+Summary: 6 of 15 companies found on Greenhouse (Airbnb, Stripe, Figma, Squarespace, Amplitude, Brex). 49 live DE/DA jobs fetched. 19 skills ranked. Top 3: SQL (35), Python (30), Scala (27). 9 companies not found — all use Workday or another ATS without a public JSON API.
+Result: RUNNABLE-SAMPLE — scripts execute end to end, real skill ranking produced from live data.
+Open issues: Workday scraper not built — 9/15 companies (60%) returned not found including original targets (Databricks, CVS Health, Experian, Cotiviti, Moda Health, Snowflake, Coursera). JD body text for Greenhouse fetched via detail endpoint but Workday JDs entirely absent. TODOs open: 3 (Workday scraper, Ashby scraper, full --all-sponsors live run).

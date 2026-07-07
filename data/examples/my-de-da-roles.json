@@ -1,0 +1,31 @@
+[
+  { "role_id": "airbnb-de", "company": "Airbnb", "title": "Senior Data Engineer, People Analytics",
+    "sponsorship": { "p": 0.99, "tier": "Proven", "source": "record" },
+    "fit": { "p": 0.8, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.9, "source": "your-input" } },
+
+  { "role_id": "stripe-da", "company": "Stripe", "title": "Staff Data Analyst",
+    "sponsorship": { "p": 0.98, "tier": "Proven", "source": "record" },
+    "fit": { "p": 0.75, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.9, "source": "your-input" } },
+
+  { "role_id": "brex-da", "company": "Brex", "title": "Data Analyst II",
+    "sponsorship": { "p": 0.0, "tier": "None", "source": "record" },
+    "fit": { "p": 0.8, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.9, "source": "your-input" } },
+
+  { "role_id": "figma-de", "company": "Figma", "title": "Data Engineer",
+    "sponsorship": { "p": 0.98, "tier": "Proven", "source": "record" },
+    "fit": { "p": 0.85, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.85, "source": "your-input" } },
+
+  { "role_id": "notion-da", "company": "Notion", "title": "Data Analyst",
+    "sponsorship": { "p": 0.0, "tier": "None", "source": "record" },
+    "fit": { "p": 0.7, "source": "model-judgment" },
+    "liveness": { "factor": 0.0, "source": "record" },
+    "timeline": { "factor": 0.85, "source": "your-input" } }
+]
