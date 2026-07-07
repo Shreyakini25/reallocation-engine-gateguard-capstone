@@ -150,3 +150,43 @@ private emails, or sensitive application notes.
 - **Rebuilt:** `node scripts/build-instructions.mjs --promote` → `AGENTS.md` + `CLAUDE.md` regenerated; `CLAUDE.md` now imports `@SNICKERDOODLE.md`.
 - **Untouched:** `data/` CSVs (real company names containing "mycroft") and prior RUN_LOG history (append-only).
 - **Result:** conformance + doctor green; no stale `MYCROFT.md` outside data/history.
+
+## 2026-07-06 -- case-early-pm-sponsorship-triage (mode-build assignment), sample run
+
+- **Recipe:** `case-early-pm-sponsorship-triage` (new mode), **sample mode**. Anchor `id: 2026-07-06-early-pm-sponsorship-triage`.
+- **Author:** Jayanth Adithya Kappagantula.
+- **Command:** `npm run score -- data/examples/pm-roles.json --out-dir assignments/submissions/jayanth-adithya-kappagantula/run` (stored Ch.11 scorer; no ad-hoc code).
+- **Inputs:** new fixture `data/examples/pm-roles.json` — 7 anonymized/fictional entry-level PM roles, one per decision path; timeline factors encode my real OPT filing status (I-20 requested 2026-07-01, not yet filed w/ USCIS, EAD ~Oct-Nov 2026). Profile: default (needs sponsorship).
+- **Result:** 7 roles → Apply 1 · Consider 3 · Skip 3 (skip 43%). Two-track working: BrightWave (E-Verify, no H-1B) rescued Skip→Consider via documented override (Runway); Meridian (higher fit, no E-Verify path) stays Skip; Peak Robotics gated to 0 by dead liveness; Atlas demoted Apply→Consider by my timeline factor 0.55.
+- **Artifacts:** `assignments/submissions/jayanth-adithya-kappagantula/run/role-scores.{json,md}`; mode file `recipes/case-early-pm-sponsorship-triage.md`; justification + worked-run under `assignments/submissions/jayanth-adithya-kappagantula/`.
+- **Verification:** re-run deterministic (JSON identical modulo date); JSON parses; count cross-checked vs `mapped_student_employment_targets_v3.csv` — 30,369 companies, only 107 list "Product Manager" in top_job_titles_sponsored (0.35%), confirming the SOC-scatter asymmetry. Break tests: missing/non-numeric `sponsorship.p` → scorer silently drops the vote and returns a confident Skip (does NOT refuse) → filed TODO #4; malformed JSON → hard crash (acceptable).
+- **Gates:** Source ✓ (fixture) · Scope ✓ (sample, fictional data) · Liveness ✓ (recorded factors) · Timeline ✓ (my filing status) · Report ✓. Human adequacy gate: **PENDING attestation** (mode stays RUNNABLE-SAMPLE).
+- **Fixed during run:** default out-dir clobbered tracked `data/examples/role-scores.json` (Ch.11 example) — restored via git checkout, re-ran with explicit `--out-dir`.
+- **Open issues:** 4 typed TODOs open (pm-sponsor-lookup, USCIS E-Verify data source, two-track re-labeler, pre-flight validator); `sponsorship.p` still hand-entered; E-Verify status asserted not yet data-verified; skip rate 43% (balanced fixture under-skips vs a real board).
+
+## 2026-07-06 -- case-early-pm-sponsorship-triage: REAL-COMPANY run (healthcare)
+
+- **Recipe:** `case-early-pm-sponsorship-triage`, sample mode, real data.
+- **Command:** `npm run score -- data/examples/pm-roles-healthcare-real.json --out-dir assignments/submissions/jayanth-adithya-kappagantula/run-healthcare-real`
+- **Inputs:** 7 REAL healthcare companies pulled from `data/80-days-to-stay/80-days-csv/mapped_student_employment_targets_v3.csv` (Teladoc, Modern Clinics, Amgen, Thermo Fisher, Acer Therapeutics, 1910 Genetics, 1859 Inc). Each `sponsorship` term cites its CSV record (`_source`). Record→probability mapping documented in the worked run.
+- **Result:** Apply 3 (Teladoc 0.446, Modern Clinics 0.389, Thermo Fisher 0.355) · Consider 1 (Amgen 0.357 — SOC-scatter: biggest sponsor, no PM title → model-judgment) · Skip 3 (Acer 0.191, 1910 Genetics 0.168, 1859 0.142). Skip 43%.
+- **Verification:** deterministic on re-run; JSON parses; counts cross-checked (30,369 total / 4,745 healthcare / 3 list "Product Manager" = 0.06%). Break tests unchanged (scorer silently drops missing sponsorship → TODO #4).
+- **Gates:** Liveness **NOT cleared** — every row `liveness [UNVERIFIED — no live posting checked]`; these are pre-liveness scores. Timeline ✓ (my filing status). Human adequacy gate: PENDING.
+- **Findings:** Amgen (1,882 approvals, 99.5%) held at Consider for lacking a PM title = FM1 on real data. Thermo Fisher scored Apply on a Director-level PM role — scorer has no fit demotion (FM3); my labeled fit is the only guard.
+- **Open issues:** liveness unverified (need real posting URL + ats:liveness); record→p mapping is my rule (TODO #1 would automate); E-Verify unverified so 1910 Genetics could not be confirmed as runway (TODO #2); selection bias toward sponsors skews Apply.
+
+## 2026-07-06 -- case-early-pm-sponsorship-triage: liveness gate cleared on a real posting
+
+- **Command:** `npm run ats:liveness -- "https://jobs.ashbyhq.com/sailorhealth/08f8ea5b-...-application?..."`  (Playwright browser check).
+- **Setup fix:** first attempt failed (Playwright browser binary missing); ran `npx playwright install chromium`, then succeeded.
+- **Result:** `✅ active` (1 active / 0 expired / 0 uncertain) for the Sailor Health (health-tech startup) PM posting.
+- **Folded into the real-company run:** added Sailor Health as an 8th role in `data/examples/pm-roles-healthcare-real.json` with `liveness.source = "record — ats:liveness 2026-07-06: active"`. Sailor Health is ABSENT from the mapped CSV, so its sponsorship is a `model-judgment` (Source gate), and E-Verify is unknown so it is NOT tagged Runway → Skip 0.181 (a live posting is necessary, not sufficient).
+- **Updated result:** 8 roles → Apply 3 · Consider 1 · Skip 4 (**skip 50% — healthy**). One row now has a real, cleared liveness gate; the other seven remain pre-liveness (UNVERIFIED).
+- **Artifacts refreshed:** `assignments/submissions/jayanth-adithya-kappagantula/run-healthcare-real/role-scores.{json,md}`, `worked-run.md`.
+
+## 2026-07-06 -- case-early-pm-sponsorship-triage: second liveness check (Philips) — gate fires on real data
+
+- **Command:** `npm run ats:liveness -- "https://philips.wd3.myworkdayjobs.com/.../Associate-Global-Product-Manager_569412-1/?source=LinkedIn"`
+- **Result:** `❌ expired` (0 active / 1 expired / 0 uncertain) — "insufficient content — likely nav/footer only". CAVEAT: Workday is a JS SPA; this may be an under-render rather than a true expiry → a human clears the gate before a final Skip.
+- **Folded in:** added Philips as a 9th role (medical devices, Associate Global Product Manager). Philips is ABSENT from the mapped CSV → sponsorship is a model-judgment/prior, not a record (P2). Liveness 0.0 (per the tool) → the gate zeroes the composite → Skip (gated 0.000). This is the liveness gate firing on a REAL posting — the real counterpart to the synthetic ghost row.
+- **Updated result (final):** 9 roles → Apply 3 · Consider 1 · Skip 5 (**skip 56% — healthy**). Two rows now carry real liveness checks: Sailor Health `active`, Philips `expired`.

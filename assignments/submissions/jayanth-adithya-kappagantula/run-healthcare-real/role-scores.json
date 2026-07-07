@@ -1,0 +1,410 @@
+{
+  "_scorer": "bayesian-role-scorer",
+  "_chapter": 11,
+  "generated": "2026-07-07",
+  "config": {
+    "weights": {
+      "sponsorship": 0.35,
+      "fit": 0.3,
+      "role_quality": 0
+    },
+    "apply_threshold": 0.3,
+    "consider_floor": 0.2,
+    "gate_zero": 0.05,
+    "soft_sponsorship_tiers": [
+      "likely",
+      "possible",
+      "unknown"
+    ]
+  },
+  "profile_needs_sponsorship": true,
+  "roles": [
+    {
+      "role_id": "teladoc-pm",
+      "company": "TELADOC HEALTH INC",
+      "title": "Associate Product Manager (entry) — telehealth",
+      "composite": 0.4462,
+      "recommendation": "Apply",
+      "machine_recommendation": "Apply",
+      "reason": "composite 0.446 ≥ 0.3, gates healthy",
+      "override": null,
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.9,
+            "weight": 0.35,
+            "contribution": 0.315,
+            "source": "record"
+          },
+          {
+            "factor": "fit",
+            "value": 0.7,
+            "weight": 0.3,
+            "contribution": 0.21,
+            "source": "model-judgment"
+          }
+        ],
+        "vote_sum": 0.525,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 1,
+            "source": "UNVERIFIED — no live posting checked (ats:liveness not run)"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 0.85,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0.85,
+        "arithmetic": "(0.9·0.35 + 0.7·0.3) × 1 × 0.85 = 0.446"
+      }
+    },
+    {
+      "role_id": "amgen-scatter",
+      "company": "AMGEN INC",
+      "title": "Product Manager I (biotech)",
+      "composite": 0.357,
+      "recommendation": "Consider",
+      "machine_recommendation": "Consider",
+      "reason": "above threshold (0.357) but one soft spot: sponsorship tier \"Likely\"",
+      "override": null,
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.6,
+            "weight": 0.35,
+            "contribution": 0.21,
+            "source": "model-judgment"
+          },
+          {
+            "factor": "fit",
+            "value": 0.7,
+            "weight": 0.3,
+            "contribution": 0.21,
+            "source": "model-judgment"
+          }
+        ],
+        "vote_sum": 0.42,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 1,
+            "source": "UNVERIFIED — no live posting checked"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 0.85,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0.85,
+        "arithmetic": "(0.6·0.35 + 0.7·0.3) × 1 × 0.85 = 0.357"
+      }
+    },
+    {
+      "role_id": "modern-clinics-pm",
+      "company": "MODERN CLINICS INC",
+      "title": "Product Manager (early-stage health)",
+      "composite": 0.3889,
+      "recommendation": "Apply",
+      "machine_recommendation": "Apply",
+      "reason": "composite 0.389 ≥ 0.3, gates healthy",
+      "override": null,
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.75,
+            "weight": 0.35,
+            "contribution": 0.2625,
+            "source": "record"
+          },
+          {
+            "factor": "fit",
+            "value": 0.65,
+            "weight": 0.3,
+            "contribution": 0.195,
+            "source": "model-judgment"
+          }
+        ],
+        "vote_sum": 0.4575,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 1,
+            "source": "UNVERIFIED — no live posting checked"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 0.85,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0.85,
+        "arithmetic": "(0.75·0.35 + 0.65·0.3) × 1 × 0.85 = 0.389"
+      }
+    },
+    {
+      "role_id": "thermofisher-senior-trap",
+      "company": "THERMO FISHER SCIENTIFIC INC",
+      "title": "Product Manager (life-sciences instruments)",
+      "composite": 0.3549,
+      "recommendation": "Apply",
+      "machine_recommendation": "Apply",
+      "reason": "composite 0.355 ≥ 0.3, gates healthy",
+      "override": null,
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.85,
+            "weight": 0.35,
+            "contribution": 0.2975,
+            "source": "record"
+          },
+          {
+            "factor": "fit",
+            "value": 0.4,
+            "weight": 0.3,
+            "contribution": 0.12,
+            "source": "model-judgment"
+          }
+        ],
+        "vote_sum": 0.4175,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 1,
+            "source": "UNVERIFIED — no live posting checked"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 0.85,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0.85,
+        "arithmetic": "(0.85·0.35 + 0.4·0.3) × 1 × 0.85 = 0.355"
+      }
+    },
+    {
+      "role_id": "acer-therapeutics-lowsponsor",
+      "company": "ACER THERAPEUTICS INC",
+      "title": "Product Manager (biotech, pre-seed)",
+      "composite": 0.1912,
+      "recommendation": "Skip",
+      "machine_recommendation": "Skip",
+      "reason": "composite 0.191 < 0.2 — time is better spent elsewhere",
+      "override": null,
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.3,
+            "weight": 0.35,
+            "contribution": 0.105,
+            "source": "model-judgment"
+          },
+          {
+            "factor": "fit",
+            "value": 0.4,
+            "weight": 0.3,
+            "contribution": 0.12,
+            "source": "model-judgment"
+          }
+        ],
+        "vote_sum": 0.225,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 1,
+            "source": "UNVERIFIED — no live posting checked"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 0.85,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0.85,
+        "arithmetic": "(0.3·0.35 + 0.4·0.3) × 1 × 0.85 = 0.191"
+      }
+    },
+    {
+      "role_id": "1910-genetics-runway",
+      "company": "1910 GENETICS INC",
+      "title": "APM (AI-driven drug discovery)",
+      "composite": 0.1679,
+      "recommendation": "Skip",
+      "machine_recommendation": "Skip",
+      "reason": "composite 0.168 < 0.2 — time is better spent elsewhere",
+      "override": null,
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.05,
+            "weight": 0.35,
+            "contribution": 0.0175,
+            "source": "record"
+          },
+          {
+            "factor": "fit",
+            "value": 0.6,
+            "weight": 0.3,
+            "contribution": 0.18,
+            "source": "model-judgment"
+          }
+        ],
+        "vote_sum": 0.1975,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 1,
+            "source": "UNVERIFIED — no live posting checked"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 0.85,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0.85,
+        "arithmetic": "(0.05·0.35 + 0.6·0.3) × 1 × 0.85 = 0.168"
+      }
+    },
+    {
+      "role_id": "1859-inc-nonsponsor",
+      "company": "1859 INC",
+      "title": "Product Manager (biotech)",
+      "composite": 0.1424,
+      "recommendation": "Skip",
+      "machine_recommendation": "Skip",
+      "reason": "composite 0.142 < 0.2 — time is better spent elsewhere",
+      "override": null,
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.05,
+            "weight": 0.35,
+            "contribution": 0.0175,
+            "source": "record"
+          },
+          {
+            "factor": "fit",
+            "value": 0.5,
+            "weight": 0.3,
+            "contribution": 0.15,
+            "source": "model-judgment"
+          }
+        ],
+        "vote_sum": 0.1675,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 1,
+            "source": "UNVERIFIED — no live posting checked"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 0.85,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0.85,
+        "arithmetic": "(0.05·0.35 + 0.5·0.3) × 1 × 0.85 = 0.142"
+      }
+    },
+    {
+      "role_id": "sailor-health-liveness-verified",
+      "company": "SAILOR HEALTH (sailorhealth, Ashby)",
+      "title": "Product Manager (health-tech startup)",
+      "composite": 0.1806,
+      "recommendation": "Skip",
+      "machine_recommendation": "Skip",
+      "reason": "composite 0.181 < 0.2 — time is better spent elsewhere",
+      "override": null,
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.05,
+            "weight": 0.35,
+            "contribution": 0.0175,
+            "source": "model-judgment"
+          },
+          {
+            "factor": "fit",
+            "value": 0.65,
+            "weight": 0.3,
+            "contribution": 0.195,
+            "source": "model-judgment"
+          }
+        ],
+        "vote_sum": 0.2125,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 1,
+            "source": "record — ats:liveness 2026-07-06: active"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 0.85,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0.85,
+        "arithmetic": "(0.05·0.35 + 0.65·0.3) × 1 × 0.85 = 0.181"
+      }
+    },
+    {
+      "role_id": "philips-liveness-gated",
+      "company": "PHILIPS (Workday)",
+      "title": "Associate Global Product Manager (medical devices, Murrysville PA)",
+      "composite": 0,
+      "recommendation": "Skip",
+      "machine_recommendation": "Skip",
+      "reason": "gated: liveness ≈ 0.000 (a closed gate zeroes the composite regardless of votes)",
+      "override": null,
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.5,
+            "weight": 0.35,
+            "contribution": 0.175,
+            "source": "model-judgment"
+          },
+          {
+            "factor": "fit",
+            "value": 0.7,
+            "weight": 0.3,
+            "contribution": 0.21,
+            "source": "model-judgment"
+          }
+        ],
+        "vote_sum": 0.385,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 0,
+            "source": "record — ats:liveness 2026-07-06: expired (insufficient content; Workday SPA — human to confirm)"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 0.85,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0,
+        "arithmetic": "(0.5·0.35 + 0.7·0.3) × 0 × 0.85 = 0.000"
+      }
+    }
+  ]
+}

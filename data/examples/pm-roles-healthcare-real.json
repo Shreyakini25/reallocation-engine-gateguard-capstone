@@ -1,0 +1,101 @@
+[
+  {
+    "role_id": "teladoc-pm",
+    "company": "TELADOC HEALTH INC",
+    "title": "Associate Product Manager (entry) — telehealth",
+    "_source": "mapped_student_employment_targets_v3.csv: 510 approvals / 16 denials, 96.96% rate, Series D+, median $127,758; top_job_titles_sponsored includes 'Product Manager'. RECORD sponsors PMs.",
+    "e_verify": null,
+    "sponsorship": { "p": 0.9, "tier": "Proven", "source": "record" },
+    "fit": { "p": 0.7, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "UNVERIFIED — no live posting checked (ats:liveness not run)" },
+    "timeline": { "factor": 0.85, "source": "your-input" }
+  },
+  {
+    "role_id": "amgen-scatter",
+    "company": "AMGEN INC",
+    "title": "Product Manager I (biotech)",
+    "_source": "CSV: 1882 approvals / 10 denials, 99.47% rate; titles = Data Engineer, Strategy Sr. Manager, Commercial Lead... NO 'Product Manager'. RECORD proves heavy sponsorship; PM-specific is NOT on record → SOC-scatter judgment.",
+    "e_verify": null,
+    "sponsorship": { "p": 0.6, "tier": "Likely", "source": "model-judgment" },
+    "fit": { "p": 0.7, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "UNVERIFIED — no live posting checked" },
+    "timeline": { "factor": 0.85, "source": "your-input" }
+  },
+  {
+    "role_id": "modern-clinics-pm",
+    "company": "MODERN CLINICS INC",
+    "title": "Product Manager (early-stage health)",
+    "_source": "CSV: 10 approvals / 0 denials, 100% rate, Series B (2020-10-23), median $165,000; titles = 'Senior Product Manager'. RECORD sponsors PMs (small n).",
+    "e_verify": null,
+    "sponsorship": { "p": 0.75, "tier": "Proven", "source": "record" },
+    "fit": { "p": 0.65, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "UNVERIFIED — no live posting checked" },
+    "timeline": { "factor": 0.85, "source": "your-input" }
+  },
+  {
+    "role_id": "thermofisher-senior-trap",
+    "company": "THERMO FISHER SCIENTIFIC INC",
+    "title": "Product Manager (life-sciences instruments)",
+    "_source": "CSV: 1096 approvals / 22 denials, 98.03% rate, median $103,230; titles include 'Director, Product Management' — REAL PM sponsorship, but at DIRECTOR level. FM3 seniority trap: fit low because the sponsored PM role is senior, not new-grad. Note: the scorer has NO fit-based demotion, so a strong sponsor can score Apply despite my low fit — my labeled fit is the only guard.",
+    "e_verify": null,
+    "sponsorship": { "p": 0.85, "tier": "Proven", "source": "record" },
+    "fit": { "p": 0.4, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "UNVERIFIED — no live posting checked" },
+    "timeline": { "factor": 0.85, "source": "your-input" }
+  },
+  {
+    "role_id": "acer-therapeutics-lowsponsor",
+    "company": "ACER THERAPEUTICS INC",
+    "title": "Product Manager (biotech, pre-seed)",
+    "_source": "CSV: 4 approvals / 2 denials, 66.67% rate, Pre-Seed (2022-11-29); titles = 'Scientist II'. Low sponsorship volume, scientific scatter, pre-seed funding risk. Sponsorship is a weak model-judgment.",
+    "e_verify": null,
+    "sponsorship": { "p": 0.3, "tier": "Possible", "source": "model-judgment" },
+    "fit": { "p": 0.4, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "UNVERIFIED — no live posting checked" },
+    "timeline": { "factor": 0.85, "source": "your-input" }
+  },
+  {
+    "role_id": "1910-genetics-runway",
+    "company": "1910 GENETICS INC",
+    "title": "APM (AI-driven drug discovery)",
+    "_source": "CSV: ZERO approvals on record, Series B biotech (funded 2021-01-29). A possible RUNWAY candidate — but E-Verify status is UNKNOWN. Per the mode's stop condition, do NOT tag Runway on an unverified E-Verify claim → stays Skip until E-Verify is checked (proposed data source, TODO #2).",
+    "e_verify": null,
+    "sponsorship": { "p": 0.05, "tier": "None", "source": "record" },
+    "fit": { "p": 0.6, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "UNVERIFIED — no live posting checked" },
+    "timeline": { "factor": 0.85, "source": "your-input" }
+  },
+  {
+    "role_id": "1859-inc-nonsponsor",
+    "company": "1859 INC",
+    "title": "Product Manager (biotech)",
+    "_source": "CSV: ZERO approvals, Series B biotech (funded 2021-11-17), no sponsored titles on record. Non-sponsor; E-Verify unknown → Skip.",
+    "e_verify": null,
+    "sponsorship": { "p": 0.05, "tier": "None", "source": "record" },
+    "fit": { "p": 0.5, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "UNVERIFIED — no live posting checked" },
+    "timeline": { "factor": 0.85, "source": "your-input" }
+  },
+  {
+    "role_id": "sailor-health-liveness-verified",
+    "company": "SAILOR HEALTH (sailorhealth, Ashby)",
+    "title": "Product Manager (health-tech startup)",
+    "_source": "ABSENT from mapped_student_employment_targets_v3.csv (verified: no 'Sailor Health' company row) → per the Source gate, sponsorship is a model-judgment, NOT a record. LIVENESS VERIFIED: npm run ats:liveness on the real Ashby posting on 2026-07-06 returned 'active'. This is the one row with a real, cleared liveness gate.",
+    "e_verify": null,
+    "sponsorship": { "p": 0.05, "tier": "None", "source": "model-judgment" },
+    "fit": { "p": 0.65, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record — ats:liveness 2026-07-06: active" },
+    "timeline": { "factor": 0.85, "source": "your-input" }
+  },
+  {
+    "role_id": "philips-liveness-gated",
+    "company": "PHILIPS (Workday)",
+    "title": "Associate Global Product Manager (medical devices, Murrysville PA)",
+    "_source": "ABSENT from mapped_student_employment_targets_v3.csv (verified: 0 company rows; a large public multinational, not a Form D filer) → sponsorship is a model-judgment/prior, NOT a record (P2 discipline: no claiming a record from general knowledge). LIVENESS: npm run ats:liveness on the real Workday posting on 2026-07-06 returned 'expired (insufficient content)'. CAVEAT: Workday is a JS SPA, so the headless check may have under-rendered — a human must clear this gate before a final Skip. Scored with liveness 0.0 per the tool result; the closed gate zeroes the composite regardless of votes.",
+    "e_verify": null,
+    "sponsorship": { "p": 0.5, "tier": "Likely", "source": "model-judgment" },
+    "fit": { "p": 0.7, "source": "model-judgment" },
+    "liveness": { "factor": 0.0, "source": "record — ats:liveness 2026-07-06: expired (insufficient content; Workday SPA — human to confirm)" },
+    "timeline": { "factor": 0.85, "source": "your-input" }
+  }
+]

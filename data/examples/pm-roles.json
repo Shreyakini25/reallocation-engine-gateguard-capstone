@@ -1,0 +1,86 @@
+[
+  {
+    "role_id": "sponsor-now-apm",
+    "company": "NovaLedger (Series B fintech, fictional)",
+    "title": "Associate Product Manager (New Grad)",
+    "_scenario": "SPONSOR-NOW. Company shows H-1B approvals AND top_job_titles_sponsored lists 'Product Manager' / 'Associate Product Manager'. Sponsorship is a record fact.",
+    "e_verify": true,
+    "sponsorship": { "p": 0.9, "tier": "Proven", "source": "record" },
+    "fit": { "p": 0.7, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.85, "source": "your-input" }
+  },
+
+  {
+    "role_id": "soc-scatter-trap",
+    "company": "Corvus Analytics (established, fictional)",
+    "title": "Product Manager I",
+    "_scenario": "SOC-SCATTER TRAP (FM1). Company has H-1B approvals but top_job_titles_sponsored lists 'Management Analyst' / 'Business Analyst', NOT 'Product Manager'. It may file PMs under 13-1111. Cannot confirm PM sponsorship from the record → downgraded to a model-judgment, tier Likely.",
+    "e_verify": true,
+    "sponsorship": { "p": 0.6, "tier": "Likely", "source": "model-judgment" },
+    "fit": { "p": 0.85, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.85, "source": "your-input" }
+  },
+
+  {
+    "role_id": "runway-everify-pivot",
+    "company": "BrightWave Health (E-Verify, no H-1B history, fictional)",
+    "title": "APM, Rotational Program",
+    "_scenario": "RUNWAY-THEN-PIVOT. No H-1B approvals on record → scorer alone would Skip. But employer is E-Verify enrolled → viable to gain experience on OPT/STEM OPT, then pivot to a sponsor. Rescued via a DOCUMENTED override (Ch.11 escape hatch), not by faking the sponsorship number.",
+    "e_verify": true,
+    "sponsorship": { "p": 0.05, "tier": "None", "source": "record" },
+    "fit": { "p": 0.55, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.85, "source": "your-input" },
+    "override": { "decision": "Consider", "reason": "RUNWAY: employer is E-Verify enrolled (prerequisite for the 24-month STEM OPT extension). No H-1B history yet, so this is a runway role — take it to build full-time PM experience during OPT/STEM OPT, then pivot to a sponsoring company. Verified-vs-inferred: E-Verify status is [record, pending the proposed USCIS E-Verify source]; the pivot assumption is my judgment and can dead-end (FM2)." }
+  },
+
+  {
+    "role_id": "ghost-posting",
+    "company": "Peak Robotics (fictional)",
+    "title": "Product Manager (New Grad)",
+    "_scenario": "GHOST POSTING. Strong sponsor, looks perfect — but the posting is dead (liveness gate = 0). A closed gate zeroes the composite regardless of votes.",
+    "e_verify": true,
+    "sponsorship": { "p": 0.9, "tier": "Proven", "source": "record" },
+    "fit": { "p": 0.8, "source": "model-judgment" },
+    "liveness": { "factor": 0.0, "source": "record" },
+    "timeline": { "factor": 0.85, "source": "your-input" }
+  },
+
+  {
+    "role_id": "true-skip-no-path",
+    "company": "Meridian Retail Group (fictional)",
+    "title": "Associate Product Manager",
+    "_scenario": "TRUE SKIP. No H-1B history AND not E-Verify enrolled → cannot even support the STEM OPT extension. Note: fit (0.6) is actually higher than the runway role's fit (0.55), yet this one stays Skip — because the E-Verify PATH, not fit, is what rescues. No override.",
+    "e_verify": false,
+    "sponsorship": { "p": 0.0, "tier": "None", "source": "record" },
+    "fit": { "p": 0.6, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.85, "source": "your-input" }
+  },
+
+  {
+    "role_id": "timeline-bite",
+    "company": "Atlas Freight Systems (fictional)",
+    "title": "Product Manager I",
+    "_scenario": "TIMELINE GATE BITES. Strong sponsor and strong fit, but the posting demands someone who can start / be work-authorized immediately. My OPT is not yet filed (I-20 pending 2026-07-11..16; EAD realistically ~Oct-Nov 2026), so the timeline factor is reduced to 0.55 (your-input). Above threshold but flagged as a soft spot → Consider.",
+    "e_verify": true,
+    "sponsorship": { "p": 0.9, "tier": "Proven", "source": "record" },
+    "fit": { "p": 0.9, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.55, "source": "your-input" }
+  },
+
+  {
+    "role_id": "low-fit-skip",
+    "company": "Stonebridge Mutual (fictional)",
+    "title": "Product Owner (entry)",
+    "_scenario": "SKIP. Non-sponsor, not E-Verify, weak fit for an early-career PM. Time is better spent elsewhere.",
+    "e_verify": false,
+    "sponsorship": { "p": 0.0, "tier": "None", "source": "record" },
+    "fit": { "p": 0.4, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.85, "source": "your-input" }
+  }
+]
