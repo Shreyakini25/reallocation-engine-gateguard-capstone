@@ -1,0 +1,83 @@
+{
+  "workflow": "case-cv-integrity-backend-h1b",
+  "tool": "scripts/resumes/cv-integrity-check.mjs",
+  "tool_version": "0.1.0",
+  "run_id": "cv-integrity-2026-07-06",
+  "mode": "sample",
+  "base": "data/examples/cv-integrity/sample-base-cv.json",
+  "variant": "data/examples/cv-integrity/sample-variant-backend.md",
+  "candidates_checked": 73,
+  "anchored_count": 22,
+  "anchored": [
+    "AWS",
+    "ClickHouse",
+    "Docker",
+    "GCP",
+    "GitHub",
+    "GitHub Actions",
+    "Go",
+    "Grafana",
+    "IAM",
+    "III",
+    "Java",
+    "Kubernetes",
+    "MongoDB",
+    "MTTD",
+    "OpenTelemetry",
+    "PostgreSQL",
+    "Pub/Sub",
+    "Python",
+    "Redis",
+    "SQL",
+    "Terraform",
+    "TypeScript"
+  ],
+  "open_flags": 8,
+  "flags": [
+    {
+      "entity": "Cloud SQL",
+      "occurrences": 2,
+      "variant_excerpt": "- Built Terraform CI/CD on GCP (Cloud SQL, Pub/Sub) with least-privilege IAM; ran workloads on Kubernetes w..."
+    },
+    {
+      "entity": "CloudWatch",
+      "occurrences": 1,
+      "variant_excerpt": "- Cloud & DevOps: AWS (EC2, S3, Lambda, RDS, CloudWatch), GCP (Cloud SQL, IAM, Pub/Sub), Kubernetes, Docker..."
+    },
+    {
+      "entity": "EC2",
+      "occurrences": 1,
+      "variant_excerpt": "- Cloud & DevOps: AWS (EC2, S3, Lambda, RDS, CloudWatch), GCP (Cloud SQL, IAM, Pub/Sub), Kubernetes, Docker..."
+    },
+    {
+      "entity": "etcd",
+      "occurrences": 1,
+      "variant_excerpt": "- Built Terraform CI/CD on GCP (Cloud SQL, Pub/Sub) with least-privilege IAM; ran workloads on Kubernetes w..."
+    },
+    {
+      "entity": "Kafka",
+      "occurrences": 2,
+      "variant_excerpt": "- Engineered a workflows platform on GCP Pub/Sub processing 500K+ events/sec (backpressure, ordering keys, ..."
+    },
+    {
+      "entity": "Lambda",
+      "occurrences": 1,
+      "variant_excerpt": "- Cloud & DevOps: AWS (EC2, S3, Lambda, RDS, CloudWatch), GCP (Cloud SQL, IAM, Pub/Sub), Kubernetes, Docker..."
+    },
+    {
+      "entity": "RDS",
+      "occurrences": 1,
+      "variant_excerpt": "- Cloud & DevOps: AWS (EC2, S3, Lambda, RDS, CloudWatch), GCP (Cloud SQL, IAM, Pub/Sub), Kubernetes, Docker..."
+    },
+    {
+      "entity": "S3",
+      "occurrences": 1,
+      "variant_excerpt": "- Cloud & DevOps: AWS (EC2, S3, Lambda, RDS, CloudWatch), GCP (Cloud SQL, IAM, Pub/Sub), Kubernetes, Docker..."
+    }
+  ],
+  "stop_conditions": [],
+  "verification_method": "word-boundary case-insensitive membership vs attested base corpus; acronym-initials expansion scoped to a single base field/line; stoplist for headers/short tokens",
+  "judgment_boundary": "flag detection is code (record); drop-vs-promote decisions are human; no model call occurs in this tool",
+  "exit_code": 1,
+  "generated_at": "2026-07-07T01:47:50.670Z"
+}
