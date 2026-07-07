@@ -285,12 +285,61 @@ Note: pre-existing repo issue on Windows — not caused by this submission. No n
 ### npm run doctor
 
 ```
+komal@komal MINGW64 /c/Setup Exercise/the-reallocation-engine (mode/KomalKhairnar-de-da-live-skill-gap)
+$ npm run doctor
+> the-reallocation-engine@1.0.0 doctor
+> node scripts/doctor.mjs
+RECIPE DOCTOR — The Reallocation Engine
+==========================================
+ENVIRONMENT (required)
+  ok node       v24.11.1
+  ok python3    Python 3.11.9
+ENVIRONMENT (optional — features degrade without these)
+  ok pandoc     pandoc 2.12
+  — libreoffice not found (PDF fallback)
+  ok playwright installed
+RUNNABLE COMMANDS (npm script -> target file present?)
+  ok verify         scripts/conformance.mjs
+  ok manifest-check scripts/manifest-check.mjs
+  ok eval:score     scripts/eval/score-run.mjs
+  ok eval:report    scripts/eval/report.mjs
+  ok doctor         scripts/doctor.mjs
+  ok build-instructions scripts/build-instructions.mjs
+  ok to-markdown    scripts/to-markdown.mjs
+  ok score          scripts/score/role-scorer.mjs
+  ok ats:dedup      scripts/ats/dedup-tracker.mjs
+  ok ats:liveness   scripts/ats/check-liveness.mjs
+  ok ats:merge      scripts/ats/merge-tracker.mjs
+  ok ats:normalize  scripts/ats/normalize-statuses.mjs
+  ok ats:scan       scripts/ats/scan.mjs
+  ok ats:verify     scripts/ats/verify-pipeline.mjs
+  ok resumes:pdf    scripts/resumes/generate-pdf.mjs
+  ok svg-to-png     scripts/svg-to-png.mjs
+  ok audit:layout   scripts/svg-layout-audit.mjs
+  ok postsvg-to-png scripts/svg-layout-audit.mjs
+DOMAIN DIRECTORIES
+  ok data/sec
+  ok data/bls
+  ok data/ats
+  ok data/80-days-to-stay
+  ok scripts/sec
+  ok scripts/bls
+  ok scripts/ats
+  ok scripts/resumes
 PRIVACY (no personal data committed)
   ok no private/PII paths are tracked
 RECIPES (43)
   with lifecycle frontmatter: 1   missing: 42
   by status: RUNNABLE-SAMPLE 1
-  open TODOs: 2 declared (in frontmatter)
+  open TODOs: 2 declared (in frontmatter) · 519 [TODO markers in bodies
+  ! missing frontmatter (42) — add: status / todos_open / last_gate / attestation / recipe_version
+      apply.md
+      auto-pipeline.md
+      ... +40 more (professor's existing recipes — not this submission)
 SUMMARY
   environment: ok runnable
+  recipes: 1/43 carry lifecycle frontmatter — 42 need it (gap toward DRAFT->VERIFIED discipline)
+  next: backfill recipe frontmatter
 ```
+
+Note: 42 missing frontmatter warnings are for the professor's existing recipes — not caused by this submission. Privacy check passed cleanly.
