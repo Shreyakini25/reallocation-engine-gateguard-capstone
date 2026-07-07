@@ -150,3 +150,16 @@ private emails, or sensitive application notes.
 - **Rebuilt:** `node scripts/build-instructions.mjs --promote` → `AGENTS.md` + `CLAUDE.md` regenerated; `CLAUDE.md` now imports `@SNICKERDOODLE.md`.
 - **Untouched:** `data/` CSVs (real company names containing "mycroft") and prior RUN_LOG history (append-only).
 - **Result:** conformance + doctor green; no stale `MYCROFT.md` outside data/history.
+
+## 2026-07-06 -- case-early-pm-sponsorship-triage (mode-build assignment), sample run
+
+- **Recipe:** `case-early-pm-sponsorship-triage` (new mode), **sample mode**. Anchor `id: 2026-07-06-early-pm-sponsorship-triage`.
+- **Author:** Jayanth Adithya Kappagantula.
+- **Command:** `npm run score -- data/examples/pm-roles.json --out-dir assignments/submissions/jayanth-adithya-kappagantula/run` (stored Ch.11 scorer; no ad-hoc code).
+- **Inputs:** new fixture `data/examples/pm-roles.json` — 7 anonymized/fictional entry-level PM roles, one per decision path; timeline factors encode my real OPT filing status (I-20 requested 2026-07-01, not yet filed w/ USCIS, EAD ~Oct-Nov 2026). Profile: default (needs sponsorship).
+- **Result:** 7 roles → Apply 1 · Consider 3 · Skip 3 (skip 43%). Two-track working: BrightWave (E-Verify, no H-1B) rescued Skip→Consider via documented override (Runway); Meridian (higher fit, no E-Verify path) stays Skip; Peak Robotics gated to 0 by dead liveness; Atlas demoted Apply→Consider by my timeline factor 0.55.
+- **Artifacts:** `assignments/submissions/jayanth-adithya-kappagantula/run/role-scores.{json,md}`; mode file `recipes/case-early-pm-sponsorship-triage.md`; justification + worked-run under `assignments/submissions/jayanth-adithya-kappagantula/`.
+- **Verification:** re-run deterministic (JSON identical modulo date); JSON parses; count cross-checked vs `mapped_student_employment_targets_v3.csv` — 30,369 companies, only 107 list "Product Manager" in top_job_titles_sponsored (0.35%), confirming the SOC-scatter asymmetry. Break tests: missing/non-numeric `sponsorship.p` → scorer silently drops the vote and returns a confident Skip (does NOT refuse) → filed TODO #4; malformed JSON → hard crash (acceptable).
+- **Gates:** Source ✓ (fixture) · Scope ✓ (sample, fictional data) · Liveness ✓ (recorded factors) · Timeline ✓ (my filing status) · Report ✓. Human adequacy gate: **PENDING attestation** (mode stays RUNNABLE-SAMPLE).
+- **Fixed during run:** default out-dir clobbered tracked `data/examples/role-scores.json` (Ch.11 example) — restored via git checkout, re-ran with explicit `--out-dir`.
+- **Open issues:** 4 typed TODOs open (pm-sponsor-lookup, USCIS E-Verify data source, two-track re-labeler, pre-flight validator); `sponsorship.p` still hand-entered; E-Verify status asserted not yet data-verified; skip rate 43% (balanced fixture under-skips vs a real board).
