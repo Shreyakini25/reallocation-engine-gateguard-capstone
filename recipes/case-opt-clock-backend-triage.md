@@ -1,6 +1,6 @@
 ---
 status: RUNNABLE-SAMPLE
-todos_open: 3
+todos_open: 4
 last_gate: P3-sample-run-2026-07-06
 attestation: Adarsh Akhouri · 2026-07-06
 recipe_version: 0.1.0
