@@ -1,0 +1,32 @@
+[
+  {
+    "role_id": "sca-1",
+    "company": "Example Logistics Co (has SEC Form D + sponsorship history)",
+    "title": "Supply Chain Analyst",
+    "sponsorship": { "p": 0.8, "tier": "proven", "source": "record" },
+    "fit": { "p": 0.75, "source": "model-judgment" },
+    "role_quality": { "p": 0, "source": "record" },
+    "liveness": { "factor": 1, "source": "record" },
+    "timeline": { "factor": 0.9, "source": "your-input" }
+  },
+  {
+    "role_id": "sca-2",
+    "company": "Example Non-Sponsor Retailer",
+    "title": "Planning Analyst",
+    "sponsorship": { "p": 0, "tier": "none", "source": "record" },
+    "fit": { "p": 0.7, "source": "model-judgment" },
+    "role_quality": { "p": 0, "source": "record" },
+    "liveness": { "factor": 1, "source": "record" },
+    "timeline": { "factor": 0.85, "source": "your-input" }
+  },
+  {
+    "role_id": "sca-3",
+    "company": "Example Startup (Form D filed, sponsorship unclear)",
+    "title": "Supply Chain Planning Analyst",
+    "sponsorship": { "p": 0.5, "tier": "likely", "source": "record" },
+    "fit": { "p": 0.8, "source": "model-judgment" },
+    "role_quality": { "p": 0, "source": "record" },
+    "liveness": { "factor": 0, "source": "record" },
+    "timeline": { "factor": 0.9, "source": "your-input" }
+  }
+]
