@@ -150,3 +150,34 @@ private emails, or sensitive application notes.
 - **Rebuilt:** `node scripts/build-instructions.mjs --promote` → `AGENTS.md` + `CLAUDE.md` regenerated; `CLAUDE.md` now imports `@SNICKERDOODLE.md`.
 - **Untouched:** `data/` CSVs (real company names containing "mycroft") and prior RUN_LOG history (append-only).
 - **Result:** conformance + doctor green; no stale `MYCROFT.md` outside data/history.
+
+## 2026-06-25 -- Personal layer setup exercise: search/resume.json, profile.yml, gaps.md
+
+- **Exercise:** INFO 7375 setup exercise — "Your Search's Personal Layer."
+- **Built:** `search/resume.json` (attested), `search/profile.yml`, `search/gaps.md`, `search/private-notes.md` (gitignored). Added `!search/resume.json` exception to `.gitignore`, which previously globally ignored any `resume.json` and would have silently dropped this required file.
+- **Attestation errors caught in resume.json (3):** McKinsey co-op title framing was inconsistent across the extracted draft; Avo Automation end date was extracted as June 2025 instead of the correct June 2024; the agent inferred a "Cloud Architecture" skill at depth from a single Terraform/Packer side project, which overstates actual expertise — removed from the skills list.
+- **Top gap (gaps.md):** No formal eval/observability ownership on a production AI surface — I've built eval-adjacent pieces (an LLM-as-judge layer at McKinsey, agent systems at RohBot/Nourish Agent/SupportIQ) but never owned a standing eval framework as a standalone, citable artifact. Evidence: KORE1's 2026 AI PM hiring guide names eval-set ownership as a named technical-fluency bar for Series B AI PM postings.
+- **Killed row:** "No enterprise-scale (Fortune 500 / regulated industry) AI deployment experience." Reason: this was the agent pattern-matching on "AI product manager" generically rather than on my actual stated target (growth-stage, Series A-C) in profile.yml — checked real postings for that segment and enterprise deployment isn't a named requirement there.
+- **profile.yml field corrected from agent's first draft:** the agent's first draft of the OPT date block conflated "Sep 1" as ambiguous between start and end date — corrected to explicit `opt_start_date: 2026-09-01` / `opt_end_date: 2027-09-01` after confirming which one I meant.
+
+### Step 4 verification check
+
+- **resume.json:** Every job entry is traceable — McKinsey via offer letter/co-op placement record, Avo via former manager reference, all projects via public links. No promoted titles or invented skills remain after the attestation pass.
+- **profile.yml:** Visa section reflects actual OPT timeline (start date known, STEM eligibility self-confirmed but flagged for DSO re-verification) rather than aspirational framing. Sponsorship is stated as a hard gate, not softened.
+- **gaps.md:** Every evidence citation in the table traces to a real, checked source (KORE1's 2026 AI PM hiring guide, O*NET 11-2021.00) rather than an invented demand signal — confirmed by running the searches myself rather than accepting the agent's first-draft claims at face value.
+
+## 2026-06-25 -- Re-extracted personal layer from Resume.pdf (supersedes tex-based draft)
+
+- **Why:** Switched extraction source from `master_resume_v10.tex` to `~/Desktop/Resume.pdf`, the actual current resume.
+- **Attestation errors caught in this pass (3):** Avo Automation end date extracted as July 2024, corrected to June 2024; SwiftHire project link was stale (bit.ly/4bHTqI8), replaced with the live link (swifthire-board.vercel.app); resume summary stated "early-stage team" as the target while `profile.yml` said growth-stage Series A-C — resolved in favor of early-stage as the real target and corrected `profile.yml` and `gaps.md` to match.
+- **Also dropped:** RohBot, SupportIQ, and the CI/CD pipeline project, intentionally trimmed from this resume version (confirmed, not an extraction error).
+- **gaps.md updated:** target-role references changed from growth-stage/Series A-C to early-stage/seed-Series A; killed-row and eval-gap rows reworded to only cite projects actually present in the attested resume.json (Nourish Agent, SwiftHire, McKinsey); added a `sponsorship.tension_note` to profile.yml flagging that early-stage companies sponsor visas less often than growth-stage ones, as open research rather than resolved.
+
+## 2026-06-30 — AI PM OPT Runway mode (case-ai-pm-opt-runway) — first run
+
+- **Mode:** `case-ai-pm-opt-runway` v0.1.0, status RUNNABLE-SAMPLE
+- **Inputs:** 5 roles (Hugging Face, Weights & Biases, Cohere, stealth seed startup, Anthropic). OPT start 2026-09-01; STEM OPT confirmed. Timeline factor 0.95. All sponsorship tiers labeled model-judgment (80-days CSV cross-check not run).
+- **Commands:** `npm run verify` (✓ conforms); `npm run ats:liveness` (✗ playwright missing — reverted to manual); `grep "11-2021" data/BLS/compact/soc_occupation_compact.csv` (✓ SOC found, cognitive pivot 3.974); `npm run score data/examples/ai-pm-opt-runway-roles.json` (✓ exited 0)
+- **Output:** 5 roles → Apply 0 · Consider 4 · Skip 1 (skip 20%). Anthropic zeroed by liveness gate. Stealth seed startup in Consider band at 0.261 (sponsorship gate limiting).
+- **Open issues:** (1) `ats:liveness` requires `npm install playwright` before becoming a real gate — all liveness values in this run are manual your-input; (2) sponsorship tiers for HF/W&B/Cohere are model-judgment, not verified against 80-days CSV — no role should move to Apply until Step 5 runs; (3) `role_quality` weight is 0 [VERIFY] in scorer config; (4) `search/resume.json` flagged by `npm run doctor` as PII in git — conflicts with personal-layer exercise requirements, unresolved; (5) SEC Form D check for company funding recency not yet added to recipe.
+- **Artifacts:** `data/examples/ai-pm-opt-runway-roles.json`, `data/examples/role-scores.json`, `data/examples/role-scores.md`, `recipes/case-ai-pm-opt-runway.md`, `assignments/submissions/rohanjauhari/`

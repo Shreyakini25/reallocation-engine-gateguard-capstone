@@ -1,0 +1,53 @@
+target_role: >
+  AI/agentic product manager at an early-stage (seed / Series A) startup
+  building AI agent or automation-driven products, owning roadmap from
+  discovery through shipped feature.
+
+visa:
+  type: F-1 OPT
+  stem_eligible: true
+  stem_eligible_note: >
+    Confirmed STEM-eligible (Northeastern MS in Information Systems is a
+    STEM-designated CIP code) as of 2026-06-25. Re-verify with DSO before
+    filing the STEM OPT extension application.
+  opt_start_date: 2026-09-01
+  opt_end_date: 2027-09-01
+  unemployment_days_used: 0
+  buffer_target_days: 80
+  buffer_note: >
+    Per the 80-Days-to-Stay framework, target staying at or under 80 days of
+    cumulative unemployment against the 90-day OPT ceiling, leaving a 10-day
+    safety margin.
+
+geography:
+  target_metros:
+    - Boston, MA
+    - New York, NY
+    - San Francisco Bay Area, CA
+    - Seattle, WA
+  remote_acceptable: false
+  geography_note: >
+    Major US tech hubs only, in-person or hybrid. Not pursuing fully remote
+    or non-hub-market roles at this time.
+
+industry:
+  target_sectors:
+    - AI / agentic tooling
+    - Automation SaaS
+  company_size:
+    stage: Seed - Series A
+    note: Early-stage preferred over growth/public for pace and scope of ownership.
+  hard_exclusions: []
+  exclusions_note: No hard sector exclusions identified at this time.
+
+sponsorship:
+  required: true
+  gate_rule: >
+    Sponsorship is a hard gate. A company with no employer visa sponsorship
+    history is Skip regardless of fit score, sponsorship tier, or timeline
+    factor.
+  tension_note: >
+    Seed/Series A companies sponsor visas less often than growth-stage ones —
+    this narrows the addressable set under the sponsorship gate. Have not yet
+    mapped which early-stage companies in target sectors have a sponsorship
+    track record; flagged as open research, not yet resolved.

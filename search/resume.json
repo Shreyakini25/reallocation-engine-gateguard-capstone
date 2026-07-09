@@ -1,0 +1,105 @@
+{
+  "attested": true,
+  "attested_date": "2026-06-25",
+  "attestation_note": "Three errors corrected: Avo Automation end date was extracted as July 2024 instead of the correct June 2024; SwiftHire project link (bit.ly/4bHTqI8) was stale/wrong and replaced with the live link (swifthire-board.vercel.app); resume summary said 'early-stage team' which conflicted with profile.yml's stated growth-stage (Series A-C) target — resolved in favor of early-stage as the real target and corrected profile.yml to match.",
+  "candidate": {
+    "name": "Rohan Manish Jauhari",
+    "location": "Boston, MA",
+    "email": "jauhari.r@northeastern.edu",
+    "website": "https://rohanjauhari.com",
+    "linkedin": "https://linkedin.com/in/rohanjauhari"
+  },
+  "summary": "Product Manager who ships AI products end to end. 4 years owning roadmaps, leading engineers, and turning ambiguous problems into features people actually use. Built and deployed multi-agent AI systems outside of work. Graduating August 2026, looking to join an early-stage team where the problems are hard and the pace is fast.",
+  "experience": [
+    {
+      "company": "Northeastern University",
+      "location": "Boston, MA",
+      "title": "Research Assistant",
+      "start_date": "2026-01",
+      "end_date": "present",
+      "highlights": [
+        "Reached 85% prediction accuracy on patient falls and hospitalizations by building an agentic monitoring system pulling real-time data from 5+ wearables"
+      ],
+      "verifiable_via": "Faculty advisor reference, university record"
+    },
+    {
+      "company": "McKinsey & Company",
+      "location": "Boston, MA",
+      "title": "Product Analyst Co-op",
+      "start_date": "2025-08",
+      "end_date": "2025-12",
+      "highlights": [
+        "Reduced manual analysis time by 60% by building an AI agent that let the product team query data in plain English instead of writing SQL every time",
+        "Defined 50+ feature-level KPIs and built a full pipeline from raw data to leadership dashboards, giving the team a single source of truth for roadmap decisions",
+        "Analyzed 100+ engagement metrics using Heap Analytics to surface adoption gaps and recommend where to focus next"
+      ],
+      "verifiable_via": "Offer letter / co-op placement record, LinkedIn"
+    },
+    {
+      "company": "Avo Automation",
+      "company_context": "Growth Stage, No-code Automation SaaS",
+      "location": "Bengaluru, India",
+      "title": "Product Engineer -> Senior Product Engineer",
+      "start_date": "2021-08",
+      "end_date": "2024-06",
+      "highlights": [
+        "Cut manual effort by 90% by leading AI enablement across the product: identified the biggest friction points in the user journey, defined the roadmap, and shipped it with 6 engineers and 2 designers",
+        "Grew the customer base by 33% by working directly with prospects to understand their use cases, shaping pricing and product strategy around what actually moved deals forward",
+        "Reduced churn by 50% by staying close to customers, gathering feedback across 100+ features, and closing gaps fast enough to change minds before they left",
+        "Drove 15% revenue growth in 6 months by keeping a high shipping cadence across 50+ features and fixes, without letting quality slip"
+      ],
+      "verifiable_via": "Former manager reference, LinkedIn employment history"
+    }
+  ],
+  "projects": [
+    {
+      "name": "Nourish Agent",
+      "description": "Chat-First AI Nutritionist",
+      "url": "https://bit.ly/4tcbS2I",
+      "highlights": [
+        "Defined and shipped a chat-first AI nutritionist that pulls live wearable data in the background and adapts recommendations in real time, no manual logging required",
+        "Architected a multi-agent system on n8n where nutrition, scheduling, and health monitoring run as isolated agents, each improvable without touching the others. Integrated Google Fitness, Gmail, Google Calendar, and Supabase via MCP"
+      ],
+      "verifiable_via": "Public link"
+    },
+    {
+      "name": "SwiftHire",
+      "description": "AI Job Search Automation",
+      "url": "https://swifthire-board.vercel.app/",
+      "highlights": [
+        "Surveyed 100+ jobseekers, found 10 concrete inefficiencies in the application process, and built 3 AI-powered features to fix them: auto-fill, real-time document tailoring, and bulk applying",
+        "Cut manual effort by 80% and application time by 25% across active users"
+      ],
+      "verifiable_via": "Public link"
+    }
+  ],
+  "education": [
+    {
+      "institution": "Northeastern University, College of Engineering",
+      "location": "Boston, MA",
+      "degree": "Master of Science in Information Systems",
+      "gpa": "3.73/4",
+      "graduation_date": "2026-08"
+    },
+    {
+      "institution": "The LNM Institute of Information Technology",
+      "location": "Jaipur, India",
+      "degree": "Bachelor of Technology in Computer Science and Engineering",
+      "graduation_date": "2021-05"
+    }
+  ],
+  "skills": {
+    "product_project": [
+      "Product Strategy", "Roadmapping", "User Research", "Agile",
+      "Metrics and KPIs", "PRD", "Go-To-Market", "Prioritization",
+      "Market Analysis", "Stakeholder Management"
+    ],
+    "technical": [
+      "AI Agents", "Multi-Agent Systems", "Python", "SQL", "Data Analytics",
+      "Full Stack Development", "Cloud (GCP, AWS)", "MCP", "n8n", "Supabase",
+      "Heap Analytics"
+    ]
+  },
+  "certifications": [],
+  "publications": []
+}

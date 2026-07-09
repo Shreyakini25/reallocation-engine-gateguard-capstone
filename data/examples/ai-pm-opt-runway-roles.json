@@ -1,0 +1,67 @@
+[
+  {
+    "role_id": "huggingface-pm",
+    "company": "Hugging Face",
+    "title": "Product Manager, AI Platform",
+    "sponsorship": { "p": 0.85, "tier": "Likely", "source": "model-judgment",
+      "note": "International team documented; H-1B history unverified in local 80-days dataset — marked Likely not Proven" },
+    "fit": { "p": 0.72, "source": "model-judgment",
+      "note": "Strong AI agent project evidence (Nourish Agent, SwiftHire); gap in formal eval-set ownership and inference-platform fluency" },
+    "liveness": { "factor": 1.0, "source": "your-input",
+      "note": "Posting confirmed live as of 2026-06-25 — must recheck at application time" },
+    "timeline": { "factor": 0.95, "source": "your-input",
+      "note": "OPT starts 2026-09-01; STEM OPT confirmed eligible giving ~36-month window; well inside H-1B Oct-1 filing cycle" }
+  },
+  {
+    "role_id": "wandb-pm",
+    "company": "Weights & Biases",
+    "title": "Product Manager, Developer Experience",
+    "sponsorship": { "p": 0.80, "tier": "Likely", "source": "model-judgment",
+      "note": "AI infrastructure company with distributed team; H-1B history unverified in local 80-days dataset" },
+    "fit": { "p": 0.68, "source": "model-judgment",
+      "note": "Eval/observability tool — directly exposes the eval-ownership gap. Good fit on AI agent shipping background; weaker on MLOps-specific domain knowledge" },
+    "liveness": { "factor": 1.0, "source": "your-input",
+      "note": "Posting confirmed live as of 2026-06-25" },
+    "timeline": { "factor": 0.95, "source": "your-input",
+      "note": "Same OPT/STEM window; no additional company-specific timeline constraint identified" }
+  },
+  {
+    "role_id": "cohere-pm",
+    "company": "Cohere",
+    "title": "Product Manager, Enterprise AI",
+    "sponsorship": { "p": 0.78, "tier": "Likely", "source": "model-judgment",
+      "note": "Canadian-founded AI startup with US operations; enterprise focus; H-1B history unverified in local dataset" },
+    "fit": { "p": 0.60, "source": "model-judgment",
+      "note": "Enterprise AI role demands B2B GTM depth and enterprise sales partnership experience; resume shows Avo (SMB/mid-market SaaS) not enterprise deals" },
+    "liveness": { "factor": 1.0, "source": "your-input",
+      "note": "Posting confirmed live as of 2026-06-25" },
+    "timeline": { "factor": 0.95, "source": "your-input",
+      "note": "Same OPT/STEM window" }
+  },
+  {
+    "role_id": "stealth-ai-pm",
+    "company": "Stealth-stage AI startup (seed, <10 employees)",
+    "title": "First PM",
+    "sponsorship": { "p": 0.10, "tier": "None", "source": "model-judgment",
+      "note": "Seed-stage company with no public H-1B record; sponsorship requires legal infrastructure most seed companies do not yet have" },
+    "fit": { "p": 0.80, "source": "model-judgment",
+      "note": "First PM role — highest ownership scope, directly matches stated preference for hard problems at pace; strong project evidence for agentic product work" },
+    "liveness": { "factor": 1.0, "source": "your-input",
+      "note": "Posting confirmed live as of 2026-06-25" },
+    "timeline": { "factor": 0.95, "source": "your-input",
+      "note": "Same OPT window; however seed-stage sponsorship is structurally rare — timeline factor does not rescue the sponsorship gate" }
+  },
+  {
+    "role_id": "anthropic-pm",
+    "company": "Anthropic",
+    "title": "Product Manager, API Developer Experience",
+    "sponsorship": { "p": 0.88, "tier": "Likely", "source": "model-judgment",
+      "note": "Well-funded AI lab with international hires documented publicly; local 80-days H-1B verification not run — treat as Likely not Proven" },
+    "fit": { "p": 0.65, "source": "model-judgment",
+      "note": "Strong Claude/AI agent background (SwiftHire, SupportIQ on older resume); gap in inference-platform PM depth and formal model-eval ownership at production scale" },
+    "liveness": { "factor": 0.0, "source": "record",
+      "note": "ats:liveness run returned 404 on the specific posting URL — posting closed or unlisted; gate blocks score" },
+    "timeline": { "factor": 0.95, "source": "your-input",
+      "note": "Same OPT/STEM window" }
+  }
+]
