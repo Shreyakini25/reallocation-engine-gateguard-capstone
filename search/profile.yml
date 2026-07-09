@@ -1,0 +1,60 @@
+target_role: "Software Engineer or Technical Product Manager in AI/cloud infrastructure, primarily at public companies; Series C with exceptional founders/team also targets"
+
+visa_constraints:
+  visa_type: "F-1 OPT with STEM OPT extension eligibility"
+  stem_eligible: "uncertain"
+  stem_extension_eligible: true
+  authorization_end_date: "2027-09-30"
+  dso_confirmation_date: null
+  dso_confirmation_notes: "STEM OPT extension can only be filed after securing employment at an E-Verify employer; eligibility to use it is uncertain until then. Confirm with Northeastern DSO before engine treats this as a gate."
+  days_unemployment_used: 0
+  days_unemployment_available: 60
+  stem_extension_available: true
+  buffer_target_days: 30
+  buffer_notes: "Target staying 30 days above the 90-day unemployment ceiling"
+
+target_geography:
+  primary_locations:
+    - "Seattle, WA"
+    - "San Francisco Bay Area, CA"
+    - "New York, NY"
+  remote_preference: "yes"
+  remote_notes: "Willing to work remote; can also relocate to primary locations"
+  timezone_preference: "US hours (PST/EST)"
+  visa_office_constraints: "Primary visa office: San Francisco (CA); can work remote if visa office location is manageable"
+
+industry_preferences:
+  target_sectors:
+    - "AI/LLM platforms"
+    - "Cloud infrastructure"
+    - "Hardware/GPU computing"
+    - "Fintech"
+  company_stages:
+    - "Public"
+    - "Series C (if founders/team exceptional)"
+  company_stage_notes: "Primary target: public companies. Secondary target: Series C stage if founders/team are exceptional and company trajectory aligns with NVIDIA/FDE search goals."
+  hard_exclusions: null
+  exclusion_notes: "No hard industry exclusions"
+
+sponsorship_requirement:
+  requires_sponsorship: true
+  sponsorship_type: "Employer visa sponsorship required"
+  preferred_sponsorship: "H-1B standard or green card sponsorship"
+  notes: "F-1 OPT authorization extends to September 2027; H-1B lottery typically April 2027. Must align job search timeline with visa calendar."
+
+role_focus:
+  software_engineer_preferences:
+    - "Backend systems engineering"
+    - "Distributed systems"
+    - "Cloud-native platforms"
+    - "AI/ML infrastructure"
+  technical_product_manager_preferences:
+    - "AI/LLM products"
+    - "Cloud infrastructure products"
+    - "Developer-facing tools"
+    - "GPU/hardware platforms"
+  role_notes: "Both SWE and TPM roles are target; TPM leverages NVIDIA internship; SWE leverages LTIMindtree + academic systems background"
+
+search_timeline:
+  notes: "OPT expires September 2027; H-1B lottery April 2027. Active search until offer secured + sponsorship path confirmed."
+  urgency: "Medium. Have ~9 months runway; aim to secure offer by Q1 2027 for H-1B filing readiness."
