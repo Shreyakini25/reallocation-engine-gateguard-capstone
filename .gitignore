@@ -67,3 +67,10 @@ data/BLS/db_30_2_mysql/
 **/*.resume.pdf
 **/resume.pdf
 resume.json
+
+# Setup Exercise — Personal Search Layer (INFO 7375)
+# profile.yml + gaps.md may be tracked; résumé stays local (PII — doctor fails if tracked).
+search/resume.json
+search/private-notes.md
+search/*-original.pdf
+search/resume-original.*

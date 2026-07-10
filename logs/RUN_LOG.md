@@ -6,6 +6,43 @@ Use this file to record what was run, what worked, what failed, and what should
 be tested next. Keep entries short. Do not include secrets, real phone numbers,
 private emails, or sensitive application notes.
 
+## 2026-06-30 - case-de-platform-cogpivot worked run (Yu-Chen Huang)
+
+- **Recipe:** `case-de-platform-cogpivot` v0.1.0 · **Status:** RUNNABLE-SAMPLE
+- **Inputs:** DataStax Inc, Coursera Inc, Deako Inc (from DE keyword filter on `SEC_DOL_H1b_data_mapped.csv`); SOC 15-1243 BLS pivot rows; `search/profile.yml`; Coursera Greenhouse URL for liveness test
+- **Commands:** `grep` DE filter (70 companies) · `grep 15-1243` BLS compact · `npm run score` (5 roles) · `npm run ats:liveness` (active + expired break test)
+- **Outputs:** `recipes/case-de-platform-cogpivot.md` · `assignments/submissions/yuchen-huang/domain-justification.md` · `assignments/submissions/yuchen-huang/worked-run.md`
+- **Result:** Apply 2 (DataStax, Coursera), Consider 1 (Deako, Likely tier), Skip 2 (no H-1B control; expired posting liveness gate made composite 0). Skip rate 40%. Cognitive pivot verified from BLS but composite weight is still 0 in default scorer.
+- **Open issues:** `[TODO: DEV]` DE title filter script; `[TODO: DEV]` platform/pipeline JD classifier; pin `role_quality` weight; DataStax Greenhouse board had 0 open jobs when I checked; scorer needs JSON profile shim (YAML profile not parsed by scorer).
+- **Privacy (2026-06-30):** I removed `search/resume.json` from git tracking (file still on my laptop). Updated `.gitignore` so `npm run doctor` passes before mode PR. Resume is not in assignment zip or PR.
+
+## 2026-06-23 — Setup Exercise: built my personal search layer (Yu-Chen Huang)
+
+- **Recipe:** manual (Setup Exercise — Your Search's Personal Layer; agent-led extraction + intake, my attestation)
+- **Inputs:** my resume PDF (kept private), my own answers, `data/bls/compact/soc_occupation_compact.csv` (SOC 15-1243)
+- **Outputs:** `search/resume.json` (attested), `search/profile.yml`, `search/gaps.md` (agent draft + my edits). `search/private-notes.md` is gitignored. Fixed `.gitignore` so `search/resume.json` is tracked (the repo's old `resume.json` rule was hiding it) and only `private-notes.md` is ignored.
+
+### Three attestation errors I caught in resume.json
+1. My E3 Database project was written like I did it alone, but it was a **5-person group project** (Northeastern DAMG6210). I changed it to say it was teamwork.
+2. My IPL Spark project looked like original work, but I actually built it by **following a YouTube tutorial** to learn. I marked it as a learning project.
+3. The E3 start date said **"Step 2024"** — a typo. The real start is **September 2024**. (I also moved R, PostgreSQL, MySQL, Docker, CI/CD to "coursework", because they are from my classes, not my jobs.)
+
+### Top gap (from gaps.md)
+Owning a data platform's **architecture end-to-end**. So far I only built pipelines inside systems other people designed, or in a school team, or by following a tutorial. I have never designed a whole platform alone.
+
+### Row I killed (and why)
+I killed "Database administration & security (backup, access control, tuning)". That demand belongs to my **secondary** SOC (15-1242 Database Administrator), not the Data Engineer / Data Architect role (15-1243) I actually want. I am not searching for DBA jobs, so it is not my gap.
+
+### profile.yml field I corrected from the agent's first draft
+The **STEM eligibility** field. The agent's first draft marked it **"uncertain / not DSO-confirmed"** (the cautious default, because eligibility depends on the program's CIP code). I corrected it to **"eligible / dso_confirmed: true"** after confirming with my DSO.
+
+### Verification check (the three honest answers)
+- **resume.json:** Most entries are traceable — my three jobs have offer letters/pay stubs (private), and my project repos are public on GitHub. The honest weak point is the metrics (99.9% SLA, 95%, 40%, 60%): they are **rough numbers I estimated, not measured**, so I added a `metrics_disclosure` field saying exactly that instead of presenting them as audited. The agent did NOT promote any title — it kept "Intern" correctly — but it had written my team/tutorial projects as solo work until I corrected them.
+- **profile.yml:** The visa dates (OPT 2026-09-14 to 2027-09-13, 0 unemployment days) are from my real documents. STEM is marked **eligible** because I confirmed it with my DSO (not just an assumption).
+- **gaps.md:** Every gap is tied to a real O*NET column from the 15-1243 row (description, `skill_programming_lv` 4.12, job zone 4) or its alternate titles. The market-pattern claims (dbt/Terraform/Snowflake) are marked **VERIFY against 3 real postings** — I have not scanned postings yet, so I did not pretend that demand is confirmed.
+
+- **Result:** `resume.json` is now **attested: true (2026-06-23)** — E3 role recorded (schema design + stored procedures), metrics disclosed as estimates, STEM confirmed. No contents from `private-notes.md` are in this log.
+
 ## 2026-06-12 — Wrote Tutorial 00 (Exercise Zero) in full
 
 - **Recipe:** manual

@@ -1,0 +1,41 @@
+# search/profile.yml — declared 2026-06-23
+# Declared intent for the job search. Reviewed by Yu-Chen Huang.
+
+roles:
+  # Confirmed against data/bls/compact/soc_occupation_compact.csv at the Q1 gate.
+  primary_soc: "15-1243"          # Database Architects (alt titles: Big Data Engineer, Cloud Infrastructure Architect, Data Architect)
+  secondary_soc: "15-1242"        # Database Administrators (alt title: Data Engineer) — administer-leaning fallback
+  dream_job_text: "I want to be a Data Engineer who builds data platforms and data infrastructure — designing and running the pipelines, warehouses, and systems other teams build their data work on."
+
+locations:
+  bases: ["San Francisco Bay Area", "Seattle, WA"]
+  remote: "no preference"         # open to remote / hybrid / on-site
+
+work_prefs:
+  hours: full-time
+  contract_ok: false
+
+authorization:
+  sponsorship_required: true      # GATE: a company with no sponsorship history is skip-regardless.
+  status: "F-1 OPT"
+  opt_start: "2026-09-14"
+  opt_end: "2027-09-13"
+  unemployment_days_used: 0
+  unemployment_ceiling_date: "2026-12-13"   # 90 days after OPT start; hard stop if still unemployed
+  stem:
+    self_assessed: "eligible (M.S. Information Systems)"
+    dso_confirmed: true           # confirmed with DSO
+    status: "eligible"            # 24-month STEM OPT extension available
+  offer_needed_by: "2026-09-14"   # Yu-Chen's own target: have an offer by the OPT start date
+  buffer_note: "Book recommends staying ~80 days inside the 90-day unemployment ceiling; my own target (offer by OPT start) is more conservative."
+
+industry:
+  sectors: ["technology"]
+  company_size: ["mid-size", "large", "public"]
+  hard_exclusions: []             # none declared
+
+situation:
+  employed: false
+  start_available: "2026-09-14"
+
+comp_floor: null                  # not declared (a private floor can live in private-notes.md)
