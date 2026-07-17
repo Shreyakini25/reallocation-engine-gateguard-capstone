@@ -8,15 +8,19 @@
  *   node scripts/resumes/generate-pdf.mjs --all
  *   node scripts/resumes/generate-pdf.mjs --all --format=letter
  */
-
+import { fileURLToPath } from 'url';
 import { chromium } from 'playwright';
 import { mkdir, readFile, writeFile } from 'fs/promises';
 import { existsSync } from 'fs';
 import path from 'path';
 
-const REPO_ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../..');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const REPO_ROOT = path.resolve(__dirname, '../..');
+
 const DEFAULT_OUTPUT_DIR = path.join(REPO_ROOT, 'output/resumes');
 const DEFAULT_FORMAT = 'letter';
+
 
 function usage() {
   console.error(`Usage:

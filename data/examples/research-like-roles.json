@@ -1,0 +1,58 @@
+[
+  { "role_id": "applied-ai-startup", "company": "Series-A applied-AI startup (recent Form D)", "title": "Applied AI Engineer — new grad",
+    "sponsorship": { "p": 0.85, "tier": "Proven", "source": "record" },
+    "fit": { "p": 0.78, "source": "model-judgment" },
+    "role_quality": { "p": 0.8, "source": "record" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.9, "source": "your-input" } },
+
+  { "role_id": "fullstack-biglab", "company": "Established sponsor — enterprise AI lab", "title": "Full-Stack SWE (New Grad), prototyping team",
+    "sponsorship": { "p": 0.9, "tier": "Proven", "source": "record" },
+    "fit": { "p": 0.6, "source": "model-judgment" },
+    "role_quality": { "p": 0.65, "source": "record" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.85, "source": "your-input" } },
+
+  { "role_id": "research-eng-nonsponsor", "company": "Household-name non-sponsor", "title": "Research-Engineer (prototype/benchmark)",
+    "sponsorship": { "p": 0.0, "tier": "None", "source": "record" },
+    "fit": { "p": 0.82, "source": "model-judgment" },
+    "role_quality": { "p": 0.9, "source": "record" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.85, "source": "your-input" } },
+
+  { "role_id": "ghost-ai-posting", "company": "Proven sponsor (ghost posting)", "title": "AI Prototype Engineer — looks perfect, not live",
+    "sponsorship": { "p": 0.9, "tier": "Proven", "source": "record" },
+    "fit": { "p": 0.85, "source": "model-judgment" },
+    "role_quality": { "p": 0.85, "source": "record" },
+    "liveness": { "factor": 0.0, "source": "record" },
+    "timeline": { "factor": 0.85, "source": "your-input" } },
+
+  { "role_id": "hci-vr-likely", "company": "Likely-tier sponsor (HCI/VR studio)", "title": "XR Prototype Developer (Unity/C#)",
+    "sponsorship": { "p": 0.55, "tier": "Likely", "source": "record" },
+    "fit": { "p": 0.8, "source": "model-judgment" },
+    "role_quality": { "p": 0.75, "source": "record" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.9, "source": "your-input" } },
+
+  { "role_id": "sim-eng-timeline", "company": "Proven sponsor — start date before OPT EAD", "title": "Simulation Engineer (start date too early)",
+    "sponsorship": { "p": 0.85, "tier": "Proven", "source": "record" },
+    "fit": { "p": 0.75, "source": "model-judgment" },
+    "role_quality": { "p": 0.7, "source": "record" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.0, "source": "your-input" } },
+
+  { "role_id": "ai-innovation-sales", "company": "Vague 'AI Innovation' posting", "title": "AI Innovation Associate (actually sales/support)",
+    "sponsorship": { "p": 0.4, "tier": "Possible", "source": "record" },
+    "fit": { "p": 0.15, "source": "model-judgment" },
+    "role_quality": { "p": 0.2, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.85, "source": "your-input" } },
+
+  { "role_id": "referral-override", "company": "Non-sponsor, but HM is a referral", "title": "Software Engineer (prototyping) — scorer says Skip",
+    "sponsorship": { "p": 0.05, "tier": "None", "source": "record" },
+    "fit": { "p": 0.72, "source": "model-judgment" },
+    "role_quality": { "p": 0.7, "source": "record" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.85, "source": "your-input" },
+    "override": { "decision": "Consider", "reason": "Referral from a classmate on the team says they just opened a cap-exempt req and will sponsor; DOL/Form-D records lag the actual hiring plan." } }
+]

@@ -1,0 +1,41 @@
+[
+  { "role_id": "msft-appliedai", "company": "Microsoft", "title": "Applied AI / Software Engineer (prototyping)",
+    "fit": { "p": 0.78, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.9, "source": "your-input" } },
+
+  { "role_id": "databricks-ml", "company": "Databricks", "title": "Machine Learning Engineer (prototyping)",
+    "fit": { "p": 0.8, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.9, "source": "your-input" } },
+
+  { "role_id": "snowflake-re", "company": "Snowflake", "title": "Research Engineer (prototype / evaluation)",
+    "fit": { "p": 0.75, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.85, "source": "your-input" } },
+
+  { "role_id": "linkedin-ml", "company": "LinkedIn", "title": "Machine Learning Engineer",
+    "fit": { "p": 0.72, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.85, "source": "your-input" } },
+
+  { "role_id": "uber-as", "company": "Uber Technologies", "title": "Applied Scientist (prototyping)",
+    "fit": { "p": 0.7, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.85, "source": "your-input" } },
+
+  { "role_id": "pinterest-ml", "company": "Pinterest", "title": "Machine Learning Engineer (recommendations)",
+    "fit": { "p": 0.6, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.9, "source": "your-input" } },
+
+  { "role_id": "zoox-sim", "company": "Zoox", "title": "Simulation / Research Engineer (ghost posting — not live)",
+    "fit": { "p": 0.85, "source": "model-judgment" },
+    "liveness": { "factor": 0.0, "source": "record" },
+    "timeline": { "factor": 0.85, "source": "your-input" } },
+
+  { "role_id": "stripe-ml", "company": "Stripe", "title": "Data/ML role (start date before OPT EAD)",
+    "fit": { "p": 0.75, "source": "model-judgment" },
+    "liveness": { "factor": 1.0, "source": "record" },
+    "timeline": { "factor": 0.0, "source": "your-input" } }
+]

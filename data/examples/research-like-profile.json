@@ -1,0 +1,7 @@
+{
+  "_note": "Illustrative profile for the case-mscs-opt-research-like-ai-software mode. No personal data — anonymized persona used to exercise npm run score. Real profiles live in private/.",
+  "persona": "F-1 MSCS/MSIS student, pre-OPT",
+  "authorization": "f-1 student, opt pending — needs future H-1B sponsorship",
+  "target_soc": ["15-1252 Software Developers", "15-1221 Computer & Information Research Scientists (research-like subset)"],
+  "target_roles": ["Applied AI Engineer", "Full-Stack / Software Engineer (prototyping)", "XR/HCI Prototype Developer", "Research Engineer"]
+}

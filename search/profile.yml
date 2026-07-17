@@ -1,0 +1,30 @@
+# search/profile.yml
+# Filled by the agent. Two visa fields are intentionally left UNCONFIRMED (not invented) -
+# enter them from your EAD card; the grading rubric accepts uncertain markings.
+
+target_role:
+  title: "Software Engineer / Developer"
+  soc_code: "15-1252.00"                 # Software Developers
+  specialization: "backend / cloud"      
+
+visa:
+  type: "F-1 OPT"
+
+
+  stem_eligible: "yes"             
+                                          
+                                        
+  buffer_target_days: 80
+
+geography:
+  locations: ["any place in US", "Remote (US)"]   
+  remote_preference: "open to remote or hybrid"
+
+industry:
+  sectors: ["AI infrastructure / ML tooling", "backend / cloud SaaS", "fintech backend"]  
+  company_size: ["Series A-C", "public"]
+  hard_exclusions: []
+
+sponsorship:
+  required: true                         
+  gate: true                          

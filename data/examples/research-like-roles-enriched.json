@@ -1,0 +1,274 @@
+[
+  {
+    "role_id": "msft-appliedai",
+    "company": "Microsoft",
+    "title": "Applied AI / Software Engineer (prototyping)",
+    "fit": {
+      "p": 0.78,
+      "source": "model-judgment"
+    },
+    "liveness": {
+      "factor": 1,
+      "source": "record"
+    },
+    "timeline": {
+      "factor": 0.9,
+      "source": "your-input"
+    },
+    "sponsorship": {
+      "p": 0.9,
+      "tier": "Proven",
+      "source": "record",
+      "evidence": {
+        "matched": true,
+        "dataset": "80-days-to-stay/SEC_DOL_H1b_data_mapped.csv",
+        "note": "12226 H-1B approvals, 97% rate",
+        "h1b_approvals": 12226,
+        "h1b_denials": 428,
+        "approval_rate_pct": 96.61767030188084,
+        "median_salary_offered": 156705,
+        "latest_funding_stage": "Series D+",
+        "latest_funding_date": "2020-07-14",
+        "top_job_titles_sponsored": "['Software Engineer', 'Product Manager', 'Technical Program Manager', 'Applied Sciences', 'Data Science']"
+      }
+    }
+  },
+  {
+    "role_id": "databricks-ml",
+    "company": "Databricks",
+    "title": "Machine Learning Engineer (prototyping)",
+    "fit": {
+      "p": 0.8,
+      "source": "model-judgment"
+    },
+    "liveness": {
+      "factor": 1,
+      "source": "record"
+    },
+    "timeline": {
+      "factor": 0.9,
+      "source": "your-input"
+    },
+    "sponsorship": {
+      "p": 0.9,
+      "tier": "Proven",
+      "source": "record",
+      "evidence": {
+        "matched": true,
+        "dataset": "80-days-to-stay/SEC_DOL_H1b_data_mapped.csv",
+        "note": "1640 H-1B approvals, 100% rate",
+        "h1b_approvals": 1640,
+        "h1b_denials": 8,
+        "approval_rate_pct": 99.51456310679612,
+        "median_salary_offered": 149422.5,
+        "latest_funding_stage": "Series D+",
+        "latest_funding_date": "2025-09-08",
+        "top_job_titles_sponsored": "['Software Engineer', 'Senior Software Engineer', 'Solutions Architect', 'Specialist Solutions Architect', 'Senior Solutions Engineer']"
+      }
+    }
+  },
+  {
+    "role_id": "snowflake-re",
+    "company": "Snowflake",
+    "title": "Research Engineer (prototype / evaluation)",
+    "fit": {
+      "p": 0.75,
+      "source": "model-judgment"
+    },
+    "liveness": {
+      "factor": 1,
+      "source": "record"
+    },
+    "timeline": {
+      "factor": 0.85,
+      "source": "your-input"
+    },
+    "sponsorship": {
+      "p": 0.9,
+      "tier": "Proven",
+      "source": "record",
+      "evidence": {
+        "matched": true,
+        "dataset": "80-days-to-stay/SEC_DOL_H1b_data_mapped.csv",
+        "note": "1816 H-1B approvals, 98% rate",
+        "h1b_approvals": 1816,
+        "h1b_denials": 28,
+        "approval_rate_pct": 98.4815618221258,
+        "median_salary_offered": 170000,
+        "latest_funding_stage": "Series D+",
+        "latest_funding_date": "2020-02-07",
+        "top_job_titles_sponsored": "['Senior Software Engineer', 'Senior Solutions Architect', 'Software Engineer', 'Senior Software Security Engineer', 'Financial Analyst']"
+      }
+    }
+  },
+  {
+    "role_id": "linkedin-ml",
+    "company": "LinkedIn",
+    "title": "Machine Learning Engineer",
+    "fit": {
+      "p": 0.72,
+      "source": "model-judgment"
+    },
+    "liveness": {
+      "factor": 1,
+      "source": "record"
+    },
+    "timeline": {
+      "factor": 0.85,
+      "source": "your-input"
+    },
+    "sponsorship": {
+      "p": 0.9,
+      "tier": "Proven",
+      "source": "record",
+      "evidence": {
+        "matched": true,
+        "dataset": "80-days-to-stay/SEC_DOL_H1b_data_mapped.csv",
+        "note": "4962 H-1B approvals, 99% rate",
+        "h1b_approvals": 4962,
+        "h1b_denials": 28,
+        "approval_rate_pct": 99.43887775551104,
+        "median_salary_offered": 167149,
+        "latest_funding_stage": "Series D+",
+        "latest_funding_date": "2014-02-28",
+        "top_job_titles_sponsored": "['Sr Software Engineer', 'Staff Software Engineer', 'Sr. Software Engineer, Systems Infrastructure', 'Sr Data Scientist', 'Software Engineer', 'Sr Software Engineer', 'Staff Software Engineer', 'Staff Software Engineer, Systems Infrastructure', 'Associate Product Manager', 'Sr. Software Engineer, Machine Learning']"
+      }
+    }
+  },
+  {
+    "role_id": "uber-as",
+    "company": "Uber Technologies",
+    "title": "Applied Scientist (prototyping)",
+    "fit": {
+      "p": 0.7,
+      "source": "model-judgment"
+    },
+    "liveness": {
+      "factor": 1,
+      "source": "record"
+    },
+    "timeline": {
+      "factor": 0.85,
+      "source": "your-input"
+    },
+    "sponsorship": {
+      "p": 0.9,
+      "tier": "Proven",
+      "source": "record",
+      "evidence": {
+        "matched": true,
+        "dataset": "80-days-to-stay/SEC_DOL_H1b_data_mapped.csv",
+        "note": "3984 H-1B approvals, 99% rate",
+        "h1b_approvals": 3984,
+        "h1b_denials": 42,
+        "approval_rate_pct": 98.95678092399405,
+        "median_salary_offered": 165000,
+        "latest_funding_stage": "Series D+",
+        "latest_funding_date": "2021-08-10",
+        "top_job_titles_sponsored": "['Senior Software Engineer', 'Staff Software Engineer', 'Software Engineer II', 'Software Engineer', 'SOFTWARE ENGINEER']"
+      }
+    }
+  },
+  {
+    "role_id": "pinterest-ml",
+    "company": "Pinterest",
+    "title": "Machine Learning Engineer (recommendations)",
+    "fit": {
+      "p": 0.6,
+      "source": "model-judgment"
+    },
+    "liveness": {
+      "factor": 1,
+      "source": "record"
+    },
+    "timeline": {
+      "factor": 0.9,
+      "source": "your-input"
+    },
+    "sponsorship": {
+      "p": 0.9,
+      "tier": "Proven",
+      "source": "record",
+      "evidence": {
+        "matched": true,
+        "dataset": "80-days-to-stay/SEC_DOL_H1b_data_mapped.csv",
+        "note": "1364 H-1B approvals, 99% rate",
+        "h1b_approvals": 1364,
+        "h1b_denials": 16,
+        "approval_rate_pct": 98.84057971014492,
+        "median_salary_offered": 156853,
+        "latest_funding_stage": "Series D+",
+        "latest_funding_date": "2017-06-02",
+        "top_job_titles_sponsored": "['Software Engineer', 'Software Engineer II', 'Software Engineer I', 'Senior Software Engineer', 'Senior Data Analyst']"
+      }
+    }
+  },
+  {
+    "role_id": "zoox-sim",
+    "company": "Zoox",
+    "title": "Simulation / Research Engineer (ghost posting — not live)",
+    "fit": {
+      "p": 0.85,
+      "source": "model-judgment"
+    },
+    "liveness": {
+      "factor": 0,
+      "source": "record"
+    },
+    "timeline": {
+      "factor": 0.85,
+      "source": "your-input"
+    },
+    "sponsorship": {
+      "p": 0.9,
+      "tier": "Proven",
+      "source": "record",
+      "evidence": {
+        "matched": true,
+        "dataset": "80-days-to-stay/SEC_DOL_H1b_data_mapped.csv",
+        "note": "1364 H-1B approvals, 99% rate",
+        "h1b_approvals": 1364,
+        "h1b_denials": 10,
+        "approval_rate_pct": 99.2721979621543,
+        "median_salary_offered": 158080,
+        "latest_funding_stage": "Series D+",
+        "latest_funding_date": "2019-10-16",
+        "top_job_titles_sponsored": "['Software Engineer', 'Senior Software Engineer', 'Senior Systems Engineer', 'Data Engineer', 'Senior AV Safety Data and Compliance Engineer']"
+      }
+    }
+  },
+  {
+    "role_id": "stripe-ml",
+    "company": "Stripe",
+    "title": "Data/ML role (start date before OPT EAD)",
+    "fit": {
+      "p": 0.75,
+      "source": "model-judgment"
+    },
+    "liveness": {
+      "factor": 1,
+      "source": "record"
+    },
+    "timeline": {
+      "factor": 0,
+      "source": "your-input"
+    },
+    "sponsorship": {
+      "p": 0.9,
+      "tier": "Proven",
+      "source": "record",
+      "evidence": {
+        "matched": true,
+        "dataset": "80-days-to-stay/SEC_DOL_H1b_data_mapped.csv",
+        "note": "1250 H-1B approvals, 98% rate",
+        "h1b_approvals": 1250,
+        "h1b_denials": 22,
+        "approval_rate_pct": 98.27044025157232,
+        "median_salary_offered": 158371,
+        "latest_funding_stage": "Series D+",
+        "latest_funding_date": "2024-04-08",
+        "top_job_titles_sponsored": "['Software Engineer', 'Backend Engineer', 'Risk Strategist', 'Product Manager', 'Engineering Manager']"
+      }
+    }
+  }
+]

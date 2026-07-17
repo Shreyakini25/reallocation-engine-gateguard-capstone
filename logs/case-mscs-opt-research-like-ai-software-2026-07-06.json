@@ -1,0 +1,38 @@
+{
+  "workflow": "case-mscs-opt-research-like-ai-software",
+  "run_id": "case-mscs-opt-research-like-ai-software-2026-07-06-001",
+  "mode": "sample",
+  "command": "npm run score -- data/examples/research-like-roles.json --profile data/examples/research-like-profile.json --out-dir reports/generated --md reports/generated/case-mscs-opt-research-like-ai-software-2026-07-06.md",
+  "steps_completed": ["assemble-records", "confirm-liveness", "confirm-timeline", "score-rank", "produce-report"],
+  "records_seen": 8,
+  "apply": 2,
+  "consider": 3,
+  "skip": 3,
+  "gated_to_zero": 2,
+  "skip_rate": "38%",
+  "stop_conditions": [],
+  "todo_items": [
+    { "type": "TODO: DEV", "item": "Automated research-like fit extractor.", "path": "scripts/modes/research-like-extract-fit.py" },
+    { "type": "TODO: DEFINE", "item": "Give role_quality a non-zero weight and renormalize (repo defect #3).", "path": "scripts/score/role-scorer.mjs" }
+  ],
+  "source_files": [
+    "data/examples/research-like-roles.json",
+    "data/examples/research-like-profile.json",
+    "scripts/score/role-scorer.mjs"
+  ],
+  "gate_decisions": [
+    { "gate": 1, "name": "Source gate", "decision": "pass", "note": "role-scorer.mjs + roles/profile JSON present" },
+    { "gate": 2, "name": "Scope gate", "decision": "pass", "note": "sample mode: no live network, no external writes" },
+    { "gate": 3, "name": "Data-shape gate", "decision": "pass", "note": "roles + profile parse; output role-scores.json parses" },
+    { "gate": 4, "name": "Script-readiness gate", "decision": "pass", "note": "npm run score exits 0; proposed .py scripts remain TODO:DEV" },
+    { "gate": 5, "name": "Approval gate", "decision": "n/a", "note": "no live/sensitive action in sample mode" },
+    { "gate": 6, "name": "Liveness gate", "decision": "pass", "note": "ghost-ai-posting liveness 0.0 -> Skip (gate fired as designed)" },
+    { "gate": 7, "name": "Timeline gate", "decision": "pass", "note": "sim-eng-timeline factor 0.0 -> Skip (gate fired as designed)" },
+    { "gate": 8, "name": "Report gate", "decision": "pass", "note": "human report + agent log written" }
+  ],
+  "generated_at": "2026-07-06T00:00:00Z",
+  "recipe_version": "0.2.0",
+  "score_version": "0.1.0",
+  "verified_output_paths": ["reports/generated/"],
+  "report_path": "reports/generated/case-mscs-opt-research-like-ai-software-2026-07-06.md"
+}

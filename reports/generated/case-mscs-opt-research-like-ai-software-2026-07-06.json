@@ -1,0 +1,426 @@
+{
+  "_scorer": "bayesian-role-scorer",
+  "_chapter": 11,
+  "generated": "2026-07-07",
+  "config": {
+    "weights": {
+      "sponsorship": 0.35,
+      "fit": 0.3,
+      "role_quality": 0
+    },
+    "apply_threshold": 0.3,
+    "consider_floor": 0.2,
+    "gate_zero": 0.05,
+    "soft_sponsorship_tiers": [
+      "likely",
+      "possible",
+      "unknown"
+    ]
+  },
+  "profile_needs_sponsorship": true,
+  "roles": [
+    {
+      "role_id": "applied-ai-startup",
+      "company": "Series-A applied-AI startup (recent Form D)",
+      "title": "Applied AI Engineer — new grad",
+      "composite": 0.4783,
+      "recommendation": "Apply",
+      "machine_recommendation": "Apply",
+      "reason": "composite 0.478 ≥ 0.3, gates healthy",
+      "override": null,
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.85,
+            "weight": 0.35,
+            "contribution": 0.2975,
+            "source": "record"
+          },
+          {
+            "factor": "fit",
+            "value": 0.78,
+            "weight": 0.3,
+            "contribution": 0.234,
+            "source": "model-judgment"
+          },
+          {
+            "factor": "role_quality",
+            "value": 0.8,
+            "weight": 0,
+            "contribution": 0,
+            "source": "record"
+          }
+        ],
+        "vote_sum": 0.5315,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 1,
+            "source": "record"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 0.9,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0.9,
+        "arithmetic": "(0.85·0.35 + 0.78·0.3 + 0.8·0) × 1 × 0.9 = 0.478"
+      }
+    },
+    {
+      "role_id": "fullstack-biglab",
+      "company": "Established sponsor — enterprise AI lab",
+      "title": "Full-Stack SWE (New Grad), prototyping team",
+      "composite": 0.4208,
+      "recommendation": "Apply",
+      "machine_recommendation": "Apply",
+      "reason": "composite 0.421 ≥ 0.3, gates healthy",
+      "override": null,
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.9,
+            "weight": 0.35,
+            "contribution": 0.315,
+            "source": "record"
+          },
+          {
+            "factor": "fit",
+            "value": 0.6,
+            "weight": 0.3,
+            "contribution": 0.18,
+            "source": "model-judgment"
+          },
+          {
+            "factor": "role_quality",
+            "value": 0.65,
+            "weight": 0,
+            "contribution": 0,
+            "source": "record"
+          }
+        ],
+        "vote_sum": 0.495,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 1,
+            "source": "record"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 0.85,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0.85,
+        "arithmetic": "(0.9·0.35 + 0.6·0.3 + 0.65·0) × 1 × 0.85 = 0.421"
+      }
+    },
+    {
+      "role_id": "research-eng-nonsponsor",
+      "company": "Household-name non-sponsor",
+      "title": "Research-Engineer (prototype/benchmark)",
+      "composite": 0.2091,
+      "recommendation": "Consider",
+      "machine_recommendation": "Consider",
+      "reason": "composite 0.209 in the Consider band [0.2, 0.3)",
+      "override": null,
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0,
+            "weight": 0.35,
+            "contribution": 0,
+            "source": "record"
+          },
+          {
+            "factor": "fit",
+            "value": 0.82,
+            "weight": 0.3,
+            "contribution": 0.246,
+            "source": "model-judgment"
+          },
+          {
+            "factor": "role_quality",
+            "value": 0.9,
+            "weight": 0,
+            "contribution": 0,
+            "source": "record"
+          }
+        ],
+        "vote_sum": 0.246,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 1,
+            "source": "record"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 0.85,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0.85,
+        "arithmetic": "(0·0.35 + 0.82·0.3 + 0.9·0) × 1 × 0.85 = 0.209"
+      }
+    },
+    {
+      "role_id": "ghost-ai-posting",
+      "company": "Proven sponsor (ghost posting)",
+      "title": "AI Prototype Engineer — looks perfect, not live",
+      "composite": 0,
+      "recommendation": "Skip",
+      "machine_recommendation": "Skip",
+      "reason": "gated: liveness ≈ 0.000 (a closed gate zeroes the composite regardless of votes)",
+      "override": null,
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.9,
+            "weight": 0.35,
+            "contribution": 0.315,
+            "source": "record"
+          },
+          {
+            "factor": "fit",
+            "value": 0.85,
+            "weight": 0.3,
+            "contribution": 0.255,
+            "source": "model-judgment"
+          },
+          {
+            "factor": "role_quality",
+            "value": 0.85,
+            "weight": 0,
+            "contribution": 0,
+            "source": "record"
+          }
+        ],
+        "vote_sum": 0.57,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 0,
+            "source": "record"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 0.85,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0,
+        "arithmetic": "(0.9·0.35 + 0.85·0.3 + 0.85·0) × 0 × 0.85 = 0.000"
+      }
+    },
+    {
+      "role_id": "hci-vr-likely",
+      "company": "Likely-tier sponsor (HCI/VR studio)",
+      "title": "XR Prototype Developer (Unity/C#)",
+      "composite": 0.3892,
+      "recommendation": "Consider",
+      "machine_recommendation": "Consider",
+      "reason": "above threshold (0.389) but one soft spot: sponsorship tier \"Likely\"",
+      "override": null,
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.55,
+            "weight": 0.35,
+            "contribution": 0.1925,
+            "source": "record"
+          },
+          {
+            "factor": "fit",
+            "value": 0.8,
+            "weight": 0.3,
+            "contribution": 0.24,
+            "source": "model-judgment"
+          },
+          {
+            "factor": "role_quality",
+            "value": 0.75,
+            "weight": 0,
+            "contribution": 0,
+            "source": "record"
+          }
+        ],
+        "vote_sum": 0.4325,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 1,
+            "source": "record"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 0.9,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0.9,
+        "arithmetic": "(0.55·0.35 + 0.8·0.3 + 0.75·0) × 1 × 0.9 = 0.389"
+      }
+    },
+    {
+      "role_id": "sim-eng-timeline",
+      "company": "Proven sponsor — start date before OPT EAD",
+      "title": "Simulation Engineer (start date too early)",
+      "composite": 0,
+      "recommendation": "Skip",
+      "machine_recommendation": "Skip",
+      "reason": "gated: timeline ≈ 0.000 (a closed gate zeroes the composite regardless of votes)",
+      "override": null,
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.85,
+            "weight": 0.35,
+            "contribution": 0.2975,
+            "source": "record"
+          },
+          {
+            "factor": "fit",
+            "value": 0.75,
+            "weight": 0.3,
+            "contribution": 0.225,
+            "source": "model-judgment"
+          },
+          {
+            "factor": "role_quality",
+            "value": 0.7,
+            "weight": 0,
+            "contribution": 0,
+            "source": "record"
+          }
+        ],
+        "vote_sum": 0.5225,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 1,
+            "source": "record"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 0,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0,
+        "arithmetic": "(0.85·0.35 + 0.75·0.3 + 0.7·0) × 1 × 0 = 0.000"
+      }
+    },
+    {
+      "role_id": "ai-innovation-sales",
+      "company": "Vague 'AI Innovation' posting",
+      "title": "AI Innovation Associate (actually sales/support)",
+      "composite": 0.1573,
+      "recommendation": "Skip",
+      "machine_recommendation": "Skip",
+      "reason": "composite 0.157 < 0.2 — time is better spent elsewhere",
+      "override": null,
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.4,
+            "weight": 0.35,
+            "contribution": 0.14,
+            "source": "record"
+          },
+          {
+            "factor": "fit",
+            "value": 0.15,
+            "weight": 0.3,
+            "contribution": 0.045,
+            "source": "model-judgment"
+          },
+          {
+            "factor": "role_quality",
+            "value": 0.2,
+            "weight": 0,
+            "contribution": 0,
+            "source": "model-judgment"
+          }
+        ],
+        "vote_sum": 0.185,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 1,
+            "source": "record"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 0.85,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0.85,
+        "arithmetic": "(0.4·0.35 + 0.15·0.3 + 0.2·0) × 1 × 0.85 = 0.157"
+      }
+    },
+    {
+      "role_id": "referral-override",
+      "company": "Non-sponsor, but HM is a referral",
+      "title": "Software Engineer (prototyping) — scorer says Skip",
+      "composite": 0.1985,
+      "recommendation": "Consider",
+      "machine_recommendation": "Skip",
+      "reason": "composite 0.198 < 0.2 — time is better spent elsewhere",
+      "override": {
+        "decision": "Consider",
+        "reason": "Referral from a classmate on the team says they just opened a cap-exempt req and will sponsor; DOL/Form-D records lag the actual hiring plan."
+      },
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.05,
+            "weight": 0.35,
+            "contribution": 0.0175,
+            "source": "record"
+          },
+          {
+            "factor": "fit",
+            "value": 0.72,
+            "weight": 0.3,
+            "contribution": 0.216,
+            "source": "model-judgment"
+          },
+          {
+            "factor": "role_quality",
+            "value": 0.7,
+            "weight": 0,
+            "contribution": 0,
+            "source": "record"
+          }
+        ],
+        "vote_sum": 0.2335,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 1,
+            "source": "record"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 0.85,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0.85,
+        "arithmetic": "(0.05·0.35 + 0.72·0.3 + 0.7·0) × 1 × 0.85 = 0.198"
+      }
+    }
+  ]
+}
