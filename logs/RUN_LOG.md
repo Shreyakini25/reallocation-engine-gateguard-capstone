@@ -150,3 +150,18 @@ private emails, or sensitive application notes.
 - **Rebuilt:** `node scripts/build-instructions.mjs --promote` → `AGENTS.md` + `CLAUDE.md` regenerated; `CLAUDE.md` now imports `@SNICKERDOODLE.md`.
 - **Untouched:** `data/` CSVs (real company names containing "mycroft") and prior RUN_LOG history (append-only).
 - **Result:** conformance + doctor green; no stale `MYCROFT.md` outside data/history.
+## 2026-07-19 — ux-designer-sponsor-triage run
+**Mode:** ux-designer-sponsor-triage v0.2.1
+**Inputs:** data/80-days-to-stay/data/SEC_DOL_H1b_data_mapped.csv (public,
+company-level); ATS scan against repo-connected sources
+**Commands run:** npm run verify; npm run ats:scan -- --dry-run (fixed
+missing portals.yml by copying portals.example.yml); PowerShell Select-String
+title search on "Designer"
+**Outputs:**
+- verify: 32/131 files failed conformance (baseline, not caused by this run)
+- ats:scan: real live Databricks postings returned
+- H-1B search: 68 companies matched "Designer" in top_job_titles_sponsored
+**Result:** RUNNABLE-SAMPLE — real commands, real data, no fabricated output
+**Open issues:** title match not row-audited for false positives (Design
+Manager vs Designer); ATS-scan-to-H1B-list join still manual
+**Notes:** no private/personal data used or committed
