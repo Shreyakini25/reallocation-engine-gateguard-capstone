@@ -1,7 +1,7 @@
 ---
 status: RUNNABLE-SAMPLE
 todos_open: 3
-last_gate: "sample-run, 2026-07-06, logs/RUN_LOG.md#2026-07-06--ds-opt-ai-washing-triage"
+last_gate: "sample-run, 2026-07-20, logs/RUN_LOG.md#2026-07-20--ds-opt-ai-washing-triage"
 attestation: null
 recipe_version: 0.1.0
 ---
@@ -185,7 +185,7 @@ skip rate, **verified findings**, **inferred findings**, typed TODOs, next decis
 - That a title maps to a SOC code without manual/script classification.
 - That company sponsorship history applies to this exact team or hiring cycle.
 
-## Worked Run — 2026-07-06 (sample mode)
+## Worked Run — 2026-07-20 (sample mode)
 
 Real execution on this machine. Reproduces the error → diagnosis → fix → success arc.
 
@@ -211,19 +211,19 @@ Scanning 1 companies via providers (0 local parser; 0 skipped — no provider ma
 (dry run — no files will be written)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Portal Scan — 2026-07-06
+Portal Scan — 2026-07-20
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Companies scanned:     1
-Total jobs found:      791
-Filtered by title:     349 removed
-Filtered by location:  391 removed
-Duplicates:            1 skipped
-New offers added:      50
+Total jobs found:      787
+Filtered by title:     330 removed
+Filtered by location:  396 removed
+Duplicates:            3 skipped
+New offers added:      58
 ```
 
 ### 3. Reverse-filter classification (sample-mode substitute for the automation script)
 
-The 50 offers are dominated by AI-washed titles — a live demonstration of the thesis.
+The 58 offers are dominated by AI-washed titles — a live demonstration of the thesis.
 Sample classification of representative offers:
 
 | Title (from scan) | Class | Why |
@@ -231,12 +231,12 @@ Sample classification of representative offers:
 | AI Engineer - FDE (Forward Deployed Engineer) | Mixed | AI Engineer signal, but FDE = delivery-weighted |
 | Specialist Solutions Architect - AI/ML | Mixed | Solutions Architect + AI/ML → gray zone |
 | Sr. Solutions Architect - AI Natives Business | Skip | Solutions/architecture, sales-adjacent |
-| Product Marketing Director, AI | Skip | Marketing + Director — "AI" is decoration |
-| Strategic AI/BI Account Executive | Skip | Account Executive = sales |
-| Manager, Forward Deployed Engineering - CMEG | Skip | Manager |
+| Product Marketing Director, Lakewatch | Skip | Marketing + Director — "AI" is decoration |
+| Strategic Genie and AI Sales Specialist | Skip | Sales Specialist — "AI" is decoration |
+| Sales Dev AI Program Manager | Skip | Sales + Manager |
 | Sr Security Engineer, Incident Response | Skip | Security |
 
-Of the 50 offers, the great majority fell to Skip (Solutions/Manager/Sales/Marketing/
+Of the 58 offers, the great majority fell to Skip (Solutions/Manager/Sales/Marketing/
 Security/Field). **Zero** unambiguous `Data Scientist` / `ML Engineer` / `Data Engineer`
 Target titles appeared in this company's current board — itself the finding: Databricks'
 open Data/AI-labeled roles are overwhelmingly go-to-market/consulting, not IC data science.
@@ -260,14 +260,14 @@ company does sponsor those titles. That nuance is why Mixed → Manual Review, n
 ### 5. Verification gate
 
 ```
-$ node scripts/conformance.mjs logs/case-ds-opt-ai-washing-triage-2026-07-06.json   # → valid JSON
+$ node scripts/conformance.mjs logs/case-ds-opt-ai-washing-triage-2026-07-20.json   # → valid JSON
 $ npm run doctor    # environment + recipe dashboard
 ```
 
 ### Verified vs. inferred (line by line)
 
 **Verified — a script or dataset produced it:**
-- Scan funnel: 791 jobs found → 349 removed by title → 391 removed by location → 50 offers (scan stdout, exit 0).
+- Scan funnel: 787 jobs found → 330 removed by title → 396 removed by location → 58 offers (scan stdout, exit 0).
 - Databricks H-1B row: 1640 approvals / 8 denials / 99.51% rate / $149,422.50 median + sponsored-title list (CSV `grep`).
 - Agent log is valid JSON (`conformance.mjs` → `✓ all conform`).
 - The `portals.yml not found` error and its fix (terminal transcript, reproducible).
@@ -276,7 +276,7 @@ $ npm run doctor    # environment + recipe dashboard
 - Every Target / Mixed / Skip label (classification of the title string alone).
 - "Manual Review" for the two Mixed rows — inference that FDE / Specialist Solutions Architect *might* be genuine, leaning on the sponsored-title overlap; not confirmed.
 - SOC codes in the rules table (title-inferred; no SOC join was run).
-- The qualitative claim "Databricks' AI-labeled roles are overwhelmingly go-to-market" — a reading of the 50 surfaced offers, not a census of all 791.
+- The qualitative claim "Databricks' AI-labeled roles are overwhelmingly go-to-market" — a reading of the 58 surfaced offers, not a census of all 787.
 
 ### Reflection
 
@@ -304,7 +304,7 @@ below (per SNICKERDOODLE Attestation Format) to promote past RUNNABLE-LIVE.
 | Ran | Saw | Expected |
 |---|---|---|
 | `npm run ats:scan -- --dry-run` (no config) | `Error: portals.yml not found` | a clear onboarding blocker |
-| same, after `cp` of the example config | 791 jobs → 50 offers, `Portal Scan` summary | a completed dry run |
+| same, after `cp` of the example config | 787 jobs → 58 offers, `Portal Scan` summary | a completed dry run |
 | `grep -i databricks <H-1B CSV>` | `DATABRICKS INC`, 1640/8/99.51% | company-level evidence row |
 | `node scripts/conformance.mjs <agent log>` | `✓ all conform` | valid JSON |
 | **deliberate break:** ran `npm run doctor` on this recipe | reported CRLF recipes as "missing frontmatter" — see below | doctor should detect frontmatter |
@@ -338,6 +338,6 @@ below (per SNICKERDOODLE Attestation Format) to promote past RUNNABLE-LIVE.
 > sample run genuinely **completed and is logged** (artifacts below), using the *existing*
 > command surface — the open DEV item is an automation enhancement the sample run did not
 > depend on. The status reflects the completed run; the open item is disclosed here, not hidden.
-> Artifacts: `logs/case-ds-opt-ai-washing-triage-2026-07-06.json`,
-> `reports/generated/case-ds-opt-ai-washing-triage-2026-07-06.md`,
-> `logs/RUN_LOG.md#2026-07-06--ds-opt-ai-washing-triage`.
+> Artifacts: `logs/case-ds-opt-ai-washing-triage-2026-07-20.json`,
+> `reports/generated/case-ds-opt-ai-washing-triage-2026-07-20.md`,
+> `logs/RUN_LOG.md#2026-07-20--ds-opt-ai-washing-triage`.

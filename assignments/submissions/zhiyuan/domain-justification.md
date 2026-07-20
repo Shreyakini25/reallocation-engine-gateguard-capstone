@@ -21,7 +21,7 @@ the party least equipped to pay it, because they lack the industry context to kn
 software vendor, "Solutions Architect — AI/ML" is customer-facing pre-sales, not model-building.
 
 The asymmetry is concrete and measurable. In this recipe's sample run, Databricks' board
-returned 50 offers after filtering; the great majority were Solutions / Manager / Sales /
+returned 58 offers after filtering; the great majority were Solutions / Manager / Sales /
 Marketing / Security / Field roles wearing an AI/ML/Data label, and **zero** were unambiguous
 individual-contributor Data/AI titles. The student who trusts the titles applies to a dozen
 "AI" roles that were never IC data-science roles, and burns OPT days doing it.

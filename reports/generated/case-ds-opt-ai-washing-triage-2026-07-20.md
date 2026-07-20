@@ -1,4 +1,4 @@
-# AI-Washing Reverse-Filter Triage — Run Report (2026-07-06, sample mode)
+# AI-Washing Reverse-Filter Triage — Run Report (2026-07-20, sample mode)
 
 **Recipe:** `recipes/case-ds-opt-ai-washing-triage.md` v0.1.0 · **Status:** RUNNABLE-SAMPLE
 **Reader:** the OPT student + advising human · **Decides:** pursue / hand-check / drop each role.
@@ -33,7 +33,7 @@ are really sales, solutions, field, marketing, or management roles wearing an AI
 | 1 Problem | pass — company set + target family named |
 | 2 Local evidence | pass — both CSVs present |
 | 3 Stored script | pass — after `portals.yml` created (was blocking) |
-| 4 Small run | pass — dry-run exit 0, 791 → 50 offers |
+| 4 Small run | pass — dry-run exit 0, 787 → 58 offers |
 | 5 Approval | **blocked** — no live scan (held; `[TODO: APPROVE]`) |
 | 6 Report | pass — this report + valid JSON log |
 
@@ -42,11 +42,11 @@ are really sales, solutions, field, marketing, or management roles wearing an AI
 | Metric | Value |
 |---|---:|
 | Companies scanned | 1 |
-| Total jobs found | 791 |
-| Removed by title filter | 349 |
-| Removed by location filter | 391 |
-| Duplicates skipped | 1 |
-| New offers surfaced | 50 |
+| Total jobs found | 787 |
+| Removed by title filter | 330 |
+| Removed by location filter | 396 |
+| Duplicates skipped | 3 |
+| New offers surfaced | 58 |
 
 ## Triage table (representative offers)
 
@@ -57,9 +57,9 @@ Labels are **model judgments over title strings**, not JD reads (see inferred fi
 | AI Engineer - FDE | Databricks | Mixed | Company-level (1640/8) | Related titles present | title-inferred | Manual Review |
 | Specialist Solutions Architect - AI/ML | Databricks | Mixed | Company-level | Solutions Architect sponsored | uncertain | Manual Review |
 | Sr. Solutions Architect - AI Natives Business | Databricks | Skip | Company-level | — | not checked | Skip |
-| Product Marketing Director, AI | Databricks | Skip | Company-level | — | not checked | Skip |
-| Strategic AI/BI Account Executive | Databricks | Skip | Company-level | — | not checked | Skip |
-| Manager, Forward Deployed Engineering - CMEG | Databricks | Skip | Company-level | — | not checked | Skip |
+| Product Marketing Director, Lakewatch | Databricks | Skip | Company-level | — | not checked | Skip |
+| Strategic Genie and AI Sales Specialist | Databricks | Skip | Company-level | — | not checked | Skip |
+| Sales Dev AI Program Manager | Databricks | Skip | Company-level | — | not checked | Skip |
 | Sr Security Engineer, Incident Response | Databricks | Skip | Company-level | — | not checked | Skip |
 
 **Skip rate:** majority of surfaced offers → Skip. Zero unambiguous IC `Data Scientist` /
@@ -67,7 +67,7 @@ Labels are **model judgments over title strings**, not JD reads (see inferred fi
 
 ## Verified findings
 
-- Scan produced 791 jobs → 50 offers for Databricks (dry run, exit 0).
+- Scan produced 787 jobs → 58 offers for Databricks (dry run, exit 0).
 - `Databricks` → `DATABRICKS INC` in the H-1B CSV (fuzzy join): **1640 approvals / 8 denials /
   99.51% approval rate / $149,422.50 median**; sponsored titles include Software Engineer and
   (Specialist) Solutions Architect.

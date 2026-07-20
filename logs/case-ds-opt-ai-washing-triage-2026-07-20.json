@@ -1,19 +1,19 @@
 {
   "workflow": "case-ds-opt-ai-washing-triage",
-  "run_id": "ds-opt-ai-washing-triage-2026-07-06-sample",
+  "run_id": "ds-opt-ai-washing-triage-2026-07-20-sample",
   "mode": "sample",
-  "generated_at": "2026-07-06T00:58:00+00:00",
+  "generated_at": "2026-07-20T00:00:00+00:00",
   "companies_scanned": 1,
-  "jobs_found": 791,
-  "filtered_by_title": 349,
-  "filtered_by_location": 391,
-  "duplicates_skipped": 1,
-  "offers": 50,
+  "jobs_found": 787,
+  "filtered_by_title": 330,
+  "filtered_by_location": 396,
+  "duplicates_skipped": 3,
+  "offers": 58,
   "classified": {
     "target": 0,
     "mixed": 2,
     "skip": 5,
-    "note": "counts are for the 7 representative offers classified by hand in sample mode; the full 50 were not individually labeled without the [TODO: DEV] script"
+    "note": "counts are for the 7 representative offers classified by hand in sample mode; the full 58 were not individually labeled without the [TODO: DEV] script"
   },
   "skip_rate": "majority (>0.5) — healthy per domain; zero unambiguous IC Data/AI Target titles on Databricks' current board",
   "h1b_joins": [
@@ -50,13 +50,13 @@
     "gate_1_problem": "pass",
     "gate_2_local_evidence": "pass",
     "gate_3_stored_script": "pass (after portals.yml created)",
-    "gate_4_small_run": "pass (dry-run exit 0, 791->50)",
+    "gate_4_small_run": "pass (dry-run exit 0, 787->58)",
     "gate_5_approval": "blocked (no live scan; [TODO: APPROVE])",
     "gate_6_report": "pass"
   },
   "verified_vs_inferred": {
-    "verified": ["scan counts 791/349/391/50", "offer titles", "Databricks H-1B CSV row"],
+    "verified": ["scan counts 787/330/396/58", "offer titles", "Databricks H-1B CSV row"],
     "inferred_model_judgment": ["all Target/Mixed/Skip labels (title-string judgment, not JD read)"]
   },
-  "report_path": "reports/generated/case-ds-opt-ai-washing-triage-2026-07-06.md"
+  "report_path": "reports/generated/case-ds-opt-ai-washing-triage-2026-07-20.md"
 }

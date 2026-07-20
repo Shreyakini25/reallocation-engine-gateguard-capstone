@@ -1,4 +1,4 @@
-# Worked Run — AI-Washing Reverse-Filter Triage (2026-07-06, sample mode)
+# Worked Run — AI-Washing Reverse-Filter Triage (2026-07-20, sample mode)
 
 Canonical source: `recipes/case-ds-opt-ai-washing-triage.md` (Worked Run + Attestation sections).
 This is the submission / presentation writeup. All numbers are copied from the real run — no
@@ -26,19 +26,19 @@ Fix: `cp data/ats/portals.example.yml data/ats/portals.yml` (Databricks enabled,
 
 **2. After config — sample run completes:**
 ```
-Portal Scan — 2026-07-06
+Portal Scan — 2026-07-20
 Companies scanned:     1
-Total jobs found:      791
-Filtered by title:     349 removed
-Filtered by location:  391 removed
-Duplicates:            1 skipped
-New offers added:      50
+Total jobs found:      787
+Filtered by title:     330 removed
+Filtered by location:  396 removed
+Duplicates:            3 skipped
+New offers added:      58
 ```
 
-**3. The finding (AI-washing, live):** of the 50 offers, the majority were washed —
-"Product Marketing Director, AI", "Strategic AI/BI Account Executive", "Sr. Solutions Architect
-- AI Natives", "Manager, Forward Deployed Engineering". **Zero** unambiguous IC `Data Scientist`
-/ `ML Engineer` / `Data Engineer` titles. Skip is success; a high skip rate is the healthy result.
+**3. The finding (AI-washing, live):** of the 58 offers, the majority were washed —
+"Product Marketing Director, Lakewatch", "Strategic Genie and AI Sales Specialist",
+"Sr. Solutions Architect - AI Natives", "Sales Dev AI Program Manager". **Zero** unambiguous IC
+`Data Scientist` / `ML Engineer` / `Data Engineer` titles. Skip is success; a high skip rate is the healthy result.
 
 **4. H-1B evidence join (real CSV row):**
 ```
@@ -49,7 +49,7 @@ Nuance: Databricks *does* sponsor Solutions-titled roles — so Mixed titles go 
 
 ## Verified vs. inferred
 
-**Verified (script/dataset produced it):** 791 → 349 → 391 → 50 scan funnel; Databricks H-1B row
+**Verified (script/dataset produced it):** 787 → 330 → 396 → 58 scan funnel; Databricks H-1B row
 (1640/8/99.51%/$149,422.50); agent log is valid JSON (`conformance.mjs` ✓); the error + fix transcript.
 
 **Inferred (model judgment over title strings, no JD read):** every Target/Mixed/Skip label; the

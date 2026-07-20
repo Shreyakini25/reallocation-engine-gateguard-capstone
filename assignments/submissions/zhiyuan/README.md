@@ -1,6 +1,6 @@
 # Submission — AI-Washing Reverse-Filter Triage for Data/AI OPT Students
 
-**Author:** Zhiyuan · **Branch:** `mode/zhiyuan-data-ai-opt` · **Date:** 2026-07-06
+**Author:** Zhiyuan · **Branch:** `mode/zhiyuan-data-ai-opt` · **Date:** 2026-07-20
 
 A recipe for The Reallocation Engine that reverse-filters AI-washed job postings — roles that
 are really sales / solutions / management wearing an "AI/ML/Data" title — for an OPT student
@@ -14,9 +14,9 @@ logged sample run.
 | **Mode / recipe** (canonical) | [`recipes/case-ds-opt-ai-washing-triage.md`](../../../recipes/case-ds-opt-ai-washing-triage.md) |
 | **Domain justification** (this folder) | [`domain-justification.md`](domain-justification.md) |
 | **Worked-run writeup** (this folder) | [`worked-run.md`](worked-run.md) |
-| Agent log (JSON) | [`logs/case-ds-opt-ai-washing-triage-2026-07-06.json`](../../../logs/case-ds-opt-ai-washing-triage-2026-07-06.json) |
-| Human report (Markdown) | [`reports/generated/case-ds-opt-ai-washing-triage-2026-07-06.md`](../../../reports/generated/case-ds-opt-ai-washing-triage-2026-07-06.md) |
-| Run-log entry | `logs/RUN_LOG.md` → `2026-07-06 -- ds-opt-ai-washing-triage` (quoted below) |
+| Agent log (JSON) | [`logs/case-ds-opt-ai-washing-triage-2026-07-20.json`](../../../logs/case-ds-opt-ai-washing-triage-2026-07-20.json) |
+| Human report (Markdown) | [`reports/generated/case-ds-opt-ai-washing-triage-2026-07-20.md`](../../../reports/generated/case-ds-opt-ai-washing-triage-2026-07-20.md) |
+| Run-log entry | `logs/RUN_LOG.md` → `2026-07-20 -- ds-opt-ai-washing-triage` (quoted below) |
 
 ## Rubric map
 
@@ -36,14 +36,14 @@ npm run doctor   → environment + recipe dashboard (this recipe: RUNNABLE-SAMPL
 
 ## Run-log entry (from `logs/RUN_LOG.md`)
 
-> ## 2026-07-06 -- ds-opt-ai-washing-triage: new recipe + first sample run
+> ## 2026-07-20 -- ds-opt-ai-washing-triage: new recipe + first sample run
 >
 > - **Recipe:** `case-ds-opt-ai-washing-triage` (new), sample mode. Reworked from the legacy
 >   25-pt design draft: `SCRIPTS/`→`scripts/`, `modes/`→`recipes/`, `modes/RUN_LOG.md`→
 >   `logs/RUN_LOG.md`; added lifecycle frontmatter; proposed command → typed TODOs; dual output;
 >   testable gates.
 > - **Command:** `npm run ats:scan -- --dry-run` + manual `grep`/`rg` triage; `grep -i databricks` on the H-1B CSV.
-> - **Result:** 791 jobs → 50 offers; majority Skip, 0 unambiguous IC Data/AI targets. H-1B join
+> - **Result:** 787 jobs → 58 offers; majority Skip, 0 unambiguous IC Data/AI targets. H-1B join
 >   verified: `Databricks`→`DATABRICKS INC`, 1640/8/99.51%/$149,422.50.
 > - **Open:** `[TODO: DEV]` automation script; `[TODO: DEFINE]` run-envelope schema;
 >   `[TODO: APPROVE]` live scan; human attestation for VERIFIED.
