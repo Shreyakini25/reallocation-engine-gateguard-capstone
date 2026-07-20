@@ -1,0 +1,114 @@
+[
+  {
+    "company_name": "Box",
+    "ats_platform": "",
+    "ats_slug": "box",
+    "ats_url": "",
+    "ats_api_url": "",
+    "open_job_count": 0,
+    "detection_status": "not_found",
+    "detected_at": "2026-07-19T23:50:47.664875+00:00",
+    "attempts": [
+      {
+        "platform": "greenhouse",
+        "status_code": 404,
+        "url": "https://boards-api.greenhouse.io/v1/boards/box/jobs",
+        "error": "",
+        "found": false,
+        "open_job_count": 0
+      },
+      {
+        "platform": "lever",
+        "status_code": 404,
+        "url": "https://api.lever.co/v0/postings/box",
+        "error": "",
+        "found": false,
+        "open_job_count": 0
+      }
+    ]
+  },
+  {
+    "company_name": "Notion",
+    "ats_platform": "",
+    "ats_slug": "notion",
+    "ats_url": "",
+    "ats_api_url": "",
+    "open_job_count": 0,
+    "detection_status": "not_found",
+    "detected_at": "2026-07-19T23:50:48.164558+00:00",
+    "attempts": [
+      {
+        "platform": "greenhouse",
+        "status_code": 404,
+        "url": "https://boards-api.greenhouse.io/v1/boards/notion/jobs",
+        "error": "",
+        "found": false,
+        "open_job_count": 0
+      },
+      {
+        "platform": "lever",
+        "status_code": 404,
+        "url": "https://api.lever.co/v0/postings/notion",
+        "error": "",
+        "found": false,
+        "open_job_count": 0
+      }
+    ]
+  },
+  {
+    "company_name": "Cartesia",
+    "ats_platform": "",
+    "ats_slug": "cartesia",
+    "ats_url": "",
+    "ats_api_url": "",
+    "open_job_count": 0,
+    "detection_status": "not_found",
+    "detected_at": "2026-07-19T23:50:48.629372+00:00",
+    "attempts": [
+      {
+        "platform": "greenhouse",
+        "status_code": 404,
+        "url": "https://boards-api.greenhouse.io/v1/boards/cartesia/jobs",
+        "error": "",
+        "found": false,
+        "open_job_count": 0
+      },
+      {
+        "platform": "lever",
+        "status_code": 404,
+        "url": "https://api.lever.co/v0/postings/cartesia",
+        "error": "",
+        "found": false,
+        "open_job_count": 0
+      }
+    ]
+  },
+  {
+    "company_name": "FT Partners",
+    "ats_platform": "",
+    "ats_slug": "ftpartners",
+    "ats_url": "",
+    "ats_api_url": "",
+    "open_job_count": 0,
+    "detection_status": "not_found",
+    "detected_at": "2026-07-19T23:50:49.141234+00:00",
+    "attempts": [
+      {
+        "platform": "greenhouse",
+        "status_code": 404,
+        "url": "https://boards-api.greenhouse.io/v1/boards/ftpartners/jobs",
+        "error": "",
+        "found": false,
+        "open_job_count": 0
+      },
+      {
+        "platform": "lever",
+        "status_code": 404,
+        "url": "https://api.lever.co/v0/postings/ftpartners",
+        "error": "",
+        "found": false,
+        "open_job_count": 0
+      }
+    ]
+  }
+]

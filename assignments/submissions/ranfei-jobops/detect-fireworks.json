@@ -1,0 +1,22 @@
+[
+  {
+    "company_name": "Fireworks AI",
+    "ats_platform": "greenhouse",
+    "ats_slug": "fireworksai",
+    "ats_url": "https://boards.greenhouse.io/fireworksai",
+    "ats_api_url": "https://boards-api.greenhouse.io/v1/boards/fireworksai/jobs",
+    "open_job_count": 37,
+    "detection_status": "found",
+    "detected_at": "2026-07-19T23:49:30.486948+00:00",
+    "attempts": [
+      {
+        "platform": "greenhouse",
+        "status_code": 200,
+        "url": "https://boards-api.greenhouse.io/v1/boards/fireworksai/jobs",
+        "error": "",
+        "found": true,
+        "open_job_count": 37
+      }
+    ]
+  }
+]
