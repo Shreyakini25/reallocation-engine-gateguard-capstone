@@ -1,0 +1,461 @@
+[
+  {
+    "role_id": "realloc-cohere-health-inc",
+    "company": "COHERE HEALTH INC",
+    "title": "Staff Machine Learning Engineer",
+    "_classification": "practitioner",
+    "_shrinkage": {
+      "n": 106,
+      "alphaPost": 113.812,
+      "betaPost": 2.1880000000000006,
+      "raw_rate": 0.9811320754716981,
+      "shrunk_mean": 0.9811,
+      "ci90_low": 0.9604,
+      "ci90_high": 1,
+      "confidence_tier": "high"
+    },
+    "_mc": {
+      "method": "Monte-Carlo (20000 draws, seeded): sponsorship~Beta posterior, fit~Beta(K=9) model-judgment",
+      "composite_mean": 0.5684,
+      "composite_ci90": [
+        0.4911,
+        0.6256
+      ],
+      "p_apply": 1,
+      "p_consider": 0,
+      "p_skip": 0
+    },
+    "_pivot_score": 4.516,
+    "_soc_code": "15-1221",
+    "_liveness_input": "live",
+    "sponsorship": {
+      "p": 0.9811,
+      "tier": "proven",
+      "source": "record"
+    },
+    "fit": {
+      "p": 0.75,
+      "source": "model-judgment"
+    },
+    "role_quality": {
+      "p": 0.903,
+      "source": "record"
+    },
+    "liveness": {
+      "factor": 1,
+      "source": "your-input"
+    },
+    "timeline": {
+      "factor": 1,
+      "source": "your-input"
+    }
+  },
+  {
+    "role_id": "realloc-moloco-inc",
+    "company": "MOLOCO INC",
+    "title": "Machine Learning Engineer Intern",
+    "_classification": "practitioner",
+    "_shrinkage": {
+      "n": 202,
+      "alphaPost": 209.812,
+      "betaPost": 2.1880000000000006,
+      "raw_rate": 0.9900990099009901,
+      "shrunk_mean": 0.9897,
+      "ci90_low": 0.9783,
+      "ci90_high": 1,
+      "confidence_tier": "high"
+    },
+    "_mc": {
+      "method": "Monte-Carlo (20000 draws, seeded): sponsorship~Beta posterior, fit~Beta(K=9) model-judgment",
+      "composite_mean": 0.5717,
+      "composite_ci90": [
+        0.4951,
+        0.6284
+      ],
+      "p_apply": 1,
+      "p_consider": 0,
+      "p_skip": 0
+    },
+    "_pivot_score": 4.516,
+    "_soc_code": "15-1221",
+    "_liveness_input": "live",
+    "sponsorship": {
+      "p": 0.9897,
+      "tier": "proven",
+      "source": "record"
+    },
+    "fit": {
+      "p": 0.75,
+      "source": "model-judgment"
+    },
+    "role_quality": {
+      "p": 0.903,
+      "source": "record"
+    },
+    "liveness": {
+      "factor": 1,
+      "source": "your-input"
+    },
+    "timeline": {
+      "factor": 1,
+      "source": "your-input"
+    }
+  },
+  {
+    "role_id": "realloc-kensho-technologies-inc",
+    "company": "KENSHO TECHNOLOGIES INC",
+    "title": "Machine Learning Engineer (inferred target)",
+    "_classification": "practitioner",
+    "_shrinkage": {
+      "n": 40,
+      "alphaPost": 49.812,
+      "betaPost": 0.1880000000000004,
+      "raw_rate": 1,
+      "shrunk_mean": 0.9962,
+      "ci90_low": 0.9821,
+      "ci90_high": 1,
+      "confidence_tier": "high"
+    },
+    "_mc": {
+      "method": "Monte-Carlo (20000 draws, seeded): sponsorship~Beta posterior, fit~Beta(K=9) model-judgment",
+      "composite_mean": 0.2866,
+      "composite_ci90": [
+        0.2481,
+        0.3154
+      ],
+      "p_apply": 0.298,
+      "p_consider": 0.702,
+      "p_skip": 0
+    },
+    "_pivot_score": 4.516,
+    "_soc_code": "15-1221",
+    "_liveness_input": "unchecked",
+    "sponsorship": {
+      "p": 0.9962,
+      "tier": "proven",
+      "source": "record"
+    },
+    "fit": {
+      "p": 0.75,
+      "source": "model-judgment"
+    },
+    "role_quality": {
+      "p": 0.903,
+      "source": "record"
+    },
+    "liveness": {
+      "factor": 0.5,
+      "source": "your-input"
+    },
+    "timeline": {
+      "factor": 1,
+      "source": "your-input"
+    }
+  },
+  {
+    "role_id": "realloc-attentive-mobile-inc",
+    "company": "ATTENTIVE MOBILE INC",
+    "title": "Machine Learning Engineer (inferred target)",
+    "_classification": "practitioner",
+    "_shrinkage": {
+      "n": 96,
+      "alphaPost": 105.812,
+      "betaPost": 0.1880000000000004,
+      "raw_rate": 1,
+      "shrunk_mean": 0.9982,
+      "ci90_low": 0.9915,
+      "ci90_high": 1,
+      "confidence_tier": "high"
+    },
+    "_mc": {
+      "method": "Monte-Carlo (20000 draws, seeded): sponsorship~Beta posterior, fit~Beta(K=9) model-judgment",
+      "composite_mean": 0.2872,
+      "composite_ci90": [
+        0.2493,
+        0.3158
+      ],
+      "p_apply": 0.308,
+      "p_consider": 0.692,
+      "p_skip": 0
+    },
+    "_pivot_score": 3.834,
+    "_soc_code": "15-1252",
+    "_liveness_input": "unchecked",
+    "sponsorship": {
+      "p": 0.9982,
+      "tier": "proven",
+      "source": "record"
+    },
+    "fit": {
+      "p": 0.75,
+      "source": "model-judgment"
+    },
+    "role_quality": {
+      "p": 0.767,
+      "source": "record"
+    },
+    "liveness": {
+      "factor": 0.5,
+      "source": "your-input"
+    },
+    "timeline": {
+      "factor": 1,
+      "source": "your-input"
+    }
+  },
+  {
+    "role_id": "realloc-skydio-inc",
+    "company": "SKYDIO INC",
+    "title": "Research Scientist (inferred target)",
+    "_classification": "researcher-only",
+    "_shrinkage": {
+      "n": 120,
+      "alphaPost": 129.812,
+      "betaPost": 0.1880000000000004,
+      "raw_rate": 1,
+      "shrunk_mean": 0.9986,
+      "ci90_low": 0.9931,
+      "ci90_high": 1,
+      "confidence_tier": "high"
+    },
+    "_mc": {
+      "method": "Monte-Carlo (20000 draws, seeded): sponsorship~Beta posterior, fit~Beta(K=9) model-judgment",
+      "composite_mean": 0.2047,
+      "composite_ci90": [
+        0.1801,
+        0.2415
+      ],
+      "p_apply": 0,
+      "p_consider": 0.53,
+      "p_skip": 0.47
+    },
+    "_pivot_score": 4.516,
+    "_soc_code": "15-1221",
+    "_liveness_input": "unchecked",
+    "sponsorship": {
+      "p": 0.9986,
+      "tier": "unlikely",
+      "source": "record"
+    },
+    "fit": {
+      "p": 0.2,
+      "source": "model-judgment"
+    },
+    "role_quality": {
+      "p": 0.903,
+      "source": "record"
+    },
+    "liveness": {
+      "factor": 0.5,
+      "source": "your-input"
+    },
+    "timeline": {
+      "factor": 1,
+      "source": "your-input"
+    }
+  },
+  {
+    "role_id": "realloc-dataminr-inc",
+    "company": "DATAMINR INC",
+    "title": "Research Scientist (inferred target)",
+    "_classification": "researcher-only",
+    "_shrinkage": {
+      "n": 60,
+      "alphaPost": 67.812,
+      "betaPost": 2.1880000000000006,
+      "raw_rate": 0.9666666666666667,
+      "shrunk_mean": 0.9687,
+      "ci90_low": 0.9348,
+      "ci90_high": 1,
+      "confidence_tier": "high"
+    },
+    "_mc": {
+      "method": "Monte-Carlo (20000 draws, seeded): sponsorship~Beta posterior, fit~Beta(K=9) model-judgment",
+      "composite_mean": 0.1994,
+      "composite_ci90": [
+        0.1744,
+        0.2356
+      ],
+      "p_apply": 0,
+      "p_consider": 0.425,
+      "p_skip": 0.575
+    },
+    "_pivot_score": 4.516,
+    "_soc_code": "15-1221",
+    "_liveness_input": "unchecked",
+    "sponsorship": {
+      "p": 0.9687,
+      "tier": "unlikely",
+      "source": "record"
+    },
+    "fit": {
+      "p": 0.2,
+      "source": "model-judgment"
+    },
+    "role_quality": {
+      "p": 0.903,
+      "source": "record"
+    },
+    "liveness": {
+      "factor": 0.5,
+      "source": "your-input"
+    },
+    "timeline": {
+      "factor": 1,
+      "source": "your-input"
+    }
+  },
+  {
+    "role_id": "realloc-outreach-corp",
+    "company": "OUTREACH CORP",
+    "title": "Research Scientist (inferred target)",
+    "_classification": "researcher-only",
+    "_shrinkage": {
+      "n": 48,
+      "alphaPost": 57.812,
+      "betaPost": 0.1880000000000004,
+      "raw_rate": 1,
+      "shrunk_mean": 0.9968,
+      "ci90_low": 0.9846,
+      "ci90_high": 1,
+      "confidence_tier": "high"
+    },
+    "_mc": {
+      "method": "Monte-Carlo (20000 draws, seeded): sponsorship~Beta posterior, fit~Beta(K=9) model-judgment",
+      "composite_mean": 0.2044,
+      "composite_ci90": [
+        0.1799,
+        0.2405
+      ],
+      "p_apply": 0,
+      "p_consider": 0.521,
+      "p_skip": 0.479
+    },
+    "_pivot_score": 4.516,
+    "_soc_code": "15-1221",
+    "_liveness_input": "unchecked",
+    "sponsorship": {
+      "p": 0.9968,
+      "tier": "unlikely",
+      "source": "record"
+    },
+    "fit": {
+      "p": 0.2,
+      "source": "model-judgment"
+    },
+    "role_quality": {
+      "p": 0.903,
+      "source": "record"
+    },
+    "liveness": {
+      "factor": 0.5,
+      "source": "your-input"
+    },
+    "timeline": {
+      "factor": 1,
+      "source": "your-input"
+    }
+  },
+  {
+    "role_id": "realloc-kinetic-automation-inc",
+    "company": "KINETIC AUTOMATION INC",
+    "title": "Machine Learning Engineer (inferred target)",
+    "_classification": "hybrid",
+    "_shrinkage": {
+      "n": 16,
+      "alphaPost": 25.811999999999998,
+      "betaPost": 0.1880000000000004,
+      "raw_rate": 1,
+      "shrunk_mean": 0.9928,
+      "ci90_low": 0.9659,
+      "ci90_high": 1,
+      "confidence_tier": "high"
+    },
+    "_mc": {
+      "method": "Monte-Carlo (20000 draws, seeded): sponsorship~Beta posterior, fit~Beta(K=9) model-judgment",
+      "composite_mean": 0.2562,
+      "composite_ci90": [
+        0.216,
+        0.2944
+      ],
+      "p_apply": 0.026,
+      "p_consider": 0.966,
+      "p_skip": 0.008
+    },
+    "_pivot_score": 4.027,
+    "_soc_code": "15-1299.08",
+    "_liveness_input": "unchecked",
+    "sponsorship": {
+      "p": 0.9928,
+      "tier": "likely",
+      "source": "record"
+    },
+    "fit": {
+      "p": 0.55,
+      "source": "model-judgment"
+    },
+    "role_quality": {
+      "p": 0.805,
+      "source": "record"
+    },
+    "liveness": {
+      "factor": 0.5,
+      "source": "your-input"
+    },
+    "timeline": {
+      "factor": 1,
+      "source": "your-input"
+    }
+  },
+  {
+    "role_id": "realloc-roblox-corp",
+    "company": "ROBLOX CORP",
+    "title": "PhD Early Career (ML)",
+    "_classification": "practitioner",
+    "_shrinkage": {
+      "n": 866,
+      "alphaPost": 865.812,
+      "betaPost": 10.188,
+      "raw_rate": 0.9884526558891455,
+      "shrunk_mean": 0.9884,
+      "ci90_low": 0.9824,
+      "ci90_high": 0.9943,
+      "confidence_tier": "high"
+    },
+    "_mc": {
+      "method": "Monte-Carlo (20000 draws, seeded): sponsorship~Beta posterior, fit~Beta(K=9) model-judgment",
+      "composite_mean": 0.571,
+      "composite_ci90": [
+        0.4953,
+        0.6277
+      ],
+      "p_apply": 1,
+      "p_consider": 0,
+      "p_skip": 0
+    },
+    "_pivot_score": 4.516,
+    "_soc_code": "15-1221",
+    "_liveness_input": "live",
+    "sponsorship": {
+      "p": 0.9884,
+      "tier": "proven",
+      "source": "record"
+    },
+    "fit": {
+      "p": 0.75,
+      "source": "model-judgment"
+    },
+    "role_quality": {
+      "p": 0.903,
+      "source": "record"
+    },
+    "liveness": {
+      "factor": 1,
+      "source": "your-input"
+    },
+    "timeline": {
+      "factor": 1,
+      "source": "your-input"
+    }
+  }
+]
