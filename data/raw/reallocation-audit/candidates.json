@@ -1,0 +1,19 @@
+{
+  "run_id": "reallocation-audit-sample-2026-07-20",
+  "slot_budget": 5,
+  "timeline_factor": 1.0,
+  "_note": "Company names are public (from the repo's SEC/DOL H1B CSV). Liveness values are from the manually-checked npm run ats:liveness results recorded in this project's earlier session (2026-06-29); 'unchecked' means no liveness check has been run for that company/posting yet.",
+  "companies": [
+    { "name": "COHERE HEALTH INC", "target_soc": "15-1221", "posting_url": "https://job-boards.greenhouse.io/coherehealth/jobs/7617095003", "posting_title": "Staff Machine Learning Engineer", "liveness": "live" },
+    { "name": "MOLOCO INC", "target_soc": "15-1221", "posting_url": "https://job-boards.greenhouse.io/moloco/jobs/7635045003", "posting_title": "Machine Learning Engineer Intern", "liveness": "live" },
+    { "name": "KENSHO TECHNOLOGIES INC", "target_soc": "15-1221", "liveness": "unchecked" },
+    { "name": "ATTENTIVE MOBILE INC", "target_soc": "15-1252", "liveness": "unchecked" },
+    { "name": "SKYDIO INC", "target_soc": "15-1221", "liveness": "unchecked" },
+    { "name": "DATAMINR INC", "target_soc": "15-1221", "liveness": "unchecked" },
+    { "name": "OUTREACH CORP", "target_soc": "15-1221", "liveness": "unchecked" },
+    { "name": "KINETIC AUTOMATION INC", "target_soc": "15-1299.08", "liveness": "unchecked" },
+    { "name": "ZOOM VIDEO COMMUNICATIONS INC", "target_soc": "15-1221", "liveness": "unchecked" },
+    { "name": "ROBLOX CORP", "target_soc": "15-1221", "posting_url": "https://careers.roblox.com/jobs/7403998", "posting_title": "PhD Early Career (ML)", "liveness": "live" },
+    { "name": "AMD", "target_soc": "15-1221", "liveness": "dead" }
+  ]
+}

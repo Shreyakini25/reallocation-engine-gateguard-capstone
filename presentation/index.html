@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>swe-to-ai-engineer · Mode Build · INFO 7375</title>
+  <link rel="stylesheet" href="colors_and_type.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ── Slide 2: side-by-side asymmetry comparison ─────────────────── */
+    .asym-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 16px;
+    }
+    .asym-card {
+      background: var(--bg-card);
+      border: var(--border-card);
+      border-radius: var(--r-card);
+      padding: 24px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .asym-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 3px;
+    }
+    .asym-card.ac-practitioner::before { background: var(--brand-cyan); }
+    .asym-card.ac-researcher::before   { background: #FFB74D; }
+    .asym-card-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: calc(var(--type-small) * var(--type-scale));
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 14px;
+    }
+    .asym-card.ac-practitioner .asym-card-title { color: var(--brand-cyan); }
+    .asym-card.ac-researcher   .asym-card-title { color: #FFB74D; }
+    .asym-title-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+    .asym-chip {
+      font-family: var(--font-mono);
+      font-size: calc(16px * var(--type-scale));
+      padding: 5px 12px;
+      border-radius: 4px;
+    }
+    .asym-card.ac-practitioner .asym-chip { background: var(--brand-cyan-dim); color: var(--brand-cyan); }
+    .asym-card.ac-researcher   .asym-chip { background: rgba(255,183,77,0.12); color: #FFB74D; }
+    .asym-companies {
+      font-family: var(--font-body);
+      font-size: calc(var(--type-small) * var(--type-scale));
+      color: var(--fg-2);
+      line-height: 1.7;
+    }
+    .asym-companies strong { color: var(--fg-1); font-weight: 600; }
+    .asym-verdict {
+      margin-top: 12px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: calc(var(--type-small) * var(--type-scale));
+    }
+    .asym-card.ac-practitioner .asym-verdict { color: #69F0AE; }
+    .asym-card.ac-researcher   .asym-verdict { color: #EF9A9A; }
+
+    /* ── Slide 2: key insight box ─────────────────────────────────────── */
+    .insight-box {
+      background: var(--bg-card);
+      border: 1px solid var(--brand-blue);
+      border-left: 4px solid var(--brand-cyan);
+      border-radius: var(--r-card);
+      padding: 18px 28px;
+      font-family: var(--font-body);
+      font-size: calc(var(--type-small) * var(--type-scale));
+      color: var(--fg-1);
+      line-height: 1.5;
+    }
+    .insight-box code {
+      font-family: var(--font-mono);
+      color: var(--brand-cyan);
+      background: var(--brand-cyan-dim);
+      padding: 2px 8px;
+      border-radius: 3px;
+    }
+
+    /* ── Slide 4: results layout ─────────────────────────────────────── */
+    .results-canvas {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+      gap: 16px;
+    }
+    .score-callout-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .score-callout-card {
+      background: var(--bg-card);
+      border: var(--border-card);
+      border-radius: var(--r-card);
+      padding: 22px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .score-callout-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 3px;
+    }
+    .score-callout-card.sc-apply::before  { background: #1B5E20; }
+    .score-callout-card.sc-learn::before  { background: #E65100; }
+    .sc-label {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: calc(var(--type-small) * var(--type-scale));
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+    }
+    .score-callout-card.sc-apply .sc-label { color: #69F0AE; }
+    .score-callout-card.sc-learn .sc-label { color: #FFB74D; }
+    .sc-company {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: calc(28px * var(--type-scale));
+      color: var(--brand-white);
+      margin-bottom: 10px;
+    }
+    .sc-rows { display: flex; flex-direction: column; gap: 6px; }
+    .sc-row {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      font-family: var(--font-body);
+      font-size: calc(20px * var(--type-scale));
+    }
+    .sc-row-label { color: var(--brand-cyan); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+    .sc-row-val   { color: var(--fg-1); }
+    .sc-row-warn  { color: #FFB74D; font-weight: 600; }
+
+    /* ── Gate-accent for evidence card D ─────────────────────────────── */
+    .evidence-card.ev-gate::before { background: #E65100; }
+    .evidence-card.ev-gate .ev-tag { border-color: #FF7043; color: #FF7043; }
+    .evidence-card.ev-gate .ev-title { color: #FF7043; }
+  </style>
+</head>
+<body>
+  <a href="#slide-1" class="skip-link">Skip to content</a>
+
+  <deck-stage width="1920" height="1080">
+
+    <!-- ════════════════════════════════════════════════════════════════
+         SLIDE 1 — COVER
+         ════════════════════════════════════════════════════════════════ -->
+    <section class="slide cover-slide" id="slide-1" data-label="01 Cover">
+      <div class="cover-layout">
+        <div class="cover-top">
+          <span class="cover-eyebrow">MODE BUILD ASSIGNMENT &nbsp;·&nbsp; INFO 7375</span>
+          <h1 class="cover-title">swe-to-ai-engineer</h1>
+          <p class="cover-subtitle">Screen Companies by H-1B Title History &mdash; Before You Spend a Week Applying</p>
+        </div>
+
+        <div>
+          <div class="cover-meta">
+            <span class="cover-author">Aakash Belide</span>
+            <span class="cover-details">MS Information Systems, Northeastern &nbsp;·&nbsp; F-1 STEM OPT Sep 2026 &nbsp;·&nbsp; Targeting AI / ML Engineering</span>
+          </div>
+
+          <div class="cover-cards">
+            <div class="cover-card">
+              <span class="cc-icon" data-chart="icon-soc" data-icon-index="0" aria-hidden="true"></span>
+              <div>
+                <div class="cc-title">H-1B Title Screen</div>
+                <div class="cc-sub">30,369-company CSV · practitioner vs. researcher signal</div>
+              </div>
+            </div>
+            <div class="cover-card">
+              <span class="cc-icon" data-chart="icon-ats" data-icon-index="1" aria-hidden="true"></span>
+              <div>
+                <div class="cc-title">Liveness Gate</div>
+                <div class="cc-sub">npm run ats:liveness · hard stop, not a vote</div>
+              </div>
+            </div>
+            <div class="cover-card">
+              <span class="cc-icon" data-chart="icon-pivot" data-icon-index="2" aria-hidden="true"></span>
+              <div>
+                <div class="cc-title">Bayesian Scorer</div>
+                <div class="cc-sub">composite = (sponsorship · fit) &times; liveness &times; timeline</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span class="footer-brand"><span class="footer-logo">&#9650;</span> swe-to-ai-engineer</span>
+        <span class="footer-url">INFO 7375 &nbsp;·&nbsp; Mode Build Assignment</span>
+        <span class="footer-year">Aakash Belide</span>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════════
+         SLIDE 2 — THE INFORMATION ASYMMETRY
+         ════════════════════════════════════════════════════════════════ -->
+    <section class="slide data-slide" id="slide-2" data-label="02 The Information Asymmetry">
+      <div class="head tight">
+        <div class="tag-row">
+          <span class="tag">INFORMATION ASYMMETRY</span>
+        </div>
+        <h1 class="title">&ldquo;ML Engineer&rdquo; Hides Two Different Careers</h1>
+        <p class="subhead">The job posting title is identical. The H-1B petition history isn&rsquo;t &mdash; and everything that matters for OPT sponsorship lives in the petition, not the job board.</p>
+      </div>
+      <div class="canvas">
+        <div class="asym-split">
+          <div class="asym-card ac-practitioner">
+            <div class="asym-card-title">Practitioner-Accessible &mdash; 5 Companies</div>
+            <div class="asym-title-chips">
+              <span class="asym-chip">machine learning engineer</span>
+              <span class="asym-chip">mlops engineer</span>
+              <span class="asym-chip">ai engineer</span>
+            </div>
+            <div class="asym-companies">
+              SWE background welcome. These companies filed H-1B petitions<br />
+              under engineering titles, not research titles.<br />
+              <strong>Cohere Health &nbsp;·&nbsp; Moloco &nbsp;·&nbsp; Attentive Mobile &nbsp;·&nbsp; Kensho &nbsp;·&nbsp; Zoom*</strong>
+            </div>
+            <div class="asym-verdict">&#10003; Proceed to liveness gate</div>
+          </div>
+          <div class="asym-card ac-researcher">
+            <div class="asym-card-title">Researcher-Only &mdash; 3 Companies</div>
+            <div class="asym-title-chips">
+              <span class="asym-chip">research scientist</span>
+              <span class="asym-chip">applied scientist</span>
+              <span class="asym-chip">research engineer</span>
+            </div>
+            <div class="asym-companies">
+              PhD pedigree expected. H-1B petitions are all under<br />
+              research titles &mdash; the practitioner bar isn&rsquo;t there yet.<br />
+              <strong>Dataminr &nbsp;·&nbsp; Outreach &nbsp;·&nbsp; Skydio</strong>
+            </div>
+            <div class="asym-verdict">&#10007; Stopped at title screen &mdash; not scored</div>
+          </div>
+        </div>
+        <div class="insight-box">
+          <strong style="color:var(--brand-cyan)">The signal:</strong>
+          &nbsp;<code>top_job_titles_sponsored</code>&nbsp; in
+          <code>data/80-days-to-stay/data/SEC_DOL_H1b_data_mapped.csv</code> &mdash;
+          30,369 companies, 1,557 (5.1%) with H-1B data. This field is invisible on any job board.
+          It is only visible by reading the DOL/USCIS petition records. &nbsp;&nbsp;
+          <span style="color:var(--fg-2)">*Zoom: practitioner title but N=2 &mdash; approval rate statistically unreliable.</span>
+        </div>
+        <div class="card-chart" data-chart="title-screen-bars" style="margin-top:14px;"></div>
+      </div>
+      <div class="slide-footer">
+        <span class="footer-brand"><span class="footer-logo">&#9650;</span> swe-to-ai-engineer</span>
+        <span class="footer-url">INFO 7375 &nbsp;·&nbsp; Mode Build Assignment</span>
+        <span class="footer-year">Aakash Belide</span>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════════
+         SLIDE 3 — THE MODE: 5 STEPS, 2 HARD GATES
+         ════════════════════════════════════════════════════════════════ -->
+    <section class="slide" id="slide-3" data-label="03 The Mode: 5 Steps, 2 Gates">
+      <div class="head tight">
+        <div class="tag-row">
+          <span class="tag">METHODOLOGY</span>
+        </div>
+        <h1 class="title">5 Steps &nbsp;&middot;&nbsp; 2 Hard Gates</h1>
+        <p class="subhead">Data and scripts first &mdash; LLM only to judge fit after the records have been checked. A gate is a <strong style="color:#FF7043">multiplier</strong>, not an addend: liveness&nbsp;=&nbsp;0 zeroes the composite even if sponsorship&nbsp;=&nbsp;0.9.</p>
+      </div>
+      <div class="canvas">
+        <div class="card-chart" data-chart="pipeline-flow" style="margin-bottom:14px;"></div>
+        <div class="evidence-grid">
+          <div class="evidence-card ev-a">
+            <span class="ev-icon" data-chart="icon-calendar" data-icon-index="0" aria-hidden="true"></span>
+            <div class="ev-letter-circle">A</div>
+            <div class="ev-title">Provenance</div>
+            <div class="ev-scripts">
+              <span class="script-name">validate-h1b-join-sample.py</span>
+              <span class="script-name muted">30,369 rows confirmed</span>
+            </div>
+            <div class="ev-tag">Data Integrity</div>
+          </div>
+
+          <div class="evidence-card ev-b">
+            <span class="ev-icon" data-chart="icon-soc" data-icon-index="1" aria-hidden="true"></span>
+            <div class="ev-letter-circle">B</div>
+            <div class="ev-title">Title Screen</div>
+            <div class="ev-scripts">
+              <span class="script-name">Python CSV lookup</span>
+              <span class="script-name muted">SEC_DOL_H1b_data_mapped.csv</span>
+            </div>
+            <div class="ev-tag">80 Days to Stay</div>
+          </div>
+
+          <div class="evidence-card ev-c">
+            <span class="ev-icon" data-chart="icon-salary" data-icon-index="2" aria-hidden="true"></span>
+            <div class="ev-letter-circle">C</div>
+            <div class="ev-title">Funding Recency</div>
+            <div class="ev-scripts">
+              <span class="script-name muted">latest_funding_date</span>
+              <span class="script-name muted">flag if &gt; 24 months</span>
+            </div>
+            <div class="ev-tag">80 Days to Stay</div>
+          </div>
+
+          <div class="evidence-card ev-gate">
+            <span class="ev-icon" data-chart="icon-ats" data-icon-index="3" aria-hidden="true"></span>
+            <div class="ev-letter-circle" style="background:#C62828;">D</div>
+            <div class="ev-title">Liveness Gate</div>
+            <div class="ev-scripts">
+              <span class="script-name">npm run ats:liveness</span>
+              <span class="script-name muted">HARD STOP per role</span>
+            </div>
+            <div class="ev-tag">Job-Ops &#9940;</div>
+          </div>
+
+          <div class="evidence-card ev-e">
+            <span class="ev-icon" data-chart="icon-pivot" data-icon-index="4" aria-hidden="true"></span>
+            <div class="ev-letter-circle">E</div>
+            <div class="ev-title">Score</div>
+            <div class="ev-scripts">
+              <span class="script-name">role-scorer.mjs</span>
+              <span class="script-name muted">Bayesian composite</span>
+            </div>
+            <div class="ev-tag">All Layers</div>
+          </div>
+        </div>
+        <div class="evidence-callout">
+          Formula: <strong>composite = (sponsorship&thinsp;&times;&thinsp;0.35 &nbsp;+&nbsp; fit&thinsp;&times;&thinsp;0.30) &times; liveness &times; timeline</strong>
+          &nbsp;&mdash;&nbsp; Apply &ge;&nbsp;0.30 &nbsp;|&nbsp; Consider &ge;&nbsp;0.20 &nbsp;|&nbsp; Skip &lt;&nbsp;0.20 &nbsp;&nbsp;
+          <span style="color:var(--fg-2);font-size:calc(20px * var(--type-scale))">
+            Researcher-only companies stop at B. Expired postings stop at D. Both gates log their stop condition.
+          </span>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span class="footer-brand"><span class="footer-logo">&#9650;</span> swe-to-ai-engineer</span>
+        <span class="footer-url">INFO 7375 &nbsp;·&nbsp; Mode Build Assignment</span>
+        <span class="footer-year">Aakash Belide</span>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════════
+         SLIDE 4 — THE RUN: 10 EVALUATED · 1 APPLIED
+         ════════════════════════════════════════════════════════════════ -->
+    <section class="slide output-slide" id="slide-4" data-label="04 The Run: 10 Evaluated">
+      <div class="head tight">
+        <div class="tag-row">
+          <span class="tag">RESULTS</span>
+        </div>
+        <h1 class="title">10 Evaluated &nbsp;&middot;&nbsp; 5 Practitioner &nbsp;&middot;&nbsp; 1 Applied</h1>
+        <p class="subhead">
+          <span style="font-family:var(--font-mono);color:var(--brand-cyan);font-size:calc(20px * var(--type-scale))">python3 one-liner &rarr; SEC CSV</span>
+          &nbsp;classified all 10. &nbsp;
+          <span style="font-family:var(--font-mono);color:var(--brand-cyan);font-size:calc(20px * var(--type-scale))">npm run ats:liveness</span>
+          &nbsp;gated each posting. &nbsp;
+          <span style="font-family:var(--font-mono);color:var(--brand-cyan);font-size:calc(20px * var(--type-scale))">node role-scorer.mjs</span>
+          &nbsp;scored 1.
+        </p>
+      </div>
+      <div class="canvas results-canvas">
+        <div class="card-chart" data-chart="approval-scatter"></div>
+        <div class="score-callout-grid">
+          <!-- Card: What scored -->
+          <div class="score-callout-card sc-apply">
+            <div class="sc-label">&#10003; Applied &mdash; Composite 0.492</div>
+            <div class="sc-company">Cohere Health</div>
+            <div class="sc-rows">
+              <div class="sc-row">
+                <span class="sc-row-label">Arithmetic</span>
+                <span class="sc-row-val">(0.85&thinsp;&times;&thinsp;0.35 + 0.65&thinsp;&times;&thinsp;0.30) &times; 1 &times; 1 = <strong style="color:#69F0AE">0.492</strong></span>
+              </div>
+              <div class="sc-row">
+                <span class="sc-row-label">Sponsorship</span>
+                <span class="sc-row-val">0.85 &nbsp;<span style="color:var(--fg-2);font-size:0.85em">[104 approvals, 98.1%, Series C May 2025]</span></span>
+              </div>
+              <div class="sc-row">
+                <span class="sc-row-label">Fit</span>
+                <span class="sc-row-val">0.65 &nbsp;<span style="color:var(--fg-2);font-size:0.85em">[model judgment &mdash; labeled as such]</span></span>
+              </div>
+              <div class="sc-row">
+                <span class="sc-row-label">Liveness</span>
+                <span class="sc-row-val" style="color:#69F0AE">1.0 &nbsp;&mdash;&nbsp; &#9989; active 2026-06-29</span>
+              </div>
+            </div>
+          </div>
+          <!-- Card: What I learned (Roblox) -->
+          <div class="score-callout-card sc-learn">
+            <div class="sc-label">&#9888; What I Learned Running It &mdash; The Roblox Paradox</div>
+            <div class="sc-company" style="font-size:calc(24px * var(--type-scale))">856 H-1B Approvals &rarr; PhD-Only</div>
+            <div class="sc-rows">
+              <div class="sc-row">
+                <span class="sc-row-label">In the CSV</span>
+                <span class="sc-row-val">&ldquo;Principal Machine Learning Engineer&rdquo; &mdash; <span style="color:#69F0AE">practitioner signal</span></span>
+              </div>
+              <div class="sc-row">
+                <span class="sc-row-label">Current board</span>
+                <span class="sc-row-val sc-row-warn">Every 2026 MLE posting: &ldquo;PhD Early Career&rdquo;</span>
+              </div>
+              <div class="sc-row">
+                <span class="sc-row-label">The gap</span>
+                <span class="sc-row-val">H-1B history is a <strong style="color:#FFB74D">lagging indicator</strong> &mdash; team structure changed, petition history didn&rsquo;t follow</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span class="footer-brand"><span class="footer-logo">&#9650;</span> swe-to-ai-engineer</span>
+        <span class="footer-url">INFO 7375 &nbsp;·&nbsp; Mode Build Assignment</span>
+        <span class="footer-year">Aakash Belide</span>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════════
+         SLIDE 5 — TAKEAWAYS · ONE LEARNED · ONE HONEST LIMIT
+         ════════════════════════════════════════════════════════════════ -->
+    <section class="slide" id="slide-5" data-label="05 Takeaways">
+      <div class="head tight">
+        <div class="tag-row">
+          <span class="tag">TAKEAWAYS</span>
+        </div>
+        <h1 class="title">What It Found &nbsp;&middot;&nbsp; What It Cannot Verify</h1>
+      </div>
+      <div class="canvas">
+        <div class="stat-row">
+          <div class="stat-card">
+            <span class="stat-number">10</span>
+            <span class="stat-label">Companies Screened</span>
+            <span class="stat-sub">5 practitioner &nbsp;·&nbsp; 3 researcher-only &nbsp;·&nbsp; 1 hybrid &nbsp;·&nbsp; 1 no-data</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number" style="color:#FFB74D">856</span>
+            <span class="stat-label">Roblox Approvals</span>
+            <span class="stat-sub">Strongest practitioner signal in the dataset &mdash; but PhD-only in 2026 postings. The mode would mislead here without human verification.</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">0.492</span>
+            <span class="stat-label">Composite Score</span>
+            <span class="stat-sub">Cohere Health Staff MLE &mdash; only role that passed title screen + liveness gate. Recommendation: Apply.</span>
+          </div>
+        </div>
+
+        <div class="close-claim">
+          <div class="cq">
+            The job board title and the H-1B filing are <span class="accent">different documents</span>.
+          </div>
+          <div class="cp">
+            One is marketing. The other is a legal petition that names the actual role category. The mode makes
+            that <span class="accent">invisible choice visible</span> &mdash; but it reads the past, not the present.
+            H-1B history is a <span class="accent">lagging indicator</span>: verify current team culture before
+            spending prep time on any practitioner-classified company.
+          </div>
+          <span class="close-repo">github.com/nikbearbrown/the-reallocation-engine &nbsp;&middot;&nbsp; recipes/case-swe-to-ai-engineer-h1b-title-screen.md &nbsp;&middot;&nbsp; RUNNABLE-SAMPLE</span>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span class="footer-brand"><span class="footer-logo">&#9650;</span> swe-to-ai-engineer</span>
+        <span class="footer-url">INFO 7375 &nbsp;·&nbsp; Mode Build Assignment</span>
+        <span class="footer-year">Aakash Belide</span>
+      </div>
+    </section>
+
+    <!-- Speaker notes (§17) -->
+    <script type="application/json" id="speaker-notes">
+[
+  "Open by grounding the audience in the situation: international SWE on OPT, 12–36 months to land a role that will eventually sponsor H-1B. The specific problem: you have a list of companies that all say 'Machine Learning Engineer' — you need to know which ones actually hire people with your background before you spend a week on a take-home. This mode answers that question.",
+  "The core insight is that the job title is marketing, but the H-1B petition title is legal. When a company sponsors a 'Research Scientist' visa, they filed paperwork saying that's who they hire. When they sponsor a 'Machine Learning Engineer' visa, they filed paperwork for that. The top_job_titles_sponsored field in the 30,369-company CSV is the signal. Pause on the researcher-only side — note that Skydio, Dataminr, and Outreach all stopped at the title screen. They never got to liveness or scoring, saving application time.",
+  "Walk through the pipeline left to right. Emphasize the gate vs. vote distinction: gates are multipliers, not addends. A liveness of 0 completely zeroes the composite regardless of how strong the sponsorship score is. Show the break test in the worked run: when liveness was set to 0 artificially, the scorer output 'Skip: gated: liveness ≈ 0.000' — the gate behavior works exactly as designed.",
+  "This slide shows the real run output. The approval scatter has Zoom in the bottom-left corner — barely a dot — which visually makes the N=2 problem obvious without text. Point to Cohere Health as the one that made it through all gates. Then shift to the Roblox finding: this isn't in the 10 companies evaluated, but it came up during the CSV exploration. 856 approvals is the strongest practitioner signal in the entire dataset. But when you look at the job board today, every 2026 MLE posting says 'PhD Early Career.' The H-1B history is accurate — those engineers existed — but it's a lagging indicator.",
+  "End with the honest accounting. The mode found 1 role to apply to from 10 companies evaluated. The Roblox paradox is the most important thing learned — it validates Failure Mode 1 from the domain justification with a real example. The honest limitation is explicit: H-1B history is a lagging indicator. The mode is a filter, not a guarantee. Verify current team culture before spending prep time."
+]
+    </script>
+  </deck-stage>
+
+  <div id="tweaks-root"></div>
+
+  <!-- ── External dependencies (pinned + SRI) ──────────────────────── -->
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"
+    integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"
+    integrity="sha384-DGyLxAyjq0f9SPpVevD6IgztCFlnMF6oW/XQGmfe+IsZ8TqEiDrcHkMLKI6fiB/Z"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"
+    integrity="sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.29.0/babel.min.js"
+    integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y"
+    crossorigin="anonymous"></script>
+
+  <!-- ── Deck logic ────────────────────────────────────────────────── -->
+  <script src="deck-stage.js"></script>
+  <script src="charts.js"></script>
+
+  <!-- Tweaks panel (React + Babel). Inlined so deck opens via file://. -->
+  <script type="text/babel" data-presets="react">
+const { useState, useEffect, useRef, useCallback } = React;
+
+function useTweaks(defaults, storageKey = "deck-tweaks") {
+  const [tweaks, setTweaks] = useState(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(storageKey) || "null");
+      return saved ? { ...defaults, ...saved } : { ...defaults };
+    } catch (e) { return { ...defaults }; }
+  });
+  useEffect(() => { localStorage.setItem(storageKey, JSON.stringify(tweaks)); }, [tweaks, storageKey]);
+  const set = useCallback((key, val) => setTweaks((t) => ({ ...t, [key]: val })), []);
+  const reset = useCallback(() => setTweaks({ ...defaults }), []);
+  return [tweaks, set, reset];
+}
+
+function TweakRow({ label, children }) {
+  return (
+    <div className="tw-row">
+      <label className="tw-label">{label}</label>
+      <div className="tw-control">{children}</div>
+    </div>
+  );
+}
+function TweakSlider({ label, value, min, max, step, onChange, fmt }) {
+  return (
+    <TweakRow label={label}>
+      <input type="range" min={min} max={max} step={step} value={value}
+        onChange={(e) => onChange(parseFloat(e.target.value))} className="tw-slider" />
+      <span className="tw-value">{fmt ? fmt(value) : value}</span>
+    </TweakRow>
+  );
+}
+function TweakRadio({ label, value, options, onChange }) {
+  return (
+    <TweakRow label={label}>
+      <div className="tw-radio-grp">
+        {options.map((o) => (
+          <button key={o.value} className={"tw-radio" + (value === o.value ? " active" : "")}
+            onClick={() => onChange(o.value)}>{o.label}</button>
+        ))}
+      </div>
+    </TweakRow>
+  );
+}
+function TweakToggle({ label, value, onChange }) {
+  return (
+    <TweakRow label={label}>
+      <button className={"tw-toggle" + (value ? " on" : "")} onClick={() => onChange(!value)}>
+        <span className="tw-knob" />
+      </button>
+    </TweakRow>
+  );
+}
+function TweaksPanel({ title = "Tweaks", children, onReset }) {
+  const [shown, setShown] = useState(false);
+  return (
+    <>
+      <button className={"tw-launcher" + (shown ? " active" : "")}
+        onClick={() => setShown((s) => !s)} aria-label="Toggle deck tweaks">
+        <span className="tw-gear">&#9881;</span><span>Tweaks</span>
+      </button>
+      {shown && (
+        <div className="tweaks-panel" role="dialog" aria-label={title}>
+          <div className="tw-header">
+            <span className="tw-title">{title}</span>
+            <div className="tw-header-btns">
+              {onReset && <button className="tw-mini" title="Reset" onClick={onReset}>&#8634;</button>}
+              <button className="tw-mini" title="Close" onClick={() => setShown(false)}>&#10005;</button>
+            </div>
+          </div>
+          <div className="tw-body">{children}</div>
+        </div>
+      )}
+      <style>{`
+        .tw-launcher {
+          position: fixed; left: 16px; bottom: 16px; z-index: 501;
+          display: flex; align-items: center; gap: 8px; cursor: pointer;
+          padding: 9px 16px 9px 13px; border-radius: 999px;
+          background: rgba(10,22,40,0.9); border: 1px solid rgba(255,255,255,0.18);
+          color: #fff; font-family: "Exo 2", sans-serif; font-weight: 600; font-size: 14px;
+          letter-spacing: 0.04em; text-transform: uppercase;
+          backdrop-filter: blur(16px); box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+          transition: background 0.15s ease;
+        }
+        .tw-launcher:hover { background: rgba(21,101,192,0.6); }
+        .tw-launcher.active { background: rgba(21,101,192,0.7); border-color: #00BCD4; }
+        .tw-gear { font-size: 16px; line-height: 1; }
+        .tweaks-panel { position: fixed; left: 16px; bottom: 68px; z-index: 500; width: 280px; border-radius: 14px;
+          background: rgba(10,22,40,0.92); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+          border: 1px solid rgba(255,255,255,0.16); box-shadow: 0 12px 48px rgba(0,0,0,0.55);
+          color: #fff; font-family: "Exo 2", sans-serif; overflow: hidden; user-select: none; }
+        .tw-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px;
+          background: rgba(21,101,192,0.22); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .tw-title { font-weight: 700; font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; }
+        .tw-header-btns { display: flex; gap: 6px; }
+        .tw-mini { width: 26px; height: 26px; border-radius: 6px; border: none; cursor: pointer;
+          background: rgba(255,255,255,0.12); color: #fff; font-size: 14px; line-height: 1; }
+        .tw-mini:hover { background: rgba(255,255,255,0.22); }
+        .tw-body { padding: 16px; display: flex; flex-direction: column; gap: 18px; }
+        .tw-row { display: flex; flex-direction: column; gap: 8px; }
+        .tw-label { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+        .tw-control { display: flex; align-items: center; gap: 12px; }
+        .tw-slider { flex: 1; accent-color: #00BCD4; height: 4px; }
+        .tw-value { font-family: "Share Tech Mono", monospace; font-size: 14px; color: #00BCD4; min-width: 44px; text-align: right; }
+        .tw-radio-grp { display: flex; gap: 8px; flex: 1; }
+        .tw-radio { flex: 1; padding: 8px; border-radius: 7px; cursor: pointer; background: rgba(255,255,255,0.08);
+          border: 1px solid transparent; color: rgba(255,255,255,0.7); font-family: "Exo 2"; font-size: 13px; font-weight: 600; }
+        .tw-radio.active { background: rgba(0,188,212,0.18); border-color: #00BCD4; color: #00BCD4; }
+        .tw-toggle { width: 50px; height: 26px; border-radius: 999px; border: none; cursor: pointer;
+          background: rgba(255,255,255,0.16); position: relative; transition: background 0.2s; }
+        .tw-toggle.on { background: #1565C0; }
+        .tw-knob { position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; transition: transform 0.2s; }
+        .tw-toggle.on .tw-knob { transform: translateX(24px); }
+        @media print { .tweaks-panel, .tw-launcher { display: none !important; } }
+      `}</style>
+    </>
+  );
+}
+
+const TWEAK_DEFAULTS = {
+  "accent": "brand",
+  "scale":  1.0,
+  "glow":   true
+};
+
+const ROOT = document.documentElement;
+const BRAND_CYAN = "#00BCD4";
+
+function applyTweaks(t) {
+  ROOT.style.setProperty("--type-scale", String(t.scale));
+  if (t.accent === "mono") ROOT.style.setProperty("--brand-cyan", "rgba(255,255,255,0.9)");
+  else ROOT.style.setProperty("--brand-cyan", BRAND_CYAN);
+  window.dispatchEvent(new CustomEvent("deck:accent-change"));
+  if (t.glow === false) {
+    ROOT.style.setProperty("--glow-blue", "none");
+    ROOT.style.setProperty("--glow-cyan", "none");
+  } else {
+    ROOT.style.setProperty("--glow-blue", "0 0 16px var(--brand-blue-glow)");
+    ROOT.style.setProperty("--glow-cyan", "0 0 12px rgba(0,188,212,0.3)");
+  }
+}
+
+function App() {
+  const [tweaks, set, reset] = useTweaks(TWEAK_DEFAULTS, "swe-to-ai-eng-tweaks");
+  useEffect(() => { applyTweaks(tweaks); }, [tweaks]);
+  return (
+    <TweaksPanel title="Deck Tweaks" onReset={reset}>
+      <TweakRadio label="Accent" value={tweaks.accent}
+        options={[{ value: "brand", label: "Cyan" }, { value: "mono", label: "Mono" }]}
+        onChange={(v) => set("accent", v)} />
+      <TweakSlider label="Type density" value={tweaks.scale} min={0.85} max={1.20} step={0.01}
+        onChange={(v) => set("scale", v)} fmt={(v) => v.toFixed(2) + "×"} />
+      <TweakToggle label="Card glow" value={tweaks.glow} onChange={(v) => set("glow", v)} />
+    </TweaksPanel>
+  );
+}
+
+(function mount() {
+  const host = document.getElementById("tweaks-root");
+  if (host) ReactDOM.createRoot(host).render(<App />);
+})();
+  </script>
+</body>
+</html>

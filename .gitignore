@@ -67,3 +67,10 @@ data/BLS/db_30_2_mysql/
 **/*.resume.pdf
 **/resume.pdf
 resume.json
+!/search/resume.json
+
+# Ignore search folder
+/search/private-notes.md
+/search/resume.json
+
+reallocation-belide-aakash-mode.zip

@@ -1,17 +1,127 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(python3 -c ' *)",
+      "Bash(npx playwright *)",
+      "Bash(python3 scripts/sec/validate-h1b-join-sample.py)",
+      "WebSearch",
+      "Bash(wait)",
+      "Bash(tee data/raw/case-swe-to-ai-engineer/title-screen.json)",
+      "Bash(node scripts/score/role-scorer.mjs data/raw/case-swe-to-ai-engineer/roles.json --md reports/generated/case-swe-to-ai-engineer-2026-06-29.md)",
+      "Bash(python3 -m json.tool)",
+      "Bash(node scripts/score/role-scorer.mjs /tmp/roles-break-test.json)",
+      "Read(//private/tmp/**)",
+      "Bash(python3 -c \"import json,sys; r=json.load\\(sys.stdin\\)['roles'][0]; print\\('recommendation:', r['recommendation']\\); print\\('reason:', r['reason']\\); print\\('arithmetic:', r['trace']['arithmetic']\\)\")",
+      "Bash(zip -r reallocation-belide-aakash-mode.zip recipes/case-swe-to-ai-engineer-h1b-title-screen.md assignments/submissions/belide-aakash/ data/raw/case-swe-to-ai-engineer/ reports/generated/case-swe-to-ai-engineer-2026-06-29.md logs/RUN_LOG.md package.json)",
+      "Bash(unzip -l reallocation-belide-aakash-mode.zip)",
+      "Bash(git push *)",
+      "Bash(gh pr create --repo nikbearbrown/the-reallocation-engine --head Belide-Aakash:mode/aakash-swe-to-ai-engineer --base main --title 'swe-to-ai-engineer: H-1B title screen for practitioner AI roles \\(RUNNABLE-SAMPLE\\)' --body ' *)",
+      "Bash(unzip -l \"/Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/the-reallocation-engine/reallocation-belide-aakash-mode.zip\")",
+      "Bash(unzip -p \"/Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/the-reallocation-engine/reallocation-belide-aakash-mode.zip\" \"reports/generated/case-swe-to-ai-engineer-2026-06-29.md\")",
+      "Bash(python3 -c \"import json; d=json.load\\(open\\('/Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/the-reallocation-engine/logs/case-swe-to-ai-engineer-2026-06-29.json'\\)\\); print\\(d['todos_open'], '\\(declared\\)', len\\(d['open_issues']\\), '\\(open_issues list\\)'\\)\")",
+      "Bash(echo \"Agent log open_issues count: $\\(python3 -c \"import json; d=json.load\\(open\\('/Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/the-reallocation-engine/logs/case-swe-to-ai-engineer-2026-06-29.json'\\)\\); print\\(d['todos_open'], '\\(declared\\)', len\\(d['open_issues']\\), '\\(open_issues list\\)'\\)\"\\)\")",
+      "Bash(git -C \"/Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/the-reallocation-engine\" status search/resume.json)",
+      "Bash(git -C \"/Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/the-reallocation-engine\" log --oneline search/resume.json)",
+      "Bash(node --check \"/Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/the-reallocation-engine/presentation/charts.js\")",
+      "Bash(zip -r reallocation-belide-aakash-mode.zip recipes/case-swe-to-ai-engineer-h1b-title-screen.md assignments/submissions/belide-aakash/domain-justification.md assignments/submissions/belide-aakash/worked-run.md logs/RUN_LOG.md logs/case-swe-to-ai-engineer-2026-06-29.json reports/generated/case-swe-to-ai-engineer-2026-06-29.md data/raw/case-swe-to-ai-engineer/company-list.json data/raw/case-swe-to-ai-engineer/roles.json data/raw/case-swe-to-ai-engineer/role-scores.json data/raw/case-swe-to-ai-engineer/title-screen.json package.json)",
+      "Bash(node scripts/reallocate/allocate.mjs data/raw/reallocation-audit/candidates.json)",
+      "Bash(python3 -m json.tool data/raw/reallocation-audit/reallocation-plan.json)",
+      "Bash(sed 's/min_total_approvals: 5,/min_total_approvals: 1,/' scripts/reallocate/allocate.mjs)",
+      "Bash(mkdir -p /tmp/perturb-gate1)",
+      "Bash(node scripts/reallocate/_adversarial_gate1.mjs data/raw/reallocation-audit/candidates.json --out-dir /tmp/perturb-gate1)",
+      "Bash(rm -f scripts/reallocate/_adversarial_gate1.mjs)",
+      "Bash(node scripts/reallocate/allocate.mjs /tmp/candidates-roblox-dead.json --out-dir /tmp/perturb-roblox-dead)",
+      "Bash(python3 -c \"import matplotlib; print\\('ok', matplotlib.__version__\\)\")",
+      "Bash(uv --version)",
+      "Bash(python3 -m json.tool data/raw/reallocation-audit/roles.json)",
+      "Bash(python3 -m json.tool data/raw/reallocation-audit/role-scores.json)",
+      "Read(//Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/**)",
+      "Read(//Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/vox/**)",
+      "Read(//Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/vox/reels/**)",
+      "Read(//Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/vox/scripts/**)",
+      "Read(//Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/vox/reels/h1b-title-screen-v3/**)",
+      "Bash(VOX=\"/Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/vox\" *)",
+      "Bash(curl -s -H 'xi-api-key: __CMDSUB_OUTPUT__' https://api.elevenlabs.io/v1/user/subscription)",
+      "Bash(python3)",
+      "Bash(python3 -c \"import manim\")",
+      "Bash(uv run *)",
+      "Bash('/Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/vox/.venv/bin/python3' -c 'import manim, numpy; print\\('\\\\''ok'\\\\''\\)')",
+      "Read(//Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/vox/.venv/bin/**)",
+      "Bash(grep -E \"manim|python3$\")",
+      "Bash(ffprobe -v error -show_entries format=duration,size -show_entries stream=codec_type,codec_name '/Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/vox/reels/reallocation-audit-explainer/reallocation-audit-explainer-review.mp4')",
+      "Bash(ffprobe -v error -show_entries format=duration,size -show_entries stream=codec_type,codec_name '/Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/vox/reels/reallocation-audit-explainer/reallocation-audit-explainer-cut.mp4')",
+      "Bash(ffmpeg -y -ss 10 -i '/Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/vox/reels/reallocation-audit-explainer/reallocation-audit-explainer-cut.mp4' -frames:v 1 __TRACKED_VAR__/frame_b01.png)",
+      "Bash(node scripts/reallocate/allocate.mjs data/raw/reallocation-audit/candidates-flag-demo.json --out-dir /tmp/flag-demo)",
+      "Bash(rm -f data/raw/reallocation-audit/candidates-flag-demo.json)",
+      "Bash(node scripts/reallocate/allocate.mjs data/raw/reallocation-audit/candidates.json --out-dir /tmp/rep1)",
+      "Bash(node scripts/reallocate/allocate.mjs data/raw/reallocation-audit/candidates.json --out-dir /tmp/rep2)",
+      "Read(//tmp/rep1/**)",
+      "Bash(cp /tmp/fairness.py scripts/reallocate/analysis/fairness_metrics.py)",
+      "Bash(cp /tmp/shap_explain.py scripts/reallocate/analysis/shap_explain.py)",
+      "Bash(python3 scripts/reallocate/analysis/confound_and_gaming.py)",
+      "Bash(ffmpeg -y -ss 155 -i '/Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/vox/reels/reallocation-audit-explainer/reallocation-audit-explainer-cut.mp4' -frames:v 1 /private/tmp/claude-501/-Users-aakashbelide-Aakash-Higher-Studies-Course-Sem-5-INFO7375-Assignment-5-the-reallocation-engine/19245976-73de-4b03-aaaf-f8507d007f06/scratchpad/n_b12.png)",
+      "Bash(ffmpeg -y -ss 258 -i '/Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/vox/reels/reallocation-audit-explainer/reallocation-audit-explainer-cut.mp4' -frames:v 1 /private/tmp/claude-501/-Users-aakashbelide-Aakash-Higher-Studies-Course-Sem-5-INFO7375-Assignment-5-the-reallocation-engine/19245976-73de-4b03-aaaf-f8507d007f06/scratchpad/n_b19.png)",
+      "Bash(ffmpeg -y -ss 16 -i '/Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/vox/reels/reallocation-audit-explainer/reallocation-audit-explainer-cut.mp4' -frames:v 1 /private/tmp/claude-501/-Users-aakashbelide-Aakash-Higher-Studies-Course-Sem-5-INFO7375-Assignment-5-the-reallocation-engine/19245976-73de-4b03-aaaf-f8507d007f06/scratchpad/n_b02.png)",
+      "Bash(ffprobe -v error -show_entries format=duration -show_entries stream=codec_type,codec_name '/Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/vox/reels/reallocation-audit-explainer/reallocation-audit-explainer-cut.mp4')",
+      "Bash(awk '{print $5, $NF}')",
+      "Read(//Library/TeX/texbin/**)",
+      "Bash(python3 -c \"import markdown\")",
+      "Read(//opt/homebrew/lib/**)",
+      "Bash(brew --prefix glib)",
+      "Bash(echo \"brew glib: $\\(brew --prefix glib || echo none\\)\")",
+      "Bash(node -e \"try{require\\('playwright'\\);console.log\\('playwright OK'\\)}catch\\(e\\){console.log\\('no playwright:',e.message.split\\(String.fromCharCode\\(10\\)\\)[0]\\)}\")",
+      "Bash(awk '{print $5\" bytes\"}')",
+      "Bash(DYLD_FALLBACK_LIBRARY_PATH=\"/opt/homebrew/lib\" uv run --quiet --with markdown --with weasyprint python3 /tmp/md2pdf.py)",
+      "Bash(DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib uv run --quiet --with pymupdf python3 -c ' *)",
+      "Read(//Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/vox/reels/reallocation-audit-explainer/**)",
+      "Bash(python3 -)",
+      "Bash(python3 -c \"print\\('em dashes in final PDF source md:', open\\('Belide_Aakash_ReallocationEngine.md'\\).read\\(\\).count\\(chr\\(0x2014\\)\\)\\)\")",
+      "Bash(ffmpeg -y -ss 60 -i __TRACKED_VAR__/reallocation-audit-explainer-cut.mp4 -frames:v 1 __TRACKED_VAR__/v_b07.png)",
+      "Bash(ffmpeg -y -ss 112 -i __TRACKED_VAR__/reallocation-audit-explainer-cut.mp4 -frames:v 1 __TRACKED_VAR__/v_b11.png)",
+      "Bash(ffmpeg -y -ss 84 -i '/Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/vox/reels/reallocation-audit-explainer/reallocation-audit-explainer-cut.mp4' -frames:v 1 /private/tmp/claude-501/-Users-aakashbelide-Aakash-Higher-Studies-Course-Sem-5-INFO7375-Assignment-5-the-reallocation-engine/19245976-73de-4b03-aaaf-f8507d007f06/scratchpad/w_b07.png)",
+      "Bash(ffmpeg -y -ss 134 -i '/Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/vox/reels/reallocation-audit-explainer/reallocation-audit-explainer-cut.mp4' -frames:v 1 /private/tmp/claude-501/-Users-aakashbelide-Aakash-Higher-Studies-Course-Sem-5-INFO7375-Assignment-5-the-reallocation-engine/19245976-73de-4b03-aaaf-f8507d007f06/scratchpad/w_b11.png)",
+      "Bash(timeout 90 uv run --quiet --with edge-tts python3 -c ' *)",
+      "Bash(uv run --quiet --with edge-tts --with mutagen python3 -c ' *)",
+      "Read(//Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/vox/reels/h1b-title-screen-v3/mp3/**)",
+      "Bash(rm -f '/Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/vox/reels/reallocation-audit-explainer/mp3/beat-*.mp3')",
+      "Bash(ffmpeg -y -ss 137 -i '/Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/vox/reels/reallocation-audit-explainer/reallocation-audit-explainer-cut.mp4' -frames:v 1 /private/tmp/claude-501/-Users-aakashbelide-Aakash-Higher-Studies-Course-Sem-5-INFO7375-Assignment-5-the-reallocation-engine/19245976-73de-4b03-aaaf-f8507d007f06/scratchpad/sync_b11.png)",
+      "Bash(awk '{printf \"  duration: %d:%02d\\\\n\", $1/60, $1%60}')",
+      "Bash(fc-match \"Exo 2\")",
+      "Bash(fc-match \"Exo 2:italic\")",
+      "Bash(fc-match \"Orbitron\")",
+      "Bash(fc-match \"Share Tech Mono\")",
+      "Bash(fc-list)",
+      "Read(//Users/aakashbelide/Library/Fonts/**)"
+    ],
+    "additionalDirectories": [
+      "/Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/vox/reels/h1b-title-screen-v2",
+      "/Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/vox/reels",
+      "/Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/vox/reels/reallocation-audit-explainer",
+      "/tmp",
+      "/private/tmp",
+      "/Users/aakashbelide/Aakash/Higher Studies/Course/Sem-5/INFO7375/Assignment-5/vox/scripts"
+    ]
+  },
   "hooks": {
     "PreToolUse": [
       {
         "matcher": "Bash",
         "hooks": [
-          { "type": "command", "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/archive-guard.sh" }
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/archive-guard.sh"
+          }
         ]
       }
     ],
     "Stop": [
       {
         "hooks": [
-          { "type": "command", "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/conformance-check.sh" }
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/conformance-check.sh"
+          }
         ]
       }
     ]

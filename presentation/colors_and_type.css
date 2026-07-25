@@ -1,0 +1,99 @@
+/* ════════════════════════════════════════════════════════════════════
+   colors_and_type.css — AEC Blueprint design token system
+   Mode: technical-educational · Canvas 1920×1080
+   ════════════════════════════════════════════════════════════════════ */
+
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&family=Share+Tech+Mono&display=swap");
+
+:root {
+  /* ── Core brand palette ─────────────────────────────────────────── */
+  --brand-navy:         #0A1628;   /* darkest background — slide base */
+  --brand-navy-mid:     #0D1F3C;   /* card and panel surfaces */
+  --brand-navy-light:   #162447;   /* elevated surfaces, hover states */
+  --brand-navy-border:  #1E3A5F;   /* subtle borders between dark panels */
+
+  --brand-blue:         #1565C0;   /* primary interactive accent */
+  --brand-blue-bright:  #1E88E5;   /* hover state of brand-blue */
+  --brand-blue-glow:    rgba(21, 101, 192, 0.35);
+
+  --brand-cyan:         #00BCD4;   /* data highlight — chart lines, indicators */
+  --brand-cyan-dim:     rgba(0, 188, 212, 0.15);
+
+  --brand-white:        #FFFFFF;
+  --brand-white-88:     rgba(255,255,255,0.88);
+  --brand-white-60:     rgba(255,255,255,0.60);
+  --brand-white-30:     rgba(255,255,255,0.30);
+  --brand-white-08:     rgba(255,255,255,0.08);
+
+  /* ── Semantic signal colors ─────────────────────────────────────── */
+  --signal-tag:         #1565C0;
+  --signal-tag-text:    #FFFFFF;
+  --signal-icon-bg:     #1E88E5;
+
+  /* ── Neutral scale (charts / non-brand) ─────────────────────────── */
+  --n0: #FFFFFF;  --n1: #E0E0E0;  --n2: #BDBDBD;  --n3: #9E9E9E;
+  --n4: #757575;  --n5: #616161;  --n6: #424242;  --n7: #212121;
+
+  /* ── Semantic surface tokens ────────────────────────────────────── */
+  --fg-1:        var(--brand-white-88);
+  --fg-2:        var(--brand-white-60);
+  --fg-3:        var(--brand-white-30);
+  --bg-slide:    var(--brand-navy);
+  --bg-card:     var(--brand-navy-mid);
+  --bg-card-alt: var(--brand-navy-light);
+  --border-subtle: var(--brand-navy-border);
+  --border-bright: var(--brand-white-30);
+
+  /* ── Typography families ────────────────────────────────────────── */
+  --font-display: "Orbitron", "Segoe UI", Arial, sans-serif;
+  --font-body:    "Exo 2", "Segoe UI", Arial, sans-serif;
+  --font-mono:    "Share Tech Mono", "Courier New", monospace;
+
+  /* ── Type scale (1920×1080 projection) ──────────────────────────── */
+  --type-eyebrow:   20px;
+  --type-title:     60px;
+  --type-title-big: 88px;
+  --type-subtitle:  36px;
+  --type-callout:   32px;
+  --type-body:      26px;
+  --type-small:     22px;
+  --type-mono:      22px;
+  --type-footer:    18px;
+  --type-tag:       18px;
+
+  /* Density multiplier — wired to Tweaks slider */
+  --type-scale: 1;
+
+  /* ── Spacing (8-point base grid) ────────────────────────────────── */
+  --s1: 4px;  --s2: 8px;   --s3: 12px;  --s4: 16px;
+  --s5: 24px; --s6: 32px;  --s7: 48px;  --s8: 64px; --s9: 96px;
+
+  /* ── Slide padding ──────────────────────────────────────────────── */
+  --pad-x:       96px;
+  --pad-top:     72px;
+  --pad-bottom: 112px;
+  --gap-title:   32px;
+  --gap-card:    20px;
+  --gap-item:    24px;
+
+  /* ── Radii ──────────────────────────────────────────────────────── */
+  --r-tag:    4px;
+  --r-card:   8px;
+  --r-icon:   50%;
+  --r-pill:   999px;
+
+  /* ── Borders ────────────────────────────────────────────────────── */
+  --border-card: 1px solid var(--border-subtle);
+  --border-card-accent: 1px solid var(--brand-blue);
+
+  /* ── Shadows / Glow ─────────────────────────────────────────────── */
+  --glow-blue:  0 0 16px var(--brand-blue-glow);
+  --glow-cyan:  0 0 12px rgba(0,188,212,0.3);
+  --shadow-card: 0 4px 24px rgba(0,0,0,0.4);
+
+  /* ── Motion ─────────────────────────────────────────────────────── */
+  --ease:   cubic-bezier(0.4, 0, 0.2, 1);
+  --t-fast: 0.15s var(--ease);
+  --t-base: 0.3s  var(--ease);
+  --t-slow: 0.5s  var(--ease);
+}

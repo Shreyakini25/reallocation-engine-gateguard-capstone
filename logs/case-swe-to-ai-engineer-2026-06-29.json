@@ -1,0 +1,122 @@
+{
+  "run_id": "sample-2026-06-29",
+  "mode": "case-swe-to-ai-engineer-h1b-title-screen",
+  "recipe_version": "0.1.0",
+  "date": "2026-06-29",
+  "run_type": "RUNNABLE-SAMPLE",
+  "companies_evaluated": 10,
+  "title_screen_results": {
+    "practitioner": [
+      "ATTENTIVE MOBILE INC",
+      "COHERE HEALTH INC",
+      "KENSHO TECHNOLOGIES INC",
+      "MOLOCO INC",
+      "ZOOM VIDEO COMMUNICATIONS INC"
+    ],
+    "researcher_only": [
+      "DATAMINR INC",
+      "OUTREACH CORP",
+      "SKYDIO INC"
+    ],
+    "hybrid": [
+      "KINETIC AUTOMATION INC"
+    ],
+    "no_data": [
+      "ADVANCED MICRO DEVICES INC"
+    ]
+  },
+  "liveness_results": [
+    {
+      "company": "COHERE HEALTH INC",
+      "url": "https://job-boards.greenhouse.io/coherehealth/jobs/7617095003",
+      "result": "active",
+      "checked": "2026-06-29",
+      "command": "npm run ats:liveness -- https://job-boards.greenhouse.io/coherehealth/jobs/7617095003"
+    },
+    {
+      "company": "MOLOCO INC",
+      "url": "https://job-boards.greenhouse.io/moloco/jobs/7635045003",
+      "result": "active",
+      "checked": "2026-06-29",
+      "command": "npm run ats:liveness -- https://job-boards.greenhouse.io/moloco/jobs/7635045003",
+      "removed_from_scoring": true,
+      "removal_reason": "Intern role — does not match Staff/Senior persona; full-time MLE II+ at Moloco requires MS/PhD per JD review"
+    },
+    {
+      "company": "ADVANCED MICRO DEVICES INC",
+      "url": "https://careers.amd.com/careers-home/jobs/80934",
+      "result": "expired",
+      "checked": "2026-06-29",
+      "command": "npm run ats:liveness -- https://careers.amd.com/careers-home/jobs/80934",
+      "note": "Also stopped earlier at no_data gate — liveness check run as stop-condition demonstration"
+    },
+    {
+      "company": "KENSHO TECHNOLOGIES INC",
+      "url": null,
+      "result": "not_checked",
+      "note": "Uses Workday portal — npm run ats:liveness supports Greenhouse/Lever/Ashby only"
+    },
+    {
+      "company": "ATTENTIVE MOBILE INC",
+      "url": null,
+      "result": "not_checked",
+      "note": "Posting URL not confirmed in this sample run"
+    },
+    {
+      "company": "ZOOM VIDEO COMMUNICATIONS INC",
+      "url": null,
+      "result": "not_checked",
+      "note": "Posting URL not confirmed; also flagged low_n (2 total approvals)"
+    }
+  ],
+  "roles_scored": 1,
+  "score_summary": {
+    "apply": 1,
+    "consider": 0,
+    "skip": 0,
+    "skip_rate_pct": 0,
+    "note": "Low skip rate reflects pre-scoring filtering: 6 of 10 companies stopped before scoring (3 researcher-only, 1 no-data, 1 intern-not-persona, 1 Workday-unverified). One role scored."
+  },
+  "stop_conditions_triggered": [
+    {
+      "company": "ADVANCED MICRO DEVICES INC",
+      "condition": "not_in_dataset",
+      "detail": "Public company (NASDAQ) — not in SEC Form D dataset; no Form D filed"
+    },
+    {
+      "company": "ADVANCED MICRO DEVICES INC",
+      "condition": "liveness_expired",
+      "detail": "Posting URL confirmed expired 2026-06-29"
+    },
+    {
+      "company": "DATAMINR INC",
+      "condition": "researcher_only",
+      "detail": "top_job_titles_sponsored: 'research engineer' only — no practitioner titles"
+    },
+    {
+      "company": "OUTREACH CORP",
+      "condition": "researcher_only",
+      "detail": "top_job_titles_sponsored: 'applied scientist' only — no practitioner titles"
+    },
+    {
+      "company": "SKYDIO INC",
+      "condition": "researcher_only",
+      "detail": "top_job_titles_sponsored: 'research scientist', 'senior research scientist' — no practitioner titles"
+    }
+  ],
+  "source_files": [
+    "data/80-days-to-stay/data/SEC_DOL_H1b_data_mapped.csv",
+    "data/80-days-to-stay/data/SEC_DOL_H1b_data_mapped-join-validation-audit.md",
+    "data/raw/case-swe-to-ai-engineer/company-list.json",
+    "data/raw/case-swe-to-ai-engineer/title-screen.json",
+    "data/raw/case-swe-to-ai-engineer/roles.json",
+    "data/raw/case-swe-to-ai-engineer/role-scores.json",
+    "data/bls/compact/soc_occupation_compact.csv"
+  ],
+  "todos_open": 3,
+  "open_issues": [
+    "[TODO: DEV] scripts/h1b/filter-by-title-pattern.py not yet implemented",
+    "[TODO: DATA SOURCE] DOL LCA current-quarter data not acquired",
+    "[TODO: DATA SOURCE] LinkedIn/ATS-provider-independent posting data not acquired"
+  ]
+}

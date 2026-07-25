@@ -1,0 +1,473 @@
+{
+  "_scorer": "bayesian-role-scorer",
+  "_chapter": 11,
+  "generated": "2026-07-24",
+  "config": {
+    "weights": {
+      "sponsorship": 0.35,
+      "fit": 0.3,
+      "role_quality": 0
+    },
+    "apply_threshold": 0.3,
+    "consider_floor": 0.2,
+    "gate_zero": 0.05,
+    "soft_sponsorship_tiers": [
+      "likely",
+      "possible",
+      "unknown"
+    ]
+  },
+  "profile_needs_sponsorship": true,
+  "roles": [
+    {
+      "role_id": "realloc-cohere-health-inc",
+      "company": "COHERE HEALTH INC",
+      "title": "Staff Machine Learning Engineer",
+      "composite": 0.5684,
+      "recommendation": "Apply",
+      "machine_recommendation": "Apply",
+      "reason": "composite 0.568 ≥ 0.3, gates healthy",
+      "override": null,
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.9811,
+            "weight": 0.35,
+            "contribution": 0.3434,
+            "source": "record"
+          },
+          {
+            "factor": "fit",
+            "value": 0.75,
+            "weight": 0.3,
+            "contribution": 0.225,
+            "source": "model-judgment"
+          },
+          {
+            "factor": "role_quality",
+            "value": 0.903,
+            "weight": 0,
+            "contribution": 0,
+            "source": "record"
+          }
+        ],
+        "vote_sum": 0.5684,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 1,
+            "source": "your-input"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 1,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 1,
+        "arithmetic": "(0.9811·0.35 + 0.75·0.3 + 0.903·0) × 1 × 1 = 0.568"
+      }
+    },
+    {
+      "role_id": "realloc-moloco-inc",
+      "company": "MOLOCO INC",
+      "title": "Machine Learning Engineer Intern",
+      "composite": 0.5714,
+      "recommendation": "Apply",
+      "machine_recommendation": "Apply",
+      "reason": "composite 0.571 ≥ 0.3, gates healthy",
+      "override": null,
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.9897,
+            "weight": 0.35,
+            "contribution": 0.3464,
+            "source": "record"
+          },
+          {
+            "factor": "fit",
+            "value": 0.75,
+            "weight": 0.3,
+            "contribution": 0.225,
+            "source": "model-judgment"
+          },
+          {
+            "factor": "role_quality",
+            "value": 0.903,
+            "weight": 0,
+            "contribution": 0,
+            "source": "record"
+          }
+        ],
+        "vote_sum": 0.5714,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 1,
+            "source": "your-input"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 1,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 1,
+        "arithmetic": "(0.9897·0.35 + 0.75·0.3 + 0.903·0) × 1 × 1 = 0.571"
+      }
+    },
+    {
+      "role_id": "realloc-kensho-technologies-inc",
+      "company": "KENSHO TECHNOLOGIES INC",
+      "title": "Machine Learning Engineer (inferred target)",
+      "composite": 0.2868,
+      "recommendation": "Consider",
+      "machine_recommendation": "Consider",
+      "reason": "composite 0.287 in the Consider band [0.2, 0.3)",
+      "override": null,
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.9962,
+            "weight": 0.35,
+            "contribution": 0.3487,
+            "source": "record"
+          },
+          {
+            "factor": "fit",
+            "value": 0.75,
+            "weight": 0.3,
+            "contribution": 0.225,
+            "source": "model-judgment"
+          },
+          {
+            "factor": "role_quality",
+            "value": 0.903,
+            "weight": 0,
+            "contribution": 0,
+            "source": "record"
+          }
+        ],
+        "vote_sum": 0.5737,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 0.5,
+            "source": "your-input"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 1,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0.5,
+        "arithmetic": "(0.9962·0.35 + 0.75·0.3 + 0.903·0) × 0.5 × 1 = 0.287"
+      }
+    },
+    {
+      "role_id": "realloc-attentive-mobile-inc",
+      "company": "ATTENTIVE MOBILE INC",
+      "title": "Machine Learning Engineer (inferred target)",
+      "composite": 0.2872,
+      "recommendation": "Consider",
+      "machine_recommendation": "Consider",
+      "reason": "composite 0.287 in the Consider band [0.2, 0.3)",
+      "override": null,
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.9982,
+            "weight": 0.35,
+            "contribution": 0.3494,
+            "source": "record"
+          },
+          {
+            "factor": "fit",
+            "value": 0.75,
+            "weight": 0.3,
+            "contribution": 0.225,
+            "source": "model-judgment"
+          },
+          {
+            "factor": "role_quality",
+            "value": 0.767,
+            "weight": 0,
+            "contribution": 0,
+            "source": "record"
+          }
+        ],
+        "vote_sum": 0.5744,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 0.5,
+            "source": "your-input"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 1,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0.5,
+        "arithmetic": "(0.9982·0.35 + 0.75·0.3 + 0.767·0) × 0.5 × 1 = 0.287"
+      }
+    },
+    {
+      "role_id": "realloc-skydio-inc",
+      "company": "SKYDIO INC",
+      "title": "Research Scientist (inferred target)",
+      "composite": 0.2048,
+      "recommendation": "Consider",
+      "machine_recommendation": "Consider",
+      "reason": "composite 0.205 in the Consider band [0.2, 0.3)",
+      "override": null,
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.9986,
+            "weight": 0.35,
+            "contribution": 0.3495,
+            "source": "record"
+          },
+          {
+            "factor": "fit",
+            "value": 0.2,
+            "weight": 0.3,
+            "contribution": 0.06,
+            "source": "model-judgment"
+          },
+          {
+            "factor": "role_quality",
+            "value": 0.903,
+            "weight": 0,
+            "contribution": 0,
+            "source": "record"
+          }
+        ],
+        "vote_sum": 0.4095,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 0.5,
+            "source": "your-input"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 1,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0.5,
+        "arithmetic": "(0.9986·0.35 + 0.2·0.3 + 0.903·0) × 0.5 × 1 = 0.205"
+      }
+    },
+    {
+      "role_id": "realloc-dataminr-inc",
+      "company": "DATAMINR INC",
+      "title": "Research Scientist (inferred target)",
+      "composite": 0.1995,
+      "recommendation": "Skip",
+      "machine_recommendation": "Skip",
+      "reason": "composite 0.200 < 0.2 — time is better spent elsewhere",
+      "override": null,
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.9687,
+            "weight": 0.35,
+            "contribution": 0.339,
+            "source": "record"
+          },
+          {
+            "factor": "fit",
+            "value": 0.2,
+            "weight": 0.3,
+            "contribution": 0.06,
+            "source": "model-judgment"
+          },
+          {
+            "factor": "role_quality",
+            "value": 0.903,
+            "weight": 0,
+            "contribution": 0,
+            "source": "record"
+          }
+        ],
+        "vote_sum": 0.399,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 0.5,
+            "source": "your-input"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 1,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0.5,
+        "arithmetic": "(0.9687·0.35 + 0.2·0.3 + 0.903·0) × 0.5 × 1 = 0.200"
+      }
+    },
+    {
+      "role_id": "realloc-outreach-corp",
+      "company": "OUTREACH CORP",
+      "title": "Research Scientist (inferred target)",
+      "composite": 0.2044,
+      "recommendation": "Consider",
+      "machine_recommendation": "Consider",
+      "reason": "composite 0.204 in the Consider band [0.2, 0.3)",
+      "override": null,
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.9968,
+            "weight": 0.35,
+            "contribution": 0.3489,
+            "source": "record"
+          },
+          {
+            "factor": "fit",
+            "value": 0.2,
+            "weight": 0.3,
+            "contribution": 0.06,
+            "source": "model-judgment"
+          },
+          {
+            "factor": "role_quality",
+            "value": 0.903,
+            "weight": 0,
+            "contribution": 0,
+            "source": "record"
+          }
+        ],
+        "vote_sum": 0.4089,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 0.5,
+            "source": "your-input"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 1,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0.5,
+        "arithmetic": "(0.9968·0.35 + 0.2·0.3 + 0.903·0) × 0.5 × 1 = 0.204"
+      }
+    },
+    {
+      "role_id": "realloc-kinetic-automation-inc",
+      "company": "KINETIC AUTOMATION INC",
+      "title": "Machine Learning Engineer (inferred target)",
+      "composite": 0.2562,
+      "recommendation": "Consider",
+      "machine_recommendation": "Consider",
+      "reason": "composite 0.256 in the Consider band [0.2, 0.3)",
+      "override": null,
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.9928,
+            "weight": 0.35,
+            "contribution": 0.3475,
+            "source": "record"
+          },
+          {
+            "factor": "fit",
+            "value": 0.55,
+            "weight": 0.3,
+            "contribution": 0.165,
+            "source": "model-judgment"
+          },
+          {
+            "factor": "role_quality",
+            "value": 0.805,
+            "weight": 0,
+            "contribution": 0,
+            "source": "record"
+          }
+        ],
+        "vote_sum": 0.5125,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 0.5,
+            "source": "your-input"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 1,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0.5,
+        "arithmetic": "(0.9928·0.35 + 0.55·0.3 + 0.805·0) × 0.5 × 1 = 0.256"
+      }
+    },
+    {
+      "role_id": "realloc-roblox-corp",
+      "company": "ROBLOX CORP",
+      "title": "PhD Early Career (ML)",
+      "composite": 0.5709,
+      "recommendation": "Apply",
+      "machine_recommendation": "Apply",
+      "reason": "composite 0.571 ≥ 0.3, gates healthy",
+      "override": null,
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.9884,
+            "weight": 0.35,
+            "contribution": 0.3459,
+            "source": "record"
+          },
+          {
+            "factor": "fit",
+            "value": 0.75,
+            "weight": 0.3,
+            "contribution": 0.225,
+            "source": "model-judgment"
+          },
+          {
+            "factor": "role_quality",
+            "value": 0.903,
+            "weight": 0,
+            "contribution": 0,
+            "source": "record"
+          }
+        ],
+        "vote_sum": 0.5709,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 1,
+            "source": "your-input"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 1,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 1,
+        "arithmetic": "(0.9884·0.35 + 0.75·0.3 + 0.903·0) × 1 × 1 = 0.571"
+      }
+    }
+  ]
+}

@@ -55,6 +55,19 @@ This repository is one *domain* governed by **Snickerdoodle** (`SNICKERDOODLE.md
 - [Appendix: Best Practices for Running the Reallocation Engine](chapters/98-appendix-best-practices.md)
 - [Back matter — acknowledgments, about the author, references, glossary](chapters/99-back-matter.md)
 
+## INFO 7375 assignment submission (Aakash Belide)
+
+The validation report is [`Belide_Aakash_ReallocationEngine.md`](Belide_Aakash_ReallocationEngine.md). It documents all 7 skeptical checks against a real reallocation tool built on top of this repo's own Ch.11 scorer — reallocating a candidate's finite OPT application effort across companies, using the H-1B/SEC sponsorship data already in this repo.
+
+**Run it from a clean checkout:**
+```bash
+npm install
+node scripts/reallocate/allocate.mjs data/raw/reallocation-audit/candidates.json
+```
+This prints a real reallocation plan (which companies get an application slot, which are blocked pending a liveness check) and writes `data/raw/reallocation-audit/{roles.json,role-scores.json,role-scores.md,reallocation-plan.json}`. No network calls, no API keys required, no private data used — every company name is public, sourced from `data/80-days-to-stay/data/SEC_DOL_H1b_data_mapped.csv`.
+
+See also: `journal/frictional-journal.md` (Frictional Journal — prediction + reflection), `data/raw/reallocation-audit/gigo-audit.md` (Component 2 audit).
+
 ## How this connects to Medhavy
 
 These are Kindle / online editions, designed for integration with **Medhavy** (also **Medhavi**), an AI-powered intelligent-textbook system in which the chapters become adaptive practice — hints, worked examples, quizzes, and feedback loops. Learn more at https://www.medhavy.com/.

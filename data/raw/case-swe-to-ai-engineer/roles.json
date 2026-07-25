@@ -1,0 +1,37 @@
+[
+  {
+    "role_id": "cohere-health-staff-mle-2026-06-29",
+    "company": "COHERE HEALTH INC",
+    "title": "Staff Machine Learning Engineer",
+    "url": "https://job-boards.greenhouse.io/coherehealth/jobs/7617095003",
+    "soc_code": "15-1221",
+    "sponsorship": {
+      "p": 0.85,
+      "tier": "proven",
+      "source": "record",
+      "evidence": "104 H-1B approvals at 98.1% rate; title 'machine learning engineer' in top_job_titles_sponsored; Series C funding 2025-05-07"
+    },
+    "fit": {
+      "p": 0.65,
+      "source": "model-judgment",
+      "note": "Staff-level requires deep ML expertise; SWE background with LLM/NLP experience is relevant but staff IC bar is high for new-grad/junior"
+    },
+    "role_quality": {
+      "p": 0.0,
+      "source": "record",
+      "note": "Weight 0.0 per scorer defaults — role_quality unpinned in Ch.11 worked example; contributes nothing to composite"
+    },
+    "liveness": {
+      "factor": 1.0,
+      "source": "record",
+      "checked": "2026-06-29",
+      "command": "npm run ats:liveness -- https://job-boards.greenhouse.io/coherehealth/jobs/7617095003",
+      "result": "active"
+    },
+    "timeline": {
+      "factor": 1.0,
+      "source": "your-input",
+      "note": "OPT start 2026-09-08; company has H-1B history; current posting open now; sponsorship needed before OPT expires 2027-09-07 — timeline is plausible"
+    }
+  }
+]

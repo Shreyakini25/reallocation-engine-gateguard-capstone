@@ -1,0 +1,203 @@
+{
+  "_engine": "application-effort-reallocation (adapted Ch.11 scorer)",
+  "generated": "2026-07-24",
+  "slot_budget": 5,
+  "objective": "maximize expected practitioner-accessible, live, sponsorship-likely interviews per application slot spent",
+  "uncertainty_method": "composite reported with a 90% credible interval and P(recommendation holds), from 20000 seeded Monte-Carlo draws propagating BOTH the sponsorship Beta posterior AND the model-judgment fit prior (Beta K=9)",
+  "hard_stop_states": "every allocated row is BLOCK (liveness unconfirmed) | FLAG (live but low-confidence / CI straddles Apply threshold) | APPROVE-REQUIRED (confident, still needs human go). The tool never spends a slot itself.",
+  "objective_leaves_out": [
+    "actual candidate fit beyond a model-judgment title-class heuristic",
+    "the team's CURRENT composition (H-1B title history lags 2-3 years behind reality)",
+    "referral access, compensation, and culture fit",
+    "whether applying there CAUSES a better outcome vs. merely correlates with one (see Component 5)"
+  ],
+  "gigo_gate": {
+    "min_total_approvals": 5,
+    "require_title_field": true
+  },
+  "candidates_evaluated": 11,
+  "candidates_rejected_at_gigo_gate": 2,
+  "candidates_scored": 9,
+  "slots_allocated": 5,
+  "allocation": [
+    {
+      "company": "MOLOCO INC",
+      "composite": 0.5714,
+      "recommendation": "Apply",
+      "slots_allocated": 1,
+      "confidence_tier": "high",
+      "sponsorship_ci90": [
+        0.9783,
+        1
+      ],
+      "composite_ci90": [
+        0.4951,
+        0.6284
+      ],
+      "p_recommendation_holds": 1,
+      "liveness_input": "live",
+      "gate_state": "APPROVE",
+      "HARD_STOP": "APPROVE-REQUIRED - cleared and confident, but still needs the candidate's explicit go before applying. This tool ranks; it never applies on its own. Resolver: the candidate."
+    },
+    {
+      "company": "ROBLOX CORP",
+      "composite": 0.5709,
+      "recommendation": "Apply",
+      "slots_allocated": 1,
+      "confidence_tier": "high",
+      "sponsorship_ci90": [
+        0.9824,
+        0.9943
+      ],
+      "composite_ci90": [
+        0.4953,
+        0.6277
+      ],
+      "p_recommendation_holds": 1,
+      "liveness_input": "live",
+      "gate_state": "FLAG",
+      "HARD_STOP": "FLAG - live and high-scoring, but the live posting title carries a PhD/research signal that contradicts the practitioner classification (stale-history risk); a human MUST read the JD and judge before spending the slot (do not auto-approve). Resolver: the candidate."
+    },
+    {
+      "company": "COHERE HEALTH INC",
+      "composite": 0.5684,
+      "recommendation": "Apply",
+      "slots_allocated": 1,
+      "confidence_tier": "high",
+      "sponsorship_ci90": [
+        0.9604,
+        1
+      ],
+      "composite_ci90": [
+        0.4911,
+        0.6256
+      ],
+      "p_recommendation_holds": 1,
+      "liveness_input": "live",
+      "gate_state": "APPROVE",
+      "HARD_STOP": "APPROVE-REQUIRED - cleared and confident, but still needs the candidate's explicit go before applying. This tool ranks; it never applies on its own. Resolver: the candidate."
+    },
+    {
+      "company": "ATTENTIVE MOBILE INC",
+      "composite": 0.2872,
+      "recommendation": "Consider",
+      "slots_allocated": 1,
+      "confidence_tier": "high",
+      "sponsorship_ci90": [
+        0.9915,
+        1
+      ],
+      "composite_ci90": [
+        0.2493,
+        0.3158
+      ],
+      "p_recommendation_holds": 0.692,
+      "liveness_input": "unchecked",
+      "gate_state": "BLOCK",
+      "HARD_STOP": "BLOCK - liveness not confirmed live; a human must verify the posting is real before this slot can be spent. Resolver: the candidate."
+    },
+    {
+      "company": "KENSHO TECHNOLOGIES INC",
+      "composite": 0.2868,
+      "recommendation": "Consider",
+      "slots_allocated": 1,
+      "confidence_tier": "high",
+      "sponsorship_ci90": [
+        0.9821,
+        1
+      ],
+      "composite_ci90": [
+        0.2481,
+        0.3154
+      ],
+      "p_recommendation_holds": 0.702,
+      "liveness_input": "unchecked",
+      "gate_state": "BLOCK",
+      "HARD_STOP": "BLOCK - liveness not confirmed live; a human must verify the posting is real before this slot can be spent. Resolver: the candidate."
+    }
+  ],
+  "not_allocated": [
+    {
+      "company": "KINETIC AUTOMATION INC",
+      "composite": 0.2562,
+      "reason": "slot budget exhausted before reaching this company"
+    },
+    {
+      "company": "SKYDIO INC",
+      "composite": 0.2048,
+      "reason": "slot budget exhausted before reaching this company"
+    },
+    {
+      "company": "OUTREACH CORP",
+      "composite": 0.2044,
+      "reason": "slot budget exhausted before reaching this company"
+    },
+    {
+      "company": "DATAMINR INC",
+      "composite": 0.1995,
+      "reason": "composite 0.200 < 0.2 — time is better spent elsewhere"
+    }
+  ],
+  "gate_log": [
+    {
+      "company": "COHERE HEALTH INC",
+      "gate_status": "cleared",
+      "classification": "practitioner"
+    },
+    {
+      "company": "MOLOCO INC",
+      "gate_status": "cleared",
+      "classification": "practitioner"
+    },
+    {
+      "company": "KENSHO TECHNOLOGIES INC",
+      "gate_status": "cleared",
+      "classification": "practitioner"
+    },
+    {
+      "company": "ATTENTIVE MOBILE INC",
+      "gate_status": "cleared",
+      "classification": "practitioner"
+    },
+    {
+      "company": "SKYDIO INC",
+      "gate_status": "cleared",
+      "classification": "researcher-only"
+    },
+    {
+      "company": "DATAMINR INC",
+      "gate_status": "cleared",
+      "classification": "researcher-only"
+    },
+    {
+      "company": "OUTREACH CORP",
+      "gate_status": "cleared",
+      "classification": "researcher-only"
+    },
+    {
+      "company": "KINETIC AUTOMATION INC",
+      "gate_status": "cleared",
+      "classification": "hybrid"
+    },
+    {
+      "company": "ZOOM VIDEO COMMUNICATIONS INC",
+      "gate_status": "rejected",
+      "reason": "Total Approvals (2) below the GIGO gate floor of 5 - approval rate would be statistical noise",
+      "raw_data": {
+        "approvals": 2,
+        "denials": 0,
+        "approval_rate": "100.0"
+      }
+    },
+    {
+      "company": "ROBLOX CORP",
+      "gate_status": "cleared",
+      "classification": "practitioner"
+    },
+    {
+      "company": "AMD",
+      "gate_status": "rejected",
+      "reason": "no H1B record found for this company name (no-data - cannot infer sponsorship likelihood)"
+    }
+  ]
+}
