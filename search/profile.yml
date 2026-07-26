@@ -1,0 +1,32 @@
+target_role: "Backend/Infrastructure Engineer, secondary interest in AI Infra / AI Engineer roles at large tech companies"
+# Northeastern graduation date: 2026-08-29 (corrected from earlier assumption of May 2026)
+
+visa:
+  visa_type: "F-1 OPT"
+  opt_start_date: "2026-10-28"
+  opt_end_date: "2027-10-27"
+  stem_opt_eligible: true
+  stem_opt_eligible_confirmed_with_dso: true
+  stem_opt_extension_end_date: "2029-10-27"
+  unemployment_days_used: 0
+  unemployment_buffer_target_days: 80   # per course recommendation: 80 days below the 90-day ceiling
+
+geography:
+  target_metros:
+    - "San Jose, CA"
+    - "San Francisco, CA"
+    - "Bay Area (general)"
+  remote_accepted: true
+  constraints_note: "Based in San Jose, CA; open to remote roles regardless of company HQ location."
+
+industry:
+  target_sectors:
+    - "Backend / Infrastructure (general tech)"
+    - "AI Infra / AI Engineering"
+  company_size_preference: "no preference -- open to all sizes (seed-stage through public/FAANG)"
+  hard_exclusions: []
+
+sponsorship:
+  requires_sponsorship: true
+  gate_type: "hard_gate"
+  note: "A company with no H-1B sponsorship history is skip-regardless, regardless of fit score."
