@@ -150,3 +150,10 @@ private emails, or sensitive application notes.
 - **Rebuilt:** `node scripts/build-instructions.mjs --promote` → `AGENTS.md` + `CLAUDE.md` regenerated; `CLAUDE.md` now imports `@SNICKERDOODLE.md`.
 - **Untouched:** `data/` CSVs (real company names containing "mycroft") and prior RUN_LOG history (append-only).
 - **Result:** conformance + doctor green; no stale `MYCROFT.md` outside data/history.
+### 2026-07-20 — case-backend-infra-jobops-liveness-ranfei
+- Mode: case-backend-infra-jobops-liveness-ranfei
+- Companies checked: Fireworks AI, Notion, Cartesia, Box, FT Partners
+- Platform confirmed via: detect-ats.py (Fireworks AI -> greenhouse); manual-web-verify (Notion -> ashby, Cartesia -> ashby, Box -> unsupported/Happydance)
+- Scan result: 208 found, 134 filtered by title, 71 filtered by location, 3 new, 0 errors (after fixing Greenhouse api: field)
+- Liveness checked: https://job-boards.greenhouse.io/fireworksai/jobs/4280748009 -> active; fabricated job ID -> expired (correct); https://careers.box.com/en/jobs/7900512/... -> expired (false negative, confirmed live independently)
+- Open issues: FT Partners platform unresolved; detect-ats.py has no ashby support; liveness gives confident wrong answers on unsupported custom-ATS platforms rather than flagging uncertainty
