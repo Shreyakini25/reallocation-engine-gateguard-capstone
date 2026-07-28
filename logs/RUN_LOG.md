@@ -6,6 +6,112 @@ Use this file to record what was run, what worked, what failed, and what should
 be tested next. Keep entries short. Do not include secrets, real phone numbers,
 private emails, or sensitive application notes.
 
+## 2026-07-27 -- Effort Reallocator recovery pass (grader findings)
+
+- **Why:** Hostile grade took −35 gating (nothing committed; journal/video blank) and −8
+  from two real defects: objective claimed a skip-rate constraint the allocator never
+  applied; `round(0.6995, 3) >= 0.70` let a sub-floor move be committed. BLS path was
+  unguarded — missing file silently emptied role_quality while Monte Carlo still drew
+  its weight.
+- **Fixes:**
+  1. CLI refuses missing `--bls`; gate flags `BLS_TABLE_ABSENT`; track
+     `data/BLS/compact/soc_occupation_compact.csv`.
+  2. Objective reworded (allocate / README / report): Ch.15 skip rate is a **reported
+     dial**, not an enforced constraint.
+  3. Stability: strict `stability >= 0.70`; display to 2 decimals; regression test;
+     executed demo at `--slots 11` → 9 moves, all ≥86% stable (APPLOVIN gone).
+  4. `search/resume.json` untracked → `private/resume.json`; removed `!search/resume.json`
+     gitignore override. `npm run doctor` PRIVACY ✓ (history still holds the earlier
+     commit; rewrite declined).
+- **Re-run:** `all` exit 5; `execute` exit 4 (10 blocks); `allocate --slots 11 --liveness-policy
+  block --waive …` exit 0; `execute --approve …` exit 0. Artifacts refreshed under
+  `tools/effort-reallocator/runs/2026-07-27/`.
+- **Tests:** 38 OK (added sub-floor stability regression).
+- **Still open (author only):** Frictional Journal Entry 1 + reflection §§1–3,5; video
+  recording from `VIDEO-OUTLINE.md`.
+- **Clean-clone proof:** cloned `origin/mode/atharva-kurlekar-erp-to-ai` to a temp dir;
+  `reallocate.py all` → exit 5 with full gate report; 38 tests OK; missing BLS path
+  prints `refused: BLS occupation table not found` (non-zero exit). `search/resume.json`
+  not tracked in the clone.
+
+## 2026-07-27 -- Effort Reallocator built and run (INFO 7375 "Reallocation Engine, Audited")
+
+- **Tool (new):** `tools/effort-reallocator/` — stdlib-only Python CLI, subcommands
+  `gate | allocate | explain | audit | execute | all`. Reallocates a weekly **application-slot
+  budget** (12 slots, per-company cap 3). Anchors: Ch.2, Ch.11 composite + 0.3 threshold, Ch.15
+  skip-rate dial. Reimplements `scripts/score/role-scorer.mjs` in Python with a **parity test**
+  against `data/examples/role-scores.json` and Ch.11's worked example (0.44625 Apply / 0.1785 Skip).
+- **Inputs:** `data/80-days-to-stay/data/SEC_DOL_H1b_data_mapped.csv` (30,369 rows);
+  `data/bls/compact/soc_occupation_compact.csv`; `data/examples/erp-to-ai-portals.yml`;
+  synthetic `examples/profile.json` + `examples/baseline-allocation.json` (so a clean clone runs).
+- **Commands:** `reallocate.py all` → **exit 5** (gate blocking); `reallocate.py execute` →
+  **exit 4**, 11 blocks, nothing moved; `allocate --liveness-policy block --waive
+  DATASET_NO_RECORD_PROVENANCE --waiver-reason "…"` → exit 0; `execute --approve --approver
+  "Atharva Kurlekar" --reason "…"` → exit 0, ledger written.
+- **Result:** 581 of 30,369 companies evaluated → Apply 149 / Consider 249 / Skip 183
+  (**skip rate 31.5%**, below Ch.15's 50% — reported, deliberately NOT enforced). 8 moves;
+  top move 1 slot ACME ANALYTICS LLC → MAPLEBEAR INC at 100% stability; **3 of 8 moves reported
+  as "not distinguishable from no change"** (20.7% / 18.4% / 5.2%). Expected gain **+0.121
+  responses/week, 80% CI [+0.117, +0.123]**; optimiser's curse measured at **6.1%** of the naive
+  figure.
+- **Gate:** **BLOCKED** on `DATASET_NO_RECORD_PROVENANCE` (no per-record timestamp/source).
+  **94.9% of rows (28,812) carry no H-1B fields** — routed to `unknown`, never imputed to zero.
+  81 rows rejected `IDENTITY_AMBIGUOUS` (a check added mid-build: one normalised name with
+  conflicting filing histories, e.g. `CHECKR INC` 76/8 vs `CHECKR GROUP INC` blank — the whole
+  group is refused, discarding good evidence, because a wrong join yields a confident number
+  about the wrong firm). Flags: 22,451 stale funding dates, 9 entity collisions, 3 wage-in-title.
+- **Largest finding (blind spot):** **5,126 firms** with recent Form D funding and no filing
+  record never enter the pool at all — the pool needs filed job titles for a fit vote, so the
+  filter selects on the outcome being predicted. MCAR/MNAR scenarios therefore applied to
+  **0 of 79** pooled candidates.
+- **Bias:** disparate impact ratio **0.0265** by ATS coverage; **238 firms with ≥25 approvals get
+  zero slots** including INTEL (13,318), MICROSOFT (12,226), UBER (3,984), AMGEN (1,882). Chose
+  calibration over parity and stated the cost. Leverage point: a Workday/proprietary-board adapter.
+- **Fragility:** **one mis-scaled cell in 30,369** removes the top firm's slot; **5 of 6** plausible
+  `VOLUME_REF` values change the allocation; an evergreen requisition is undetectable at zero
+  data change.
+- **Hard stop:** blocks on unwaived gate code, unverifiable posting, or stability < 70%. No
+  `--force`. Approvals *and* refusals append to **`logs/gate-decisions/`** — a directory
+  `DOMAIN.md` lists as planned-but-missing, so this closes that gap.
+- **Iteration (wrong versions kept, not erased):** `VOLUME_REF` 100 → 500 after the twelve slots
+  turned out to be decided **alphabetically**; Case-B detector moved from interval widths to
+  approval counts (the capped intervals were degenerate); non-deterministic move pairing fixed
+  (set iteration); stability floor compared in two places disagreed at 70.0%; bias audit was
+  quoting **96.8%** missingness inherited from the earlier assignment while this tool's own gate
+  measured **94.9%**.
+- **Verification:** `python3 -m unittest discover tools/effort-reallocator/tests` → **37 tests OK**;
+  `node scripts/conformance.mjs tools/effort-reallocator` → **56 files conform**.
+- **Blockers found in the repo (pre-existing, NOT from this work):**
+  1. `npm run verify` fails on `metadata.yaml` — `ModuleNotFoundError: No module named 'yaml'`.
+     The system `python3` has no PyYAML. Plan: `pip install pyyaml`, or teach
+     `conformance.mjs` to skip YAML when the module is absent instead of reporting a
+     content failure. (This tool is stdlib-only precisely to avoid that class of breakage.)
+  2. `npm run doctor` **PRIVACY** check fails: **`search/resume.json` is git-tracked** and holds
+     real personal data (`basics`, `education`, `work`). Committed earlier in
+     `65bfdba`, so it is also in history. **Not touched here** — removing a tracked
+     personal file is the user's decision. Plan: `git rm --cached search/resume.json`, move it
+     under `private/`, and decide whether history needs rewriting before any public push.
+- **Artifacts:** `tools/effort-reallocator/runs/2026-07-27/` (two runs — `default/` refused,
+  `executed/` committed — plus four terminal transcripts and a README),
+  `logs/gate-decisions/2026-07-27-effort-reallocator.md`,
+  `Kurlekar_Atharva_ReallocationEngine.md`, `FRICTIONAL-JOURNAL.md`, `constraints.md`.
+- **No private data.** The committed run uses synthetic `examples/` only; `out/` is gitignored.
+
+## 2026-07-06 -- ERP-to-AI Engineering triage (sample mode, live liveness gate, BLS cognitive advisory)
+
+**Superseded** by the entry below (2026-07-06 ats:scan migration). Kept for provenance only.
+
+- **Recipe:** `case-erp-to-ai-engineering` v0.1.0 (RUNNABLE-SAMPLE)
+- **Inputs:** `data/80-days-to-stay/data/SEC_DOL_H1b_data_mapped.csv` (30,369 rows); `data/bls/compact/soc_occupation_compact.csv`; `data/examples/erp-to-ai-liveness-urls.txt` (3 Reddit Greenhouse postings + 1 dead URL); `data/examples/erp-to-ai-roles.json` (6 roles).
+- **Commands:** `python3 scripts/ai-pivot/filter-ai-title-sponsors.py --top 20 --min-approvals 5`; `node scripts/ai-pivot/liveness-gate.mjs --file data/examples/erp-to-ai-liveness-urls.txt`; `npm run score data/examples/erp-to-ai-roles.json`.
+- **Result:** 30,369 seen -> 160 applied/mixed AI sponsors (22 research-gated excluded) -> shortlist 20 with advisory BLS cognitive scores (15-1252=3.834; 15-2051=gap). Liveness: 3 PASS (real Reddit Greenhouse job postings) / 1 CLOSED (dead board, HTTP 404). Score: Apply 2 (Reddit Staff DE 0.382, Reddit ML Engineer 0.346) / Consider 1 / Skip 3 (Amgen, DocuSign, Quantiphi — strong historical sponsors, no live posting) — skip 50%.
+- **Gates:** source PASS (H-1B CSV + BLS CSV); scope sample; data-shape PASS; liveness gate passed on real job URLs; Fit rubric specified in mode file; timeline encoded for F-1/OPT-not-filed.
+- **Verification:** research-gated count cross-check (22 vs grep 19); BLS spot-check (15-1252.00=3.834, 15-2051.00 blank); three Greenhouse URLs reproducibly `active`.
+- **Break attempts:** missing CSV -> stop exit 2; dead URL -> HTTP 404 gate CLOSED; malformed JSON -> scorer exit 1.
+- **Artifacts:** `logs/case-erp-to-ai-engineering-20260706.json`, `logs/case-erp-to-ai-engineering-liveness-20260706.json`, `reports/generated/case-erp-to-ai-engineering-20260706.md`, `data/examples/role-scores.{json,md}`.
+- **Open issues:** `[TODO: DEV] jd-soc-classifier.py`; `[TODO: DATA SOURCE]` automated posting URLs via `npm run ats:scan` (hand-sourced Reddit URLs for this run only); `role_quality` weight unpinned by book — cognitive scores stay advisory.
+- **No private data:** public CSVs and public job-posting URLs only.
+
 ## 2026-06-12 — Wrote Tutorial 00 (Exercise Zero) in full
 
 - **Recipe:** manual
@@ -142,6 +248,51 @@ private emails, or sensitive application notes.
 - **Artifacts:** `logs/oferta-2026-06-14.json`, `reports/generated/oferta-2026-06-14.md`, `data/examples/role-scores.{json,md}`.
 - **Flags:** skip-rate 40% < 50% (curated fixture, expected); `role_quality` weight 0 [VERIFY] drops the Ch.9 signal (gap #3); 1 documented override.
 - **Open:** machine half of P4 done; **human adequacy (P4 second half) outstanding** — attest to promote `oferta` past DRAFT.
+
+## 2026-06-25 -- Setup Exercise: Personal Layer (INFO 7375)
+
+- **What was built:** Three files constituting the engine's personal data layer — `search/resume.json` (attested), `search/profile.yml`, `search/gaps.md`. Privacy boundary: `search/private-notes.md` gitignored.
+- **Three attestation errors caught in resume.json:**
+  1. ServiceNow CSA listed as an "excluded" credential but still present in the certifications array — removed entirely and moved to a `not_yet_obtained` block. Not an earned credential.
+  2. Diploma qualification (3-year diploma, lateral entry) was missing from the education record. BE duration of 3 years is correct, but the prior diploma was not recorded. Added as `edu_3` with institution/dates flagged for verification.
+  3. Metric percentages at FLO Group (30% error reduction, 20% onboarding reduction) were extracted as facts — confirmed as estimated, not measured from data. Noted inline in the relevant bullet points.
+- **Top gap from gaps.md:** ServiceNow administration at CSA level (Gap B1, IT Systems Analyst track — primary) — 3 of 3 active target postings (IBM R-646296, HCLTech Admin, State Street R-790190) list ServiceNow as required or preferred. Current evidence is end-user ITSM experience only. Closes when CSA credential is issued.
+- **Field corrected in profile.yml from agent's first draft:**
+  - Agent initially wrote `status: "F-1 OPT"` and `opt_end: "2027-08"`. Corrected to `status: "F-1 student"` and `opt_end: null` — OPT EAD has not been filed yet; graduation is August 2026 and application must be submitted immediately via DSO. A date on an un-issued card is not a fact.
+  - `stem_end_potential` also nulled — STEM OPT cannot be planned until initial OPT is approved.
+- **Source data:** BLS compact file `data/bls/compact/soc_occupation_compact.csv` (SOC 15-1211, pulled 2026-06-25), 3-posting spot sample (IBM R-646296, HCLTech Administrator Miami-Dade, State Street R-790190).
+- **Gaps.md edits completed:**
+  - Killed row B2 (BRD/UAT ownership) — agent generated this from the generic O*NET 15-1211 Systems Analyst task list, but none of the actual target postings (IBM R-646296, HCLTech Admin, State Street R-790190) require BRD or UAT coordination; they are technical/implementation roles, not business analyst roles.
+  - Rewrote row A1 (no shipped AI project) in own words — the rewritten row distinguishes between having an OCI GenAI cert and being able to demonstrate working code in an interview; the plan closes only when a public GitHub repo with a running pipeline exists, not when another course is completed.
+- **Verification check (Step 4):**
+  - resume.json: Every job entry is traceable to a role I held. Metric percentages (~30% error reduction, ~20% onboarding reduction) are noted as estimated — I confirmed they were not measured from data. Diploma institution and start date remain a TODO; the agent's import missed the diploma entirely, which was a real extraction failure. Those fields need to be verified against my certificate before the record is fully clean.
+  - profile.yml: OPT end date is null. The agent's first draft wrote "F-1 OPT" and a 2027 expiry date — both fabricated from résumé language, not from a physical document. I have not filed for my EAD yet. Setting a gate date on an un-issued card would have caused the engine to produce Apply recommendations for a timeline I cannot currently defend.
+  - gaps.md: IT track evidence cites verifiable posting IDs and req numbers (IBM R-646296, HCLTech Miami-Dade, State Street R-790190) — these are checkable. AI/Gen AI track is labeled aspirational with a note that no active applications exist yet; those gaps are forward-looking and not blocking the current search.
+- **AI Use Disclosure:**
+  - What the agent did: Claude Sonnet (via Cursor) extracted and structured `resume.json` from my master resume JSON, drafted `profile.yml` from my stated constraints, and drafted the initial `gaps.md` from BLS SOC data and a posting sample.
+  - What I did: I ran the attestation pass and found three real errors — the CSA cert that was present but not earned, the missing diploma qualification, and the estimated metrics stated as measured facts. I corrected the visa status section in both `resume.json` and `profile.yml`. I killed gap row B2 because I know the actual postings I applied to don't require BRD work. I rewrote gap row A1 in my own words.
+  - What the agent could not do: The agent read "F-1 OPT" in my source résumé JSON and confidently wrote `"status": "F-1 OPT"` and `"opt_end": "2027-08"` in `resume.json` — inferring an active OPT and fabricating an expiry date from an assumed one-year timeline. I have not filed for my EAD yet and am still on F-1 student status. That error required knowledge of my own immigration documents, which the agent does not have access to. An undetected fabricated gate date in `profile.yml` would have caused the Bayesian scorer to treat roles as Apply-eligible on a timeline I cannot legally support.
+
+## 2026-07-06 -- ERP-to-AI Engineering triage (sample mode, ats:scan 16 boards, BLS cognitive advisory)
+
+- **Recipe:** `case-erp-to-ai-engineering` v0.1.0 (RUNNABLE-SAMPLE)
+- **Inputs:** H-1B mapped CSV (30,369 rows); BLS compact CSV; `data/examples/erp-to-ai-portals.yml` (16 enabled Greenhouse boards); 6 hand-assembled roles in roles.json.
+- **Commands:** `npm run verify`; `npm run doctor`; filter-ai-title-sponsors.py; `REALLOCATION_ENGINE_PORTALS=data/examples/erp-to-ai-portals.yml npm run ats:scan -- --dry-run`; `npm run score`.
+- **Result:** 160 applied/mixed sponsors; scan **16 companies · 1,742 jobs · 341 yield**; score Apply 3 / Consider 1 / Skip 2 (33% skip).
+- **Gates:** source PASS; hiring-now via ats:scan --dry-run; Fit rubric in mode file.
+- **P6 open defect:** scan yield not auto-wired to roles JSON (6 sample roles hand-assembled).
+- **No private data.**
+
+## 2026-07-06 -- ERP-to-AI Engineering triage (sample mode, ats:scan + verify, BLS cognitive advisory)
+
+**Superseded** — intermediate 2-company run; see canonical entry above.
+
+- **Recipe:** `case-erp-to-ai-engineering` v0.1.0 (RUNNABLE-SAMPLE)
+- **Inputs:** H-1B mapped CSV (30,369 rows); BLS compact CSV; `data/examples/erp-to-ai-portals.yml` (16 Greenhouse boards); 6 roles in roles.json.
+- **Commands:** `npm run verify`; `npm run doctor`; filter-ai-title-sponsors.py; `REALLOCATION_ENGINE_PORTALS=data/examples/erp-to-ai-portals.yml npm run ats:scan -- --dry-run`; same + `--verify --company Reddit`; `npm run score`.
+- **Result:** 160 applied/mixed sponsors; scan 1,742 jobs → 341 yield (16 Greenhouse boards). Score Apply 2 / Consider 1 / Skip 3 (50% skip).
+- **Gates:** source PASS; hiring-now via ats:scan --dry-run; Fit rubric in mode file.
+- **No private data.**
 
 ## 2026-06-14 -- Rename MYCROFT.md → SNICKERDOODLE.md (constitution rebrand)
 
