@@ -15,9 +15,9 @@ RECOMMENDATION: move 1 application slot
 
 ## 1. The tool
 Ingests the CSV, scores each company by H-1B approval rate, attaches a margin of error
-(±100/√n percentage points), and recommends one move. **Objective (one sentence):** maximize
-H-1B sponsorship reliability. **What it leaves out:** company size, funding stage, and whether
-the student actually fits the role — none of which the score sees.
+(±100/√n percentage points), and recommends one move. **Objective (one sentence):** rank companies
+by their H-1B approval reliability. **What it leaves out:** company size, funding stage, and salary —
+none of which the score sees.
 
 ## 2. Data validation & the GIGO gate
 Hidden assumption the data makes: "approval rate is comparable across companies." It isn't — a
@@ -28,36 +28,36 @@ are dropped. A tool that skipped this gate would happily recommend a company wit
 
 ## 3. Bias audit (data → output)
 **Who is starved:** early-stage and small companies. They have thin or zero H-1B history, so they
-fail the gate or score low, and never receive the reallocated effort — even when they would
-sponsor. This is a feedback loop: no history → no recommendation → no applicant. **Fairness
-tension:** *equal opportunity* (every company that would truly sponsor should be reachable) vs.
-*predictive parity* (recommendations should be equally reliable across company-size groups). I
-chose predictive parity — I only recommend where the evidence is dense — and the cost is that I
-systematically ignore young sponsors. **Highest-leverage fix:** add a funding-recency signal (SEC
-Form D) so a company can qualify on trajectory, not just filing history.
+fail the gate or score noisily, and never receive the reallocated effort — even if their short
+record is genuinely strong. This is a feedback loop: no history → no recommendation → no applicant.
+**Fairness tension:** *equal opportunity* (every company with a real record should be reachable, not
+just the high-volume ones) vs. *predictive parity* (recommendations should be equally reliable
+across company-size groups). I chose predictive parity — I only recommend where the evidence is
+dense — and the cost is that I systematically ignore young companies with thin records.
+**Highest-leverage fix:** add a funding-recency signal (SEC Form D) so a company can qualify on
+trajectory, not just filing volume.
 
 ## 4. Explainability & its critique
 The explanation is simple and honest: the recommendation is driven by `approval_rate`, gated by
 `n`. **Where it lies by omission:** the explanation says "6Sense: 100% approval." Technically
-true. Practically misleading — it invites the student to read "100% = I will get sponsored,"
-when the field only means USCIS approved the petitions the company *chose* to file. The plot is
-accurate; the inference a human draws from it is wrong.
+true. Practically misleading — "100%" reads as rock-solid certainty, but it rests on just 62
+filings; the identical label would sit on a company with a 100% rate on 2 filings. The number is
+accurate; the confidence a reader hears in the word "100%" is not earned by the sample behind it.
 
 ## 5. Causal & counterfactual reasoning (Pearl's three rungs)
-- **Rung 1 — Observation:** high approval rate correlates with companies that appear in the data
-  as reliable sponsors.
-- **Rung 2 — Intervention:** if the student actually moves effort to 6Sense, does their outcome
-  improve? The score is **observational, not interventional.** Confounders that would make the
-  correlation vanish: (a) **selection** — approval rate is P(approve | petition filed); companies
-  only file for people they already decided to hire, so the number never contained the student's
-  odds of being hired; (b) **sample size** — 6Sense's 100% rests on 62 cases; (c) **size/sector**.
-- **Rung 3 — Counterfactual:** for a past applicant who spent a slot on Aurora Solar, would they
-  have an offer had the engine sent them to 6Sense instead? Unknowable from this data — approval
-  rate carries no information about hiring. The counterfactual rests on an assumption the dataset
-  cannot support.
-- **Honest verdict:** **the engine reallocates on correlation dressed as causation.** Worse, it
-  optimizes the wrong quantity — approval-given-petition, not offer-probability. It is a
-  reasonable *filter*, not a causal recommender.
+- **Rung 1 — Observation:** across the data, approval rates cluster near the ceiling — almost every
+  company that files sits around 98–100%. The rate correlates with little *because* it barely varies.
+- **Rung 2 — Intervention:** if the student moves effort to the top-rated company, does the ranking
+  reflect a real difference in the world? The score is **observational, not interventional.**
+  Confounders that dissolve the gap: (a) **sample size** — 6Sense's 100% rests on 62 filings, not a
+  stable rate; (b) **near-ceiling base rate** — with everyone at 98–100%, the differences the tool
+  ranks on are mostly sampling noise; (c) **selection** — companies choose which petitions to file.
+- **Rung 3 — Counterfactual:** had the engine ranked a different company first, would the approval
+  picture actually differ? Not measurably — the 0.5-point gap between 100% and 99.5% is inside the
+  margins. The counterfactual would rest on treating noise as signal.
+- **Honest verdict:** **the engine ranks on observed rates, not a causal claim** — and the metric it
+  ranks on barely discriminates once sample size is accounted for. It is a reasonable *coarse filter*
+  (does a company have a solid approval record at all), not a fine-grained recommender.
 
 ## 6. Adversarial robustness & fragility
 Perturbation: lower the GIGO threshold from n≥20 to n≥5 — a change a busy user would not notice.
@@ -78,18 +78,20 @@ non-negotiable here because the resource moved is the student's finite OPT-windo
 
 ## Uncertainty communication
 Every recommendation ships a ±margin and an n. The plain-English line: *"6Sense looks best on
-paper, but that's 62 past petitions, not a promise you'll be hired — and the score never measured
-hiring at all."* **Where I would not trust this tool:** any company near the gate boundary, and any
-use that reads "approval rate" as "my odds."
+paper, but that's a 100% from only 62 filings — one that hasn't met its first denial, not a
+meaningfully better rate than Databricks' 99.5% on 1,648."* **Where I would not trust this tool:**
+any company near the gate boundary, and any fine-grained ranking between companies whose rates
+differ by less than their margins.
 
 ## AI Use Disclosure
 - **Tool(s) used:** Claude (Anthropic).
 - **Portions assisted:** drafting `reallocate.py`, structuring this report.
 - **How used:** generated the first-pass scorer and report skeleton.
 - **What I changed:** corrected my pre-build prediction after seeing the real output (the winner is
-  a small-n 100% firm, not the biggest filer), and rewrote the causal section around the true error.
-- **What the AI could not do:** The AI ranked companies by approval rate as if that were
-  "where to apply." It could not see that `approval_rate` measures P(USCIS approves | the company
-  filed) — a post-hiring step ~99% of the time — and therefore contains none of the student's
-  probability of being *hired*. Knowing that gap requires having lived the F-1 → H-1B pipeline; the
-  model optimized a column that looks like the answer and isn't.
+  a small-n 100% firm, not the biggest filer), and rewrote the causal section around sample size and
+  near-ceiling base rates instead of my first, wrong framing.
+- **What the AI could not do:** The AI ranked companies by raw approval rate and placed a
+  100%-on-62-filings company above a 99.5%-on-1,648 one — treating the smaller sample as "better."
+  It did not flag that these rates all sit near the ceiling, so the gaps it ranked on are mostly
+  sampling noise, not real differences in the world. Deciding that a precise-looking rate on thin
+  data deserves *less* trust, not more, was the judgment I had to add.
