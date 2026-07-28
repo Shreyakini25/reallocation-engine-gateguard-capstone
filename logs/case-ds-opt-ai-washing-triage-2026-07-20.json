@@ -1,0 +1,62 @@
+{
+  "workflow": "case-ds-opt-ai-washing-triage",
+  "run_id": "ds-opt-ai-washing-triage-2026-07-20-sample",
+  "mode": "sample",
+  "generated_at": "2026-07-20T00:00:00+00:00",
+  "companies_scanned": 1,
+  "jobs_found": 787,
+  "filtered_by_title": 330,
+  "filtered_by_location": 396,
+  "duplicates_skipped": 3,
+  "offers": 58,
+  "classified": {
+    "target": 0,
+    "mixed": 2,
+    "skip": 5,
+    "note": "counts are for the 7 representative offers classified by hand in sample mode; the full 58 were not individually labeled without the [TODO: DEV] script"
+  },
+  "skip_rate": "majority (>0.5) — healthy per domain; zero unambiguous IC Data/AI Target titles on Databricks' current board",
+  "h1b_joins": [
+    {
+      "scan_name": "Databricks",
+      "csv_name": "DATABRICKS INC",
+      "join": "fuzzy (upper-case + strip legal suffix)",
+      "total_approvals": 1640,
+      "total_denials": 8,
+      "approval_rate": 99.51456310679612,
+      "median_salary_offered": 149422.5,
+      "top_job_titles_sponsored": ["Software Engineer", "Senior Software Engineer", "Solutions Architect", "Specialist Solutions Architect", "Senior Solutions Engineer"],
+      "evidence_label": "Company-level H-1B evidence",
+      "verified": true
+    }
+  ],
+  "stop_conditions": [
+    "Did not run a live (non-dry-run) scan: held at approval gate 5.",
+    "Did not build the dedicated automation script ([TODO: DEV] open).",
+    "Did not attach SOC/BLS (no confirmed mapping this run)."
+  ],
+  "todo_items": [
+    {"type": "DEFINE", "item": "student_run_envelope field schema"},
+    {"type": "DEV", "item": "scripts/ats/ai-washing-triage.mjs automation"},
+    {"type": "APPROVE", "item": "live (writing) scan clearance"}
+  ],
+  "source_files": [
+    "data/ats/portals.yml",
+    "data/80-days-to-stay/data/SEC_DOL_H1b_data_mapped.csv",
+    "data/bls/compact/soc_occupation_compact.csv",
+    "scripts/ats/scan.mjs"
+  ],
+  "gate_decisions": {
+    "gate_1_problem": "pass",
+    "gate_2_local_evidence": "pass",
+    "gate_3_stored_script": "pass (after portals.yml created)",
+    "gate_4_small_run": "pass (dry-run exit 0, 787->58)",
+    "gate_5_approval": "blocked (no live scan; [TODO: APPROVE])",
+    "gate_6_report": "pass"
+  },
+  "verified_vs_inferred": {
+    "verified": ["scan counts 787/330/396/58", "offer titles", "Databricks H-1B CSV row"],
+    "inferred_model_judgment": ["all Target/Mixed/Skip labels (title-string judgment, not JD read)"]
+  },
+  "report_path": "reports/generated/case-ds-opt-ai-washing-triage-2026-07-20.md"
+}

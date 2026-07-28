@@ -150,3 +150,14 @@ private emails, or sensitive application notes.
 - **Rebuilt:** `node scripts/build-instructions.mjs --promote` → `AGENTS.md` + `CLAUDE.md` regenerated; `CLAUDE.md` now imports `@SNICKERDOODLE.md`.
 - **Untouched:** `data/` CSVs (real company names containing "mycroft") and prior RUN_LOG history (append-only).
 - **Result:** conformance + doctor green; no stale `MYCROFT.md` outside data/history.
+
+## 2026-07-20 -- ds-opt-ai-washing-triage: new recipe + first sample run
+
+- **Recipe:** `case-ds-opt-ai-washing-triage` (new), **sample mode**, run id `ds-opt-ai-washing-triage-2026-07-20-sample`. Reworked from the legacy 25-pt design draft (`DATA_ML_H1B_Triage.md`): `SCRIPTS/`→`scripts/`, `modes/`→`recipes/`, `modes/RUN_LOG.md`→`logs/RUN_LOG.md`; added lifecycle frontmatter; proposed command → typed TODOs; dual output contract; testable phase gates.
+- **Command:** `npm run ats:scan -- --dry-run` (stored script) + manual `grep`/`rg` triage; `grep -i databricks` on the H-1B CSV.
+- **Inputs:** `data/ats/portals.yml` (copied from `portals.example.yml`, gitignored), `data/80-days-to-stay/data/SEC_DOL_H1b_data_mapped.csv`.
+- **Gates:** 1 Problem ✓ · 2 Local-evidence ✓ · 3 Stored-script ✓ (after portals.yml) · 4 Small-run ✓ (dry-run exit 0, 787→58) · 5 Approval **blocked** (no live scan; `[TODO: APPROVE]`) · 6 Report ✓.
+- **Result:** 787 jobs → 58 offers; representative classify → majority Skip, 0 unambiguous IC Data/AI Target titles (Databricks' AI-labeled roles are go-to-market/consulting). H-1B join verified: `Databricks`→`DATABRICKS INC`, 1640/8/99.51%/$149,422.50. (Numbers vary run-to-run: live board; the 2026-07-06 dev run was 791→50.)
+- **Artifacts:** `logs/case-ds-opt-ai-washing-triage-2026-07-20.json`, `reports/generated/case-ds-opt-ai-washing-triage-2026-07-20.md`.
+- **Blockers/defects found:** (1) `npm run ats:scan` errors `portals.yml not found` until config exists — captured as Worked Run. (2) `scripts/doctor.mjs:80` frontmatter parser breaks on **CRLF** (`(.*)` won't match `\r`) → reports 0/42 recipes have frontmatter though they do; new recipe written LF to be detected. (3) `scripts/bls/extract-soc-occupation-table.py` fails `ImportError: openpyxl` (missing pip dep), distinct from resolved defect #1. (4) `scripts/ats/analyze-patterns.py` ran clean (exit 0) — DOMAIN.md KNOWN BUG did not reproduce here. (5) `python3` is the Windows Store shim on this box; `python` (3.13.1) is the real interpreter.
+- **Open:** `[TODO: DEV]` automation script; `[TODO: DEFINE]` run-envelope schema; `[TODO: APPROVE]` live scan; human attestation for VERIFIED.
