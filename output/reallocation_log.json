@@ -1,0 +1,110 @@
+{
+  "run_id": "20260728_232737",
+  "generated_at": "2026-07-28T23:27:37.989307",
+  "effort_budget_hours": 40,
+  "top_n": 10,
+  "gigo_warnings": [
+    "28812 rows (94.9%) have null Total Approvals \u2014 treated as 0, not as 'no sponsorship history'.",
+    "2495 rows (8.2%) have no funding date \u2014 funding score will be 0 for these companies."
+  ],
+  "gate_passed": 1226,
+  "gate_failed": 29143,
+  "recommendations": [
+    {
+      "rank": 1,
+      "company": "DATABRICKS INC",
+      "composite_score": 0.8937,
+      "uncertainty": 0.0,
+      "effort_hours": 4.5,
+      "h1b_score": 0.8677,
+      "funding_score": 1.0
+    },
+    {
+      "rank": 2,
+      "company": "INTEL CORP",
+      "composite_score": 0.8514,
+      "uncertainty": 0.0,
+      "effort_hours": 4.3,
+      "h1b_score": 1.0,
+      "funding_score": 0.6384
+    },
+    {
+      "rank": 3,
+      "company": "GRAMMARLY INC",
+      "composite_score": 0.8105,
+      "uncertainty": 0.0,
+      "effort_hours": 4.1,
+      "h1b_score": 0.7194,
+      "funding_score": 0.9699
+    },
+    {
+      "rank": 4,
+      "company": "PACIFIC LIFE INSURANCE CO",
+      "composite_score": 0.7945,
+      "uncertainty": 0.0,
+      "effort_hours": 4.0,
+      "h1b_score": 0.6693,
+      "funding_score": 1.0
+    },
+    {
+      "rank": 5,
+      "company": "SPANIO INC",
+      "composite_score": 0.7876,
+      "uncertainty": 0.0,
+      "effort_hours": 4.0,
+      "h1b_score": 0.6554,
+      "funding_score": 1.0
+    },
+    {
+      "rank": 6,
+      "company": "MATI THERAPEUTICS INC",
+      "composite_score": 0.7662,
+      "uncertainty": 0.0,
+      "effort_hours": 3.9,
+      "h1b_score": 0.6127,
+      "funding_score": 1.0
+    },
+    {
+      "rank": 7,
+      "company": "ICON TECHNOLOGY INC",
+      "composite_score": 0.7559,
+      "uncertainty": 0.0,
+      "effort_hours": 3.8,
+      "h1b_score": 0.8863,
+      "funding_score": 0.5096
+    },
+    {
+      "rank": 8,
+      "company": "VROOM INC",
+      "composite_score": 0.7529,
+      "uncertainty": 0.0,
+      "effort_hours": 3.8,
+      "h1b_score": 0.586,
+      "funding_score": 1.0
+    },
+    {
+      "rank": 9,
+      "company": "TREELINE BIOSCIENCES INC",
+      "composite_score": 0.7529,
+      "uncertainty": 0.0,
+      "effort_hours": 3.8,
+      "h1b_score": 0.586,
+      "funding_score": 1.0
+    },
+    {
+      "rank": 10,
+      "company": "AIERA INC",
+      "composite_score": 0.7455,
+      "uncertainty": 0.0,
+      "effort_hours": 3.8,
+      "h1b_score": 0.6928,
+      "funding_score": 0.7973
+    }
+  ],
+  "cannot_verify": [
+    "current sponsorship intent",
+    "posting liveness",
+    "cap-subject vs cap-exempt status",
+    "causal validity of composite score"
+  ]
+}

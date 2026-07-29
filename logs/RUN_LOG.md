@@ -150,3 +150,110 @@ private emails, or sensitive application notes.
 - **Rebuilt:** `node scripts/build-instructions.mjs --promote` → `AGENTS.md` + `CLAUDE.md` regenerated; `CLAUDE.md` now imports `@SNICKERDOODLE.md`.
 - **Untouched:** `data/` CSVs (real company names containing "mycroft") and prior RUN_LOG history (append-only).
 - **Result:** conformance + doctor green; no stale `MYCROFT.md` outside data/history.
+## 2026-06-28 — Setup Exercise: search/ personal layer
+
+- **Mode:** manual (Claude chat assisted extraction; student attested all three files)
+- **Inputs:** Wenhan_resume.pdf, student intake answers (visa dates, geography, industry preferences)
+- **Outputs:** search/resume.json, search/profile.yml, search/gaps.md
+- **Result:** All three files drafted and attested.
+
+### Three attestation errors caught in resume.json
+
+1. **"Designed" → "Contributed to"** for Circle Cat RAG and multimodal system bullets.
+   These were team projects. The agent used "Designed" for all bullets uniformly,
+   which overstated individual ownership for work I participated in but did not lead.
+
+2. **Go removed from languages.** Listed on original resume but no project evidence
+   to defend in an interview. Studied only. Removed to avoid a question I cannot answer.
+
+3. **"5 yrs experience" → "4+ years"** in the objective.
+   Yiteng: 4 years. Circle Cat: under 1 year. The original claim of 5 years
+   was not defensible. Corrected to 4+.
+
+### Top gap from gaps.md
+
+System design at production scale. I have built services but have not owned
+them in production — no on-call, no incident ownership, no capacity planning.
+This is the gap that will come up in every AI platform SWE interview loop.
+Closing condition: a deployed side project with load test results and a
+written incident retrospective, published to GitHub before OPT start.
+
+### Killed row and why
+
+Removed "Formal ML/AI coursework credential." The agent generated this gap
+from pattern-matching on preferred qualifications in job postings, not from
+required qualifications. After re-reading the actual postings, no AI platform
+SWE role gated on ML coursework — they all gated on shipped systems evidence.
+The agent did not distinguish required from preferred. That is the thing
+it got wrong about my situation.
+
+### Field corrected in profile.yml from agent's first draft
+
+`stem_eligible` — agent's first draft set this to `true`. I changed it to
+`uncertain` because I have not confirmed STEM OPT eligibility with my DSO.
+The agent inferred eligibility from my STEM degree. That inference may be
+correct, but it is not confirmed, and treating an unconfirmed gate as true
+would produce Apply recommendations for roles I may not legally be able to take.
+
+### Verification check answers
+
+- **resume.json**: Every job entry is traceable. Circle Cat bullets now correctly
+  reflect team vs. individual contribution. Yiteng bullets are verifiable
+  (Flask/MySQL backend work, Amazon MWS integration). No invented metrics —
+  the 35% MTTR figure is from actual monitoring data I can defend.
+
+- **profile.yml**: Visa constraint section reflects actual documents.
+  stem_eligible marked uncertain pending DSO confirmation. OPT dates
+  calculated from program end date (2026-08-19) plus 60-day grace period.
+  No optimistic assumptions treated as facts.
+
+- **gaps.md**: Every gap in the evidence column cites a specific job posting
+  reviewed on June 28 2026, or an O*NET entry for SOC 15-1252.
+  No gap was sourced from the agent's confident inference about what
+  "typically" is required. The killed row documents one case where the
+  agent invented a demand signal from preferred qualifications.
+
+### AI Use Disclosure
+
+Claude chat (claude.ai) used to extract resume.json from PDF, draft profile.yml
+from intake answers, and draft gaps.md from resume vs. profile comparison.
+
+What the AI could not do: The agent could not know that the RAG system at
+Circle Cat was a team project, not a solo design. It applied "Designed" to
+every bullet uniformly. That required my knowledge of the actual work split
+to catch and correct. The agent also could not distinguish confirmed STEM
+eligibility from inferred STEM eligibility — it treated the degree as
+sufficient evidence. I caught both errors in the attestation pass.
+## 2026-07-04 — NLP/ML sponsorship triage · RUNNABLE-SAMPLE run
+
+- **Mode:** case-nlp-ml-sponsorship-triage v0.2.0
+- **Status reached:** RUNNABLE-SAMPLE
+- **Inputs:**
+  - `data/80-days-to-stay/data/SEC_DOL_H1b_data_mapped.csv` (30,370 rows)
+  - `data/BLS/compact/soc_occupation_compact.csv`
+  - `data/ats/portals.yml` (copied from portals.example.yml)
+  - Target company: Databricks
+  - Liveness URL: `https://www.databricks.com/company/careers/open-positions`
+- **Commands run:**
+  - `npm run verify` — passed (4 warnings, 0 errors)
+  - `npm run ats:scan -- --dry-run` — 50 Databricks offers found
+  - `npm run ats:liveness -- <url>` — uncertain (general careers page)
+  - `grep -i "databricks" SEC_DOL_H1b_data_mapped.csv` — 1,640 approvals, 99.51%
+  - `grep "15-2051|15-1252|15-1211" soc_occupation_compact.csv` — scores retrieved
+- **Outputs:**
+  - `reports/generated/nlp-ml-triage-2026-07-04.md` (proposed — not yet written by script)
+  - This log entry
+- **Result:**
+  - Databricks: 1,640 H-1B approvals (99.51%), $1.07B Series D+ (2025-09),
+    50 active postings in dry run, liveness uncertain on index page
+  - 15-1252 cognitive score: 3.88 ✅
+  - 15-2051 cognitive score: missing ⚠️
+- **Open issues:**
+  1. Liveness tested on careers index page — need role-specific URL for
+     `active` result. Re-run required.
+  2. 15-2051 (Data Scientists) cognitive_pivot_score is empty in BLS extract.
+     Cannot score role resilience for this SOC without investigation.
+  3. LCA job-title data (`data/lca-disclosure/`) does not exist.
+     NLP/LLM-specific sponsorship verification blocked until data is downloaded.
+  4. `portals.yml` only contains example config (Databricks).
+     Add target companies before live scan.

@@ -1,0 +1,80 @@
+# search/profile.yml
+# Wenhan Cheng — Job Search Profile
+# Generated: 2026-06-28 | Attested by student before submission
+
+# ── TARGET ROLE ────────────────────────────────────────────────────────────
+target_role:
+  title: Software Engineer (AI Platform / Backend)
+  description: >
+    Backend or AI platform engineering role involving LLM integration,
+    distributed systems, or ML infrastructure — at a company building
+    software or AI products, not in traditional manufacturing or hardware.
+  soc_codes_likely:
+    - 15-1252  # Software Developers, Applications
+    - 15-1244  # Network and Computer Systems Administrators (fallback)
+  level: new grad or junior (0–2 years post-MS)
+
+# ── VISA AND TIMELINE ──────────────────────────────────────────────────────
+visa:
+  type: F-1 OPT (STEM extension)
+  stem_eligible: uncertain  # confirm with DSO before treating as a gate
+  program_end_date: "2026-08-19"
+  grace_period_end: "2026-10-18"   # 60 days after program end
+  opt_earliest_start: "2026-08-19"
+  opt_latest_start: "2026-10-18"
+  opt_duration_months: 24
+  opt_estimated_expiry: "2028-10"  # approximate, depends on actual start date
+  unemployment_days_used: 0
+  unemployment_days_ceiling: 90
+  buffer_target: 80               # book recommendation: stay 80 days below ceiling
+  sponsorship_required: true      # H-1B sponsorship is a hard gate
+  sponsorship_note: >
+    Must confirm STEM OPT eligibility with DSO before filing.
+    Do not treat stem_eligible as confirmed until DSO verification is complete.
+    A company with zero H-1B sponsorship history for SOC 15-1252 is
+    skip-regardless of other fit signals.
+
+# ── TARGET GEOGRAPHY ───────────────────────────────────────────────────────
+geography:
+  open_to_nationwide: true
+  preferred_metros:
+    - San Jose, CA
+    - San Francisco Bay Area, CA
+    - Seattle, WA
+    - New York, NY
+    - Austin, TX
+    - Boston, MA
+  remote_acceptable: true
+  remote_note: >
+    Remote acceptable if company has US presence and demonstrated history
+    of sponsoring remote employees for H-1B. Fully remote at companies
+    with no US office is a visa risk — flag for manual review.
+
+# ── INDUSTRY AND COMPANY PREFERENCES ──────────────────────────────────────
+industry:
+  preferred_sectors:
+    - AI / ML infrastructure
+    - SaaS / cloud software
+    - Fintech
+    - Developer tools
+    - Consumer tech
+    - Healthcare tech (software side)
+  excluded_sectors:
+    - Traditional manufacturing
+    - Hardware / semiconductors
+    - Defense / government contracting
+    - Oil and gas
+  company_size:
+    acceptable: [seed, series-a, series-b, series-c, public]
+    note: >
+      No hard size exclusion. Seed-stage companies with no Form D filing
+      or no H-1B history should be flagged as higher visa risk regardless
+      of role fit.
+
+# ── AVAILABILITY ───────────────────────────────────────────────────────────
+availability:
+  earliest_start: "2026-08-19"
+  preferred_start: "2026-09-01"
+  note: >
+    Targeting full-time roles starting after graduation (August 2026).
+    Not seeking co-op or internship for this search cycle.

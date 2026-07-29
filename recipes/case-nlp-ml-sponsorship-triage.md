@@ -1,181 +1,286 @@
 ---
-status: DRAFT
-todos_open: 14
-last_gate: null
-attestation: null
-recipe_version: 0.1.0
+status: RUNNABLE-SAMPLE
+todos_open: 4
+last_gate: gate-4-script-readiness
+attestation: "Wenhan Cheng · 2026-07-04 · RUNNABLE-SAMPLE"
+recipe_version: 0.2.0
 ---
 
-# NLP/ML Sponsorship Triage
+# Case: NLP/ML Sponsorship Triage
+## `case-nlp-ml-sponsorship-triage`
+
+**Who this is for:** International CS graduate student (Northeastern University,
+F-1 OPT, STEM extension eligible, program end 2026-08-19) targeting
+Software Engineer (AI Platform / Backend) roles that require H-1B sponsorship.
+
+**When to use it:** Before spending application effort on any company in the
+NLP/ML hiring space. Run this recipe first; run `oferta.md` only on companies
+that clear the triage gates here.
+
+---
 
 ## Purpose
 
-Separates NLP/ML employers worth full application effort from ghost, stale, or unverifiable employers using sponsorship history, funding, ATS liveness, and SOC fit. The recipe gives the student and a human reviewer enough evidence to decide which job-search actions are worth continuing, which require manual verification, and which should stop before more OPT time is spent.
+Separates NLP/ML employers worth full application effort from ghost, stale,
+or unverifiable employers. Uses three verified data layers in order:
+
+1. **80 Days to Stay** — H-1B sponsorship history + SEC Form D funding,
+   filtered to ML-adjacent SOC codes (15-2051, 15-1252, 15-1211)
+2. **Job-Ops** — ATS provider detection + posting liveness (a hard gate,
+   not a vote)
+3. **Cognitive Pivot** — BLS/O*NET cognitive-pivot score to identify roles
+   resilient to AI substitution
+
+Prime directive: verified local data first. LLM judgment only after data
+has been checked.
+
+---
 
 ## Source Inventory
 
-| Source Node | Node Type | Source URL or Path | Human Check |
+| Source | Path | Verified present? | Human check |
 |---|---|---|---|
-| Pantry source | file | `pantry/[anonymized source — re-attach an anonymized copy]` | Confirm the source exists, is complete, and is allowed to be used before converting claims into implementation requirements. |
-| Pantry source | file | `pantry/[anonymized source — re-attach an anonymized copy]` | Confirm the source exists, is complete, and is allowed to be used before converting claims into implementation requirements. |
-| Pantry source | file | `pantry/[anonymized source — re-attach an anonymized copy]` | Confirm the source exists, is complete, and is allowed to be used before converting claims into implementation requirements. |
+| H-1B + funding mapped data | `data/80-days-to-stay/data/SEC_DOL_H1b_data_mapped.csv` | ✅ 30,370 rows confirmed | Confirm audit file is current before filtering |
+| H-1B audit report | `data/80-days-to-stay/data/SEC_DOL_H1b_data_mapped-audit.md` | ✅ present | Read before running — flags known coverage gaps |
+| BLS/O*NET compact | `data/BLS/compact/soc_occupation_compact.csv` | ✅ present | Confirm `cognitive_pivot_score` column is populated for target SOCs |
+| ATS portal config | `data/ats/portals.yml` | ✅ present (copied from example) | Add target companies before live scan |
+| DOL LCA job-title data | `data/lca-disclosure/lca-disclosure-YYYY.csv` | ❌ does not exist | [TODO: DATA SOURCE] Download from dol.gov/agencies/eta/foreign-labor/performance before using LCA filter step |
+
+---
 
 ## Inputs
 
 | Input | Type | Source | Required? |
 |---|---|---|---|
-| input_1 | CSV / text | Student run envelope or pantry evidence. [TODO: DEFINE] Specify exact field name and accepted format. | Yes |
-| input_2 | text | Student run envelope or pantry evidence. [TODO: DEFINE] Specify exact field name and accepted format. | Yes |
-| input_3 | URL list / text | Student run envelope or pantry evidence. [TODO: DEFINE] Specify exact field name and accepted format. | Yes |
+| Company shortlist | CSV or text list | Student-assembled from job board; verified against `SEC_DOL_H1b_data_mapped.csv` | Yes |
+| Target SOC codes | text | 15-2051, 15-1252, 15-1211 (confirm with O*NET before filtering) | Yes |
+| Job posting URLs | URL list | From ATS scan output or manual search | Yes for liveness gate |
+| OPT timeline | dates | From student's EAD card and I-20 | Yes — visa gate |
+
+---
 
 ## Phase Gates
 
-1. Source gate: All required source paths are present or explicitly marked with a typed TODO. Test: `test -f "recipes/case-nlp-ml-sponsorship-triage.md" && rg -n "\[TODO: DEFINE]" "recipes/case-nlp-ml-sponsorship-triage.md" || true`. Human capacity: [TO].
-2. Scope gate: The run declares `sample` mode or an approved live mode before ingest begins. Test: `python3 -m json.tool data/raw/case-nlp-ml-sponsorship-triage/run-envelope.json`. Human capacity: [PF].
-3. Data-shape gate: Every raw and verified JSON output parses before downstream scripts run. Test: `find data/raw/case-nlp-ml-sponsorship-triage data/verified/case-nlp-ml-sponsorship-triage -name "*.json" -print -exec python3 -m json.tool {} \;`. Human capacity: [PA].
-4. Script-readiness gate: Every step script exists or is represented by a typed development TODO. Test: `test -f scripts/ingest/case-nlp-ml-sponsorship-triage-ingest-inputs.py || rg --fixed-strings "[TODO: DEV]" "recipes/case-nlp-ml-sponsorship-triage.md"`. Human capacity: [IJ].
-5. Approval gate: Live network calls, external writes, credentials, production databases, emails, dashboards, publishing, or model calls with sensitive data require an approval record. Test: `test -f logs/gate-decisions/case-nlp-ml-sponsorship-triage-approval.json || rg --fixed-strings "[TODO: APPROVE]" "recipes/case-nlp-ml-sponsorship-triage.md"`. Human capacity: [EI].
-6. Report gate: Agent log and human report are written with the required fields and sections. Test: `test -f logs/case-nlp-ml-sponsorship-triage-[DATE].json && test -f reports/generated/case-nlp-ml-sponsorship-triage-[DATE].md`. Human capacity: [TO].
+All gates are hard stops. A SKIP decision here means do not apply,
+regardless of role fit.
+
+**Gate 1 — Sponsorship history present**
+Condition: `Total Approvals` >= 5 AND `Approval_Rate` >= 0.70 for at least
+one of SOC 15-2051, 15-1252, or 15-1211 in `SEC_DOL_H1b_data_mapped.csv`.
+Test: `grep -i "<company>" data/80-days-to-stay/data/SEC_DOL_H1b_data_mapped.csv`
+Fail action: mark company SKIP. Do not infer sponsorship from company size or reputation.
+
+**Gate 2 — Funding recency**
+Condition: `latest_funding_date` within 24 months of today OR company is public.
+Test: check `latest_funding_date` field in CSV row.
+Fail action: flag as STALE-FUNDING. Escalate to manual check before applying.
+
+**Gate 3 — Liveness (hard gate)**
+Condition: `npm run ats:liveness -- <url>` returns `active`, not `expired` or `uncertain`.
+Fail action: SKIP this specific posting. Do not apply to uncertain or expired URLs.
+Note: `uncertain` means no apply control was found — treat as expired until
+manually confirmed.
+
+**Gate 4 — OPT timeline compatibility**
+Condition: Student has >= 80 unemployment days remaining AND OPT expiry
+gives enough runway for H-1B cap lottery cycle (typically needs 12+ months).
+Fail action: flag timeline risk. Do not apply without DSO confirmation.
+
+**Gate 5 — Cognitive resilience**
+Condition: `cognitive_pivot_score` >= 3.88 for target SOC in
+`data/BLS/compact/soc_occupation_compact.csv`.
+Fail action: flag for review — role may be automation-vulnerable.
+
+---
 
 ## Steps
 
-1. Step name: Verify provenance. Labor: AI with Human gate.
-   Script called: `scripts/tools/case-nlp-ml-sponsorship-triage-verify-provenance.py` [TODO: DEV] Define input schema, output schema, transformation logic, and error handling for this script before implementation.
-   Input: declared recipe inputs, prior step outputs, and gate decisions for `case-nlp-ml-sponsorship-triage`.
-   Output: workflow, source_paths, exists, parsed_ok, approval_state, checked_at.
-   Where output goes: `logs/`
-2. Step name: Ingest declared inputs. Labor: AI with Human gate.
-   Script called: `scripts/ingest/case-nlp-ml-sponsorship-triage-ingest-inputs.py` [TODO: DEV] Define input schema, output schema, transformation logic, and error handling for this script before implementation.
-   Input: declared recipe inputs, prior step outputs, and gate decisions for `case-nlp-ml-sponsorship-triage`.
-   Output: records, source_name, source_type, fetched_at, sample_mode, rejects.
-   Where output goes: `data/raw/case-nlp-ml-sponsorship-triage/`
-3. Step name: Validate data shape. Labor: AI with Human gate.
-   Script called: `scripts/gigo/case-nlp-ml-sponsorship-triage-validate-data-shape.py` [TODO: DEV] Define input schema, output schema, transformation logic, and error handling for this script before implementation.
-   Input: declared recipe inputs, prior step outputs, and gate decisions for `case-nlp-ml-sponsorship-triage`.
-   Output: record_count, required_fields_present, missing_fields, parse_errors, schema_version.
-   Where output goes: `data/verified/case-nlp-ml-sponsorship-triage/`
-4. Step name: Transform and quality check. Labor: AI with Human gate.
-   Script called: `scripts/gigo/case-nlp-ml-sponsorship-triage-transform-quality-check.py` [TODO: DEV] Define input schema, output schema, transformation logic, and error handling for this script before implementation.
-   Input: declared recipe inputs, prior step outputs, and gate decisions for `case-nlp-ml-sponsorship-triage`.
-   Output: verified_records, record_count, duplicates, rejects, flags, quality_notes.
-   Where output goes: `data/verified/case-nlp-ml-sponsorship-triage/`
-5. Step name: Run approved tools. Labor: AI with Human gate.
-   Script called: `scripts/tools/case-nlp-ml-sponsorship-triage-run-approved-tools.py` [TODO: DEV] Define input schema, output schema, transformation logic, and error handling for this script before implementation.
-   Input: declared recipe inputs, prior step outputs, and gate decisions for `case-nlp-ml-sponsorship-triage`.
-   Output: tool_name, input_path, output_path, action_taken, approval_id, no_write_mode.
-   Where output goes: `logs/`
-6. Step name: Produce human report. Labor: AI with Human gate.
-   Script called: `scripts/tools/case-nlp-ml-sponsorship-triage-produce-human-report.py` [TODO: DEV] Define input schema, output schema, transformation logic, and error handling for this script before implementation.
-   Input: declared recipe inputs, prior step outputs, and gate decisions for `case-nlp-ml-sponsorship-triage`.
-   Output: summary, sources_checked, gate_results, findings, typed_todos, next_decision.
-   Where output goes: `reports/generated/`
+### Step 1 — Build verified shortlist from H-1B data
+
+```bash
+grep -i "<company_name>" data/80-days-to-stay/data/SEC_DOL_H1b_data_mapped.csv
+```
+
+Filter for:
+- `Total Approvals` >= 5 (for ML SOC codes)
+- `Approval_Rate` >= 0.70
+- `latest_funding_date` within 24 months
+
+Save output to `data/ats/nlp-ml-shortlist-YYYY-MM-DD.csv`.
+
+Do NOT add companies based on reputation alone. If a company is not in the
+dataset, mark it `sponsorship: Unknown` and handle in Step 5.
+
+**Verified example (Databricks, from real data):**
+- Total Approvals: 1,640
+- Approval Rate: 99.51%
+- Latest funding: $1.07B Series D+, 2025-09-08
+- Top titles: Software Engineer, Senior Software Engineer, Solutions Architect
+
+### Step 2 — Score role resilience (BLS/O*NET)
+
+```bash
+grep -i "15-2051\|15-1252\|15-1211" data/BLS/compact/soc_occupation_compact.csv \
+  | cut -d',' -f1,3,32
+```
+
+Verified scores from real data (2026-07-04):
+- 15-1211.00 Computer Systems Analysts: 4.12
+- 15-1252.00 Software Developers: 3.88
+- 15-2051.00 Data Scientists: score field empty in current extract
+
+If `cognitive_pivot_score` is empty for a SOC code, write:
+`cognitive_pivot_score: missing — BLS extract incomplete for this SOC.`
+Do not substitute an LLM estimate.
+
+### Step 3 — ATS detection and scan
+
+```bash
+npm run ats:scan -- --dry-run
+```
+
+Removes `--dry-run` flag only after reviewing output. Live scan writes to
+`data/ats/pipeline.md`.
+
+### Step 4 — Liveness check (hard gate)
+
+```bash
+npm run ats:liveness -- <job-url>
+```
+
+Results:
+- `active` → posting confirmed live, proceed
+- `expired` → SKIP, do not apply
+- `uncertain` → treat as expired; manually verify before applying
+
+### Step 5 — Handle unverified companies
+
+Companies not in `SEC_DOL_H1b_data_mapped.csv`:
+- Mark `sponsorship: Unknown`
+- Do not infer from company size, funding, or name
+- Run liveness check as normal
+- Escalate to `oferta.md` for full individual evaluation
+
+### Step 6 — Assemble triage report
+
+Save to `reports/generated/nlp-ml-triage-YYYY-MM-DD.md`.
+
+Priority definitions:
+- **Pursue**: Approvals >= 5, rate >= 0.70, funded < 24 months, liveness = active
+- **Investigate**: One criterion missing or borderline
+- **Skip**: No H-1B history for ML SOC, stale funding, liveness = expired/uncertain
+
+---
+
+## What This Recipe Can Verify
+
+- H-1B approval count and rate for ML SOC codes — from `SEC_DOL_H1b_data_mapped.csv`
+- SEC Form D funding recency and amount — from same file
+- ATS provider presence — from `npm run ats:scan`
+- Job posting liveness — from `npm run ats:liveness`
+- O*NET cognitive-pivot score for target SOC codes — from BLS compact extract
+
+## What This Recipe Cannot Verify
+
+- Whether a company will sponsor YOUR specific visa situation. Approval history
+  is past behavior, not a current commitment.
+- Whether `uncertain` liveness means the posting is live. Some ATS platforms
+  return 200 for expired postings with no apply button.
+- LCA job-title-level sponsorship data (e.g., "NLP Engineer" specifically).
+  [TODO: DATA SOURCE] Requires `data/lca-disclosure/` which does not yet exist.
+- SOC cognitive score for 15-2051 — field is empty in current BLS extract.
+  Do not substitute an estimate.
+- Current HR policy at any company. A 99% approval rate in the dataset
+  does not mean the company is currently sponsoring.
+
+---
 
 ## Output Contract
 
-### Agent output
-File: `logs/case-nlp-ml-sponsorship-triage-[DATE].json`
-Fields: workflow, run_id, mode, steps_completed, records_seen, rejects, duplicates, flags, stop_conditions, todo_items, source_files, gate_decisions, generated_at, raw_output_paths, verified_output_paths, report_path.
+### Agent log
+File: `logs/case-nlp-ml-sponsorship-triage-YYYY-MM-DD.json`
+Required fields: `workflow`, `run_id`, `mode`, `steps_completed`,
+`records_seen`, `gate_results`, `stop_conditions`, `todo_items`,
+`generated_at`, `verified_findings`, `inferred_findings`
 
 ### Human report
-File: `reports/generated/case-nlp-ml-sponsorship-triage-[DATE].md`
-Reader: domain lead or human boss responsible for accepting the `NLP/ML Sponsorship Triage` run.
-Decision enabled: approve the run for the next phase, request source/schema fixes, or block live execution.
-Sections: run summary, purpose, source inventory, inputs used, phase-gate results, steps completed, records seen, rejects, duplicates, flags, typed TODOs, human approvals, verified findings, inferred findings, decision recommendation.
+File: `reports/generated/nlp-ml-triage-YYYY-MM-DD.md`
+
+```markdown
+# NLP/ML Sponsorship Triage — YYYY-MM-DD
+
+## Shortlist
+
+| Company | H-1B Approvals (ML SOC) | Approval Rate | Funding Recency | ATS | Liveness | Cog. Score | Priority |
+|---|---|---|---|---|---|---|---|
+| Databricks | 1,640 | 99.51% | 2025-09 (Series D+) | Greenhouse | uncertain* | 3.88 (15-1252) | Investigate* |
+
+*liveness returned uncertain on careers page — specific role URL required
+
+## Unverified Companies
+
+| Company | Reason | Next Action |
+|---|---|---|
+
+## Missing Data
+
+-
+
+## Next Actions
+
+-
+```
+
+---
 
 ## Stop Conditions
 
-- Stop if a pantry source file is missing, because the conversion would no longer be traceable to the original submission.
-- Stop if the student run envelope is missing timeline, target role, company, or URL fields, because scoring would require guessing.
-- Stop if local sponsorship, BLS, or ATS evidence is missing and no [TODO: DATA SOURCE] fallback is documented, because the result would overstate verification.
-- Stop if a proposed script is needed for a score and the script does not exist, because that score must remain inferred or manual.
-- Stop before live network calls, external writes, immigration/legal guidance, or recruiter-policy conclusions unless the approval gate is passed.
+- Stop if `SEC_DOL_H1b_data_mapped.csv` is not present or audit shows
+  coverage gaps for target companies.
+- Stop if OPT unemployment days remaining < 80 without DSO consultation.
+- Stop if liveness returns `expired` — do not apply to this posting.
+- Stop if `cognitive_pivot_score` is missing for target SOC — do not
+  substitute an LLM estimate.
+- Stop before any immigration or legal conclusion — this recipe produces
+  evidence, not legal advice.
 
-## Snickerdoodle
+---
 
-### Run Commands
-Full dialogic run:
-`snickerdoodle run case-nlp-ml-sponsorship-triage --mode dialogic`
+## Log Template
 
-Sample mode (no live network calls, no writes):
-`snickerdoodle run case-nlp-ml-sponsorship-triage --mode dialogic --sample`
+```markdown
+## YYYY-MM-DD — NLP/ML sponsorship triage
 
-### Step Commands
+- **Mode:** case-nlp-ml-sponsorship-triage
+- **Status reached:** RUNNABLE-SAMPLE
+- **Inputs:** SEC_DOL_H1b_data_mapped.csv, soc_occupation_compact.csv,
+  portals.yml, [job URLs]
+- **Commands run:** ats:scan --dry-run, ats:liveness, grep on H-1B CSV,
+  grep on BLS compact
+- **Outputs:** reports/generated/nlp-ml-triage-YYYY-MM-DD.md
+- **Result:** N companies checked; M Pursue; K Investigate; J Skip
+- **Open issues:** LCA data missing; 15-2051 cognitive score empty;
+  liveness uncertain on careers pages (need role-specific URLs)
+```
 
-| Step | CLI Command | Flags |
-|---|---|---|
-| Verify provenance | `snickerdoodle run case-nlp-ml-sponsorship-triage --step verify-provenance` | `--sample` `--no-write` |
-| Ingest declared inputs | `snickerdoodle run case-nlp-ml-sponsorship-triage --step ingest-inputs` | `--sample` |
-| Validate data shape | `snickerdoodle run case-nlp-ml-sponsorship-triage --step validate-data-shape` | `--sample` |
-| Transform and quality check | `snickerdoodle run case-nlp-ml-sponsorship-triage --step transform-quality-check` | `--sample` |
-| Run approved tools | `snickerdoodle run case-nlp-ml-sponsorship-triage --step run-approved-tools` | `--sample` `--no-write` |
-| Produce human report | `snickerdoodle run case-nlp-ml-sponsorship-triage --step produce-human-report` | `--sample` `--no-write` |
+---
 
-### Gate Commands
+## Proposed Additions
 
-| Gate | CLI Command |
-|---|---|
-| Gate 1 - Source gate | `snickerdoodle gate case-nlp-ml-sponsorship-triage --gate 1 --decision approve --note "Sources checked"` |
-| Gate 2 - Scope gate | `snickerdoodle gate case-nlp-ml-sponsorship-triage --gate 2 --decision approve --note "Scope and mode approved"` |
-| Gate 3 - Data-shape gate | `snickerdoodle gate case-nlp-ml-sponsorship-triage --gate 3 --decision approve --note "Outputs parse"` |
-| Gate 4 - Script-readiness gate | `snickerdoodle gate case-nlp-ml-sponsorship-triage --gate 4 --decision approve --note "Scripts ready or TODO DEV accepted"` |
-| Gate 5 - Approval gate | `snickerdoodle gate case-nlp-ml-sponsorship-triage --gate 5 --decision approve --note "Live or sensitive actions approved"` |
-| Gate 6 - Report gate | `snickerdoodle gate case-nlp-ml-sponsorship-triage --gate 6 --decision approve --note "Report and log complete"` |
+### [TODO: DATA SOURCE] DOL LCA job-title disclosure data
+Path: `data/lca-disclosure/lca-disclosure-YYYY.csv`
+Source: dol.gov/agencies/eta/foreign-labor/performance (quarterly)
+Rationale: Current H-1B data aggregates by company. LCA data contains
+exact petition job titles ("NLP Engineer", "LLM Research Scientist"),
+enabling verification that a company has specifically sponsored the
+role type the student is targeting — not just broad SOC codes.
+Data contract: Source Data Layer, same as `data/BLS/` and
+`data/80-days-to-stay/`. Raw files untouched; processed extracts
+to `data/lca-disclosure/processed/`.
 
-### Script Locations
-
-| Step | Script Path | Layer |
-|---|---|---|
-| Verify provenance | `scripts/tools/case-nlp-ml-sponsorship-triage-verify-provenance.py` | tools |
-| Ingest declared inputs | `scripts/ingest/case-nlp-ml-sponsorship-triage-ingest-inputs.py` | ingest |
-| Validate data shape | `scripts/gigo/case-nlp-ml-sponsorship-triage-validate-data-shape.py` | gigo |
-| Transform and quality check | `scripts/gigo/case-nlp-ml-sponsorship-triage-transform-quality-check.py` | gigo |
-| Run approved tools | `scripts/tools/case-nlp-ml-sponsorship-triage-run-approved-tools.py` | tools |
-| Produce human report | `scripts/tools/case-nlp-ml-sponsorship-triage-produce-human-report.py` | tools |
-
-### Output Locations
-
-| Output | Path | Format |
-|---|---|---|
-| Raw ingest | `data/raw/case-nlp-ml-sponsorship-triage/` | JSON |
-| Verified data | `data/verified/case-nlp-ml-sponsorship-triage/` | JSON |
-| Agent log | `logs/case-nlp-ml-sponsorship-triage-[DATE].json` | JSON |
-| Human report | `reports/generated/case-nlp-ml-sponsorship-triage-[DATE].md` | Markdown |
-| Gate decisions | `logs/gate-decisions/` | JSON |
-
-## Provenance
-
-| Source | Verification command | Notes |
-|---|---|---|
-| `data/lca-disclosure/lca-disclosure-YYYY.csv` | `test -f "data/lca-disclosure/lca-disclosure-YYYY.csv"` | Referenced source/evidence path from prior recipe text. |
-| `pantry/[anonymized source — re-attach an anonymized copy]` | `test -f "pantry/[anonymized source — re-attach an anonymized copy]` | Referenced source/evidence path from prior recipe text. |
-| `pantry/[anonymized source — re-attach an anonymized copy]` | `test -f "pantry/[anonymized source — re-attach an anonymized copy]` | Referenced source/evidence path from prior recipe text. |
-| `pantry/[anonymized source — re-attach an anonymized copy]` | `test -f "pantry/[anonymized source — re-attach an anonymized copy]` | Referenced source/evidence path from prior recipe text. |
-
-## Existing Recipe Notes Preserved For Implementation
-
-### Known Evidence From Submission
-
-- Mapped sponsorship/funding data.
-- BLS rows for 15-2051, 15-1252, 15-1243, and 15-1299.
-- ATS provider and liveness when run.
-
-### Cannot Verify Without More Work
-
-- Current sponsorship intent.
-- Whether a company outside the mapped dataset is a sponsor.
-- LCA NLP/ML title history until the proposed source is added.
-
-### Original Workflow Notes
-
-- Verify all three pantry files.
-- Start from verified data, not a job board alone.
-- Build a shortlist and save it under `data/ats/`.
-- Score role resilience with BLS/O*NET.
-- Run ATS detection on the shortlist.
-- Run liveness checks for target postings.
-- Keep unverified companies separate and route them to manual recruiter/funding checks.
-- Assemble a triage report with pursue, backup, or skip decisions.
-
-### Proposed Or Missing Tools
-
-- [TODO: DEV] No dedicated workflow script exists yet; generate scripts only after the input and output schemas below are confirmed.
+### [TODO: DEV] LCA filter script
+Path: `scripts/lca/extract-nlp-ml-roles.py`
+Would filter LCA data by keywords ("NLP", "LLM", "language model",
+"machine learning") and SOC codes 15-2051, 15-1252, 15-1211.
+Does not exist yet — outputs from this step must be labeled PROPOSED
+until the script is built and tested.
