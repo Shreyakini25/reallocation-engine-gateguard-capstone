@@ -1,0 +1,72 @@
+[
+  {
+    "role_id": "GR-001",
+    "company": "Fictional Robustness Lab",
+    "title": "Missing liveness",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "timeline": { "factor": 1, "source": "your-input" }
+  },
+  {
+    "role_id": "GR-002",
+    "company": "Fictional Robustness Lab",
+    "title": "Missing timeline",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": 1, "source": "your-input" }
+  },
+  {
+    "role_id": "GR-003",
+    "company": "Fictional Robustness Lab",
+    "title": "Null liveness",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": null, "source": "your-input" },
+    "timeline": { "factor": 1, "source": "your-input" }
+  },
+  {
+    "role_id": "GR-004",
+    "company": "Fictional Robustness Lab",
+    "title": "String liveness",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": "0.01", "source": "your-input" },
+    "timeline": { "factor": 1, "source": "your-input" }
+  },
+  {
+    "role_id": "GR-005",
+    "company": "Fictional Robustness Lab",
+    "title": "Negative liveness",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": -0.25, "source": "your-input" },
+    "timeline": { "factor": 1, "source": "your-input" }
+  },
+  {
+    "role_id": "GR-006",
+    "company": "Fictional Robustness Lab",
+    "title": "Liveness above one",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": 1.25, "source": "your-input" },
+    "timeline": { "factor": 1, "source": "your-input" }
+  },
+  {
+    "role_id": "GR-007",
+    "company": "Fictional Robustness Lab",
+    "title": "Negative timeline",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": 1, "source": "your-input" },
+    "timeline": { "factor": -0.25, "source": "your-input" }
+  },
+  {
+    "role_id": "GR-008",
+    "company": "Fictional Robustness Lab",
+    "title": "Timeline above one",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": 1, "source": "your-input" },
+    "timeline": { "factor": 1.25, "source": "your-input" }
+  }
+]
