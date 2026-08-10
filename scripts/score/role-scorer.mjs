@@ -87,10 +87,11 @@ function scoreRole(role, weights, needsSponsor) {
     { key: 'timeline', factor: timeline, source: role.timeline?.source || SRC.input },
   ];
   const gateProduct = gates.reduce((s, g) => s * g.factor, 1);
-  const composite = voteSum * gateProduct;
+  const multipliedComposite = voteSum * gateProduct;
 
   // classification
   const closedGate = gates.find((g) => g.factor <= CONFIG.gate_zero);
+  const composite = closedGate ? 0 : multipliedComposite;
   let rec, reason;
   if (closedGate) {
     rec = 'Skip';
@@ -133,7 +134,9 @@ function scoreRole(role, weights, needsSponsor) {
       vote_sum: Number(voteSum.toFixed(4)),
       gates: gates.map((g) => ({ factor: g.key, multiplier: g.factor, source: g.source })),
       gate_product: Number(gateProduct.toFixed(4)),
-      arithmetic: `(${votes.map((v) => `${v.p}·${v.weight}`).join(' + ') || '0'}) × ${gates.map((g) => g.factor).join(' × ')} = ${fmt(composite)}`,
+      arithmetic: closedGate
+        ? `(${votes.map((v) => `${v.p}·${v.weight}`).join(' + ') || '0'}) × ${gates.map((g) => g.factor).join(' × ')} = ${fmt(multipliedComposite)} → 0.000 (closed ${closedGate.key} gate)`
+        : `(${votes.map((v) => `${v.p}·${v.weight}`).join(' + ') || '0'}) × ${gates.map((g) => g.factor).join(' × ')} = ${fmt(composite)}`,
     },
   };
 }
