@@ -97,3 +97,78 @@ contract establishes stronger requirements.
 - deliberately reintroduce the target defect as a mutation;
 - confirm GateGuard kills the mutation;
 - record before/after evidence.
+
+---
+
+## 2026-08-10 — Correction, regression verification, and mutation test
+
+### Minimal correction
+
+Modified the production role scorer to enforce its existing closed-gate
+contract.
+
+The scorer now preserves the raw multiplication result for auditability but
+sets the final decision composite to zero when a required gate is classified
+as closed.
+
+### Corrected regression results
+
+Registered baseline suite:
+
+- before: 5 PASS / 5 FAIL
+- after: 10 PASS / 0 FAIL
+
+Registered boundary suite:
+
+- before: 8 PASS / 8 FAIL
+- after: 16 PASS / 0 FAIL
+
+The `0.0501` controls remained positive, confirming that the correction did
+not broadly zero weak-but-open gates.
+
+### Auditability
+
+Closed-gate traces now expose both the raw multiplication and the hard-stop
+transition.
+
+Example:
+
+`(0.9·0.35 + 0.9·0.3) × 0.05 × 1 = 0.029 → 0.000 (closed liveness gate)`
+
+### Deliberate break attempt
+
+Created one temporary mutant that bypassed the hard-stop assignment.
+
+The production scorer remained unchanged during the mutation experiment.
+
+Against the mutant:
+
+- baseline suite: 5 PASS / 5 FAIL, exit code 1
+- boundary suite: 8 PASS / 8 FAIL, exit code 1
+
+Targeted mutation result:
+
+`1 / 1 mutant killed`
+
+This is a targeted mutation result and does not claim comprehensive mutation
+coverage across the repository.
+
+### Current conclusion
+
+GateGuard now demonstrates all three required behaviors:
+
+1. it fails on the original hard-stop defect;
+2. it passes when that defect is corrected;
+3. it fails again when the same defect is deliberately reintroduced.
+
+### Next
+
+Build the GateGuard two-customer documentation pair:
+
+- AI-facing recipe;
+- human-facing `.card.md`;
+- explicit phase gates;
+- output contract;
+- verification rules;
+- failure modes;
+- logging and stop conditions.
