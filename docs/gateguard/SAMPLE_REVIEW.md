@@ -117,4 +117,3 @@ The human reviewer must personally confirm before completing the `By:` line:
 - no failure or ERROR was hidden;
 - the machine evidence matches the claims in this record;
 - the distinction between software conformance and real-world truth is understood.
-
