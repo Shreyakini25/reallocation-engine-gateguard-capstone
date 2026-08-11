@@ -1,7 +1,7 @@
 ---
-status: DRAFT
+status: RUNNABLE-SAMPLE
 todos_open: 0
-last_gate: null
+last_gate: "sample-run, 2026-08-11, logs/RUN_LOG.md#2026-08-11"
 attestation: null
 recipe_version: 0.1.0
 ---

@@ -150,3 +150,40 @@ private emails, or sensitive application notes.
 - **Rebuilt:** `node scripts/build-instructions.mjs --promote` → `AGENTS.md` + `CLAUDE.md` regenerated; `CLAUDE.md` now imports `@SNICKERDOODLE.md`.
 - **Untouched:** `data/` CSVs (real company names containing "mycroft") and prior RUN_LOG history (append-only).
 - **Result:** conformance + doctor green; no stale `MYCROFT.md` outside data/history.
+
+## 2026-08-11 — GateGuard recipe acceptance run
+
+- **Recipe:** `gateguard` v0.1.0, sample-mode verification.
+- **Git commit tested:** `5451c9279a19128e73a6d4da5bb38e0b89d8a806`.
+- **Scorer SHA-256:** `3aab2b1936fb9c95d265b6f832d65bd06f22294a1c1e257d1bbfa526bb838775`.
+- **Inputs:** `scripts/score/fixtures/gateguard-roles.json` and `scripts/score/fixtures/gateguard-boundary.json`; all fixtures are fictional controlled inputs.
+- **Commands:** syntax-checked `role-scorer.mjs` and `gateguard-harness.mjs`; executed GateGuard baseline and boundary suites using the committed harness.
+- **Baseline result:** 10 PASS · 0 FAIL · 0 ERROR · 10 TOTAL.
+- **Boundary result:** 16 PASS · 0 FAIL · 0 ERROR · 16 TOTAL.
+- **Boundary check:** `0.05` closed-gate controls returned composite zero; `0.0501` open controls remained positive at composite `0.0293`.
+- **Outputs:** `reports/gateguard/acceptance/baseline.{json,md}` and `reports/gateguard/acceptance/boundary.{json,md}`.
+- **Prior deliberate break:** one isolated hard-stop regression mutant was detected by both registered suites; mutation evidence preserved under `reports/gateguard/mutation/`.
+- **Evidence boundary:** composites/recommendations/traces are scorer outputs; PASS/FAIL/ERROR are harness outputs; fixture values are controlled inputs; defect interpretation is human judgment.
+- **Human adequacy:** PENDING. `docs/gateguard/ATTESTATION.md` prepared for human review; reviewer identity/date intentionally not self-filled.
+- **Open issues:** no live job-posting, candidate, sponsorship, or immigration truth was tested; malformed/missing/out-of-range gate policy remains outside the correction scope.
+
+## 2026-08-11 — GateGuard lifecycle clarification
+
+- **Recipe:** `gateguard` v0.1.0.
+- **Issue found:** the human review prepared after the sample acceptance run was initially named `ATTESTATION.md`.
+- **Governance check:** `SNICKERDOODLE.md` reserves lifecycle attestation for the RUNNABLE-LIVE → VERIFIED transition and states that later recipe/script edits void an attestation.
+- **Correction:** renamed the current record to `docs/gateguard/SAMPLE_REVIEW.md` and explicitly classified it as the human adequacy review of the sample run.
+- **Result:** final lifecycle attestation remains deferred until the GateGuard recipe and scripts are frozen.
+- **Open:** GateGuard may be promoted only to the lifecycle stage supported by the current evidence.
+
+## 2026-08-11 — GateGuard sample acceptance verification complete
+
+- **Recipe:** `gateguard` v0.1.0.
+- **Lifecycle:** `RUNNABLE-SAMPLE`.
+- **Doctor:** 44/44 recipe artifacts carry lifecycle frontmatter; zero missing.
+- **Privacy:** doctor reported no tracked private/PII paths.
+- **Verification:** `npm run verify` completed successfully.
+- **Manifest:** passed with 4 repository-level warnings concerning `output/`, `reports/generated/`, `archive/`, and `private/`.
+- **Acceptance evidence:** preserved under `reports/gateguard/acceptance/`.
+- **Human review:** recorded in `docs/gateguard/SAMPLE_REVIEW.md`.
+- **Final lifecycle attestation:** intentionally deferred; `attestation: null` remains correct at RUNNABLE-SAMPLE.
