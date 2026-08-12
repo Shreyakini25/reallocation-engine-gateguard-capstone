@@ -1,0 +1,624 @@
+{
+  "tool": "GateGuard",
+  "version": "0.1.0",
+  "run_label": "honest-production-baseline",
+  "generated_at": "2026-08-12T20:29:29.956Z",
+  "git_commit": "e895a9d68f8c9aab3f2b401708b898b713a6b89c",
+  "scorer": "scripts/score/role-scorer.mjs",
+  "scorer_sha256": "3aab2b1936fb9c95d265b6f832d65bd06f22294a1c1e257d1bbfa526bb838775",
+  "fixtures": "scripts/score/fixtures/gateguard-roles.json",
+  "fixture_count": 10,
+  "summary": {
+    "passed": 10,
+    "failed": 0,
+    "errors": 0,
+    "total": 10
+  },
+  "scorer_stdout": "✓ scored 10 roles → Apply 1 · Consider 0 · Skip 9 (skip 90%)\n  ../../../../../var/folders/yx/kqm2x80n74zb22z_3bvm2w480000gn/T/gateguard-2iWFto/role-scores.json  +  ../../../../../var/folders/yx/kqm2x80n74zb22z_3bvm2w480000gn/T/gateguard-2iWFto/role-scores.md",
+  "results": [
+    {
+      "role_id": "GG-001",
+      "purpose": "Healthy control with both gates open",
+      "status": "PASS",
+      "actual_composite": 0.585,
+      "machine_recommendation": "Apply",
+      "reason": "composite 0.585 ≥ 0.3, gates healthy",
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.9,
+            "weight": 0.35,
+            "contribution": 0.315,
+            "source": "your-input"
+          },
+          {
+            "factor": "fit",
+            "value": 0.9,
+            "weight": 0.3,
+            "contribution": 0.27,
+            "source": "your-input"
+          }
+        ],
+        "vote_sum": 0.585,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 1,
+            "source": "your-input"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 1,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 1,
+        "arithmetic": "(0.9·0.35 + 0.9·0.3) × 1 × 1 = 0.585"
+      },
+      "assertions": [
+        {
+          "name": "composite remains positive",
+          "pass": true,
+          "expected": "> 0",
+          "actual": 0.585
+        },
+        {
+          "name": "machine recommendation",
+          "pass": true,
+          "expected": "Apply",
+          "actual": "Apply"
+        },
+        {
+          "name": "case is not classified as a closed gate",
+          "pass": true,
+          "expected": "reason not starting with \"gated:\"",
+          "actual": "composite 0.585 ≥ 0.3, gates healthy"
+        }
+      ]
+    },
+    {
+      "role_id": "GG-002",
+      "purpose": "Exact-zero liveness hard stop",
+      "status": "PASS",
+      "actual_composite": 0,
+      "machine_recommendation": "Skip",
+      "reason": "gated: liveness ≈ 0.000 (a closed gate zeroes the composite regardless of votes)",
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.9,
+            "weight": 0.35,
+            "contribution": 0.315,
+            "source": "your-input"
+          },
+          {
+            "factor": "fit",
+            "value": 0.9,
+            "weight": 0.3,
+            "contribution": 0.27,
+            "source": "your-input"
+          }
+        ],
+        "vote_sum": 0.585,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 0,
+            "source": "your-input"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 1,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0,
+        "arithmetic": "(0.9·0.35 + 0.9·0.3) × 0 × 1 = 0.000 → 0.000 (closed liveness gate)"
+      },
+      "assertions": [
+        {
+          "name": "closed gate forces exact zero composite",
+          "pass": true,
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "name": "machine recommendation",
+          "pass": true,
+          "expected": "Skip",
+          "actual": "Skip"
+        },
+        {
+          "name": "closed-gate reason identifies gate",
+          "pass": true,
+          "expected": "gated: liveness",
+          "actual": "gated: liveness ≈ 0.000 (a closed gate zeroes the composite regardless of votes)"
+        }
+      ]
+    },
+    {
+      "role_id": "GG-003",
+      "purpose": "Exact-zero timeline hard stop",
+      "status": "PASS",
+      "actual_composite": 0,
+      "machine_recommendation": "Skip",
+      "reason": "gated: timeline ≈ 0.000 (a closed gate zeroes the composite regardless of votes)",
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.9,
+            "weight": 0.35,
+            "contribution": 0.315,
+            "source": "your-input"
+          },
+          {
+            "factor": "fit",
+            "value": 0.9,
+            "weight": 0.3,
+            "contribution": 0.27,
+            "source": "your-input"
+          }
+        ],
+        "vote_sum": 0.585,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 1,
+            "source": "your-input"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 0,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0,
+        "arithmetic": "(0.9·0.35 + 0.9·0.3) × 1 × 0 = 0.000 → 0.000 (closed timeline gate)"
+      },
+      "assertions": [
+        {
+          "name": "closed gate forces exact zero composite",
+          "pass": true,
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "name": "machine recommendation",
+          "pass": true,
+          "expected": "Skip",
+          "actual": "Skip"
+        },
+        {
+          "name": "closed-gate reason identifies gate",
+          "pass": true,
+          "expected": "gated: timeline",
+          "actual": "gated: timeline ≈ 0.000 (a closed gate zeroes the composite regardless of votes)"
+        }
+      ]
+    },
+    {
+      "role_id": "GG-004",
+      "purpose": "Both hard-stop gates closed",
+      "status": "PASS",
+      "actual_composite": 0,
+      "machine_recommendation": "Skip",
+      "reason": "gated: liveness ≈ 0.000 (a closed gate zeroes the composite regardless of votes)",
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.9,
+            "weight": 0.35,
+            "contribution": 0.315,
+            "source": "your-input"
+          },
+          {
+            "factor": "fit",
+            "value": 0.9,
+            "weight": 0.3,
+            "contribution": 0.27,
+            "source": "your-input"
+          }
+        ],
+        "vote_sum": 0.585,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 0,
+            "source": "your-input"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 0,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0,
+        "arithmetic": "(0.9·0.35 + 0.9·0.3) × 0 × 0 = 0.000 → 0.000 (closed liveness gate)"
+      },
+      "assertions": [
+        {
+          "name": "closed gate forces exact zero composite",
+          "pass": true,
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "name": "machine recommendation",
+          "pass": true,
+          "expected": "Skip",
+          "actual": "Skip"
+        },
+        {
+          "name": "closed-gate reason identifies gate",
+          "pass": true,
+          "expected": "gated: liveness",
+          "actual": "gated: liveness ≈ 0.000 (a closed gate zeroes the composite regardless of votes)"
+        }
+      ]
+    },
+    {
+      "role_id": "GG-005",
+      "purpose": "Liveness exactly at configured gate_zero boundary",
+      "status": "PASS",
+      "actual_composite": 0,
+      "machine_recommendation": "Skip",
+      "reason": "gated: liveness ≈ 0.050 (a closed gate zeroes the composite regardless of votes)",
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.9,
+            "weight": 0.35,
+            "contribution": 0.315,
+            "source": "your-input"
+          },
+          {
+            "factor": "fit",
+            "value": 0.9,
+            "weight": 0.3,
+            "contribution": 0.27,
+            "source": "your-input"
+          }
+        ],
+        "vote_sum": 0.585,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 0.05,
+            "source": "your-input"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 1,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0.05,
+        "arithmetic": "(0.9·0.35 + 0.9·0.3) × 0.05 × 1 = 0.029 → 0.000 (closed liveness gate)"
+      },
+      "assertions": [
+        {
+          "name": "closed gate forces exact zero composite",
+          "pass": true,
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "name": "machine recommendation",
+          "pass": true,
+          "expected": "Skip",
+          "actual": "Skip"
+        },
+        {
+          "name": "closed-gate reason identifies gate",
+          "pass": true,
+          "expected": "gated: liveness",
+          "actual": "gated: liveness ≈ 0.050 (a closed gate zeroes the composite regardless of votes)"
+        }
+      ]
+    },
+    {
+      "role_id": "GG-006",
+      "purpose": "Timeline exactly at configured gate_zero boundary",
+      "status": "PASS",
+      "actual_composite": 0,
+      "machine_recommendation": "Skip",
+      "reason": "gated: timeline ≈ 0.050 (a closed gate zeroes the composite regardless of votes)",
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.9,
+            "weight": 0.35,
+            "contribution": 0.315,
+            "source": "your-input"
+          },
+          {
+            "factor": "fit",
+            "value": 0.9,
+            "weight": 0.3,
+            "contribution": 0.27,
+            "source": "your-input"
+          }
+        ],
+        "vote_sum": 0.585,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 1,
+            "source": "your-input"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 0.05,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0.05,
+        "arithmetic": "(0.9·0.35 + 0.9·0.3) × 1 × 0.05 = 0.029 → 0.000 (closed timeline gate)"
+      },
+      "assertions": [
+        {
+          "name": "closed gate forces exact zero composite",
+          "pass": true,
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "name": "machine recommendation",
+          "pass": true,
+          "expected": "Skip",
+          "actual": "Skip"
+        },
+        {
+          "name": "closed-gate reason identifies gate",
+          "pass": true,
+          "expected": "gated: timeline",
+          "actual": "gated: timeline ≈ 0.050 (a closed gate zeroes the composite regardless of votes)"
+        }
+      ]
+    },
+    {
+      "role_id": "GG-007",
+      "purpose": "Boundary control immediately above gate_zero",
+      "status": "PASS",
+      "actual_composite": 0.0293,
+      "machine_recommendation": "Skip",
+      "reason": "composite 0.029 < 0.2 — time is better spent elsewhere",
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.9,
+            "weight": 0.35,
+            "contribution": 0.315,
+            "source": "your-input"
+          },
+          {
+            "factor": "fit",
+            "value": 0.9,
+            "weight": 0.3,
+            "contribution": 0.27,
+            "source": "your-input"
+          }
+        ],
+        "vote_sum": 0.585,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 0.0501,
+            "source": "your-input"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 1,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0.0501,
+        "arithmetic": "(0.9·0.35 + 0.9·0.3) × 0.0501 × 1 = 0.029"
+      },
+      "assertions": [
+        {
+          "name": "composite remains positive",
+          "pass": true,
+          "expected": "> 0",
+          "actual": 0.0293
+        },
+        {
+          "name": "case is not classified as a closed gate",
+          "pass": true,
+          "expected": "reason not starting with \"gated:\"",
+          "actual": "composite 0.029 < 0.2 — time is better spent elsewhere"
+        }
+      ]
+    },
+    {
+      "role_id": "GG-008",
+      "purpose": "Closed gate must remain zero with weaker votes",
+      "status": "PASS",
+      "actual_composite": 0,
+      "machine_recommendation": "Skip",
+      "reason": "gated: liveness ≈ 0.050 (a closed gate zeroes the composite regardless of votes)",
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 0.2,
+            "weight": 0.35,
+            "contribution": 0.07,
+            "source": "your-input"
+          },
+          {
+            "factor": "fit",
+            "value": 0.2,
+            "weight": 0.3,
+            "contribution": 0.06,
+            "source": "your-input"
+          }
+        ],
+        "vote_sum": 0.13,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 0.05,
+            "source": "your-input"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 1,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0.05,
+        "arithmetic": "(0.2·0.35 + 0.2·0.3) × 0.05 × 1 = 0.007 → 0.000 (closed liveness gate)"
+      },
+      "assertions": [
+        {
+          "name": "closed gate forces exact zero composite",
+          "pass": true,
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "name": "machine recommendation",
+          "pass": true,
+          "expected": "Skip",
+          "actual": "Skip"
+        },
+        {
+          "name": "closed-gate reason identifies gate",
+          "pass": true,
+          "expected": "gated: liveness",
+          "actual": "gated: liveness ≈ 0.050 (a closed gate zeroes the composite regardless of votes)"
+        }
+      ]
+    },
+    {
+      "role_id": "GG-009",
+      "purpose": "Maximum votes must not rescue a closed liveness gate",
+      "status": "PASS",
+      "actual_composite": 0,
+      "machine_recommendation": "Skip",
+      "reason": "gated: liveness ≈ 0.050 (a closed gate zeroes the composite regardless of votes)",
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 1,
+            "weight": 0.35,
+            "contribution": 0.35,
+            "source": "your-input"
+          },
+          {
+            "factor": "fit",
+            "value": 1,
+            "weight": 0.3,
+            "contribution": 0.3,
+            "source": "your-input"
+          }
+        ],
+        "vote_sum": 0.65,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 0.05,
+            "source": "your-input"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 1,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0.05,
+        "arithmetic": "(1·0.35 + 1·0.3) × 0.05 × 1 = 0.032 → 0.000 (closed liveness gate)"
+      },
+      "assertions": [
+        {
+          "name": "closed gate forces exact zero composite",
+          "pass": true,
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "name": "machine recommendation",
+          "pass": true,
+          "expected": "Skip",
+          "actual": "Skip"
+        },
+        {
+          "name": "closed-gate reason identifies gate",
+          "pass": true,
+          "expected": "gated: liveness",
+          "actual": "gated: liveness ≈ 0.050 (a closed gate zeroes the composite regardless of votes)"
+        }
+      ]
+    },
+    {
+      "role_id": "GG-010",
+      "purpose": "Maximum votes must not rescue a closed timeline gate",
+      "status": "PASS",
+      "actual_composite": 0,
+      "machine_recommendation": "Skip",
+      "reason": "gated: timeline ≈ 0.050 (a closed gate zeroes the composite regardless of votes)",
+      "trace": {
+        "votes": [
+          {
+            "factor": "sponsorship",
+            "value": 1,
+            "weight": 0.35,
+            "contribution": 0.35,
+            "source": "your-input"
+          },
+          {
+            "factor": "fit",
+            "value": 1,
+            "weight": 0.3,
+            "contribution": 0.3,
+            "source": "your-input"
+          }
+        ],
+        "vote_sum": 0.65,
+        "gates": [
+          {
+            "factor": "liveness",
+            "multiplier": 1,
+            "source": "your-input"
+          },
+          {
+            "factor": "timeline",
+            "multiplier": 0.05,
+            "source": "your-input"
+          }
+        ],
+        "gate_product": 0.05,
+        "arithmetic": "(1·0.35 + 1·0.3) × 1 × 0.05 = 0.032 → 0.000 (closed timeline gate)"
+      },
+      "assertions": [
+        {
+          "name": "closed gate forces exact zero composite",
+          "pass": true,
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "name": "machine recommendation",
+          "pass": true,
+          "expected": "Skip",
+          "actual": "Skip"
+        },
+        {
+          "name": "closed-gate reason identifies gate",
+          "pass": true,
+          "expected": "gated: timeline",
+          "actual": "gated: timeline ≈ 0.050 (a closed gate zeroes the composite regardless of votes)"
+        }
+      ]
+    }
+  ]
+}

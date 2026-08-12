@@ -1,0 +1,152 @@
+[
+  {
+    "role_id": "GG-001",
+    "company": "Fictional Control Co.",
+    "title": "Healthy control",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": 1.0, "source": "your-input" },
+    "timeline": { "factor": 1.0, "source": "your-input" },
+    "_gateguard": {
+      "purpose": "Healthy control with both gates open",
+      "expect_composite": "positive",
+      "expect_recommendation": "Apply",
+      "expect_gated_by": null
+    }
+  },
+  {
+    "role_id": "GG-002",
+    "company": "Fictional Liveness Zero Co.",
+    "title": "Liveness zero",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": 0.0, "source": "your-input" },
+    "timeline": { "factor": 1.0, "source": "your-input" },
+    "_gateguard": {
+      "purpose": "Exact-zero liveness hard stop",
+      "expect_composite": "zero",
+      "expect_recommendation": "Skip",
+      "expect_gated_by": "liveness"
+    }
+  },
+  {
+    "role_id": "GG-003",
+    "company": "Fictional Timeline Zero Co.",
+    "title": "Timeline zero",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": 1.0, "source": "your-input" },
+    "timeline": { "factor": 0.0, "source": "your-input" },
+    "_gateguard": {
+      "purpose": "Exact-zero timeline hard stop",
+      "expect_composite": "zero",
+      "expect_recommendation": "Skip",
+      "expect_gated_by": "timeline"
+    }
+  },
+  {
+    "role_id": "GG-004",
+    "company": "Fictional Double Gate Co.",
+    "title": "Both gates zero",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": 0.0, "source": "your-input" },
+    "timeline": { "factor": 0.0, "source": "your-input" },
+    "_gateguard": {
+      "purpose": "Both hard-stop gates closed",
+      "expect_composite": "zero",
+      "expect_recommendation": "Skip",
+      "expect_gated_by": "liveness"
+    }
+  },
+  {
+    "role_id": "GG-005",
+    "company": "Fictional Boundary Liveness Co.",
+    "title": "Liveness at closed-gate boundary",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": 0.05, "source": "your-input" },
+    "timeline": { "factor": 1.0, "source": "your-input" },
+    "_gateguard": {
+      "purpose": "Liveness exactly at configured gate_zero boundary",
+      "expect_composite": "zero",
+      "expect_recommendation": "Skip",
+      "expect_gated_by": "liveness"
+    }
+  },
+  {
+    "role_id": "GG-006",
+    "company": "Fictional Boundary Timeline Co.",
+    "title": "Timeline at closed-gate boundary",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": 1.0, "source": "your-input" },
+    "timeline": { "factor": 0.05, "source": "your-input" },
+    "_gateguard": {
+      "purpose": "Timeline exactly at configured gate_zero boundary",
+      "expect_composite": "zero",
+      "expect_recommendation": "Skip",
+      "expect_gated_by": "timeline"
+    }
+  },
+  {
+    "role_id": "GG-007",
+    "company": "Fictional Above Boundary Co.",
+    "title": "Liveness immediately above boundary",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": 0.0501, "source": "your-input" },
+    "timeline": { "factor": 1.0, "source": "your-input" },
+    "_gateguard": {
+      "purpose": "Boundary control immediately above gate_zero",
+      "expect_composite": "positive",
+      "expect_recommendation": null,
+      "expect_gated_by": null
+    }
+  },
+  {
+    "role_id": "GG-008",
+    "company": "Fictional Low Vote Co.",
+    "title": "Closed liveness with weaker votes",
+    "sponsorship": { "p": 0.2, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.2, "source": "your-input" },
+    "liveness": { "factor": 0.05, "source": "your-input" },
+    "timeline": { "factor": 1.0, "source": "your-input" },
+    "_gateguard": {
+      "purpose": "Closed gate must remain zero with weaker votes",
+      "expect_composite": "zero",
+      "expect_recommendation": "Skip",
+      "expect_gated_by": "liveness"
+    }
+  },
+  {
+    "role_id": "GG-009",
+    "company": "Fictional Maximum Vote Co.",
+    "title": "Closed liveness with maximum votes",
+    "sponsorship": { "p": 1.0, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 1.0, "source": "your-input" },
+    "liveness": { "factor": 0.05, "source": "your-input" },
+    "timeline": { "factor": 1.0, "source": "your-input" },
+    "_gateguard": {
+      "purpose": "Maximum votes must not rescue a closed liveness gate",
+      "expect_composite": "zero",
+      "expect_recommendation": "Skip",
+      "expect_gated_by": "liveness"
+    }
+  },
+  {
+    "role_id": "GG-010",
+    "company": "Fictional Maximum Timeline Co.",
+    "title": "Closed timeline with maximum votes",
+    "sponsorship": { "p": 1.0, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 1.0, "source": "your-input" },
+    "liveness": { "factor": 1.0, "source": "your-input" },
+    "timeline": { "factor": 0.05, "source": "your-input" },
+    "_gateguard": {
+      "purpose": "Maximum votes must not rescue a closed timeline gate",
+      "expect_composite": "zero",
+      "expect_recommendation": "Skip",
+      "expect_gated_by": "timeline"
+    }
+  }
+]

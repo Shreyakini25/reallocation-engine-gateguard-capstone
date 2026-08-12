@@ -1,0 +1,24 @@
+
+GateGuard hard-stop verification
+================================
+PASS   GB-L-0000  composite=0        Liveness exact zero
+PASS   GB-L-0001  composite=0        Positive liveness inside closed-gate range
+PASS   GB-L-0100  composite=0        Liveness well inside closed-gate range
+PASS   GB-L-0499  composite=0        Immediately below closed-gate boundary
+PASS   GB-L-0500  composite=0        Exact configured closed-gate boundary
+PASS   GB-L-0501  composite=0.0293   Immediately above closed-gate boundary
+PASS   GB-L-1000  composite=0.0585   Weak but open liveness gate
+PASS   GB-L-10000  composite=0.585    Fully open liveness control
+PASS   GB-T-0000  composite=0        Timeline exact zero
+PASS   GB-T-0001  composite=0        Positive timeline inside closed-gate range
+PASS   GB-T-0100  composite=0        Timeline well inside closed-gate range
+PASS   GB-T-0499  composite=0        Immediately below closed-gate boundary
+PASS   GB-T-0500  composite=0        Exact configured timeline closed-gate boundary
+PASS   GB-T-0501  composite=0.0293   Immediately above timeline closed-gate boundary
+PASS   GB-T-1000  composite=0.0585   Weak but open timeline gate
+PASS   GB-T-10000  composite=0.585    Fully open timeline control
+
+Summary: 16 PASS · 0 FAIL · 0 ERROR · 16 TOTAL
+JSON audit: reports/generated/gateguard-honest-production-boundary.json
+Human report: reports/generated/gateguard-honest-production-boundary.md
+production boundary exit code: 0

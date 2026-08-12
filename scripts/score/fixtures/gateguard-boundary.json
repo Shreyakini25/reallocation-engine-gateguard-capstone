@@ -1,0 +1,243 @@
+[
+  {
+    "role_id": "GB-L-0000",
+    "company": "Fictional Boundary Lab",
+    "title": "Liveness 0",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": 0, "source": "your-input" },
+    "timeline": { "factor": 1, "source": "your-input" },
+    "_gateguard": {
+      "purpose": "Liveness exact zero",
+      "expect_composite": "zero",
+      "expect_recommendation": "Skip",
+      "expect_gated_by": "liveness"
+    }
+  },
+  {
+    "role_id": "GB-L-0001",
+    "company": "Fictional Boundary Lab",
+    "title": "Liveness 0.0001",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": 0.0001, "source": "your-input" },
+    "timeline": { "factor": 1, "source": "your-input" },
+    "_gateguard": {
+      "purpose": "Positive liveness inside closed-gate range",
+      "expect_composite": "zero",
+      "expect_recommendation": "Skip",
+      "expect_gated_by": "liveness"
+    }
+  },
+  {
+    "role_id": "GB-L-0100",
+    "company": "Fictional Boundary Lab",
+    "title": "Liveness 0.01",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": 0.01, "source": "your-input" },
+    "timeline": { "factor": 1, "source": "your-input" },
+    "_gateguard": {
+      "purpose": "Liveness well inside closed-gate range",
+      "expect_composite": "zero",
+      "expect_recommendation": "Skip",
+      "expect_gated_by": "liveness"
+    }
+  },
+  {
+    "role_id": "GB-L-0499",
+    "company": "Fictional Boundary Lab",
+    "title": "Liveness 0.0499",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": 0.0499, "source": "your-input" },
+    "timeline": { "factor": 1, "source": "your-input" },
+    "_gateguard": {
+      "purpose": "Immediately below closed-gate boundary",
+      "expect_composite": "zero",
+      "expect_recommendation": "Skip",
+      "expect_gated_by": "liveness"
+    }
+  },
+  {
+    "role_id": "GB-L-0500",
+    "company": "Fictional Boundary Lab",
+    "title": "Liveness 0.05",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": 0.05, "source": "your-input" },
+    "timeline": { "factor": 1, "source": "your-input" },
+    "_gateguard": {
+      "purpose": "Exact configured closed-gate boundary",
+      "expect_composite": "zero",
+      "expect_recommendation": "Skip",
+      "expect_gated_by": "liveness"
+    }
+  },
+  {
+    "role_id": "GB-L-0501",
+    "company": "Fictional Boundary Lab",
+    "title": "Liveness 0.0501",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": 0.0501, "source": "your-input" },
+    "timeline": { "factor": 1, "source": "your-input" },
+    "_gateguard": {
+      "purpose": "Immediately above closed-gate boundary",
+      "expect_composite": "positive",
+      "expect_recommendation": null,
+      "expect_gated_by": null
+    }
+  },
+  {
+    "role_id": "GB-L-1000",
+    "company": "Fictional Boundary Lab",
+    "title": "Liveness 0.10",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": 0.10, "source": "your-input" },
+    "timeline": { "factor": 1, "source": "your-input" },
+    "_gateguard": {
+      "purpose": "Weak but open liveness gate",
+      "expect_composite": "positive",
+      "expect_recommendation": null,
+      "expect_gated_by": null
+    }
+  },
+  {
+    "role_id": "GB-L-10000",
+    "company": "Fictional Boundary Lab",
+    "title": "Liveness 1.0",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": 1, "source": "your-input" },
+    "timeline": { "factor": 1, "source": "your-input" },
+    "_gateguard": {
+      "purpose": "Fully open liveness control",
+      "expect_composite": "positive",
+      "expect_recommendation": "Apply",
+      "expect_gated_by": null
+    }
+  },
+
+  {
+    "role_id": "GB-T-0000",
+    "company": "Fictional Boundary Lab",
+    "title": "Timeline 0",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": 1, "source": "your-input" },
+    "timeline": { "factor": 0, "source": "your-input" },
+    "_gateguard": {
+      "purpose": "Timeline exact zero",
+      "expect_composite": "zero",
+      "expect_recommendation": "Skip",
+      "expect_gated_by": "timeline"
+    }
+  },
+  {
+    "role_id": "GB-T-0001",
+    "company": "Fictional Boundary Lab",
+    "title": "Timeline 0.0001",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": 1, "source": "your-input" },
+    "timeline": { "factor": 0.0001, "source": "your-input" },
+    "_gateguard": {
+      "purpose": "Positive timeline inside closed-gate range",
+      "expect_composite": "zero",
+      "expect_recommendation": "Skip",
+      "expect_gated_by": "timeline"
+    }
+  },
+  {
+    "role_id": "GB-T-0100",
+    "company": "Fictional Boundary Lab",
+    "title": "Timeline 0.01",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": 1, "source": "your-input" },
+    "timeline": { "factor": 0.01, "source": "your-input" },
+    "_gateguard": {
+      "purpose": "Timeline well inside closed-gate range",
+      "expect_composite": "zero",
+      "expect_recommendation": "Skip",
+      "expect_gated_by": "timeline"
+    }
+  },
+  {
+    "role_id": "GB-T-0499",
+    "company": "Fictional Boundary Lab",
+    "title": "Timeline 0.0499",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": 1, "source": "your-input" },
+    "timeline": { "factor": 0.0499, "source": "your-input" },
+    "_gateguard": {
+      "purpose": "Immediately below closed-gate boundary",
+      "expect_composite": "zero",
+      "expect_recommendation": "Skip",
+      "expect_gated_by": "timeline"
+    }
+  },
+  {
+    "role_id": "GB-T-0500",
+    "company": "Fictional Boundary Lab",
+    "title": "Timeline 0.05",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": 1, "source": "your-input" },
+    "timeline": { "factor": 0.05, "source": "your-input" },
+    "_gateguard": {
+      "purpose": "Exact configured timeline closed-gate boundary",
+      "expect_composite": "zero",
+      "expect_recommendation": "Skip",
+      "expect_gated_by": "timeline"
+    }
+  },
+  {
+    "role_id": "GB-T-0501",
+    "company": "Fictional Boundary Lab",
+    "title": "Timeline 0.0501",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": 1, "source": "your-input" },
+    "timeline": { "factor": 0.0501, "source": "your-input" },
+    "_gateguard": {
+      "purpose": "Immediately above timeline closed-gate boundary",
+      "expect_composite": "positive",
+      "expect_recommendation": null,
+      "expect_gated_by": null
+    }
+  },
+  {
+    "role_id": "GB-T-1000",
+    "company": "Fictional Boundary Lab",
+    "title": "Timeline 0.10",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": 1, "source": "your-input" },
+    "timeline": { "factor": 0.10, "source": "your-input" },
+    "_gateguard": {
+      "purpose": "Weak but open timeline gate",
+      "expect_composite": "positive",
+      "expect_recommendation": null,
+      "expect_gated_by": null
+    }
+  },
+  {
+    "role_id": "GB-T-10000",
+    "company": "Fictional Boundary Lab",
+    "title": "Timeline 1.0",
+    "sponsorship": { "p": 0.9, "tier": "proven", "source": "your-input" },
+    "fit": { "p": 0.9, "source": "your-input" },
+    "liveness": { "factor": 1, "source": "your-input" },
+    "timeline": { "factor": 1, "source": "your-input" },
+    "_gateguard": {
+      "purpose": "Fully open timeline control",
+      "expect_composite": "positive",
+      "expect_recommendation": "Apply",
+      "expect_gated_by": null
+    }
+  }
+]
