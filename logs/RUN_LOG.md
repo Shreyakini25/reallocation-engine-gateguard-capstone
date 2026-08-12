@@ -207,3 +207,14 @@ private emails, or sensitive application notes.
 - **Evidence:** `docs/gateguard/HONEST_RUN.md` and `reports/gateguard/honest-run/`.
 - **Claim boundary:** this run verifies the targeted software hard-stop regression only; it does not verify real posting liveness, sponsorship truth, immigration feasibility, correctness of the `0.05` policy threshold, or full scorer calibration.
 - **Open issue:** lifecycle attestation remains intentionally deferred until contribution scripts and recipe are frozen.
+
+## 2026-08-12 — GateGuard final human adequacy attestation
+
+- **Reviewer:** Shreya Kini.
+- **Attestation:** `docs/gateguard/ATTESTATION.md`.
+- **Lifecycle:** remains `RUNNABLE-SAMPLE`; this attestation does not claim lifecycle `VERIFIED`.
+- **Frozen evidence base:** `b31616d5f1302dcbdcb68eff7af298e6a028d5eb`.
+- **Human review:** Honest Run evidence, production/mutant outputs, disclosed warnings, limitations, and verified-versus-inferred boundaries were reviewed before sign-off.
+- **Freeze condition:** scorer, GateGuard harness, recipe, and human card hashes matched the reviewed frozen identities before signing.
+- **Scope:** attestation covers the capstone software/test evidence only; it does not attest to real posting liveness, sponsorship truth, immigration feasibility, correctness of the `0.05` policy threshold, or full model calibration.
+- **Re-attestation rule:** any later change to `scripts/score/role-scorer.mjs`, `scripts/score/gateguard-harness.mjs`, `recipes/gateguard.md`, or `recipes/gateguard.card.md` requires renewed human review before relying on this attestation.
