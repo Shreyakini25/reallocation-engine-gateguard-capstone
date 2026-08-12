@@ -256,6 +256,91 @@
       border-radius: 0 9px 9px 0;
     }
 
+
+    .proof-ladder {
+      position: relative;
+      margin-top: 30px;
+    }
+
+    .proof-step {
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      gap: 18px;
+      position: relative;
+      padding-bottom: 24px;
+    }
+
+    .proof-step:last-child {
+      padding-bottom: 0;
+    }
+
+    .proof-step:not(:last-child)::before {
+      content: "";
+      position: absolute;
+      left: 28px;
+      top: 52px;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .proof-number {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--dark);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 750;
+      font-size: 18px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .proof-content {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+      background: #fafafa;
+    }
+
+    .proof-content h3 {
+      margin: 0 0 5px;
+      font-size: 18px;
+    }
+
+    .proof-content p {
+      margin: 4px 0 10px;
+      color: var(--muted);
+    }
+
+    .evidence-link {
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 650;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .evidence-link:hover {
+      text-decoration: underline;
+    }
+
+    .proof-summary {
+      margin-top: 26px;
+      padding: 20px 22px;
+      border-radius: 10px;
+      background: var(--dark);
+      color: white;
+    }
+
+    .proof-summary strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
     footer {
       padding: 30px 0 50px;
       color: var(--muted);
@@ -545,6 +630,166 @@ Maximum scoring votes + closed timeline → composite 0</pre>
       </p>
     </div>
 
+  </div>
+</section>
+
+
+<section id="proof-ladder">
+  <h2>From hypothesis to evidence</h2>
+
+  <p class="lead">
+    GateGuard was not built around a final green test result. The evidence trail
+    preserves what was predicted, what actually failed, what changed, whether the
+    harness detects the defect when it is deliberately reintroduced, and what
+    remains outside the software's knowledge.
+  </p>
+
+  <div class="proof-ladder">
+
+    <div class="proof-step">
+      <div class="proof-number">1</div>
+      <div class="proof-content">
+        <h3>Prediction locked</h3>
+        <p>
+          Before implementing the harness or executing the runtime test, the
+          suspected hard-stop behavior and falsification condition were recorded.
+        </p>
+        <a class="evidence-link"
+           href="https://github.com/Shreyakini25/reallocation-engine-gateguard-capstone/blob/contrib/shreya-gate-behavior-harness/docs/gateguard/PREDICTION_LOCK.md"
+           target="_blank">
+          Open prediction lock →
+        </a>
+      </div>
+    </div>
+
+    <div class="proof-step">
+      <div class="proof-number">2</div>
+      <div class="proof-content">
+        <h3>Original behavior tested</h3>
+        <p>
+          The unchanged scorer exposed the residual-score behavior: some
+          scorer-classified closed gates still retained positive composite values.
+        </p>
+        <a class="evidence-link"
+           href="https://github.com/Shreyakini25/reallocation-engine-gateguard-capstone/blob/contrib/shreya-gate-behavior-harness/docs/gateguard/BASELINE_FINDING.md"
+           target="_blank">
+          Open baseline finding →
+        </a>
+      </div>
+    </div>
+
+    <div class="proof-step">
+      <div class="proof-number">3</div>
+      <div class="proof-content">
+        <h3>Boundary probed</h3>
+        <p>
+          Values below, at, and immediately above the configured
+          <code>0.05</code> boundary were tested independently for liveness and timeline.
+        </p>
+        <a class="evidence-link"
+           href="https://github.com/Shreyakini25/reallocation-engine-gateguard-capstone/blob/contrib/shreya-gate-behavior-harness/docs/gateguard/BOUNDARY_FINDING.md"
+           target="_blank">
+          Open boundary finding →
+        </a>
+      </div>
+    </div>
+
+    <div class="proof-step">
+      <div class="proof-number">4</div>
+      <div class="proof-content">
+        <h3>Minimal correction applied</h3>
+        <p>
+          The scorer was changed so a scorer-classified closed liveness or
+          timeline gate explicitly forces the final composite to zero.
+        </p>
+        <a class="evidence-link"
+           href="https://github.com/Shreyakini25/reallocation-engine-gateguard-capstone/blob/contrib/shreya-gate-behavior-harness/docs/gateguard/CORRECTED_FINDING.md"
+           target="_blank">
+          Open corrected finding →
+        </a>
+      </div>
+    </div>
+
+    <div class="proof-step">
+      <div class="proof-number">5</div>
+      <div class="proof-content">
+        <h3>Defect deliberately reintroduced</h3>
+        <p>
+          The hard stop was disabled only in an isolated temporary scorer.
+          GateGuard failed again, demonstrating sensitivity to the targeted regression.
+        </p>
+        <a class="evidence-link"
+           href="https://github.com/Shreyakini25/reallocation-engine-gateguard-capstone/blob/contrib/shreya-gate-behavior-harness/docs/gateguard/MUTATION_FINDING.md"
+           target="_blank">
+          Open mutation finding →
+        </a>
+      </div>
+    </div>
+
+    <div class="proof-step">
+      <div class="proof-number">6</div>
+      <div class="proof-content">
+        <h3>Final Honest Run preserved</h3>
+        <p>
+          The production baseline passed 10/10 and the boundary suite passed
+          16/16, while deliberate-mutant runs returned non-zero exit codes.
+        </p>
+        <a class="evidence-link"
+           href="https://github.com/Shreyakini25/reallocation-engine-gateguard-capstone/blob/contrib/shreya-gate-behavior-harness/docs/gateguard/HONEST_RUN.md"
+           target="_blank">
+          Open Honest Run →
+        </a>
+      </div>
+    </div>
+
+    <div class="proof-step">
+      <div class="proof-number">7</div>
+      <div class="proof-content">
+        <h3>Every number classified</h3>
+        <p>
+          Reported values are labeled as script-output, local-evidence,
+          controlled input, or missing rather than being presented as unsupported facts.
+        </p>
+        <a class="evidence-link"
+           href="https://github.com/Shreyakini25/reallocation-engine-gateguard-capstone/blob/contrib/shreya-gate-behavior-harness/docs/gateguard/TRACEABILITY_MATRIX.md"
+           target="_blank">
+          Open traceability matrix →
+        </a>
+      </div>
+    </div>
+
+    <div class="proof-step">
+      <div class="proof-number">8</div>
+      <div class="proof-content">
+        <h3>Human boundary retained</h3>
+        <p>
+          Human review records what was tested and what was not. Real posting
+          status, sponsorship truth, immigration feasibility, and policy correctness
+          are explicitly not certified by GateGuard.
+        </p>
+        <a class="evidence-link"
+           href="https://github.com/Shreyakini25/reallocation-engine-gateguard-capstone/blob/contrib/shreya-gate-behavior-harness/docs/gateguard/ATTESTATION.md"
+           target="_blank">
+          Open human attestation →
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="proof-summary">
+    <strong>The proof is the chain, not just the green result.</strong>
+    Prediction → observed failure → boundary probe → minimal fix → deliberate
+    regression → Honest Run → traceability → human judgment.
+  </div>
+
+  <div class="hero-actions">
+    <a class="button"
+       style="background:#111827;color:white"
+       href="https://github.com/Shreyakini25/reallocation-engine-gateguard-capstone/pull/1"
+       target="_blank">
+      Review the full contribution in PR #1
+    </a>
   </div>
 </section>
 
