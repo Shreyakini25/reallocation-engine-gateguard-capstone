@@ -1,0 +1,16 @@
+
+> the-reallocation-engine@1.0.0 verify
+> node scripts/conformance.mjs && node scripts/manifest-check.mjs
+
+conformance: 137 files (77 md · 30 py · 24 js · 1 sh · 4 json · 1 yaml)
+✓ all conform (machine half of P4). Adequacy is still the human gate.
+MANIFEST CHECK — The Reallocation Engine
+==========================================
+
+WARN (4):
+  W1 ignore path not in .gitignore: output/
+  W1 ignore path not in .gitignore: reports/generated/
+  W1 ignore path not in .gitignore: archive/
+  W2 private path not gitignored (PII/secret risk): private/
+
+✓ manifest check passed (4 warnings)

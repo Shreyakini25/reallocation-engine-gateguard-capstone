@@ -1,0 +1,18 @@
+
+GateGuard hard-stop verification
+================================
+PASS   GG-001  composite=0.585    Healthy control with both gates open
+PASS   GG-002  composite=0        Exact-zero liveness hard stop
+PASS   GG-003  composite=0        Exact-zero timeline hard stop
+PASS   GG-004  composite=0        Both hard-stop gates closed
+PASS   GG-005  composite=0        Liveness exactly at configured gate_zero boundary
+PASS   GG-006  composite=0        Timeline exactly at configured gate_zero boundary
+PASS   GG-007  composite=0.0293   Boundary control immediately above gate_zero
+PASS   GG-008  composite=0        Closed gate must remain zero with weaker votes
+PASS   GG-009  composite=0        Maximum votes must not rescue a closed liveness gate
+PASS   GG-010  composite=0        Maximum votes must not rescue a closed timeline gate
+
+Summary: 10 PASS · 0 FAIL · 0 ERROR · 10 TOTAL
+JSON audit: reports/generated/gateguard-honest-production-baseline.json
+Human report: reports/generated/gateguard-honest-production-baseline.md
+production baseline exit code: 0

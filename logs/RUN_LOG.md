@@ -187,3 +187,23 @@ private emails, or sensitive application notes.
 - **Acceptance evidence:** preserved under `reports/gateguard/acceptance/`.
 - **Human review:** recorded in `docs/gateguard/SAMPLE_REVIEW.md`.
 - **Final lifecycle attestation:** intentionally deferred; `attestation: null` remains correct at RUNNABLE-SAMPLE.
+
+## 2026-08-12 — GateGuard final honest run
+
+- **Recipe:** `gateguard` v0.1.0.
+- **Lifecycle:** `RUNNABLE-SAMPLE`.
+- **Branch:** `contrib/shreya-gate-behavior-harness`.
+- **Starting HEAD:** `e895a9d`.
+- **Inputs:** fictional controlled fixtures `scripts/score/fixtures/gateguard-roles.json` and `scripts/score/fixtures/gateguard-boundary.json`.
+- **Production baseline:** 10 PASS · 0 FAIL · 0 ERROR · 10 TOTAL; exit code 0.
+- **Production boundary:** 16 PASS · 0 FAIL · 0 ERROR · 16 TOTAL; exit code 0.
+- **Plausibility boundary:** configured closed gate `0.05` returned composite `0`; immediately open control `0.0501` returned composite `0.0293`.
+- **Deliberate break:** disabled final hard-stop enforcement only in `/tmp/gateguard-honest-mutant.mjs`; committed production scorer was not modified.
+- **Mutant baseline:** 5 PASS · 5 FAIL · 0 ERROR · 10 TOTAL; exit code 1.
+- **Mutant boundary:** 8 PASS · 8 FAIL · 0 ERROR · 16 TOTAL; exit code 1.
+- **Cleanup:** temporary mutant deleted after testing.
+- **Doctor:** required environment runnable; no tracked private/PII paths; 44/44 lifecycle frontmatter present.
+- **Verify:** conformance passed; manifest check passed with four disclosed repository warnings.
+- **Evidence:** `docs/gateguard/HONEST_RUN.md` and `reports/gateguard/honest-run/`.
+- **Claim boundary:** this run verifies the targeted software hard-stop regression only; it does not verify real posting liveness, sponsorship truth, immigration feasibility, correctness of the `0.05` policy threshold, or full scorer calibration.
+- **Open issue:** lifecycle attestation remains intentionally deferred until contribution scripts and recipe are frozen.
