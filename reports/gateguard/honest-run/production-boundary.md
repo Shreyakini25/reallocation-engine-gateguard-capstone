@@ -182,4 +182,3 @@ Fully open timeline control
 - Composite values, recommendations, reasons, and traces come from the scorer output.
 - PASS/FAIL is produced by deterministic assertions in this harness.
 - This audit does not claim that fictional fixture values describe any real candidate, employer, or posting.
-
