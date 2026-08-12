@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GateGuard | Hard-Stop Verification Case Study</title>
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --surface: #ffffff;
+      --text: #16181d;
+      --muted: #60656f;
+      --border: #dfe3e8;
+      --accent: #1f4b99;
+      --dark: #111827;
+      --soft: #eef3fb;
+      --success: #176b45;
+      --danger: #a33a32;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+    }
+
+    header {
+      background: var(--dark);
+      color: white;
+      padding: 72px 0 62px;
+    }
+
+    .eyebrow {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      opacity: 0.7;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 7vw, 72px);
+      line-height: 1;
+      margin: 0 0 18px;
+      letter-spacing: -0.04em;
+    }
+
+    .subtitle {
+      max-width: 780px;
+      font-size: 20px;
+      color: #d1d5db;
+      margin: 0;
+    }
+
+    .hero-actions {
+      margin-top: 32px;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 11px 18px;
+      border-radius: 8px;
+      font-weight: 650;
+      text-decoration: none;
+      border: 1px solid transparent;
+    }
+
+    .button-primary {
+      background: white;
+      color: var(--dark);
+    }
+
+    .button-secondary {
+      color: white;
+      border-color: #6b7280;
+    }
+
+    main {
+      padding: 54px 0 80px;
+    }
+
+    section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 34px;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 27px;
+      letter-spacing: -0.02em;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin-top: 8px;
+    }
+
+    .lead {
+      font-size: 19px;
+      max-width: 850px;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .metric {
+      background: var(--soft);
+      border-radius: 10px;
+      padding: 22px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 32px;
+      line-height: 1.1;
+      color: var(--accent);
+      margin-bottom: 7px;
+    }
+
+    .metric span {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .architecture {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 12px;
+      align-items: center;
+      margin-top: 28px;
+    }
+
+    .node {
+      border: 1px solid var(--border);
+      background: #fafafa;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .node strong {
+      margin-bottom: 5px;
+    }
+
+    .arrow {
+      font-size: 27px;
+      color: var(--muted);
+    }
+
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .panel {
+      border-radius: 10px;
+      padding: 22px;
+      border: 1px solid var(--border);
+    }
+
+    .panel.bad {
+      border-left: 5px solid var(--danger);
+    }
+
+    .panel.good {
+      border-left: 5px solid var(--success);
+    }
+
+    code {
+      font-family: "SFMono-Regular", Consolas, monospace;
+      background: #f0f2f5;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-size: 0.93em;
+    }
+
+    pre {
+      background: #111827;
+      color: #e5e7eb;
+      padding: 20px;
+      border-radius: 10px;
+      overflow-x: auto;
+      font-size: 14px;
+    }
+
+    .truth-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .truth-card {
+      background: #fafafa;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 22px;
+    }
+
+    .truth-card ul,
+    .failure-grid ul {
+      padding-left: 20px;
+    }
+
+    .failure-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .failure {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .callout {
+      border-left: 5px solid var(--accent);
+      background: var(--soft);
+      padding: 18px 22px;
+      margin-top: 22px;
+      border-radius: 0 9px 9px 0;
+    }
+
+    footer {
+      padding: 30px 0 50px;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    @media (max-width: 760px) {
+      section {
+        padding: 25px;
+      }
+
+      .metrics,
+      .comparison,
+      .truth-grid,
+      .failure-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .architecture {
+        grid-template-columns: 1fr;
+      }
+
+      .arrow {
+        transform: rotate(90deg);
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <div class="eyebrow">Software Verification · Reliability Engineering · Case Study</div>
+    <h1>GateGuard</h1>
+    <p class="subtitle">
+      A deterministic verification harness that catches a subtle scoring defect:
+      a rule labeled as a hard stop could still leave a non-zero decision score.
+    </p>
+
+    <div class="hero-actions">
+      <a class="button button-primary"
+         href="https://github.com/Shreyakini25/reallocation-engine-gateguard-capstone/pull/1"
+         target="_blank">
+        View GitHub PR
+      </a>
+
+      <a class="button button-secondary"
+         href="https://github.com/Shreyakini25/reallocation-engine-gateguard-capstone"
+         target="_blank">
+        View Repository
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+<section>
+  <h2>The problem</h2>
+
+  <p class="lead">
+    Decision systems often combine multiple signals into one composite score.
+    But some conditions are not preferences — they are gates.
+  </p>
+
+  <p>
+    In this role-scoring engine, posting liveness and timeline feasibility are
+    intended to behave as hard stops. A closed gate should make the decision
+    composite exactly zero regardless of how strong the other scoring signals are.
+  </p>
+
+  <p>
+    The implementation could identify a gate as closed while still retaining a
+    small positive composite. That creates an information asymmetry for the person
+    relying on the score: the interface can say “closed” while the arithmetic
+    still behaves as though the condition were merely another weighted vote.
+  </p>
+
+  <div class="callout">
+    <strong>Engineering question:</strong>
+    Can we prove that every scorer-classified closed liveness or timeline gate
+    actually forces the final composite to zero?
+  </div>
+</section>
+
+<section>
+  <h2>What I built</h2>
+
+  <p>
+    I built GateGuard, a dependency-free Node.js verification harness that runs
+    controlled fictional scenarios against the real role scorer and checks the
+    resulting composite values against an explicit hard-stop contract.
+  </p>
+
+  <div class="architecture">
+    <div class="node">
+      <strong>Controlled fixtures</strong>
+      <span>Healthy, closed, boundary and high-vote scenarios</span>
+    </div>
+
+    <div class="arrow">→</div>
+
+    <div class="node">
+      <strong>Role scorer</strong>
+      <span>Existing production scoring logic</span>
+    </div>
+
+    <div class="arrow">→</div>
+
+    <div class="node">
+      <strong>GateGuard</strong>
+      <span>Assertions, audit reports and non-zero failure exit codes</span>
+    </div>
+  </div>
+
+  <p class="small">
+    All test fixtures are controlled and fictional. No real candidate, employer,
+    immigration, sponsorship or private personal data is required.
+  </p>
+</section>
+
+<section>
+  <h2>The defect</h2>
+
+  <div class="comparison">
+
+    <div class="panel bad">
+      <h3>Residual-score behavior</h3>
+      <p>
+        A positive gate factor inside the scorer's closed range could still
+        participate in multiplication and leave a non-zero composite.
+      </p>
+      <p>
+        The scorer could therefore classify the gate as closed while the arithmetic
+        retained residual decision value.
+      </p>
+    </div>
+
+    <div class="panel good">
+      <h3>Hard-stop behavior</h3>
+      <p>
+        After identifying a closed gate, the final composite is explicitly forced
+        to zero:
+      </p>
+      <p>
+        <code>const composite = closedGate ? 0 : multipliedComposite;</code>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Measurable result</h2>
+
+  <p>
+    The strongest evidence was not simply that the corrected code passed.
+    I deliberately reintroduced the targeted defect in an isolated temporary
+    scorer and confirmed that the harness failed.
+  </p>
+
+  <div class="metrics">
+    <div class="metric">
+      <strong>26 / 26</strong>
+      <span>registered production checks passed across baseline and boundary suites</span>
+    </div>
+
+    <div class="metric">
+      <strong>5 / 10</strong>
+      <span>baseline checks still passed after deliberately disabling the hard stop</span>
+    </div>
+
+    <div class="metric">
+      <strong>8 / 16</strong>
+      <span>boundary checks still passed after deliberately disabling the hard stop</span>
+    </div>
+  </div>
+
+  <p>
+    Production behavior:
+    <strong>10/10 baseline</strong> and
+    <strong>16/16 boundary</strong> assertions passed.
+  </p>
+
+  <p>
+    Deliberate regression behavior:
+    baseline fell to <strong>5/10</strong> and boundary fell to
+    <strong>8/16</strong>. Both mutant runs returned process exit code
+    <strong>1</strong>.
+  </p>
+
+  <div class="callout">
+    This is a targeted regression experiment, not a claim of model accuracy or
+    comprehensive mutation coverage.
+  </div>
+</section>
+
+<section>
+  <h2>Boundary behavior</h2>
+
+  <p>
+    Boundary tests were designed around the configured
+    <code>gate_zero = 0.05</code> threshold.
+  </p>
+
+  <pre>0.0500  → closed gate → composite 0
+0.0501  → open control → composite 0.0293
+
+Maximum scoring votes + closed liveness → composite 0
+Maximum scoring votes + closed timeline → composite 0</pre>
+
+  <p>
+    This verifies that the configured boundary is implemented consistently in
+    the registered scenarios and that high vote strength cannot rescue a
+    scorer-classified closed gate.
+  </p>
+</section>
+
+<section>
+  <h2>Verified vs. inferred</h2>
+
+  <div class="truth-grid">
+
+    <div class="truth-card">
+      <h3>Verified by execution</h3>
+      <ul>
+        <li>PASS / FAIL / ERROR counts</li>
+        <li>Composite outputs</li>
+        <li>Process exit codes</li>
+        <li>Boundary behavior</li>
+        <li>Targeted mutation detection</li>
+        <li>Production scorer remained unchanged during mutation testing</li>
+        <li>Repository privacy and conformance checks</li>
+      </ul>
+    </div>
+
+    <div class="truth-card">
+      <h3>Not established by GateGuard</h3>
+      <ul>
+        <li>Whether 0.05 is the correct business or policy threshold</li>
+        <li>Whether a real job posting is live</li>
+        <li>Whether an employer will sponsor a candidate</li>
+        <li>Real immigration or work-authorization feasibility</li>
+        <li>Correctness of the full scoring model</li>
+        <li>Whether maintainers should merge the contribution</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Failure modes I designed for</h2>
+
+  <div class="failure-grid">
+
+    <div class="failure">
+      <h3>Contract violation</h3>
+      <p>
+        A gate is classified as closed but the final composite remains non-zero.
+      </p>
+    </div>
+
+    <div class="failure">
+      <h3>Boundary regression</h3>
+      <p>
+        Exact-threshold values stop behaving consistently with the declared
+        closed-gate contract.
+      </p>
+    </div>
+
+    <div class="failure">
+      <h3>Vote rescue</h3>
+      <p>
+        Strong fit or sponsorship values incorrectly overcome a closed hard stop.
+      </p>
+    </div>
+
+    <div class="failure">
+      <h3>Fixture or contract drift</h3>
+      <p>
+        Tests and declared semantics diverge as the scorer evolves.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>What the machine could not know</h2>
+
+  <p>
+    GateGuard verifies software behavior against a declared contract. It cannot
+    determine whether the contract itself represents the correct real-world policy.
+  </p>
+
+  <p>
+    It cannot independently know whether a posting is truly active, whether an
+    employer will sponsor a specific person, whether an immigration timeline is
+    feasible, or how malformed inputs should be interpreted without an explicit
+    policy.
+  </p>
+
+  <p>
+    That distinction matters: software tests can prove that a system follows its
+    rules. They cannot prove that the rules are true about the world.
+  </p>
+</section>
+
+<section>
+  <h2>Reproduce the core verification</h2>
+
+  <pre>node scripts/score/gateguard-harness.mjs \
+  --fixtures scripts/score/fixtures/gateguard-roles.json
+
+node scripts/score/gateguard-harness.mjs \
+  --fixtures scripts/score/fixtures/gateguard-boundary.json
+
+npm run doctor
+npm run verify</pre>
+
+  <p>
+    The GitHub pull request includes the implementation, controlled fixtures,
+    prediction lock, forensic analysis, boundary evidence, mutation evidence,
+    Honest Run evidence and human attestation.
+  </p>
+
+  <div class="hero-actions">
+    <a class="button"
+       style="background:#111827;color:white"
+       href="https://github.com/Shreyakini25/reallocation-engine-gateguard-capstone/pull/1"
+       target="_blank">
+      Open Pull Request #1
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    GateGuard · Hard-Stop Verification Case Study · Shreya Kini
+  </div>
+</footer>
+
+</body>
+</html>
